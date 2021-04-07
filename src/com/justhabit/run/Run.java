@@ -1,6 +1,6 @@
 package com.justhabit.run;
 
-import com.justhabit.view.LoginFrame;
+import com.justhabit.view.FirstFrame;
 
 public class Run {
 

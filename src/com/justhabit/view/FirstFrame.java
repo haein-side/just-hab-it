@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -18,7 +20,9 @@ import javax.swing.JPasswordField;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
-public class LoginFrame {
+import com.justhabit.model.controller.PanelChangeControl;
+
+public class FirstFrame {
 
 	private JFrame frame;
 	
@@ -32,7 +36,7 @@ public class LoginFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					LoginFrame window = new LoginFrame();
+					FirstFrame window = new FirstFrame();
 					window.frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -44,7 +48,7 @@ public class LoginFrame {
 	/**
 	 * Create the application.
 	 */
-	public LoginFrame() {
+	public FirstFrame() {
 		initialize();
 	}
 
@@ -52,6 +56,8 @@ public class LoginFrame {
 	 * Initialize the contents of the frame.
 	 */
 	private void initialize() {
+
+		/* FIRST FRAME FOR LOGIN AND SIGNUP */
 		frame = new JFrame();
 		frame.setBounds(100, 100, 700, 400);
 		frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -59,7 +65,9 @@ public class LoginFrame {
 		frame.setBackground(new Color(1.0f, 1.0f, 1.0f, 0.0f));
 		frame.getContentPane().setLayout(null);
 		frame.setLocationRelativeTo(null);
-		
+
+///////////////////////////////////////////////////////////////////////////////////
+		/* CIRCLEPANEL AT LEFT */
 		LoginPanel circlePanel = new LoginPanel(Color.LIGHT_GRAY, Color.DARK_GRAY);
 		circlePanel.addMouseMotionListener(new MouseMotionAdapter() {
 			@Override
@@ -101,7 +109,11 @@ public class LoginFrame {
 		lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_1.setBounds(78, 290, 234, 36);
 		circlePanel.add(lblNewLabel_1);
+//////////////////////////////////////////////////////////////////////////////////
 		
+		
+		
+		/* 오른쪽에 붙이는 로그인 패널*/
 		LoginPanel contentPanel = new LoginPanel(Color.decode("#e65758"), Color.decode("#771d32"),LoginPanel.DIAGONAL_DOWN);
 		contentPanel.setArc(10);
 		contentPanel.setBorderColor(Color.white);
@@ -150,7 +162,50 @@ public class LoginFrame {
 		loginButton.setBounds(220, 234, 130, 30);
 		contentPanel.add(loginButton);
 		
+		/* 회원가입 용 패널*/
+		SignupPanel contentPanel2 = new SignupPanel(Color.decode("#e65758"), Color.decode("#771d32"),LoginPanel.DIAGONAL_DOWN);
+		contentPanel2.setArc(10);
+		contentPanel2.setBorderColor(Color.white);
+		contentPanel2.setBorderWidth(2);
+		contentPanel2.setBounds(200, 50, 500, 320);
+		frame.getContentPane().add(contentPanel2);
+		contentPanel2.setLayout(null);
+		
+		JPanel panel2 = new JPanel();
+		panel2.setBackground(Color.WHITE);
+		panel2.setBounds(229, 87, 250, 50);
+		contentPanel2.add(panel2);
+		panel2.setLayout(null);
+		
+		txtUsername = new JTextField();
+		txtUsername.setBackground(Color.WHITE);
+		txtUsername.setBounds(10, 11, 230, 28);
+		panel2.add(txtUsername);
+		txtUsername.setColumns(10);
+		txtUsername.setBorder(null);
+		
+		JPanel panel_2 = new JPanel();
+		panel_1.setLayout(null);
+		panel_1.setBackground(Color.WHITE);
+		panel_1.setBounds(229, 173, 250, 50);
+		contentPanel2.add(panel_2);
+		
+		txtPassword = new JPasswordField();
+		txtPassword.setBounds(10, 11, 230, 28);
+		panel_2.add(txtPassword);
+		txtPassword.setBorder(null);
+		
+		
+		
 		JButton signupButton = new JButton("SIGN UP");
+		signupButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				PanelChangeControl.changePanel(frame, contentPanel,contentPanel2 );
+			}
+		});
+		
 		signupButton.setBounds(355, 234, 130, 30);
 		contentPanel.add(signupButton);
 		
@@ -173,7 +228,5 @@ public class LoginFrame {
 		lblNewLabel_3_1.setFont(new Font("Tahoma", Font.BOLD, 20));
 		lblNewLabel_3_1.setBounds(469, 11, 21, 28);
 		contentPanel.add(lblNewLabel_3_1);
-		
 	}
-	
 }
