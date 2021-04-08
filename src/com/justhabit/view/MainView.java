@@ -14,6 +14,8 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.justhabit.model.controller.PanelChangeControl;
+
 /**
  * @author user
  * 기본 틀
@@ -23,12 +25,15 @@ public class MainView extends JFrame{
 	private JFrame mf;
 	private JPanel cenMain;
 	public MainView() {
+		
 		super();
 		
 		
 		//메인프레임
 		this.mf = new JFrame();
+		PanelChangeControl.mainFrame = this.mf;
 		mf.setLayout(null);
+		this.mf.setVisible(false);
 		
 		//메인패널
 		JPanel pan = new JPanel();
@@ -70,11 +75,11 @@ public class MainView extends JFrame{
 
 		
 		//메인센터(메인패널 클래스)
-//		this.cenMain = new HabbitAdd(mf);
-		this.cenMain = new TodayWord(mf);
-		
-		
-		mf.add(cenMain);
+
+		this.cenMain = new TodayWord();
+	    mf.add(cenMain);
+
+
 		
 		
 		//메뉴목록
@@ -94,7 +99,7 @@ public class MainView extends JFrame{
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	               
-	               ChangePanel.changePanel(mf, cenMain, new HabbitAdd(mf));
+	            	PanelChangeControl.changePanel(cenMain, new HabbitAdd());
 	            }
 	            
 	        });
@@ -104,9 +109,13 @@ public class MainView extends JFrame{
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	               
-	               ChangePanel.changePanel(mf, cenMain, new HabbitAdd(mf));
+
+	             
+
+	            	PanelChangeControl.changePanel(cenMain, new HabbitAdd());
 	            }
 	            
+
 	        });
 		
 		

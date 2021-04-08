@@ -170,7 +170,13 @@ public class FirstFrame {
       JButton loginButton = new JButton("LOG IN");
       loginButton.setBounds(220, 234, 130, 30);
       login.add(loginButton);
-      
+      loginButton.addActionListener(new ActionListener() {
+          
+          @Override
+          public void actionPerformed(ActionEvent e) {
+             PanelChangeControl.changeFrame(frame, new MainView());
+          }
+       });
       
       loginButton.addActionListener(new ActionListener() {
     	  
@@ -186,7 +192,7 @@ public class FirstFrame {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            PanelChangeControl.changePanel(frame, login, new James() );
+            PanelChangeControl.changePanel(login, new James() );
          }
       });
       
@@ -455,7 +461,7 @@ public class FirstFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-               PanelChangeControl.changePanel(frame, signup, login );
+               PanelChangeControl.changePanel(signup, login );
             }
          });
          

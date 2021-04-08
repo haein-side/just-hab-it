@@ -2,20 +2,16 @@ package com.justhabit.view;
 
 import java.awt.Color;
 import java.awt.Font;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
+
+import com.justhabit.model.controller.PanelChangeControl;
 
 public class HabbitAdd5 extends JPanel {
 
@@ -26,7 +22,8 @@ public class HabbitAdd5 extends JPanel {
 	
 	
 	private HabbitAdd5 habbitAdd5;
-   public HabbitAdd5(JFrame mf) {
+	
+   public HabbitAdd5() {
 
 	   this.habbitAdd5 = this;
 	   
@@ -65,7 +62,7 @@ public class HabbitAdd5 extends JPanel {
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               ChangePanel.changePanel(mf, habbitAdd5 , new HabbitAdd4(mf));
+            	PanelChangeControl.changePanel(habbitAdd5 , new HabbitAdd4());
             }
          }); 
       	
