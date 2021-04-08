@@ -1,29 +1,19 @@
 package com.justhabit.view;
 
-import java.awt.BorderLayout;
 import java.awt.Color;
-import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
-import java.awt.TextField;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.image.BufferedImage;
-import java.io.File;
-import java.io.IOException;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
-import javax.swing.JFrame;
-import javax.swing.JLabel;
 import javax.swing.JPanel;
+
+import com.justhabit.model.controller.PanelChangeControl;
 
 public class TodayWord extends JPanel {
 
@@ -32,7 +22,7 @@ public class TodayWord extends JPanel {
   private Image back;
   private TodayWord todayWord;
 	
-	public TodayWord(JFrame mf) {
+	public TodayWord() {
 		this.todayWord = this;
 		
 		this.setLayout(null);
@@ -54,7 +44,7 @@ public class TodayWord extends JPanel {
 		first.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               ChangePanel.changePanel(mf, todayWord , new MainPage());
+            	PanelChangeControl.changePanel(todayWord , new MainPage());
             }
          });
 

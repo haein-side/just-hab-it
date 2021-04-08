@@ -1,30 +1,22 @@
 package com.justhabit.view;
 
 import java.awt.Color;
-import java.awt.Container;
 import java.awt.Font;
-import java.awt.GridLayout;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
-import java.awt.event.ItemEvent;
-import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
-import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
+
+import com.justhabit.model.controller.PanelChangeControl;
 
 public class HabbitAdd3 extends JPanel {
 
 	private HabbitAdd3 habbitAdd3;
 	
-   public HabbitAdd3(JFrame mf) {
+   public HabbitAdd3() {
 	   
 	   this.habbitAdd3 = this;
 
@@ -76,14 +68,14 @@ public class HabbitAdd3 extends JPanel {
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               ChangePanel.changePanel(mf, habbitAdd3 , new HabbitAdd2(mf));
+            	PanelChangeControl.changePanel(habbitAdd3 , new HabbitAdd2());
             }
          }); 
       	
       	jbutton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               ChangePanel.changePanel(mf, habbitAdd3 , new HabbitAdd4(mf));
+            	PanelChangeControl.changePanel(habbitAdd3 , new HabbitAdd4());
             }
          });
       	     
