@@ -70,8 +70,8 @@ public class MainView extends JFrame{
 
 		
 		//메인센터(메인패널 클래스)
-		this.cenMain = new HabbitAdd(mf);
-		mf.add(cenMain);
+		this.cenMain = new TodayWord(mf);
+	      mf.add(cenMain);
 		
 		
 		//메뉴목록
@@ -102,8 +102,7 @@ public class MainView extends JFrame{
 	            public void actionPerformed(ActionEvent e) {
 	               
 	               ChangePanel.changePanel(mf, cenMain, new HabbitAdd(mf));
-	            }
-	            
+	            } 
 	        });
 		
 		
