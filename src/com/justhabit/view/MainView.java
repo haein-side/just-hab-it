@@ -30,7 +30,9 @@ public class MainView extends JFrame{
 		
 		//메인프레임
 		this.mf = new JFrame();
-		PanelChangeControl.mainFrame = this.mf;
+//		PanelChangeControl.mainFrame = this.mf;
+//		PanelChangeControl.mainFrame.setVisible(false); 
+		
 		mf.setLayout(null);
 		
 		//메인패널
