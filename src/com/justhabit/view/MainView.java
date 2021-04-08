@@ -75,7 +75,9 @@ public class MainView extends JFrame{
 		//메인센터(메인패널 클래스)
 		this.cenMain = new TodayWord();
 		mf.add(cenMain);
-		
+
+
+
 		
 		
 		//메뉴목록
@@ -105,9 +107,13 @@ public class MainView extends JFrame{
 	            @Override
 	            public void actionPerformed(ActionEvent e) {
 	               
+
+	             
+
 	            	PanelChangeControl.changePanel(cenMain, new HabbitAdd());
 	            }
 	            
+
 	        });
 		
 		
