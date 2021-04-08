@@ -74,6 +74,7 @@ public class MainView extends JFrame{
 		mf.add(cenMain);
 		
 		
+		
 		//메뉴목록
 		String[] menu = {"Main", "menu1", "menu2", "menu3","menu4", "mypage"};
 		
