@@ -12,7 +12,7 @@ public class ChangePanel {
 	public static void changePanel(JFrame jf, JPanel oldp, JPanel newp) {
 		jf.remove(oldp);
 		jf.add(newp);
-		newp.revalidate();
+//		newp.revalidate();
 	    newp.repaint();
 	}
 }

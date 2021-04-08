@@ -26,7 +26,6 @@ public class HabbitAdd5 extends JPanel {
 	
 	
 	private HabbitAdd5 habbitAdd5;
-	
    public HabbitAdd5(JFrame mf) {
 
 	   this.habbitAdd5 = this;

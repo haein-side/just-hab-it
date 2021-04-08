@@ -21,6 +21,8 @@ public class HabbitAdd2 extends JPanel {
 	
 	
 	private HabbitAdd2 habbitAdd2;
+	
+//	JFrame mf = new MainView();
 
    public HabbitAdd2(JFrame mf) {
 	   

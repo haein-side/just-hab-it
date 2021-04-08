@@ -23,7 +23,7 @@ public class MainView extends JFrame{
 	private JFrame mf;
 	private JPanel cenMain;
 	public MainView() {
-		super("이름을 정해야 하는군?");
+		super();
 		
 		
 		//메인프레임
@@ -70,7 +70,10 @@ public class MainView extends JFrame{
 
 		
 		//메인센터(메인패널 클래스)
-		this.cenMain = new HabbitAdd(mf);
+//		this.cenMain = new HabbitAdd(mf);
+		this.cenMain = new TodayWord(mf);
+		
+		
 		mf.add(cenMain);
 		
 		

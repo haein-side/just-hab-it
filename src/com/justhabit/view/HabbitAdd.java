@@ -20,6 +20,7 @@ public class HabbitAdd extends JPanel {
 	
 	
    private HabbitAdd habbitAdd;
+   
 
 public HabbitAdd(JFrame mf) {
 

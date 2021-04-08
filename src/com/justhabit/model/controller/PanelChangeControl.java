@@ -11,4 +11,9 @@ public class PanelChangeControl {
 		jf.repaint();
 	}
 	
+	public static void changeFrame(JFrame oldf, JFrame newf) {
+		oldf.setVisible(false);
+		newf.dispose();
+		newf.setVisible(true);
+	}
 }
