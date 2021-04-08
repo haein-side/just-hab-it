@@ -67,7 +67,6 @@ public class CheckRecordView extends JPanel{
 		habitCheck.setLayout(new GridLayout());
 		habitCheck.setBounds(220,0,570,50);
 		
-		
 		//체크박스 생성
 		JCheckBox[] buttons = new JCheckBox[5];
 		
@@ -78,7 +77,7 @@ public class CheckRecordView extends JPanel{
 			habitCheck.add(buttons[i]);
 		}
 		
-		//TODO 체크박스
+		
 		
 		for(int i = 0; i < buttons.length; i++ ) {
 			checkcount = new HashMap<>();
@@ -153,16 +152,24 @@ public class CheckRecordView extends JPanel{
 				day[i].setBackground(Color.white);
 				calendar.add(day[i]);
 			} else {
+				
 				day[i] = new JButton(calArr.get(i)+"");			
 				day[i].setHorizontalAlignment(JLabel.CENTER);
 				day[i].setVerticalAlignment(JLabel.CENTER);
 				day[i].setBackground(Color.white);
 				calendar.add(day[i]);
 			}
+			
+			if(day[i].getText().equals(today)) {
+				day[i].setBackground(Color.yellow);
+			} else {
+				day[i].setBackground(Color.green);
+			}
+			
+			
 		}
 		calendarPanel.add(calendar);
 		
-
 		//문구 표시
 		JPanel habitInfo = new JPanel();
 		habitInfo.setLayout(null);
@@ -173,12 +180,8 @@ public class CheckRecordView extends JPanel{
 		info.setText("여기에 \n \n어떻게 \n \n넣을것인가..");
 		habitInfo.add(info);
 		
-		
 		this.add(habitInfo);
 		this.add(calendarPanel);
 		this.add(habitTop);
-		
-		
-		
 	}
 }

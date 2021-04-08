@@ -35,6 +35,7 @@ public class TimeRecordView extends JPanel{
 	JFrame fm = new JFrame();
 	static int myTime;
 	int i = 0;
+	int test = 5;
 	public TimeRecordView() {
 		
 		this.setBounds(0, 100, 900, 462);
@@ -99,6 +100,11 @@ public class TimeRecordView extends JPanel{
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,5,5);
 		calendar.setLayout(gridLayout);
 		
+		//오늘날짜 확인
+		Date todayDate = new Date();
+		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
+		String today = dateFormat.format(todayDate);
+				
 		JButton[] day = new JButton[calArr.size()]; 
 		for(int i = 0; i < calArr.size();i++) {
 			
@@ -116,14 +122,23 @@ public class TimeRecordView extends JPanel{
 				day[i].setBackground(Color.white);
 				calendar.add(day[i]);
 			}
+			
+//			if(0<test && test<5) {
+//				day[i].setBackground(Color.yellow);
+//			} else if(test<=5) {
+//				day[i].setBackground(Color.green);
+//			}
+			//TODO 신호등 만들기(테스트중)
+			if(day[i].getText().equals(today)) {
+				day[i].setBackground(Color.yellow);
+			} else {
+				day[i].setBackground(Color.green);
+			}
 		}
 		calendarPanel.add(calendar);
 
 		
-		//오늘날짜 확인
-		Date todayDate = new Date();
-		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-		String today = dateFormat.format(todayDate);
+		
 		
 		//날짜 클릭시 그날 info 출력..진행중
 		Dialog dayInfo = new Dialog(fm,"day Info");
