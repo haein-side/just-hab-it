@@ -5,7 +5,7 @@ import javax.swing.JPanel;
 
 public class PanelChangeControl {
 
-	private static JFrame mainFrame;
+	public static JFrame mainFrame;
 	
 	
 	   
