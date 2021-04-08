@@ -17,12 +17,14 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SpinnerNumberModel;
 
+import com.justhabit.model.controller.PanelChangeControl;
+
 public class HabbitAdd2 extends JPanel {
 	
 	
 	private HabbitAdd2 habbitAdd2;
 
-   public HabbitAdd2(JFrame mf) {
+   public HabbitAdd2() {
 	   
 	   this.habbitAdd2 = this;
 
@@ -62,7 +64,7 @@ public class HabbitAdd2 extends JPanel {
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               ChangePanel.changePanel(mf, habbitAdd2 , new HabbitAdd(mf));
+            	PanelChangeControl.changePanel(habbitAdd2 , new HabbitAdd());
             }
          }); 
       	
@@ -70,7 +72,7 @@ public class HabbitAdd2 extends JPanel {
       	jbutton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               ChangePanel.changePanel(mf, habbitAdd2 , new HabbitAdd3(mf));
+            	PanelChangeControl.changePanel(habbitAdd2 , new HabbitAdd3());
             }
          });  	
    }
