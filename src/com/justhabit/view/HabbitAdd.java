@@ -11,6 +11,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.justhabit.model.controller.PanelChangeControl;
+
 public class HabbitAdd extends JPanel {
 
 //	private JButton nextButton; // 다음버튼
@@ -21,7 +23,7 @@ public class HabbitAdd extends JPanel {
 	
    private HabbitAdd habbitAdd;
 
-public HabbitAdd(JFrame mf) {
+public HabbitAdd() {
 
 	   this.habbitAdd = this;
 	   
@@ -55,7 +57,7 @@ public HabbitAdd(JFrame mf) {
       	jbutton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               ChangePanel.changePanel(mf, habbitAdd , new HabbitAdd2(mf));
+            	PanelChangeControl.changePanel(habbitAdd , new HabbitAdd2());
             }
          });
    } 
