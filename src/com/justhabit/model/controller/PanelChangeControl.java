@@ -10,6 +10,7 @@ public class PanelChangeControl {
 	
 	   
     public static void changePanel(JPanel oldp, JPanel newp) {
+      
       mainFrame.remove(oldp);
       mainFrame.add(newp);
       newp.revalidate();

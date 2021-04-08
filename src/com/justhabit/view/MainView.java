@@ -32,6 +32,8 @@ public class MainView extends JFrame{
 		//메인프레임
 		this.mf = new JFrame();
 		PanelChangeControl.mainFrame = this.mf;
+		PanelChangeControl.mainFrame.setVisible(false); 
+		
 		mf.setLayout(null);
 		this.mf.setVisible(false);
 		
@@ -75,7 +77,6 @@ public class MainView extends JFrame{
 
 		
 		//메인센터(메인패널 클래스)
-
 		this.cenMain = new TodayWord();
 	    mf.add(cenMain);
 
