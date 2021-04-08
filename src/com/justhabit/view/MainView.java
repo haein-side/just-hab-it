@@ -73,7 +73,7 @@ public class MainView extends JFrame{
 
 		
 		//메인센터(메인패널 클래스)
-		this.cenMain = new HabbitAdd();
+		this.cenMain = new TodayWord();
 		mf.add(cenMain);
 		
 		
