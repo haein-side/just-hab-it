@@ -56,6 +56,8 @@ public HabbitAdd() {
 	jbutton2.setLocation(450, 280);
 	habbitAdd.add(jbutton2);
       	
+
+
   	jbutton2.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
@@ -68,5 +70,6 @@ public HabbitAdd() {
   	habbitAdd.setResizable(false);
   	habbitAdd.setLocationRelativeTo(null); // 화면 가운데로
   	habbitAdd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
    } 
 }

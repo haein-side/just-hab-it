@@ -9,7 +9,6 @@ public class PanelChangeControl {
 
 	public static JFrame mainFrame;
 	
-	
 	   
     public static void changePanel(JPanel oldp, JPanel newp) { 
       mainFrame.getContentPane().remove(oldp);
@@ -23,6 +22,14 @@ public class PanelChangeControl {
 //      newp.setVisible(true);
       
     }
+    
+    public static void changePanel(JFrame jf, JPanel oldp, JPanel newp) {
+        
+        jf.remove(oldp);
+        jf.add(newp);
+        newp.revalidate();
+        newp.repaint();
+      }
    
     public static void changeFrame(JFrame oldf, JFrame newf) {
       oldf.setVisible(false);
