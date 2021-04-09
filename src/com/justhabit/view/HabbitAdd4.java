@@ -22,10 +22,10 @@ public class HabbitAdd4 extends JPanel {
 	   
 	   this.habbitAdd4 = this;
 
-       this.setLayout(null);
-       this.setBounds(0, 100, 900, 462);
-       this.setBackground(Color.lightGray);
-       this.setVisible(true);
+	   habbitAdd4.setLayout(null);
+	   habbitAdd4.setBounds(0, 100, 900, 462);
+	   habbitAdd4.setBackground(Color.lightGray);
+	   habbitAdd4.setVisible(true);
 
 
 	   JLabel label1 = new JLabel("4번) 습관기록방식은 무엇인가요?");
@@ -33,7 +33,7 @@ public class HabbitAdd4 extends JPanel {
 	   label1.setFont(new Font("Serif", Font.BOLD, 30));
 	   label1.setSize(500,200);
 	   label1.setLocation(200,0);
-       this.add(label1);
+	   habbitAdd4.add(label1);
        
        JPanel radioPanel = new JPanel();
        radioPanel.setSize(200,50);
@@ -49,17 +49,17 @@ public class HabbitAdd4 extends JPanel {
        radioPanel.add(time);
        radioPanel.add(timer);
        
-       this.add(radioPanel);
+       habbitAdd4.add(radioPanel);
       
    	  JButton jbutton1 = new JButton("이전");
       jbutton1.setSize(80,50);
       jbutton1.setLocation(300, 280);
-     	this.add(jbutton1);
+      habbitAdd4.add(jbutton1);
       
       JButton jbutton2 = new JButton("다음");
       jbutton2.setSize(80,50);
       jbutton2.setLocation(450, 280);
-      	this.add(jbutton2);
+      habbitAdd4.add(jbutton2);
       	
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override

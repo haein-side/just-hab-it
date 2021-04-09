@@ -13,18 +13,20 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
+import com.justhabit.model.controller.PanelChangeControl;
+
 public class MyPage extends JPanel {
 	
 	private MyPage myPage;
 	
-	public MyPage(JFrame mf) {
+	public MyPage() {
 		
 		this.myPage = this;
 		
-		this.setLayout(null);
-		this.setBounds(0, 100, 900, 462);
-		this.setBackground(Color.lightGray);
-		this.setVisible(true);
+		myPage.setLayout(null);
+		myPage.setBounds(0, 100, 900, 462);
+		myPage.setBackground(Color.lightGray);
+		myPage.setVisible(true);
 		
 		JLabel id  = new JLabel("ID : ");
 		JLabel userName  = new JLabel("닉네임 : ");
@@ -41,21 +43,21 @@ public class MyPage extends JPanel {
 		email.setBounds(500, 190, 150, 150);
 		levelExp.setBounds(130, 290, 150, 150);
 		
-		this.add(id);
-		this.add(userName);
-		this.add(email);
-		this.add(levelExp);
+		myPage.add(id);
+		myPage.add(userName);
+		myPage.add(email);
+		myPage.add(levelExp);
 			
 		
 		JButton revise = new JButton("회원정보 수정하기");
 		revise.setSize(180,40);
 		revise.setLocation(365, 390);
-		this.add(revise);
+		myPage.add(revise);
 		
 		revise.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-               ChangePanel.changePanel(mf, myPage , new ReviseInfo());
+            	PanelChangeControl.changePanel(myPage , new ReviseInfo());
             }
          });
 		
@@ -63,7 +65,7 @@ public class MyPage extends JPanel {
 		JButton exit = new JButton("탈퇴하기");
 		exit.setSize(130,40);
 		exit.setLocation(670, 60);
-		this.add(exit);
+		myPage.add(exit);
 		
 		
 		
@@ -71,7 +73,7 @@ public class MyPage extends JPanel {
 		
 		JLabel levelImg = new JLabel(new ImageIcon(level));
 		levelImg.setBounds(80,60,300,300);
-		this.add(levelImg);
+		myPage.add(levelImg);
 		
 		
 		

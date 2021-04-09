@@ -84,7 +84,7 @@ public class MainView extends JFrame{
 		
 		
 		//메뉴목록
-		String[] menu = {"Main", "menu1", "menu2", "menu3","menu4", "mypage"};
+		String[] menu = {"Main", "습관등록", "mypage", "menu3","menu4", "test"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
@@ -94,6 +94,17 @@ public class MainView extends JFrame{
 			menuButton[i].setBackground(Color.pink);
 			botPan.add(menuButton[i]);
 		}
+		
+		
+		menuButton[0].addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				PanelChangeControl.changePanel(cenMain, new MainPage());
+			}
+			
+		});
 		
 	     menuButton[1].addActionListener(new ActionListener() {
 
@@ -113,11 +124,42 @@ public class MainView extends JFrame{
 
 	             
 
-	            	PanelChangeControl.changePanel(cenMain, new HabbitAdd());
+	            	PanelChangeControl.changePanel(cenMain, new MyPage());
 	            }
 	            
 
 	        });
+	     //테스트 삭제예정
+	     menuButton[3].addActionListener(new ActionListener() {
+	    	 
+	    	 @Override
+	    	 public void actionPerformed(ActionEvent e) {
+	    		 
+	    		 
+	    		 
+	    		 
+	    		 PanelChangeControl.changePanel(cenMain, new TimeRecordView());
+	    	 }
+	    	 
+	    	 
+	     });
+	     
+	     //테스트 삭제예정
+	     menuButton[4].addActionListener(new ActionListener() {
+	    	 
+	    	 @Override
+	    	 public void actionPerformed(ActionEvent e) {
+	    		 
+	    		 
+	    		 
+	    		 
+	    		 PanelChangeControl.changePanel(cenMain, new CheckRecordView());
+	    	 }
+	    	 
+	    	 
+	     });
+	     
+	     
 		
 		
 		
