@@ -184,7 +184,7 @@ public class FirstFrame {
          
          @Override
          public void actionPerformed(ActionEvent e) {
-            PanelChangeControl.changePanel(login, new James() );
+            PanelChangeControl.changePanel(frame, login, new SignupPanel() );
          }
       });
       
@@ -211,149 +211,9 @@ public class FirstFrame {
       lblNewLabel_3_1.setBounds(469, 11, 21, 28);
       login.add(lblNewLabel_3_1);
       
-      
-      
-      
-/////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-////////////////////////////////////////////////////////////////////////////
-      
-//      /* 오른쪽에 붙이는 로그인 패널*/
-//      LoginPanel signup = new LoginPanel(Color.decode("#e65758"), Color.decode("#771d32"),LoginPanel.DIAGONAL_DOWN);
-//      signup.setArc(10);
-//      signup.setBorderColor(Color.white);
-//      signup.setBorderWidth(2);
-//      signup.setBounds(200, 50, 500, 320);
-//      frame.getContentPane().add(signup);
-//      signup.setLayout(null);
-//      
-//
-//      
-//      sign_username = new JTextField();
-//      sign_username.setBackground(Color.WHITE);
-//      sign_username.setBounds(330, 60, 120, 20);
-//      signup.add(sign_username);
-//      txtUsername.setColumns(5);
-//      sign_username.setBorder(null);
-//      
-//
-//      sign_pwd = new JPasswordField();
-//      sign_pwd.setBounds(330, 90, 120, 20);
-//      signup.add(sign_pwd);
-//      sign_pwd.setBorder(null);
-//      
-//      sign_pwd_check = new JPasswordField();
-//      sign_pwd_check.setBounds(330, 120, 120, 20);
-//      signup.add(sign_pwd_check);
-//      sign_pwd_check.setBorder(null);
-//      
-//      sign_email = new JPasswordField();
-//      sign_email.setBounds(330, 150, 120, 20);
-//      signup.add(sign_email);
-//      sign_email.setBorder(null);
-//      
-//      sign_PIN = new JPasswordField();
-//      sign_PIN.setBounds(330, 180, 120, 20);
-//      signup.add(sign_PIN);
-//      sign_PIN.setBorder(null);
-//      
-//      
-//      
-//      
-//      
-//      
-//      
-//      
-//      JLabel name_label = new JLabel("Username");
-//      name_label.setForeground(Color.WHITE);
-//      name_label.setFont(new Font("Tahoma", Font.BOLD, 16));
-//      name_label.setBounds(229, 60, 250, 14);
-//      signup.add(name_label);
-//      
-//      JLabel pass_label = new JLabel("Password");
-//      pass_label.setForeground(Color.WHITE);
-//      pass_label.setFont(new Font("Tahoma", Font.BOLD, 16));
-//      pass_label.setBounds(229, 90, 250, 14);
-//      signup.add(pass_label);
-//      
-//      JLabel re_label = new JLabel("Re-enter");
-//      re_label.setForeground(Color.WHITE);
-//      re_label.setFont(new Font("Tahoma", Font.BOLD, 16));
-//      re_label.setBounds(229, 120, 250, 14);
-//      signup.add(re_label);
-//      
-//      
-//      JLabel email_label = new JLabel("Email");
-//      email_label.setForeground(Color.WHITE);
-//      email_label.setFont(new Font("Tahoma", Font.BOLD, 16));
-//      email_label.setBounds(229, 150, 250, 14);
-//      signup.add(email_label);
-//      
-//      JLabel pin_label = new JLabel("PIN(4digits)");
-//      pin_label.setForeground(Color.WHITE);
-//      pin_label.setFont(new Font("Tahoma", Font.BOLD, 16));
-//      pin_label.setBounds(229, 185, 250, 14);
-//      signup.add(pin_label);
-//      
-//      
-//      
-//      
-//      
-//      
-//      
-//      
-//      JButton backButton = new JButton("<- BACK");
-//      backButton.setBounds(220, 234, 80, 30);
-//      signup.add(backButton);
-//      backButton.addActionListener(new ActionListener() {
-//         
-//         @Override
-//         public void actionPerformed(ActionEvent e) {
-//            PanelChangeControl.changePanel(frame, signup, login );
-//         }
-//      });
-//      
-//      
-//      
-//      JButton registerButton = new JButton("REGISTER");
-//      registerButton.setBounds(310, 234, 140, 30);
-//      signup.add(registerButton);
-////      signupButton.addActionListener(new ActionListener() {
-////         
-////         @Override
-////         public void actionPerformed(ActionEvent e) {
-////            PanelChangeControl.changePanel(frame, contentPanel,contentPanel2 );
-////         }
-////      });
-//      
-//      
-//      
-//      JLabel register_label = new JLabel("REGISTER");
-//      register_label.setForeground(Color.WHITE);
-//      register_label.setFont(new Font("Tahoma", Font.BOLD, 20));
-//      register_label.setBounds(229, 25, 115, 14);
-//      signup.add(register_label);
-//      
-//      JLabel x_label = new JLabel("X");
-//      x_label.addMouseListener(new MouseAdapter() {
-//         @Override
-//         public void mouseClicked(MouseEvent e) {
-//            if(JOptionPane.showConfirmDialog(null, "Are you sure to close this application ?") == 0)
-//               System.exit(0);
-//         }
-//      });
-//      x_label.setHorizontalAlignment(SwingConstants.CENTER);
-//      x_label.setForeground(Color.WHITE);
-//      x_label.setFont(new Font("Tahoma", Font.BOLD, 20));
-//      x_label.setBounds(469, 11, 21, 28);
-//      signup.add(x_label);
-//      
-      
-      
-      
    }
    
-   public class James extends JPanel {
+   public class SignupPanel extends JPanel {
       
       private JTextField sign_username;
       private JPasswordField sign_pwd;
@@ -361,7 +221,7 @@ public class FirstFrame {
       private JTextField sign_email;
       private JTextField sign_PIN;
       
-      public James() {
+      public SignupPanel() {
          /* 오른쪽에 붙이는 로그인 패널*/
          LoginPanel signup = new LoginPanel(Color.decode("#e65758"), Color.decode("#771d32"),LoginPanel.DIAGONAL_DOWN);
          signup.setArc(10);
@@ -400,9 +260,6 @@ public class FirstFrame {
          sign_PIN.setBounds(330, 180, 120, 20);
          signup.add(sign_PIN);
          sign_PIN.setBorder(null);
-         
-         
-         
          
          
          
@@ -453,7 +310,7 @@ public class FirstFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-               PanelChangeControl.changePanel(signup, login );
+               PanelChangeControl.changePanel(frame, signup, login );
             }
          });
          
@@ -462,13 +319,13 @@ public class FirstFrame {
          JButton registerButton = new JButton("REGISTER");
          registerButton.setBounds(310, 234, 140, 30);
          signup.add(registerButton);
-//         signupButton.addActionListener(new ActionListener() {
-//            
-//            @Override
-//            public void actionPerformed(ActionEvent e) {
-//               PanelChangeControl.changePanel(frame, contentPanel,contentPanel2 );
-//            }
-//         });
+         registerButton.addActionListener(new ActionListener() {
+            
+            @Override
+            public void actionPerformed(ActionEvent e) {
+               PanelChangeControl.changePanel(frame, signup, login);
+            }
+         });
          
          
          
@@ -493,6 +350,4 @@ public class FirstFrame {
          signup.add(x_label);
       }
    }
-   
-   
 }
