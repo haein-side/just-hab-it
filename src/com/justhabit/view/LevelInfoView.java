@@ -31,16 +31,17 @@ public class LevelInfoView extends JPanel {
 		
 		//레벨이미지 추가
 		JPanel level = new JPanel();
-		level.setBounds(63, 100, 800, 300);
+		level.setBounds(8, 150, 870, 400);
 		level.setLayout(new GridLayout(1,5,10,0));
 		level.setBackground(Color.white);
 		
-		Image levelImg = new ImageIcon("image/레벨설명.PNG").getImage().getScaledInstance(900, 250, 0);
+		
+//		Image levelImg = new ImageIcon("image/레벨설명.PNG").getImage().getScaledInstance(900, 250, 0);
 		
 //		ImageIcon levelInfo = new ImageIcon("image/레벨설명.PNG");
 //		levelInfo.
-		JLabel label = new JLabel(new ImageIcon(levelImg));
-		level.add(label);
+//		JLabel label = new JLabel(new ImageIcon(levelImg));
+//		level.add(label);
 		
 		
 //		JPanel chobo = new JPanel();
@@ -56,16 +57,19 @@ public class LevelInfoView extends JPanel {
 //		
 //		JPanel[] levelinfo = {chobo,jungsu,gosu,chogosu,god};
 //		ImageIcon[] levelIcon = {choboimage,jungsuimage,gosuimage,chogosuimage,godimage};
+		
 //		
 //		
 //		
 //		for(int i = 0; i < levelinfo.length; i++) {
 //			JLabel levelLabel = new JLabel(levelIcon[i]);
 //			levelinfo[i].add(levelLabel);
-//			levelinfo[i].setSize(50, 50);
+//			levelinfo[i].setSize(20, 20);
 //			levelinfo[i].setBackground(Color.white);
 //			level.add(levelinfo[i]);
 //		}
+//		JLabel test = new JLabel("레벨설명");
+//		level.add(test);
 		this.add(level);
 		
 	}

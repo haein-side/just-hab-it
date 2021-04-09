@@ -17,30 +17,35 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class TimeRecordView extends JPanel{
-	public static void main(String[] args) {
-		JFrame fm = new JFrame();
-		fm.setLayout(null);
-		
-		fm.add(new TimeRecordView());
-		fm.setSize(900, 700);
-		fm.setLocationRelativeTo(null);
-		fm.setVisible(true);
-		fm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
+import com.justhabit.model.controller.PanelChangeControl;
+
+public class TimeRecordView extends JFrame{
+	
 
 	/**
 	 * 타이머 기록페이지
 	 */
-	JFrame fm = new JFrame();
+	JFrame mf = this;
 	static int myTime;
 	int i = 0;
 	int test = 5;
+	int k = 0;//버튼추가용
 	public TimeRecordView() {
 		
-		this.setBounds(0, 100, 900, 462);
 		this.setLayout(null);
-		this.setBackground(Color.white);
+		this.setSize(900, 700);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		JPanel top = new TopPanel();
+		this.add(top);
+		
+		JPanel center = new JPanel();
+		center.setBounds(0, 100, 900, 462);
+		center.setLayout(null);
+		center.setBackground(Color.white);
+		
 		
 		//습관상단바
 		JPanel habitTop = new JPanel();
@@ -141,7 +146,7 @@ public class TimeRecordView extends JPanel{
 		
 		
 		//날짜 클릭시 그날 info 출력..진행중
-		Dialog dayInfo = new Dialog(fm,"day Info");
+		Dialog dayInfo = new Dialog(mf,"day Info");
 		JButton closeButton = new JButton("닫기");
 		JLabel topDialog = new JLabel();
 		topDialog.setHorizontalAlignment(JLabel.CENTER);;
@@ -178,12 +183,64 @@ public class TimeRecordView extends JPanel{
 		info.setText("여기에 \n \n어떻게 \n \n넣을것인가..");
 		habitInfo.add(info);
 		
+		//메뉴패널추가
+		JPanel botPan = new JPanel();
+		botPan.setLayout(new GridLayout(1,6));
+		botPan.setSize(900, 100);
+		botPan.setLocation(0, 562);
+		botPan.setBackground(Color.GREEN);
+		this.add(botPan);
+		// 메뉴목록
+		String[] menu = {"Main", "습관등록", "mypage", "횟수보기","타이머보기"};
+		//버튼추가
+				JButton[] menuButton = new JButton[menu.length];
+				for(int i =0; i <menu.length; i++) {
+					
+					menuButton[i] = new JButton(menu[i]);
+					menuButton[i].setBackground(Color.pink);
+					botPan.add(menuButton[i]);
+				}
 		
-		this.add(habitInfo);
-		this.add(calendarPanel);
-		this.add(habitTop);
+		menuButton[0].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	             PanelChangeControl.changeFrame(mf, new MainPage());
+	          }
+	       });
+		menuButton[1].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	             PanelChangeControl.changeFrame(mf, new HabbitAdd());
+	          }
+	       });
+		
+		menuButton[2].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	             PanelChangeControl.changeFrame(mf, new MyPage());
+	          }
+	       });
+		
+		menuButton[3].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	             PanelChangeControl.changeFrame(mf, new CheckRecordView());
+	          }
+	       });
+		
+		menuButton[4].setEnabled(false);
 		
 		
+		
+		center.add(habitInfo);
+		center.add(calendarPanel);
+		center.add(habitTop);
+		
+		this.add(center);
 		
 	}
 }

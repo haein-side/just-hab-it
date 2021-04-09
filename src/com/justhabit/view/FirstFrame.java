@@ -24,7 +24,7 @@ import com.justhabit.model.controller.PanelChangeControl;
 
 public class FirstFrame {
 
-   private JFrame frame;
+   private JFrame frame ;
    private LoginPanel login;
    
    private Image ic_logo = new ImageIcon("images/login.png").getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
@@ -170,13 +170,15 @@ public class FirstFrame {
       JButton loginButton = new JButton("LOG IN");
       loginButton.setBounds(220, 234, 130, 30);
       login.add(loginButton);
+     
+      
       loginButton.addActionListener(new ActionListener() {
-          
-          @Override
-          public void actionPerformed(ActionEvent e) {
-             PanelChangeControl.changeFrame(frame, new MainView());
-          }
-       });
+    	  
+    	  @Override
+    	  public void actionPerformed(ActionEvent e) {
+    		  PanelChangeControl.changeFrame(frame, new MainPage());
+    	  }
+      });
       
       
       JButton signupButton = new JButton("SIGN UP");
