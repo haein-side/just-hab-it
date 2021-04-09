@@ -6,6 +6,7 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JSpinner;
@@ -13,7 +14,7 @@ import javax.swing.SpinnerNumberModel;
 
 import com.justhabit.model.controller.PanelChangeControl;
 
-public class HabbitAdd6 extends JPanel{
+public class HabbitAdd6 extends JFrame{
 	private HabbitAdd6 habbitAdd6;
 	
 	   public HabbitAdd6() {
@@ -55,14 +56,14 @@ public class HabbitAdd6 extends JPanel{
 	      	jbutton1.addMouseListener(new MouseAdapter() {
 	            @Override
 	            public void mouseClicked(MouseEvent e) {
-	            	PanelChangeControl.changePanel(habbitAdd6 , new HabbitAdd4());
+	            	PanelChangeControl.changeFrame(habbitAdd6 , new HabbitAdd4());
 	            }
 	         }); 
 	      	
 	      	jbutton2.addMouseListener(new MouseAdapter() {
 	      		@Override
 	      		public void mouseClicked(MouseEvent e) {
-	      			PanelChangeControl.changePanel(habbitAdd6 , new MainPage());
+	      			PanelChangeControl.changeFrame(habbitAdd6 , new MainPage());
 	      		}
 	      	}); 
 	   }

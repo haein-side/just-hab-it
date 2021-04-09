@@ -4,6 +4,8 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.Image;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
 import java.awt.event.ItemListener;
 import java.text.SimpleDateFormat;
@@ -21,29 +23,33 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-public class CheckRecordView extends JPanel{
+import com.justhabit.model.controller.PanelChangeControl;
+
+public class CheckRecordView extends JFrame{
 	
-	public static void main(String[] args) {
-		JFrame fm = new JFrame();
-		fm.setLayout(null);
-		
-		fm.add(new CheckRecordView());
-		fm.setSize(900, 700);
-		fm.setLocationRelativeTo(null);
-		fm.setVisible(true);
-		fm.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-	}
-	
+
 	int count = 0; //체크박스 카운트용
 	int i = 0;
 	Map<Integer,String> checkcount = null;
 	/**
 	 * 체크박스 기록페이지
 	 */
+	JFrame mf = this;
 	public CheckRecordView() {
-		this.setBounds(0, 100, 900, 462);
+		
 		this.setLayout(null);
-		this.setBackground(Color.white);
+		
+		
+		this.setSize(900, 700);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
+		this.add(new TopPanel());
+		JPanel center = new JPanel();
+		center.setBounds(0, 100, 900, 462);
+		center.setLayout(null);
+		center.setBackground(Color.white);
 		
 		//습관상단바
 		JPanel habitTop = new JPanel();
@@ -53,7 +59,7 @@ public class CheckRecordView extends JPanel{
 		//습관상단바 - 습관명
 		JPanel habitName = new JPanel();
 		habitName.setBounds(10,0,200,50);
-		habitName.setBackground(Color.yellow);
+		habitName.setBackground(new Color(51,153,51));
 		JLabel nameLabel = new JLabel("물마시기");
 
 		//폰트설정
@@ -180,8 +186,67 @@ public class CheckRecordView extends JPanel{
 		info.setText("여기에 \n \n어떻게 \n \n넣을것인가..");
 		habitInfo.add(info);
 		
-		this.add(habitInfo);
-		this.add(calendarPanel);
-		this.add(habitTop);
+		//하단패널
+		JPanel botPan = new JPanel();
+		botPan.setLayout(new GridLayout(1,6));
+		botPan.setSize(900, 100);
+		botPan.setLocation(0, 562);
+		botPan.setBackground(Color.GREEN);
+		
+		this.add(botPan);
+		//메뉴목록
+		String[] menu = {"Main", "습관등록", "mypage", "횟수보기","타이머보기"};
+		
+		//버튼추가
+		JButton[] menuButton = new JButton[menu.length];
+		for(int i =0; i <menu.length; i++) {
+			
+			menuButton[i] = new JButton(menu[i]);
+			menuButton[i].setBackground(Color.pink);
+			botPan.add(menuButton[i]);
+		}
+		//메뉴버튼추가
+		
+		menuButton[0].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	             PanelChangeControl.changeFrame(mf, new MainPage());
+	          }
+	       });
+		menuButton[1].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	             PanelChangeControl.changeFrame(mf, new HabbitAdd());
+	          }
+	       });
+		
+		menuButton[2].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	             PanelChangeControl.changeFrame(mf, new MyPage());
+	          }
+	       });
+		
+		menuButton[3].setEnabled(false);
+		
+		menuButton[4].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	             PanelChangeControl.changeFrame(mf, new TimeRecordView());
+	          }
+	       });
+		
+		
+		
+		
+		
+		center.add(habitInfo);
+		center.add(calendarPanel);
+		center.add(habitTop);
+		this.add(center);
 	}
 }
