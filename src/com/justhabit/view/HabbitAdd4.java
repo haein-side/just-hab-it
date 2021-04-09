@@ -14,7 +14,7 @@ import javax.swing.JRadioButton;
 
 import com.justhabit.model.controller.PanelChangeControl;
 
-public class HabbitAdd4 extends JPanel {
+public class HabbitAdd4 extends JFrame {
 
 	private HabbitAdd4 habbitAdd4;
 
@@ -25,6 +25,7 @@ public class HabbitAdd4 extends JPanel {
 	   habbitAdd4.setLayout(null);
 	   habbitAdd4.setBounds(0, 100, 900, 462);
 	   habbitAdd4.setBackground(Color.lightGray);
+	   habbitAdd4.setLocationRelativeTo(null);
 	   habbitAdd4.setVisible(true);
 
 
@@ -64,14 +65,14 @@ public class HabbitAdd4 extends JPanel {
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd4 , new HabbitAdd3());
+            	PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd3());
             }
          }); 
       	
       	jbutton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd4 , new HabbitAdd5());
+            	PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd5());
             }
          });	
 

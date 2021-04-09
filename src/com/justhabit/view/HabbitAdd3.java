@@ -7,12 +7,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.justhabit.model.controller.PanelChangeControl;
 
-public class HabbitAdd3 extends JPanel {
+public class HabbitAdd3 extends JFrame {
 
 	private HabbitAdd3 habbitAdd3;
 	
@@ -23,6 +24,7 @@ public class HabbitAdd3 extends JPanel {
 	   habbitAdd3.setLayout(null);
 	   habbitAdd3.setBounds(0, 100, 900, 462);
 	   habbitAdd3.setBackground(Color.lightGray);
+	   habbitAdd3.setLocationRelativeTo(null);
 	   habbitAdd3.setVisible(true);
 
 
@@ -68,14 +70,14 @@ public class HabbitAdd3 extends JPanel {
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd3 , new HabbitAdd2());
+            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd2());
             }
          }); 
       	
       	jbutton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd3 , new HabbitAdd4());
+            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4());
             }
          });
       	     

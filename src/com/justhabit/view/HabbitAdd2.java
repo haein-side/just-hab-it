@@ -19,20 +19,20 @@ import javax.swing.SpinnerNumberModel;
 
 import com.justhabit.model.controller.PanelChangeControl;
 
-public class HabbitAdd2 extends JPanel {
+public class HabbitAdd2 extends JFrame {
 	
 	
-	private HabbitAdd2 habbitAdd2;
+	private HabbitAdd2 habbitAdd2 = this;
 	
 //	JFrame mf = new MainView();
 
    public HabbitAdd2() {
 	   
-	   this.habbitAdd2 = this;
 
 	   habbitAdd2.setLayout(null);
 	   habbitAdd2.setBounds(0, 100, 900, 462);
 	   habbitAdd2.setBackground(Color.lightGray);
+	   habbitAdd2.setLocationRelativeTo(null);
 	   habbitAdd2.setVisible(true);
 
 
@@ -66,7 +66,7 @@ public class HabbitAdd2 extends JPanel {
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd2 , new HabbitAdd());
+            	PanelChangeControl.changeFrame(habbitAdd2 , new HabbitAdd());
             }
          }); 
       	
@@ -74,7 +74,7 @@ public class HabbitAdd2 extends JPanel {
       	jbutton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd2 , new HabbitAdd3());
+            	PanelChangeControl.changeFrame(habbitAdd2 , new HabbitAdd3());
             }
          });  	
    }

@@ -3,14 +3,19 @@ package com.justhabit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
-public class ReviseInfo extends JPanel {
+import com.justhabit.model.controller.PanelChangeControl;
+
+public class ReviseInfo extends JFrame {
 	
 	private ReviseInfo reviseInfo;
 	
@@ -19,9 +24,18 @@ public class ReviseInfo extends JPanel {
 		this.reviseInfo = this;
 		
 		this.setLayout(null);
-		this.setBounds(0, 100, 900, 462);
+		this.setSize(900, 700);
 		this.setBackground(Color.lightGray);
+		this.setLocationRelativeTo(null);
 		this.setVisible(true);
+		
+		this.add(new TopPanel());
+		
+		JPanel userPanel = new JPanel();
+		userPanel.setLayout(null);
+		userPanel.setBounds(0,80,900,480);
+		userPanel.setBackground(Color.white);
+		this.add(userPanel);
 		
 		JLabel id  = new JLabel("ID : ");
 		JLabel userName  = new JLabel("닉네임 : ");
@@ -38,10 +52,10 @@ public class ReviseInfo extends JPanel {
 		email.setBounds(500, 190, 150, 150);
 		levelExp.setBounds(130, 290, 150, 150);
 		
-		this.add(id);
-		this.add(userName);
-		this.add(email);
-		this.add(levelExp);
+		userPanel.add(id);
+		userPanel.add(userName);
+		userPanel.add(email);
+		userPanel.add(levelExp);
 		
 		JTextField idBox = new JTextField(17);
 		JTextField usernameBox = new JTextField(17);
@@ -49,15 +63,35 @@ public class ReviseInfo extends JPanel {
 		idBox.setBounds(580, 170, 220, 30);
 		usernameBox.setBounds(580, 210, 220, 30);
 		emailBox.setBounds(580, 250, 220, 30);
-		this.add(usernameBox);
-		this.add(emailBox);
-		this.add(idBox);
+		userPanel.add(usernameBox);
+		userPanel.add(emailBox);
+		userPanel.add(idBox);
+		
+		JButton cancel = new JButton("취소");
+		cancel.setSize(90,40);
+		cancel.setLocation(465, 390);
+		userPanel.add(cancel);
+		cancel.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	PanelChangeControl.changeFrame(reviseInfo , new MyPage());
+            }
+         });
 		
 		
-		JButton exit = new JButton("회원정보 수정 완료");
-		exit.setSize(180,40);
-		exit.setLocation(365, 390);
-		this.add(exit);
+		JButton exit = new JButton("저장");
+		exit.setSize(90,40);
+		exit.setLocation(345, 390);
+		
+		exit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	PanelChangeControl.changeFrame(reviseInfo , new MyPage());
+            }
+         });
+		
+		
+		userPanel.add(exit);
 		
 //		JButton revise = new JButton("회원정보수정");
 //		revise.setSize(130,40);
@@ -70,11 +104,6 @@ public class ReviseInfo extends JPanel {
 		JLabel levelImg = new JLabel(new ImageIcon(level));
 		levelImg.setBounds(80,60,300,300);
 		this.add(levelImg);
-		
-		
-		
-		
-		
 	}
 	
 	
