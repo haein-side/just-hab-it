@@ -9,10 +9,10 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 public class MainPage extends JPanel{
- private JPanel mainPage;
+ public JPanel mainPage;
+ public JButton first;
  
 	public MainPage() {
-		
 		
 		this.setLayout(null);
 		this.setBounds(0, 100, 900, 462);
@@ -22,16 +22,19 @@ public class MainPage extends JPanel{
 		JButton first = new JButton("습관 1");
 		first.setSize(100,80);
 		first.setLocation(150, 300);
+		first.setRolloverEnabled(false);
 		this.add(first);
 		
 		JButton second = new JButton("습관 2");
 		second.setSize(100,80);
 		second.setLocation(400, 300);
+		second.setRolloverEnabled(false);
 		this.add(second);
 		
 		JButton third = new JButton("습관 3");
 		third.setSize(100,80);
 		third.setLocation(650, 300);
+		third.setRolloverEnabled(false);
 		this.add(third);
 		
 		JLabel promise = new JLabel("오늘의 각오를 입력해주세요!");
@@ -48,8 +51,6 @@ public class MainPage extends JPanel{
 		this.add(chat);
 		this.validate();
 		
-		
-
 		
 		
 	}

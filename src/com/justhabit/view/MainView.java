@@ -79,7 +79,6 @@ public class MainView extends JFrame{
 		mf.add(cenMain);
 
 
-
 		
 		
 		//메뉴목록
