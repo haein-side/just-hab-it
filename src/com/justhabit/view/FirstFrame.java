@@ -176,7 +176,7 @@ public class FirstFrame {
     	  
     	  @Override
     	  public void actionPerformed(ActionEvent e) {
-    		  PanelChangeControl.changeFrame(frame, new MainPage());
+    		  PanelChangeControl.changeFrame(frame, new TodayWord());
     	  }
       });
       

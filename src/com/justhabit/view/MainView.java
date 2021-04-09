@@ -77,9 +77,8 @@ public class MainView extends JFrame{
 
 		
 		//메인센터(메인패널 클래스)
-		this.cenMain = new TodayWord();
-	    mf.add(cenMain);
-
+//		this.cenMain = new TodayWord();
+//	    mf.add(cenMain);
 
 		
 		
@@ -96,68 +95,68 @@ public class MainView extends JFrame{
 		}
 		
 		
-		menuButton[0].addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				
-				PanelChangeControl.changePanel(cenMain, new MainPage());
-			}
-			
-		});
-		
-	     menuButton[1].addActionListener(new ActionListener() {
-
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	               
-	            	PanelChangeControl.changePanel(cenMain, new HabbitAdd());
-	            }
-	            
-	        });
-	     
-	     menuButton[2].addActionListener(new ActionListener() {
-
-	            @Override
-	            public void actionPerformed(ActionEvent e) {
-	               
-
-	             
-
-	            	PanelChangeControl.changePanel(cenMain, new MyPage());
-	            }
-	            
-
-	        });
-	     //테스트 삭제예정
-	     menuButton[3].addActionListener(new ActionListener() {
-	    	 
-	    	 @Override
-	    	 public void actionPerformed(ActionEvent e) {
-	    		 
-	    		 
-	    		 
-	    		 
-	    		 PanelChangeControl.changePanel(cenMain, new TimeRecordView());
-	    	 }
-	    	 
-	    	 
-	     });
-	     
-	     //테스트 삭제예정
-	     menuButton[4].addActionListener(new ActionListener() {
-	    	 
-	    	 @Override
-	    	 public void actionPerformed(ActionEvent e) {
-	    		 
-	    		 
-	    		 
-	    		 
-	    		 PanelChangeControl.changePanel(cenMain, new CheckRecordView());
-	    	 }
-	    	 
-	    	 
-	     });
+//		menuButton[0].addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				
+//				PanelChangeControl.changePanel(cenMain, new MainPage());
+//			}
+//			
+//		});
+//		
+//	     menuButton[1].addActionListener(new ActionListener() {
+//
+//	            @Override
+//	            public void actionPerformed(ActionEvent e) {
+//	               
+//	            	PanelChangeControl.changePanel(cenMain, new HabbitAdd());
+//	            }
+//	            
+//	        });
+//	     
+//	     menuButton[2].addActionListener(new ActionListener() {
+//
+//	            @Override
+//	            public void actionPerformed(ActionEvent e) {
+//	               
+//
+//	             
+//
+//	            	PanelChangeControl.changePanel(cenMain, new MyPage());
+//	            }
+//	            
+//
+//	        });
+//	     //테스트 삭제예정
+//	     menuButton[3].addActionListener(new ActionListener() {
+//	    	 
+//	    	 @Override
+//	    	 public void actionPerformed(ActionEvent e) {
+//	    		 
+//	    		 
+//	    		 
+//	    		 
+//	    		 PanelChangeControl.changePanel(cenMain, new TimeRecordView());
+//	    	 }
+//	    	 
+//	    	 
+//	     });
+//	     
+//	     //테스트 삭제예정
+//	     menuButton[4].addActionListener(new ActionListener() {
+//	    	 
+//	    	 @Override
+//	    	 public void actionPerformed(ActionEvent e) {
+//	    		 
+//	    		 
+////	    		 
+//	    		 
+//	    		 PanelChangeControl.changePanel(cenMain, new CheckRecordView());
+//	    	 }
+//	    	 
+//	    	 
+//	     });
 	     
 	     
 		

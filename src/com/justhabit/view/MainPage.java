@@ -12,14 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+
 import com.justhabit.model.controller.PanelChangeControl;
 
 public class MainPage extends JFrame{
  
 	JFrame mf = this;
 	public MainPage() {
-		
-	
 		
 		this.setLayout(null);
 		this.setSize(900, 700);
@@ -37,6 +36,7 @@ public class MainPage extends JFrame{
 		JButton first = new JButton("습관 1");
 		first.setSize(100,80);
 		first.setLocation(150, 300);
+		
 		center.add(first);
 		
 		JButton second = new JButton("습관 2");

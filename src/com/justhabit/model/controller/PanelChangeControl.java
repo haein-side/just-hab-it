@@ -10,15 +10,14 @@ public class PanelChangeControl {
 	public static JFrame mainFrame;
 	
 	   
-    public static void changePanel(JPanel oldp, JPanel newp) {
-      
+    public static void changePanel(JPanel oldp, JPanel newp) { 
       mainFrame.getContentPane().remove(oldp);
       mainFrame.getContentPane().add(newp);
       mainFrame.validate();
+      newp.repaint();
 //      mainFrame.remove(oldp);
 //      mainFrame.add(newp);
 //      newp.revalidate();
-      newp.repaint();
 //      oldp.setVisible(false);
 //      newp.setVisible(true);
       
