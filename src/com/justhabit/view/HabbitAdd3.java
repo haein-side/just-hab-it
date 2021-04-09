@@ -68,7 +68,7 @@ public class HabbitAdd3 extends JPanel {
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd3 , new HabbitAdd2());
+            	PanelChangeControl.changePanel(habbitAdd3 , new HabbitAdd());
             }
          }); 
       	

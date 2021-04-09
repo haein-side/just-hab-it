@@ -58,7 +58,7 @@ public HabbitAdd() {
       	jbutton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd , new HabbitAdd2());
+            	PanelChangeControl.changePanel(habbitAdd , new HabbitAdd3());
             }
          });
    } 

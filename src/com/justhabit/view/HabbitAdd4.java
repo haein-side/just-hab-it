@@ -2,6 +2,8 @@ package com.justhabit.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -56,10 +58,28 @@ public class HabbitAdd4 extends JPanel {
       jbutton1.setLocation(300, 280);
       habbitAdd4.add(jbutton1);
       
-      JButton jbutton2 = new JButton("다음");
-      jbutton2.setSize(80,50);
-      jbutton2.setLocation(450, 280);
-      habbitAdd4.add(jbutton2);
+//      JButton jbutton2 = new JButton("다음");
+//      jbutton2.setSize(80,50);
+//      jbutton2.setLocation(450, 280);
+//      habbitAdd4.add(jbutton2);
+      
+      	time.addActionListener(new ActionListener() {
+		
+		@Override
+		public void actionPerformed(ActionEvent e) {
+			PanelChangeControl.changePanel(habbitAdd4 , new HabbitAdd5());
+			
+		}
+     });
+     
+      	timer.addActionListener(new ActionListener() {
+ 		
+ 		@Override
+ 		public void actionPerformed(ActionEvent e) {
+ 			PanelChangeControl.changePanel(habbitAdd4 , new HabbitAdd6());
+ 			
+ 		}
+ 	 });
       	
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
@@ -67,13 +87,5 @@ public class HabbitAdd4 extends JPanel {
             	PanelChangeControl.changePanel(habbitAdd4 , new HabbitAdd3());
             }
          }); 
-      	
-      	jbutton2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd4 , new HabbitAdd5());
-            }
-         });	
-
    } 
 }
