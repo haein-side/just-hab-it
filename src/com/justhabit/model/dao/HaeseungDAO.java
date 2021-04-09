@@ -222,7 +222,7 @@ public class HaeseungDAO {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setDouble(1, timerRecord.getTimer());
+			pstmt.setDouble(1, timerRecord.getTimer()+0.0005);
 			pstmt.setInt(2, timerRecord.getHabitId());
 			pstmt.setString(3, timerRecord.getDoDate());
 			
@@ -336,7 +336,7 @@ public class HaeseungDAO {
 			if(rset.next()) {
 				totalRecord = new HaeseungMonthTotalDTO();
 				totalRecord.setDateCount(rset.getInt("COUNT(*)"));
-				totalRecord.setRecordSum(rset.getInt("SUM(time_record)"));
+				totalRecord.setRecordSum(rset.getDouble("SUM(time_record)"));
 			} 
 			
 		} catch (SQLException e) {
@@ -375,6 +375,38 @@ public class HaeseungDAO {
 				row = new HaeseungRecordDTO();
 				row.setDoDate(rset.getString("do_date"));
 				row.setCheck(rset.getInt("count_check"));
+				row.setHabitGoal(rset.getInt("habit_goal"));
+				
+				userRecordGoalList.add(row);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		
+		return userRecordGoalList;
+	}
+
+	public List<HaeseungRecordDTO> selectTimerRecordGoal(Connection con, HaeseungRecordDTO recordInfo) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HaeseungRecordDTO row = null;
+		List<HaeseungRecordDTO> userRecordGoalList = null;
+		String query = prop.getProperty("selectTimerGoalRecord");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, recordInfo.getHabitId());
+			rset = pstmt.executeQuery();
+			
+			userRecordGoalList = new ArrayList<HaeseungRecordDTO>();
+			
+			while(rset.next()) {
+				row = new HaeseungRecordDTO();
+				row.setDoDate(rset.getString("do_date"));
+				row.setTimer(rset.getDouble("time_record"));
 				row.setHabitGoal(rset.getInt("habit_goal"));
 				
 				userRecordGoalList.add(row);

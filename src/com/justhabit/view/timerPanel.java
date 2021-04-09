@@ -45,9 +45,9 @@ public class timerPanel extends JPanel{
 		JPanel bp = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel wp = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		
-		JLabel c1 = new JLabel(" : ");
-		JLabel c2 = new JLabel(" : ");
-		JLabel c3 = new JLabel(" : ");
+		JLabel c1 = new JLabel(":");
+		JLabel c2 = new JLabel(":");
+		JLabel c3 = new JLabel(":");
 		hbtHr = new JLabel("00");
 		hbtMin = new JLabel("00");
 		hbtSec = new JLabel("00");
@@ -55,7 +55,11 @@ public class timerPanel extends JPanel{
 		
 		JLabel[] clock = {c1,c2,c3,hbtHr,hbtMin,hbtSec,hbtMillsec};
 		for(int i = 0; i < clock.length; i++) {
-			clock[i].setFont(new Font("D2Coding",Font.PLAIN,15));
+			if(i<3) {
+				clock[i].setFont(new Font("D2Coding",Font.PLAIN,15));
+			} else {
+				clock[i].setFont(new Font("D2Coding",Font.PLAIN,15));
+			}
 		}
 		
 		
@@ -126,13 +130,11 @@ public class timerPanel extends JPanel{
 								hbtSec.setText(String.format("%02d", ss));
 								hbtMillsec.setText(String.format("%02d", ms));
 								t++;
-//								count++;
 							} catch(InterruptedException e1) {
 							}
 						}
 					}
 				});
-				
 				display.start();
 			}
 			else if(s.equals("PAUSE")) {
@@ -150,11 +152,9 @@ public class timerPanel extends JPanel{
 				hbtMin.setText("00");
 				hbtSec.setText("00");
 				hbtMillsec.setText("00");
-//				count = 0;
 				t=0;
 				
 			}
-//			System.out.println(count);
 		}
 	}
 }

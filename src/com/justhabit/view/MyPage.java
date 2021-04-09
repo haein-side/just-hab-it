@@ -232,14 +232,14 @@ public class MyPage extends JFrame {
 		botPan.setBackground(Color.GREEN);
 		this.add(botPan);
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage", "횟수보기","타이머보기"};
+		String[] menu = {"Main", "습관등록", "mypage"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setBackground(Color.pink);
+			menuButton[i].setBackground(new Color(211,224,234));
 			botPan.add(menuButton[i]);
 		}
 		menuButton[0].addActionListener(new ActionListener() {

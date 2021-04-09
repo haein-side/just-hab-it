@@ -11,6 +11,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -35,10 +36,11 @@ public class TimeRecordView extends JFrame{
 	private HaeseungRecordDTO timerRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
 	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
 	private HaeseungMonthTotalDTO totalRecord = new HaeseungMonthTotalDTO();
+	List<HaeseungRecordDTO> recordAndGoalList = null;
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
 	private int totalDate =0; //습관실시 일수
-	private int totalTimer=0;//기록된 습관 총 수
+	private double totalTimer=0;//기록된 습관 총 시간
 	private String thisMonth = "" ;//이번달 "00월"
 	JFrame mf = this;
 	int test = 5;
@@ -62,13 +64,11 @@ public class TimeRecordView extends JFrame{
 		
 		
 		//등록된 습관정보 불러오기
-//		registInfo.setHabitID(MainPage.userhabitid);
-		//TODO 삭제예정: 테스트용
 		registInfo.setHabitID(MainPage.userhabitid); 
 		registInfo = habitInfoController.selectHabitInfo(registInfo);
 		//습관상단바
 		JPanel habitTop = new JPanel();
-		habitTop.setLayout(new FlowLayout(FlowLayout.CENTER));
+		habitTop.setLayout(new FlowLayout(FlowLayout.LEFT));
 //		habitTop.setBackground(new Color(51,153,51));
 		habitTop.setBounds(43, 20, 800, 50);
 		
@@ -141,66 +141,71 @@ public class TimeRecordView extends JFrame{
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
 		today = dateFormat.format(todayDate);
 				
-		JButton[] day = new JButton[calArr.size()]; 
+		JButton[] dayButton = new JButton[calArr.size()]; 
 		for(int i = 0; i < calArr.size();i++) {
 			
 			if(i<9) {
 				
-				day[i] = new JButton("0"+calArr.get(i));			
-				day[i].setHorizontalAlignment(JLabel.CENTER);
-				day[i].setVerticalAlignment(JLabel.CENTER);
-				day[i].setBackground(Color.white);
-				calendar.add(day[i]);
+				dayButton[i] = new JButton("0"+calArr.get(i));			
+				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
+				dayButton[i].setVerticalAlignment(JLabel.CENTER);
+				dayButton[i].setBackground(Color.white);
+				calendar.add(dayButton[i]);
 			} else {
-				day[i] = new JButton(calArr.get(i)+"");			
-				day[i].setHorizontalAlignment(JLabel.CENTER);
-				day[i].setVerticalAlignment(JLabel.CENTER);
-				day[i].setBackground(Color.white);
-				calendar.add(day[i]);
+				dayButton[i] = new JButton(calArr.get(i)+"");			
+				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
+				dayButton[i].setVerticalAlignment(JLabel.CENTER);
+				dayButton[i].setBackground(Color.white);
+				calendar.add(dayButton[i]);
 			}
+		}
+		
+		//달성 여부에 따라 신호등 만들기
+		timerRecord.setHabitId(MainPage.userhabitid);
+		timerRecord.setRecordType(registInfo.getHabitType());
+		recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
+		SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
+		String checkYearMonth = yearMonth.format(todayDate);
+		System.out.println(checkYearMonth);
+		String searchDate =  "";
+		for(int i = 0; i < calArr.size(); i++) {
 			
-//			if(0<test && test<5) {
-//				day[i].setBackground(Color.yellow);
-//			} else if(test<=5) {
-//				day[i].setBackground(Color.green);
-//			}
-			//TODO 신호등 만들기(테스트중)
-			if(day[i].getText().equals(today)) {
-				day[i].setBackground(Color.yellow);
-			} else {
-				day[i].setBackground(Color.green);
+			searchDate = checkYearMonth+"/"+dayButton[i].getText();
+			System.out.println("비교할 날짜 : " +  searchDate);
+			for(int j = 0; j < recordAndGoalList.size(); j++) {
+				
+				if(searchDate.equals(recordAndGoalList.get(j).getDoDate())) {
+					int goal = recordAndGoalList.get(j).getHabitGoal();
+					double record = recordAndGoalList.get(j).getTimer();
+					System.out.println("목표 : " + goal);
+					System.out.println("기록 : " + record);
+					if(goal == record) {
+						dayButton[i].setBackground(Color.green);
+					} else if(record > 0 ){
+						dayButton[i].setBackground(Color.yellow);
+					}
+				}
 			}
 		}
 		calendarPanel.add(calendar);
 		
-		//날짜 클릭시 그날 info 출력..진행중
-		Dialog dayInfo = new Dialog(mf,"day Info");
-		JButton closeButton = new JButton("닫기");
-		JLabel topDialog = new JLabel();
-		topDialog.setHorizontalAlignment(JLabel.CENTER);;
-		JLabel mainDialog = new JLabel();
-		
-		dayInfo.add(closeButton,"South");
-		dayInfo.add(topDialog,"North");
-		dayInfo.add(mainDialog,"Center");
-		
-		//날짜 색 변경
-//		for(i = 0; i < calArr.size(); i++) {
-//			if(day[i].getText().equals(today)) {
-//				
-//				dayInfo.setBounds(350,250,150,150);
-//					}
-//				});
-//			}
-//		}
-		closeButton.addActionListener(new ActionListener() {
-			
-			@Override
-			public void actionPerformed(ActionEvent e) {
-				dayInfo.dispose();
+		//클릭시 그날 기록 출력하기,기록있는날만 나옴  
+		for(int i = 0; i < calArr.size(); i++) {
+			searchDate = checkYearMonth+"/"+dayButton[i].getText();
+			for(int j = 0; j < recordAndGoalList.size(); j++) {
+				int a = j;
+				String b = searchDate;
+					dayButton[i].addActionListener(new ActionListener() {
+						@Override
+						public void actionPerformed(ActionEvent e) {
+							recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
+							if(b.equals(recordAndGoalList.get(a).getDoDate())) {
+							JOptionPane.showMessageDialog(mf, b +"\n\n"+recordAndGoalList.get(a).getTimer()+"시간");
+						} 
+					}
+				});
 			}
-		});		
-		
+		}
 		//문구 표시
 		JPanel habitInfo = new JPanel();
 		habitInfo.setLayout(null);
@@ -222,7 +227,9 @@ public class TimeRecordView extends JFrame{
 		
 		//저장 버튼 
 		JButton recordButton = new JButton("저장");
-		habitTop.add(recordButton);
+//		recordButton.setBounds(43, 20, 800, 50);
+		recordButton.setBounds(783, 139, 60, 27);
+		this.add(recordButton);
 		
 		recordButton.addActionListener(/**
 				 * @author user
@@ -237,8 +244,8 @@ public class TimeRecordView extends JFrame{
 						double div = 60*60*100;
 						double hbtTimer = timerPanel.t / div;
 						double test = timerPanel.t % div;
-						System.out.println(hbtTimer);
-						System.out.println(test);
+						System.out.println("---------------------------------------" + hbtTimer);
+						System.out.println("---------------------------------------" + test);
 						if(hbtTimer == 0) {
 							JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
 						} else {
@@ -249,10 +256,6 @@ public class TimeRecordView extends JFrame{
 							timerRecord.setTimer(hbtTimer); //기록시간
 							today = todayDateFormat.format(todayDate);
 							timerRecord.setDoDate(today);  // 오늘날짜
-							//테스트용
-//							Date test = new Date(2021,3,8);
-//							String testDate = todayDateFormat.format(test);
-//							checkRecord.setDoDate(testDate);
 							int result = habitInfoController.dateTimerSelectController(timerRecord);
 							if(result==0){
 								habitInfoController.insertTimerController(timerRecord);
@@ -268,13 +271,36 @@ public class TimeRecordView extends JFrame{
 							totalDate = totalRecord.getDateCount();
 							totalTimer = totalRecord.getRecordSum();
 							info.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 총시간 : " + totalTimer + "시간");
+							
+							timerRecord.setHabitId(MainPage.userhabitid);
+							timerRecord.setRecordType(registInfo.getHabitType());
+							recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
+							SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
+							String checkYearMonth = yearMonth.format(todayDate);
+							System.out.println(checkYearMonth);
+							String searchDate =  "";
+							for(int i = 0; i < calArr.size(); i++) {
+								
+								searchDate = checkYearMonth+"/"+dayButton[i].getText();
+								System.out.println("비교할 날짜 : " +  searchDate);
+								for(int j = 0; j < recordAndGoalList.size(); j++) {
+									
+									if(searchDate.equals(recordAndGoalList.get(j).getDoDate())) {
+										int goal = recordAndGoalList.get(j).getHabitGoal();
+										double record = recordAndGoalList.get(j).getTimer();
+										System.out.println("목표 : " + goal);
+										System.out.println("기록 : " + record);
+										if(goal == record) {
+											dayButton[i].setBackground(Color.green);
+										} else if(record > 0 ){
+											dayButton[i].setBackground(Color.yellow);
+										}
+									}
+								}
+							}
 						}
 					}
 				});
-		
-
-		
-		
 		
 		//하단패널
 		JPanel botPan = new JPanel();
