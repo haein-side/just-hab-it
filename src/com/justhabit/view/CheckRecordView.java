@@ -3,7 +3,6 @@ package com.justhabit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.GridLayout;
-import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.ItemEvent;
@@ -15,7 +14,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
@@ -23,14 +21,22 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.justhabit.model.controller.HaeSeungController;
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.dto.HaeseungRecordDTO;
+import com.justhabit.model.dto.HaesungInfoDTO;
 
 public class CheckRecordView extends JFrame{
 	
-
-	int count = 0; //체크박스 카운트용
+	
+	private HaeSeungController habitInfoController = new HaeSeungController();
+//	Map<Integer,String> checkcount = null;//체크박스 카운트용
+	
+	int checkCount = 0; // 체크박스카운트용
 	int i = 0;
-	Map<Integer,String> checkcount = null;
+	Date todayDate= new Date(); // 오늘 날짜
+	String today = ""; //날짜 문자열로 변환
+	HaeseungRecordDTO checkRecord = new HaeseungRecordDTO();
 	/**
 	 * 체크박스 기록페이지
 	 */
@@ -51,30 +57,35 @@ public class CheckRecordView extends JFrame{
 		center.setLayout(null);
 		center.setBackground(Color.white);
 		
+		//등록된 습관정보 불러오기
+		int HabbitID = 1;
+		HaesungInfoDTO habitInfo = habitInfoController.selectHabitInfo(HabbitID);
+		
 		//습관상단바
 		JPanel habitTop = new JPanel();
 		habitTop.setLayout(null);
-		habitTop.setBounds(43, 20, 800, 50);
+		habitTop.setBounds(43, 20, 780, 50);
 		
 		//습관상단바 - 습관명
-		JPanel habitName = new JPanel();
-		habitName.setBounds(10,0,200,50);
-		habitName.setBackground(new Color(51,153,51));
-		JLabel nameLabel = new JLabel("물마시기");
+		JPanel namePanel = new JPanel();
+		namePanel.setBounds(10,0,200,50);
+		namePanel.setBackground(new Color(51,153,51));
+		String habitName = habitInfo.getHabitName();
+		JLabel nameLabel = new JLabel(habitName);
 
 		//폰트설정
-		nameLabel.setFont(new Font("D2Coding",Font.BOLD,30));
-		habitName.add(nameLabel);
+		nameLabel.setFont(new Font("D2Coding",Font.PLAIN,20));
+		namePanel.add(nameLabel);
 		
-		habitTop.add(habitName);
+		habitTop.add(namePanel);
 		
 		//습관 상단바 - 체크박스
 		JPanel habitCheck =  new JPanel();
 		habitCheck.setLayout(new GridLayout());
-		habitCheck.setBounds(220,0,570,50);
+		habitCheck.setBounds(220,0,550,50);
 		
 		//체크박스 생성
-		JCheckBox[] buttons = new JCheckBox[5];
+		JCheckBox[] buttons = new JCheckBox[habitInfo.getHabitGoal()];
 		
 		for(int i = 0; i < buttons.length; i++) {
 			JCheckBox box = new JCheckBox((i+1)+"회");
@@ -85,27 +96,54 @@ public class CheckRecordView extends JFrame{
 		
 		
 		
+
+		//체크 횟수 기록
 		for(int i = 0; i < buttons.length; i++ ) {
-			checkcount = new HashMap<>();
+//			checkcount = new HashMap<>();
 			buttons[i].addItemListener(new ItemListener() {
 				@Override
 				public void itemStateChanged(ItemEvent e) {
-					
+					checkCount = 0;
 					for(int i = 0; i < buttons.length; i++) {
 						if(buttons[i].isSelected()) {
-							checkcount.put(i,buttons[i].getText());
-							System.out.println(checkcount);
-							System.out.println(checkcount.size());
-						} else {
-							checkcount.remove(i);
-							System.out.println(checkcount);
-							System.out.println(checkcount.size());
+//							checkcount.put(i,buttons[i].getText());
+							checkCount++;
 						}
 					}
 				}
 			});
 		}
+		
+		
 
+
+		//저장버튼 클릭 시 일치하는 날짜 검색-> 있으면 update 없으면 insert;
+		JButton recordButton = new JButton("저장");
+
+		recordButton.setBounds(823,128, 60, 30);
+		
+		SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
+		today = todayDateFormat.format(todayDate);
+		checkRecord.setUserId(habitInfo.getUserID());
+		checkRecord.setHabitId(habitInfo.getHabitID());
+		checkRecord.setDoDate(todayDateFormat.format(todayDate));
+		recordButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				checkRecord.setCheck(checkCount);
+				if(today.equals(habitInfoController.dateSelectController(checkRecord.getHabitId()))){
+					habitInfoController.updateTimerController(checkRecord);
+				} else {
+					System.out.println(habitInfoController.dateSelectController(checkRecord.getHabitId()));
+					habitInfoController.insertTimerController(checkRecord);
+				}
+			}
+		});
+		
+		
+		this.add(recordButton);
+		
 		habitTop.add(habitCheck);
 		
 		//달력
@@ -136,10 +174,9 @@ public class CheckRecordView extends JFrame{
 		monthPrint.add(monthName);
 		calendarPanel.add(monthPrint);
 		
-		Date todayDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
 		
-		String today = dateFormat.format(todayDate);
+		String day = dateFormat.format(todayDate);
 		//달력표시
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
@@ -147,29 +184,29 @@ public class CheckRecordView extends JFrame{
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,5,5);
 		calendar.setLayout(gridLayout);
 		
-		JButton[] day = new JButton[calArr.size()]; 
+		JButton[] dayButton = new JButton[calArr.size()]; 
 		for(int i = 0; i < calArr.size();i++) {
 			
 			if(i<9) {
 				
-				day[i] = new JButton("0"+calArr.get(i));			
-				day[i].setHorizontalAlignment(JLabel.CENTER);
-				day[i].setVerticalAlignment(JLabel.CENTER);
-				day[i].setBackground(Color.white);
-				calendar.add(day[i]);
+				dayButton[i] = new JButton("0"+calArr.get(i));			
+				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
+				dayButton[i].setVerticalAlignment(JLabel.CENTER);
+				dayButton[i].setBackground(Color.white);
+				calendar.add(dayButton[i]);
 			} else {
 				
-				day[i] = new JButton(calArr.get(i)+"");			
-				day[i].setHorizontalAlignment(JLabel.CENTER);
-				day[i].setVerticalAlignment(JLabel.CENTER);
-				day[i].setBackground(Color.white);
-				calendar.add(day[i]);
+				dayButton[i] = new JButton(calArr.get(i)+"");			
+				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
+				dayButton[i].setVerticalAlignment(JLabel.CENTER);
+				dayButton[i].setBackground(Color.white);
+				calendar.add(dayButton[i]);
 			}
 			
-			if(day[i].getText().equals(today)) {
-				day[i].setBackground(Color.yellow);
+			if(dayButton[i].getText().equals(today)) {
+				dayButton[i].setBackground(Color.yellow);
 			} else {
-				day[i].setBackground(Color.green);
+				dayButton[i].setBackground(Color.green);
 			}
 			
 			
@@ -177,14 +214,14 @@ public class CheckRecordView extends JFrame{
 		calendarPanel.add(calendar);
 		
 		//문구 표시
-		JPanel habitInfo = new JPanel();
-		habitInfo.setLayout(null);
-		habitInfo.setBounds(420, 95, 420, 340);
-		JTextArea info = new JTextArea();
-		info.setBounds(10,10,400,320);
-		info.setFont(new Font("D2Coding",Font.PLAIN,20));
-		info.setText("여기에 \n \n어떻게 \n \n넣을것인가..");
-		habitInfo.add(info);
+		JPanel infoPanel = new JPanel();
+		infoPanel.setLayout(null);
+		infoPanel.setBounds(420, 95, 420, 340);
+		JTextArea infoText = new JTextArea();
+		infoText.setBounds(10,10,400,320);
+		infoText.setFont(new Font("D2Coding",Font.PLAIN,20));
+		infoText.setText("여기에 \n \n어떻게 \n \n넣을것인가..");
+		infoPanel.add(infoText);
 		
 		//하단패널
 		JPanel botPan = new JPanel();
@@ -244,7 +281,7 @@ public class CheckRecordView extends JFrame{
 		
 		
 		
-		center.add(habitInfo);
+		center.add(infoPanel);
 		center.add(calendarPanel);
 		center.add(habitTop);
 		this.add(center);

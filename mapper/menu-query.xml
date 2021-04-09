@@ -29,5 +29,39 @@
     	       SEQ_CATEGORY_CODE.CURRVAL
     	  FROM DUAL
     </entry>
-   
+   <entry key="selectHabitInfo">
+	   SELECT 
+	          USER_ID
+	        , HABIT_ID
+	        , HABIT_NAME
+	        , HABIT_TYPE
+	        , HABIT_GOAL
+	        , HABIT_DAYS
+	     FROM HBT_REGISTER
+	    WHERE HABIT_ID = ?
+   </entry>
+   <entry key="insertRecord">
+       INSERT
+         INTO HBT_CHECK
+       VALUES
+            (
+              ?
+            , ?
+            , ?
+            , ?   
+            )  
+   </entry>
+   <entry key="selectDateInfo">
+        SELECT 
+               DO_DATE 
+          FROM HBT_CHECK 
+         WHERE HABIT_ID = ?
+   </entry>
+   <entry key="updateCheck">
+       UPDATE
+              HBT_CHECK
+          SET COUNT_CHECK = ?
+        WHERE HABIT_ID = ?
+          AND DO_DATE = ?
+   </entry>
 </properties>
