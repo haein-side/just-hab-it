@@ -25,7 +25,8 @@ public class MainView extends JFrame{
 	private JFrame mf;
 	private JPanel cenMain;
 	public MainView() {
-		super("이름을 정해야 하는군?");
+		
+		super();
 		
 		
 		//메인프레임
@@ -34,6 +35,7 @@ public class MainView extends JFrame{
 		PanelChangeControl.mainFrame.setVisible(false); 
 		
 		mf.setLayout(null);
+		this.mf.setVisible(false);
 		
 		//메인패널
 		JPanel pan = new JPanel();
@@ -76,14 +78,13 @@ public class MainView extends JFrame{
 		
 		//메인센터(메인패널 클래스)
 		this.cenMain = new TodayWord();
-		mf.add(cenMain);
-
+	    mf.add(cenMain);
 
 
 		
 		
 		//메뉴목록
-		String[] menu = {"Main", "menu1", "menu2", "menu3","menu4", "mypage"};
+		String[] menu = {"Main", "습관등록", "mypage", "menu3","menu4", "test"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
@@ -93,6 +94,17 @@ public class MainView extends JFrame{
 			menuButton[i].setBackground(Color.pink);
 			botPan.add(menuButton[i]);
 		}
+		
+		
+		menuButton[0].addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				PanelChangeControl.changePanel(cenMain, new MainPage());
+			}
+			
+		});
 		
 	     menuButton[1].addActionListener(new ActionListener() {
 
@@ -112,11 +124,42 @@ public class MainView extends JFrame{
 
 	             
 
-	            	PanelChangeControl.changePanel(cenMain, new HabbitAdd());
+	            	PanelChangeControl.changePanel(cenMain, new MyPage());
 	            }
 	            
 
 	        });
+	     //테스트 삭제예정
+	     menuButton[3].addActionListener(new ActionListener() {
+	    	 
+	    	 @Override
+	    	 public void actionPerformed(ActionEvent e) {
+	    		 
+	    		 
+	    		 
+	    		 
+	    		 PanelChangeControl.changePanel(cenMain, new TimeRecordView());
+	    	 }
+	    	 
+	    	 
+	     });
+	     
+	     //테스트 삭제예정
+	     menuButton[4].addActionListener(new ActionListener() {
+	    	 
+	    	 @Override
+	    	 public void actionPerformed(ActionEvent e) {
+	    		 
+	    		 
+	    		 
+	    		 
+	    		 PanelChangeControl.changePanel(cenMain, new CheckRecordView());
+	    	 }
+	    	 
+	    	 
+	     });
+	     
+	     
 		
 		
 		

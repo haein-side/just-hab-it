@@ -7,12 +7,13 @@ import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.justhabit.model.controller.PanelChangeControl;
 
-public class HabbitAdd3 extends JPanel {
+public class HabbitAdd3 extends JFrame {
 
 	private HabbitAdd3 habbitAdd3;
 	
@@ -20,10 +21,11 @@ public class HabbitAdd3 extends JPanel {
 	   
 	   this.habbitAdd3 = this;
 
-       this.setLayout(null);
-       this.setBounds(0, 100, 900, 462);
-       this.setBackground(Color.lightGray);
-       this.setVisible(true);
+	   habbitAdd3.setLayout(null);
+	   habbitAdd3.setBounds(0, 100, 900, 462);
+	   habbitAdd3.setBackground(Color.lightGray);
+	   habbitAdd3.setLocationRelativeTo(null);
+	   habbitAdd3.setVisible(true);
 
 
 	   JLabel label1 = new JLabel("3번) 어떤 요일에 하고 싶나요?");
@@ -31,7 +33,7 @@ public class HabbitAdd3 extends JPanel {
 	   label1.setFont(new Font("Serif", Font.BOLD, 30));
 	   label1.setSize(500,200);
 	   label1.setLocation(240,0);
-       this.add(label1);
+	   habbitAdd3.add(label1);
        
        JPanel checkPanel = new JPanel();
        checkPanel.setSize(350,50);
@@ -53,29 +55,31 @@ public class HabbitAdd3 extends JPanel {
 		    checkPanel.add(jcb[i]);
 		}
 		
-		this.add(checkPanel);
+		habbitAdd3.add(checkPanel);
 		
 	   JButton jbutton1 = new JButton("이전");
        jbutton1.setSize(80,50);
        jbutton1.setLocation(300, 280);
-         	this.add(jbutton1);	
+       habbitAdd3.add(jbutton1);	
        
       JButton jbutton2 = new JButton("다음");
       jbutton2.setSize(80,50);
       jbutton2.setLocation(450, 280);
-      	this.add(jbutton2);
+      habbitAdd3.add(jbutton2);
       	
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd3 , new HabbitAdd2());
+
+            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd2());
+
             }
          }); 
       	
       	jbutton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(habbitAdd3 , new HabbitAdd4());
+            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4());
             }
          });
       	     

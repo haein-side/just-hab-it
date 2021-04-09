@@ -11,25 +11,25 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
 import javax.swing.JButton;
+import javax.swing.JFrame;
 import javax.swing.JPanel;
 
 import com.justhabit.model.controller.PanelChangeControl;
 
-public class TodayWord extends JPanel {
+public class TodayWord extends JFrame {
 
   String text;
   String title;
   private Image back;
-  private TodayWord todayWord;
+  private TodayWord todayWord = this;
 	
 	public TodayWord() {
-		this.todayWord = this;
 		
 		this.setLayout(null);
-		this.setBounds(0, 100, 900, 462);
+		this.setSize(900, 462);
 		this.setBackground(Color.LIGHT_GRAY);
-		this.setVisible(true);
 		
+		JPanel test = new JPanel();
 		
 		text = "커다란 고민도 작은 고민이 합쳐 만들어진 것이다";
 		title = "<오늘의 명언>";
@@ -41,10 +41,14 @@ public class TodayWord extends JPanel {
 		first.setLocation(410, 380);
 		this.add(first);
 		
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		
+		
 		first.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changePanel(todayWord , new MainPage());
+            	PanelChangeControl.changeFrame(todayWord , new MainPage());
             }
          });
 
@@ -65,7 +69,7 @@ public class TodayWord extends JPanel {
 	  @Override
 	  protected void paintComponent(Graphics g) {
 	    super.paintComponent(g);
-//	    g.drawImage(back, 0, 0, null);
+	    g.drawImage(back, 0, 0, null);
 	    
 	    Graphics2D g2d = (Graphics2D) g.create();
 
