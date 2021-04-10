@@ -87,6 +87,9 @@ public class CheckRecordView extends JFrame{
 		habitCheck.setLayout(new GridLayout());
 		habitCheck.setBounds(220,0,550,50);
 		
+		
+		
+		
 		//체크박스 생성
 		JCheckBox[] buttons = new JCheckBox[registInfo.getHabitGoal()];
 		
