@@ -53,9 +53,11 @@
    </entry>
    <entry key="selectDateInfo">
         SELECT 
-               DO_DATE 
+               HABIT_ID
+             , DO_DATE 
           FROM HBT_CHECK 
          WHERE HABIT_ID = ?
+           AND DO_DATE = ?
    </entry>
    <entry key="updateCheck">
        UPDATE

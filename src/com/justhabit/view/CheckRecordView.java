@@ -32,11 +32,12 @@ public class CheckRecordView extends JFrame{
 	private HaeSeungController habitInfoController = new HaeSeungController();
 //	Map<Integer,String> checkcount = null;//체크박스 카운트용
 	
-	int checkCount = 0; // 체크박스카운트용
-	int i = 0;
-	Date todayDate= new Date(); // 오늘 날짜
-	String today = ""; //날짜 문자열로 변환
-	HaeseungRecordDTO checkRecord = new HaeseungRecordDTO();
+	private int checkCount = 0; // 체크박스카운트용
+	private int i = 0;
+	private Date todayDate= new Date(); // 오늘 날짜
+	private String today = ""; //날짜 문자열로 변환
+	private HaeseungRecordDTO checkRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
+	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
 	/**
 	 * 체크박스 기록페이지
 	 */
@@ -58,8 +59,9 @@ public class CheckRecordView extends JFrame{
 		center.setBackground(Color.white);
 		
 		//등록된 습관정보 불러오기
-		int HabbitID = 1;
-		HaesungInfoDTO habitInfo = habitInfoController.selectHabitInfo(HabbitID);
+		registInfo.setHabitID(4);
+		registInfo = habitInfoController.selectHabitInfo(registInfo);
+		
 		
 		//습관상단바
 		JPanel habitTop = new JPanel();
@@ -70,7 +72,7 @@ public class CheckRecordView extends JFrame{
 		JPanel namePanel = new JPanel();
 		namePanel.setBounds(10,0,200,50);
 		namePanel.setBackground(new Color(51,153,51));
-		String habitName = habitInfo.getHabitName();
+		String habitName = registInfo.getHabitName();
 		JLabel nameLabel = new JLabel(habitName);
 
 		//폰트설정
@@ -85,7 +87,7 @@ public class CheckRecordView extends JFrame{
 		habitCheck.setBounds(220,0,550,50);
 		
 		//체크박스 생성
-		JCheckBox[] buttons = new JCheckBox[habitInfo.getHabitGoal()];
+		JCheckBox[] buttons = new JCheckBox[registInfo.getHabitGoal()];
 		
 		for(int i = 0; i < buttons.length; i++) {
 			JCheckBox box = new JCheckBox((i+1)+"회");
@@ -94,9 +96,6 @@ public class CheckRecordView extends JFrame{
 			habitCheck.add(buttons[i]);
 		}
 		
-		
-		
-
 		//체크 횟수 기록
 		for(int i = 0; i < buttons.length; i++ ) {
 //			checkcount = new HashMap<>();
@@ -116,27 +115,34 @@ public class CheckRecordView extends JFrame{
 		
 		
 
-
-		//저장버튼 클릭 시 일치하는 날짜 검색-> 있으면 update 없으면 insert;
+		//습관기록저장
 		JButton recordButton = new JButton("저장");
 
 		recordButton.setBounds(823,128, 60, 30);
 		
 		SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
 		today = todayDateFormat.format(todayDate);
-		checkRecord.setUserId(habitInfo.getUserID());
-		checkRecord.setHabitId(habitInfo.getHabitID());
-		checkRecord.setDoDate(todayDateFormat.format(todayDate));
-		recordButton.addActionListener(new ActionListener() {
+		Date test = new Date(2021,3,8);
+		String testDate = todayDateFormat.format(test);
+		checkRecord.setUserId(registInfo.getUserID());
+		checkRecord.setHabitId(registInfo.getHabitID());
+		//테스트용
+		checkRecord.setDoDate(today);
+//		checkRecord.setDoDate(testDate);
+		recordButton.addActionListener(/**
+		 * @author user
+		 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
+		 */
+		new ActionListener() {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				checkRecord.setCheck(checkCount);
-				if(today.equals(habitInfoController.dateSelectController(checkRecord.getHabitId()))){
-					habitInfoController.updateTimerController(checkRecord);
-				} else {
-					System.out.println(habitInfoController.dateSelectController(checkRecord.getHabitId()));
+				int result = habitInfoController.dateSelectController(checkRecord);
+				if(result==0){
 					habitInfoController.insertTimerController(checkRecord);
+				} else {
+					habitInfoController.updateTimerController(checkRecord);
 				}
 			}
 		});

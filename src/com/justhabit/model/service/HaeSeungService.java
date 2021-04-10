@@ -15,11 +15,11 @@ public class HaeSeungService {
 	
 	HaeseungDAO habitDAO = new HaeseungDAO();
 
-	public HaesungInfoDTO selectHabitInfo(int habitID) {
+	public HaesungInfoDTO selectHabitInfo(HaesungInfoDTO registInfo) {
 		
 		Connection con = getConnection();
 		
-		HaesungInfoDTO info = habitDAO.selectHabit(con, habitID);
+		HaesungInfoDTO info = habitDAO.selectHabit(con, registInfo);
 		close(con);
 		return info;
 	}
@@ -38,13 +38,14 @@ public class HaeSeungService {
 		return result;
 	}
 
-	public String selectDateinfo(int habitId) {
+	public HaeseungRecordDTO selectDateinfo(HaeseungRecordDTO recordInfo) {
 		
 		Connection con = getConnection();
 		
-		String date = habitDAO.selectDate(con, habitId);
+		HaeseungRecordDTO info= habitDAO.selectDate(con, recordInfo);
+		
 		close(con);
-		return date;
+		return info;
 	}
 
 	public int updateRecordService(HaeseungRecordDTO checkRecord) {
@@ -54,10 +55,8 @@ public class HaeSeungService {
 		int result = habitDAO.updateRecord(con,checkRecord);
 		
 		if(result > 0 ) {
-			System.out.println("수정성공!");
 			commit(con);
 		}else {
-			System.out.println("수정실패!");
 			rollback(con);
 		}
 		return result;

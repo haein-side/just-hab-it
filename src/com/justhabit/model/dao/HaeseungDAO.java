@@ -26,7 +26,7 @@ public class HaeseungDAO {
 		}
 	}
 
-	public HaesungInfoDTO selectHabit(Connection con, int habitID) {
+	public HaesungInfoDTO selectHabit(Connection con, HaesungInfoDTO registInfo) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -37,7 +37,7 @@ public class HaeseungDAO {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, habitID);
+			pstmt.setInt(1, registInfo.getHabitID());
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
@@ -82,26 +82,25 @@ public class HaeseungDAO {
 		return result;
 	}
 
-	public String selectDate(Connection con, int habitId) {
+	public HaeseungRecordDTO selectDate(Connection con, HaeseungRecordDTO recordInfo) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		Date recodeDate = null;
-		String date = "";
+		HaeseungRecordDTO selectRecord = null;
 		
 		String query = prop.getProperty("selectDateInfo");
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, habitId);
+			pstmt.setInt(1, recordInfo.getHabitId());
+			pstmt.setString(2, recordInfo.getDoDate());
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				recodeDate = new Date();
-				recodeDate = rset.getDate("DO_DATE");
-				SimpleDateFormat recordDateFormat = new SimpleDateFormat("yy/MM/dd");
-				date = recordDateFormat.format(recodeDate);
-			}
+				selectRecord = new HaeseungRecordDTO();
+				selectRecord.setHabitId(rset.getInt("HABIT_ID"));
+				selectRecord.setDoDate(rset.getString("DO_DATE"));
+			} 
 			
 			
 		} catch (SQLException e) {
@@ -110,7 +109,7 @@ public class HaeseungDAO {
 			close(rset);
 			close(pstmt);
 		}
-		return date;
+		return selectRecord;
 	}
 
 	public int updateRecord(Connection con, HaeseungRecordDTO checkRecord) {
