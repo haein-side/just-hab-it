@@ -68,7 +68,7 @@
    </entry>
    <entry key="login">
        SELECT
-              count(*)
+              user_id
          FROM hbt_user
         WHERE user_name = ?
           AND user_pwd = ?

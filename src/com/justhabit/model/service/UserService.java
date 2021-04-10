@@ -1,6 +1,8 @@
 package com.justhabit.model.service;
 
 import static com.justhabit.common.JDBC_EC2.getConnection;
+import static com.justhabit.common.JDBC_EC2.close;
+
 
 import java.sql.Connection;
 
@@ -15,6 +17,8 @@ public class UserService {
 		Connection con = getConnection();
 		
 		boolean IsloggedIn = userDAO.selectUser(con, loginId, loginPwd );
+		
+		close(con);
 		
 		return IsloggedIn;
 	}

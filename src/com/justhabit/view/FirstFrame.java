@@ -26,6 +26,7 @@ import com.justhabit.model.controller.UserController;
 public class FirstFrame {
 	
 	UserController userController = new UserController();
+	public static int loggedUserID;
 
    private JFrame frame ;
    private LoginPanel login;
@@ -174,6 +175,7 @@ public class FirstFrame {
     		  
     		  if(userController.loginCheck(txtUsername.getText().toLowerCase(), 
     				  new String(txtPassword.getPassword()))) {
+    			    
         		  	PanelChangeControl.changeFrame(frame, new TodayWord());
     		  } else {
     			  //login failed
