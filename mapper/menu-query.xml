@@ -75,7 +75,7 @@
          FROM hbt_user
         WHERE user_name = ?
    </entry>
-   <enter key="myUser">
+   <entry key="myUser">
        SELECT
               user_name
             , user_pwd
@@ -83,7 +83,6 @@
             , user_pin
          FROM hbt_user
         WHERE user_id = ?
-   
-   </enter>
+   </entry>
    
 </properties>
