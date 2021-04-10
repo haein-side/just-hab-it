@@ -195,6 +195,8 @@ public class HaeseungDAO {
 			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;
@@ -227,6 +229,8 @@ public class HaeseungDAO {
 			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;
@@ -238,7 +242,6 @@ public class HaeseungDAO {
 		HaeseungRecordDTO selectRecord = null;
 		
 		String query = prop.getProperty("selectTimerDateInfo");
-		
 		try {
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, timerRecord.getHabitId());
@@ -251,7 +254,7 @@ public class HaeseungDAO {
 				selectRecord.setDoDate(rset.getString("DO_DATE"));
 			} 
 			
-			
+			System.out.println(selectRecord);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {

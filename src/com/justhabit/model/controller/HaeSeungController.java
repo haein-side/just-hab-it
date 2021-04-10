@@ -69,14 +69,14 @@ public class HaeSeungController {
 	 * 시간기록 INSERT
 	 * @param checkRecord
 	 */
-	public void insertTimerController(HaeseungRecordDTO checkRecord) {
+	public void insertTimerController(HaeseungRecordDTO timerRecord) {
 //		오늘날짜로 설정. 테스트시 주석처리
 		Date todayDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
-		checkRecord.setDoDate(dateFormat.format(todayDate));
+		timerRecord.setDoDate(dateFormat.format(todayDate));
 		
 		
-		int result = habitService.insertTimerService(checkRecord);
+		int result = habitService.insertTimerService(timerRecord);
 		
 		if(result > 0) {
 			System.out.println("신규저장성공");

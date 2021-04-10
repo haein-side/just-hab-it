@@ -68,16 +68,21 @@ public class TimeRecordView extends JFrame{
 		
 		//습관상단바 - 습관명
 		JPanel habitName = new JPanel();
-		habitName.setBounds(10,0,200,50);
-		habitName.setBackground(new Color(51,153,51));
+//		habitName.setBounds(0,0,200,50);
+		habitName.setBackground(new Color(211,224,234));
 		JLabel nameLabel = new JLabel(registInfo.getHabitName());
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		//폰트설정
-		nameLabel.setFont(new Font("D2Coding",Font.BOLD,30));
+		nameLabel.setFont(new Font("D2Coding",Font.BOLD,20));
 		habitName.add(nameLabel);
 		
 		habitTop.add(habitName);
+		
+		//습관목표출력
+		JLabel habitGoal = new JLabel("목표 : "+registInfo.getHabitGoal()+"시간 /");
+		habitGoal.setFont(new Font("D2Coding",Font.PLAIN,15));
+		habitTop.add(habitGoal);
 		
 		//습관 상단바 - 타이머
 		JPanel timer=  new timerPanel();
@@ -113,6 +118,7 @@ public class TimeRecordView extends JFrame{
 							int result = habitInfoController.dateTimerSelectController(timerRecord);
 							if(result==0){
 								habitInfoController.insertTimerController(timerRecord);
+								JOptionPane.showMessageDialog(mf, "기록 저장 성공");
 							} else {
 								habitInfoController.updateTimerController(timerRecord);
 								JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
