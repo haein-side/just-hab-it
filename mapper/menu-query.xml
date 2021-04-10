@@ -78,13 +78,18 @@
          INTO hbt_user
        VALUES
        (
-         seq_user_id
+         seq_user_id.nextval
        , ?
        , ?
        , ?
        , ? 
        )
    </entry>
-   
+   <entry key="checkUsername">
+       SELECT
+              user_name
+         FROM hbt_user
+        WHERE user_name = ?
+   </entry>
    
 </properties>

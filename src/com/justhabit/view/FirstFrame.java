@@ -6,6 +6,8 @@ import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
@@ -261,15 +263,28 @@ public class FirstFrame {
          signup.add(sign_pwd_check);
          sign_pwd_check.setBorder(null);
          
-         sign_email = new JPasswordField();
+         sign_email = new JTextField();
          sign_email.setBounds(330, 150, 120, 20);
          signup.add(sign_email);
          sign_email.setBorder(null);
          
-         sign_PIN = new JPasswordField();
+         sign_PIN = new JTextField();
          sign_PIN.setBounds(330, 180, 120, 20);
          signup.add(sign_PIN);
          sign_PIN.setBorder(null);
+         sign_PIN.addKeyListener(new KeyAdapter() {
+             public void keyPressed(KeyEvent ke) {
+                 String value = sign_PIN.getText();
+//                 int l = value.length();
+                 if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' 
+                		 || ke.getKeyChar() == '\b') {
+                	 sign_PIN.setEditable(true);
+                 } else {
+                	 JOptionPane.showMessageDialog(signup, "Please type only number(0~9)");
+                	 sign_PIN.setText("");
+                 }
+              }
+           });
          
          
          
@@ -333,7 +348,24 @@ public class FirstFrame {
             
             @Override
             public void actionPerformed(ActionEvent e) {
-               PanelChangeControl.changePanel(frame, signup, login);
+               
+            	String result = userController.signupCheck(sign_username.getText().toLowerCase()
+            			, new String(sign_pwd.getPassword()), new String(sign_pwd_check.getPassword())
+            			, sign_email.getText(), sign_PIN.getText());
+            	
+            	if(result.equals("회원가입이 성공적으로 완료되었습니다 :)")) {
+            		JOptionPane.showMessageDialog(signup, result + "\n로그인 화면으로 이동합니다.");
+            		PanelChangeControl.changePanel(frame, signup, login);
+            	}
+            	else {
+            		JOptionPane.showMessageDialog(signup, result);
+            		
+//            		switch(result) {
+//            		    case "모든 필요한 정보가 채워지지 않았습니다":
+//            		    	
+//            		}
+            	}
+            		
             }
          });
          
