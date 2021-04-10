@@ -9,8 +9,6 @@
     	     , HABIT_TYPE
     	  FROM HBT_REGISTER 
     	 WHERE USER_ID = 1
-    
-    	 
     </entry>
 
    <entry key="selectHabitInfo">
@@ -24,7 +22,7 @@
 	     FROM HBT_REGISTER
 	    WHERE HABIT_ID = ?
    </entry>
-   <entry key="insertRecord">
+   <entry key="insertCheck">
        INSERT
          INTO HBT_CHECK
        VALUES
@@ -75,5 +73,15 @@
          FROM hbt_user
         WHERE user_name = ?
    </entry>
-   
+   <entry key="insertTimer">
+       INSERT
+         INTO HBT_TIMER
+       VALUES
+            (
+              ?
+            , ?
+            , ?
+            , ?   
+            )  
+   </entry>
 </properties>

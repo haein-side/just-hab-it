@@ -15,6 +15,14 @@ public class HaeSeungService {
 	
 	HaeseungDAO habitDAO = new HaeseungDAO();
 
+	/**
+	 * <pre>
+	 * 습관정보 조회
+	 * </pre>
+	 * 
+	 * @param 
+	 * @return
+	 */
 	public HaesungInfoDTO selectHabitInfo(HaesungInfoDTO registInfo) {
 		
 		Connection con = getConnection();
@@ -24,8 +32,35 @@ public class HaeSeungService {
 		return info;
 	}
 
-	public int insertTimerService(HaeseungRecordDTO checkRecord) {
+	/**
+	 * <pre>
+	 * CHECK INSERT
+	 * </pre>
+	 * @param checkRecord
+	 * @return
+	 */
+	public int insertCheckService(HaeseungRecordDTO checkRecord) {
 		
+		Connection con = getConnection();
+		
+		int result = habitDAO.insertCheck(con, checkRecord);
+		
+		if(result > 0 ) {
+			commit(con);
+		}else {
+			rollback(con);
+		}
+		return result;
+	}
+	
+	/**
+	 * <pre>
+	 * Timer INSERT
+	 * </pre>
+	 * @param checkRecord
+	 * @return
+	 */
+	public int insertTimerService(HaeseungRecordDTO checkRecord) {
 		Connection con = getConnection();
 		
 		int result = habitDAO.insertTimer(con, checkRecord);
@@ -37,6 +72,7 @@ public class HaeSeungService {
 		}
 		return result;
 	}
+	
 
 	public HaeseungRecordDTO selectDateinfo(HaeseungRecordDTO recordInfo) {
 		
@@ -61,5 +97,6 @@ public class HaeSeungService {
 		}
 		return result;
 	}
+
 
 }
