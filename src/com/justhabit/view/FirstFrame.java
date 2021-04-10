@@ -33,7 +33,7 @@ public class FirstFrame {
    private JFrame frame ;
    private LoginPanel login;
    
-   private Image ic_logo = new ImageIcon("images/login.png").getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
+   private Image ic_logo = new ImageIcon("image/nike-logo-png-21194.png").getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH);
    private JTextField txtUsername;
    private JPasswordField txtPassword;
       
@@ -103,18 +103,18 @@ public class FirstFrame {
       lblLogo.setBounds(78, 71, 234, 160);
       circlePanel.add(lblLogo);
       
-      JLabel lblNewLabel = new JLabel("W E L C O M E");
-      lblNewLabel.setForeground(Color.WHITE);
-      lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-      lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-      lblNewLabel.setBounds(78, 242, 234, 36);
-      circlePanel.add(lblNewLabel);
+//      JLabel lblNewLabel = new JLabel("W E L C O M E");
+//      lblNewLabel.setForeground(Color.WHITE);
+//      lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
+//      lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
+//      lblNewLabel.setBounds(78, 242, 234, 36);
+//      circlePanel.add(lblNewLabel);
       
-      JLabel lblNewLabel_1 = new JLabel("JUST HAB IT");
-      lblNewLabel_1.setForeground(Color.WHITE);
+      JLabel lblNewLabel_1 = new JLabel("JUST HAB' IT");
+      lblNewLabel_1.setForeground(Color.black);
       lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
       lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
-      lblNewLabel_1.setBounds(78, 290, 234, 36);
+      lblNewLabel_1.setBounds(78, 210, 234, 36);
       circlePanel.add(lblNewLabel_1);      
       
       
@@ -322,7 +322,7 @@ public class FirstFrame {
          signup.add(pin_label);
          
          
-         
+         JLabel result_label = new JLabel();
          
          
          
@@ -365,7 +365,6 @@ public class FirstFrame {
 //            		    	
 //            		}
             	}
-            		
             }
          });
          
