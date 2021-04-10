@@ -4,16 +4,18 @@ public class AllHabitDTO {
 	private int UserID;
 	private int habitID;
 	private String habitName;
+	private String habitType;
 	
 	public AllHabitDTO() {
 		super();
 	}
 
-	public AllHabitDTO(int userID, int habitID, String habitName) {
+	public AllHabitDTO(int userID, int habitID, String habitName, String habitType) {
 		super();
 		UserID = userID;
 		this.habitID = habitID;
 		this.habitName = habitName;
+		this.habitType = habitType;
 	}
 
 	public int getUserID() {
@@ -40,11 +42,19 @@ public class AllHabitDTO {
 		this.habitName = habitName;
 	}
 
-	@Override
-	public String toString() {
-		return "AllHabitDTO [UserID=" + UserID + ", habitID=" + habitID + ", habitName=" + habitName + "]";
+	public String getHabitType() {
+		return habitType;
 	}
 
-	
+	public void setHabitType(String habitType) {
+		this.habitType = habitType;
+	}
+
+	@Override
+	public String toString() {
+		return "AllHabitDTO [UserID=" + UserID + ", habitID=" + habitID + ", habitName=" + habitName + ", habitType="
+				+ habitType + "]";
+	}
+
 	
 }

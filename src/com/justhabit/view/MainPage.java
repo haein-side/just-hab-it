@@ -26,8 +26,8 @@ public class MainPage extends JFrame{
 	
 	private HaeinController habitDayController = new HaeinController();
 	private AllHabitDTO allHabitDTO = new AllHabitDTO();
-
-	
+	public static int userhabitid;
+	int h = 0;
  
 	JFrame mf = this;
 	public MainPage() {
@@ -104,11 +104,26 @@ public class MainPage extends JFrame{
 		
 		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(userid);
 		JButton[] habitButtons = new JButton[allhabitList.size()];
-		for(int i = 0; i < allhabitList.size(); i++) {
+		
+		for(h = 0; h < allhabitList.size(); h++) {
 				JButton box = new JButton();
 				box.setSize(100, 80);
-				box.setLocation(150* + 100*(i-1), 300);
-				box.setText(allhabitList.get(i).getHabitName());
+				box.setLocation(150* + 100*(h-1), 300);
+				box.setText(allhabitList.get(h).getHabitName());
+				box.addActionListener(new ActionListener() {
+			          
+			          @Override
+			          public void actionPerformed(ActionEvent e) {
+			        	  userhabitid = allhabitList.get(h-1).getHabitID();
+			        	  if(allhabitList.get(h-1).getHabitType().equals("C")) {
+			        		  PanelChangeControl.changeFrame(mf, new CheckRecordView());
+			        		  
+			        	  } else {
+			        		  PanelChangeControl.changeFrame(mf, new TimeRecordView());
+			        		  
+			        	  }
+			          }
+			       });
 				this.add(box);
 			
 		}
