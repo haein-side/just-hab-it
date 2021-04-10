@@ -2,32 +2,15 @@
 <!DOCTYPE properties SYSTEM "http://java.sun.com/dtd/properties.dtd">
 <properties>
     <!-- 주석처리 -->
-    <entry key="insertCategory">
-    	INSERT
-    	  INTO TBL_CATEGORY
-    	VALUES
-    	(
-    	  SEQ_CATEGORY_CODE.NEXTVAL
-    	, ?
-    	, ?
-    	)
-    </entry>
-    <entry key="insertMenu">
-    	INSERT
-    	  INTO TBL_MENU 
-    	VALUES
-    	(
-    	  SEQ_MENU_CODE.NEXTVAL
-    	, ?
-    	, ?
-    	, ?
-    	, ?
-    	)
-    </entry>
-    <entry key="getCurrentSequence">
+    <entry key="selectHabitDay">
     	SELECT
-    	       SEQ_CATEGORY_CODE.CURRVAL
-    	  FROM DUAL
+    	       A.USER_ID
+    	     , A.HABIT_ID
+    	     , A.HABIT_NAME
+    	     , A.HABIT_DAYS
+    	  FROM HBT_REGISTER A
+    	 WHERE A.HABIT_DAYS = ?
     </entry>
+
    
 </properties>
