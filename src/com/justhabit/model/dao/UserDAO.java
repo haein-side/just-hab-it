@@ -111,6 +111,40 @@ private Properties prop = new Properties();
 		return result == 0 ? false : true;
 	}
 
+	public UserDTO myUser(Connection con, int loggedUserID) {
+
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		UserDTO user = null;
+		
+		String query = prop.getProperty("myUser");
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, loggedUserID);
+			
+			
+			rset = psmt.executeQuery();
+			if(rset.next()) {
+				user = new UserDTO();
+				user.setUserId(loggedUserID);
+				user.setUserName(rset.getString("user_name"));
+				user.setUserPwd(rset.getString("user_pwd"));
+				user.setUserEmail(rset.getString("user_email"));
+				user.setUserPin(rset.getInt("user_pin"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return user;
+	}
+
 	
 
 	

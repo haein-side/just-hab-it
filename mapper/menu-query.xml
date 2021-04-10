@@ -75,5 +75,15 @@
          FROM hbt_user
         WHERE user_name = ?
    </entry>
+   <enter key="myUser">
+       SELECT
+              user_name
+            , user_pwd
+            , user_email
+            , user_pin
+         FROM hbt_user
+        WHERE user_id = ?
+   
+   </enter>
    
 </properties>
