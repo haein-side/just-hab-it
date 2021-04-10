@@ -50,4 +50,13 @@
         WHERE HABIT_ID = ?
           AND DO_DATE = ?
    </entry>
+   <entry key="login">
+       SELECT
+              count(*)
+         FROM hbt_user
+        WHERE user_name = ?
+          AND user_pwd = ?
+   </entry>
+   
+   
 </properties>

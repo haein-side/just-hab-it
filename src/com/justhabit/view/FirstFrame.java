@@ -21,8 +21,11 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.controller.UserController;
 
 public class FirstFrame {
+	
+	UserController userController = new UserController();
 
    private JFrame frame ;
    private LoginPanel login;
@@ -167,9 +170,19 @@ public class FirstFrame {
     	  @Override
     	  public void actionPerformed(ActionEvent e) {
     		  
-//    		  txtUsername.getText());
+//    		  System.out.println(new String(txtPassword.getPassword()));
     		  
-    		  PanelChangeControl.changeFrame(frame, new TodayWord());
+    		  if(userController.loginCheck(txtUsername.getText().toLowerCase(), 
+    				  new String(txtPassword.getPassword()))) {
+        		  	PanelChangeControl.changeFrame(frame, new TodayWord());
+    		  } else {
+    			  //login failed
+//    			  System.out.println("id or password wrong");
+    			  JOptionPane.showMessageDialog(login, "ID or Password wrong\nPlease try again :)");
+    			  txtUsername.setText("");
+    			  txtPassword.setText("");
+    		  }
+    		  
     	  }
       });
       

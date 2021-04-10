@@ -43,6 +43,6 @@ public class PanelChangeControl {
     	  pane.add(panNew); 
 //    	  LoadPanListener.curPane = panNew; 
     	  mainFrame.setContentPane(pane); 
-    	} 
+    } 
     
 }
