@@ -4,13 +4,11 @@
     <!-- 주석처리 -->
     <entry key="selectHabitDay">
     	SELECT
-    	       A.USER_ID
-    	     , A.HABIT_ID
-    	     , A.HABIT_NAME
-    	     , A.HABIT_DAYS
-    	  FROM HBT_REGISTER A
-    	 WHERE A.HABIT_DAYS = ?
-    	   AND A.USER_ID = ?
+    	     , HABIT_ID
+    	     , HABIT_NAME
+    	  FROM HBT_REGISTER 
+    	 WHERE HABIT_DAYS = ?
+    	   AND USER_ID = ?
     </entry>
 
    <entry key="selectHabitInfo">

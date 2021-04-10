@@ -12,10 +12,13 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-
+import com.justhabit.model.controller.HaeinController;
 import com.justhabit.model.controller.PanelChangeControl;
 
 public class MainPage extends JFrame{
+	
+	private HaeinController habitDayController = new HaeinController();
+	
  
 	JFrame mf = this;
 	public MainPage() {
@@ -32,7 +35,7 @@ public class MainPage extends JFrame{
 		center.setBackground(new Color(246,245,245));
 		
 		
-		
+		//습관 버튼
 		JButton first = new JButton("습관 1");
 		first.setSize(100,80);
 		first.setLocation(150, 300);
@@ -49,6 +52,8 @@ public class MainPage extends JFrame{
 		third.setLocation(650, 300);
 		center.add(third);
 		
+		
+		//오늘의 각오
 		JLabel promise = new JLabel("오늘의 각오를 입력해주세요!");
 //		promise.setFont(new Font("Serif", Font.BOLD, 30));
 	    promise.setSize(promise.getPreferredSize());
