@@ -8,6 +8,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.justhabit.view.FirstFrame;
+
 import static com.justhabit.common.JDBC_EC2.close;
 
 public class UserDAO {
@@ -40,7 +42,7 @@ private Properties prop = new Properties();
 			
 			if(rset.next())
 				result = rset.getInt(1);
-
+				FirstFrame.loggedUserID = result;
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
