@@ -84,10 +84,12 @@ public class CheckRecordView extends JFrame{
 		
 		//습관 상단바 - 체크박스
 		JPanel habitCheck =  new JPanel();
-		habitCheck.setLayout(new GridLayout());
+		habitCheck.setLayout(null);
 		habitCheck.setBounds(220,0,550,50);
 		
-		
+		JButton doButton = new JButton("1회실행");
+		doButton.setLocation(400,0);
+		habitCheck.add(doButton);
 		
 		
 		//체크박스 생성
