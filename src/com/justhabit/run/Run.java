@@ -24,7 +24,7 @@ public class Run {
 //		MainPage mainpage = new MainPage();
 //		mainpage.displayHabit();
 		
-//		new MyPage();
+		new MyPage();
 		
 	}
 }

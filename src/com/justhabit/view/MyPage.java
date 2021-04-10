@@ -61,10 +61,10 @@ public class MyPage extends JFrame {
 //	    levelExp.setFont(new Font("a디딤돌",Font.BOLD,20));
 	    
 	    
-	    label_username.setBounds(500, 110, 150, 150);
-	    label_email.setBounds(500, 150, 150, 150);
-	    label_password.setBounds(500, 190, 150, 150);
-	    label_pin.setBounds(500, 230, 150, 150);
+	    label_username.setBounds(400, 60, 150, 150);
+	    label_email.setBounds(400, 100, 150, 150);
+	    label_password.setBounds(400, 140, 150, 150);
+	    label_pin.setBounds(400, 190, 150, 150);
 //		levelExp.setBounds(130, 290, 150, 150);
 		
 		userPanel.add(label_username);
@@ -74,7 +74,9 @@ public class MyPage extends JFrame {
 //		userPanel.add(levelExp);
 		
 		
-		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
+//		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
+		//TODO: 테스트용 지우고 로그인된 유저로 정보가져오기.
+		UserDTO myUser = userController.userInfo(1); // test
 		String pwd = "";
 		for(int i = 0; i < myUser.getUserPwd().length(); i++) {
 			if(i == 0)
@@ -103,14 +105,14 @@ public class MyPage extends JFrame {
 		myUser_pin.setFont(new Font("a디딤돌",Font.BOLD,20));
 		
 		
-		myUser_name.setBounds(550, 110, 150, 150);
-		myUser_email.setBounds(550, 150, 150, 150);
-		myUser_pwd.setBounds(550, 190, 150, 150);
-		myUser_pin.setBounds(550, 230, 150, 150);
+		myUser_name.setBounds(600, 60, 300, 150);
+		myUser_email.setBounds(600, 100, 300, 150);
+		myUser_pwd.setBounds(600, 140, 300, 150);
+		myUser_pin.setBounds(600, 190, 300, 150);
 		
 		userPanel.add(myUser_name);
 		userPanel.add(myUser_email);
-		userPanel.add(label_password);
+		userPanel.add(myUser_pwd);
 		userPanel.add(myUser_pin);
 		
 		
@@ -132,8 +134,8 @@ public class MyPage extends JFrame {
 		
 		
 		JButton exit = new JButton("탈퇴하기");
-		exit.setSize(130,40);
-		exit.setLocation(670, 60);
+		exit.setSize(180,40);
+		exit.setLocation(600, 390);
 		userPanel.add(exit);
 		
 		
@@ -194,14 +196,5 @@ public class MyPage extends JFrame {
 	             PanelChangeControl.changeFrame(myPage, new TimeRecordView());
 	          }
 	       });
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-	
 }
