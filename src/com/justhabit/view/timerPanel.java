@@ -24,7 +24,7 @@ public class timerPanel extends JPanel{
 	int mm;
 	int ss;
 	int ms;
-	int t= 0;
+	int t= 360000;
 	static int count = 0; //시간 카운트용
 	
 	public timerPanel() {
@@ -101,13 +101,13 @@ public class timerPanel extends JPanel{
 							
 							
 							//hr은..흠...
-							mm = t % (1000*60) / 60 / 60;
-							ss = t % (1000*60) / 60 % 60;
-							ms = t % 100;
-//							hr = t / 3600 %24;
-//							mm = t % 3600 / 60;
-//							ss = t % 3600 % 60 ;
+//							mm = t / (1000*60);
+//							ss = t % (1000*60) / 60 % 60;
 //							ms = t % 100;
+							hr = t / (60*60*100) % 24;
+							mm = t /(60*100) % 60;
+							ss = t / 100 % 60;
+							ms = t % 100;
 //							mm = (t / 1000) / 3600;
 //							ss = ((t/1000) % 3600) /60 ;
 //							ms = (t/1000) % 60;
