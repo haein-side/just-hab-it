@@ -85,25 +85,47 @@ public class HaeSeungController {
 		}
 	}
 
-
-
-
-
 	/**
 	 * <pre>
-	 *   습관기록 UPDATE
+	 *   횟수기록 UPDATE
 	 * </pre>
 	 * @param checkRecord
 	 */
-	public void updateTimerController(HaeseungRecordDTO checkRecord) {
+	public void updateCheckController(HaeseungRecordDTO checkRecord) {
 		
-		int result = habitService.updateRecordService(checkRecord);
+		int result = habitService.updateCheckRecordService(checkRecord);
 		
 		if(result > 0) {
 			System.out.println("갱신성공!");
 		} else {
 			System.out.println("갱신실패!");
 		}
+	}
+
+	/**
+	 * <pre>
+	 *   시간기록 UPDATE
+	 * </pre>  
+	 * @param timerRecord
+	 */
+	public void updateTimerController(HaeseungRecordDTO timerRecord) {
+		
+		int result = habitService.updateTimerRecordService(timerRecord);
+		
+		if(result > 0) {
+			System.out.println("갱신성공!");
+		} else {
+			System.out.println("갱신실패!");
+		}
+	}
+
+	public int dateTimerSelectController(HaeseungRecordDTO timerRecord) {
+		int result = 0;
+		if(!(habitService.selectTimerDateinfo(timerRecord)==null)) {
+			result = 1;
+		}
+		
+		return result;
 	}
 
 

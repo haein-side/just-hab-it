@@ -21,9 +21,12 @@ public class Run {
 		/* 연결됐는지 확인하는 메소드 */
 //		Connection con = getConnection();
 //		System.out.println(con);
-//		
+
+		
 //		MainPage mainpage = new MainPage();
 //		mainpage.displayHabit();
+		
+//		new MyPage();
 		
 	}
 }

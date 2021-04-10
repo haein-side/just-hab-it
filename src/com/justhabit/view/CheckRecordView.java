@@ -84,9 +84,9 @@ public class CheckRecordView extends JFrame{
 		habitCheck.setLayout(null);
 		habitCheck.setBounds(220,0,550,50);
 		
-		JButton doButton = new JButton("1회실행");
-		doButton.setLocation(400,0);
-		habitCheck.add(doButton);
+//		JButton doButton = new JButton("1회실행");
+//		doButton.setLocation(400,0);
+//		habitCheck.add(doButton);
 		
 		
 		//체크박스 생성
@@ -151,7 +151,7 @@ public class CheckRecordView extends JFrame{
 						habitInfoController.insertCheckController(checkRecord);
 						JOptionPane.showMessageDialog(mf, "기록등록 성공");
 					} else {
-						habitInfoController.updateTimerController(checkRecord);
+						habitInfoController.updateCheckController(checkRecord);
 						JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
 					}
 				}

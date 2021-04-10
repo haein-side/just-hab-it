@@ -31,7 +31,7 @@ public class TimeRecordView extends JFrame{
 	 */
 	
 	private HaeSeungController habitInfoController = new HaeSeungController();
-	private HaeseungRecordDTO checkRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
+	private HaeseungRecordDTO timerRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
 	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
@@ -104,17 +104,17 @@ public class TimeRecordView extends JFrame{
 							today = todayDateFormat.format(todayDate);
 							Date test = new Date(2021,3,8);
 							String testDate = todayDateFormat.format(test);
-							checkRecord.setUserId(registInfo.getUserID());
-							checkRecord.setHabitId(registInfo.getHabitID());
+							timerRecord.setUserId(registInfo.getUserID());
+							timerRecord.setHabitId(registInfo.getHabitID());
 							//테스트용
-							checkRecord.setDoDate(today);
+							timerRecord.setDoDate(today);
 //						checkRecord.setDoDate(testDate);
-							checkRecord.setTimer(hbtTimer);
-							int result = habitInfoController.dateSelectController(checkRecord);
+							timerRecord.setTimer(hbtTimer);
+							int result = habitInfoController.dateTimerSelectController(timerRecord);
 							if(result==0){
-								habitInfoController.insertTimerController(checkRecord);
+								habitInfoController.insertTimerController(timerRecord);
 							} else {
-								habitInfoController.updateTimerController(checkRecord);
+								habitInfoController.updateTimerController(timerRecord);
 								JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
 							}
 						}

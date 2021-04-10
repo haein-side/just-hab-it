@@ -73,6 +73,7 @@
          FROM hbt_user
         WHERE user_name = ?
    </entry>
+   
    <entry key="insertTimer">
        INSERT
          INTO HBT_TIMER
@@ -83,5 +84,30 @@
             , ?
             , ?   
             )  
+   </entry>
+   
+   <entry key="myUser">
+       SELECT
+              user_name
+            , user_pwd
+            , user_email
+            , user_pin
+         FROM hbt_user
+        WHERE user_id = ?
+   </entry>
+   <entry key="updateTimer">
+       UPDATE
+              HBT_TIMER
+          SET TIME_RECORD = ?
+        WHERE HABIT_ID = ?
+          AND DO_DATE = ?
+   </entry>
+   <entry key="selectTimerDateInfo">
+       SELECT 
+              HABIT_ID
+            , DO_DATE 
+         FROM HBT_TIMER 
+        WHERE HABIT_ID = ?
+          AND DO_DATE = ?
    </entry>
 </properties>

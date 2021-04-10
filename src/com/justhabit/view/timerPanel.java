@@ -150,7 +150,7 @@ public class timerPanel extends JPanel{
 				hbtMin.setText("00");
 				hbtSec.setText("00");
 				hbtMillsec.setText("00");
-				
+				count = 0;
 				t=0;
 				
 			}System.out.println(count);

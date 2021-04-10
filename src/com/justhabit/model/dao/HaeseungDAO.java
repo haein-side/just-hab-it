@@ -168,7 +168,15 @@ public class HaeseungDAO {
 		return result;
 	}
 
-	public int updateRecord(Connection con, HaeseungRecordDTO checkRecord) {
+	/**
+	 * <pre>
+	 * CHECK UPDATE
+	 * </pre>
+	 * @param con
+	 * @param checkRecord
+	 * @return
+	 */
+	public int updateCheckRecord(Connection con, HaeseungRecordDTO checkRecord) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -190,6 +198,67 @@ public class HaeseungDAO {
 		}
 		
 		return result;
+	}
+
+	/**
+	 * <pre>
+	 * TIMER UPDATE
+	 * </pre>
+	 * @param con
+	 * @param timerRecord
+	 * @return
+	 */
+	public int updateTimerRecord(Connection con, HaeseungRecordDTO timerRecord) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateTimer");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, timerRecord.getTimer());
+			pstmt.setInt(2, timerRecord.getHabitId());
+			pstmt.setString(3, timerRecord.getDoDate());
+			
+			
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return result;
+	}
+
+	public HaeseungRecordDTO selectTimerDate(Connection con, HaeseungRecordDTO timerRecord) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HaeseungRecordDTO selectRecord = null;
+		
+		String query = prop.getProperty("selectTimerDateInfo");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, timerRecord.getHabitId());
+			pstmt.setString(2, timerRecord.getDoDate());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				selectRecord = new HaeseungRecordDTO();
+				selectRecord.setHabitId(rset.getInt("HABIT_ID"));
+				selectRecord.setDoDate(rset.getString("DO_DATE"));
+			} 
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return selectRecord;
 	}
 
 	
