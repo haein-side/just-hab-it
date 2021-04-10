@@ -179,6 +179,8 @@ public class FirstFrame {
     			  //login failed
 //    			  System.out.println("id or password wrong");
     			  JOptionPane.showMessageDialog(login, "ID or Password wrong\nPlease try again :)");
+    			  txtUsername.setText("");
+    			  txtPassword.setText("");
     		  }
     		  
     	  }
