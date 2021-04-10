@@ -170,12 +170,15 @@ public class FirstFrame {
     	  @Override
     	  public void actionPerformed(ActionEvent e) {
     		  
+//    		  System.out.println(new String(txtPassword.getPassword()));
+    		  
     		  if(userController.loginCheck(txtUsername.getText().toLowerCase(), 
-    				  txtPassword.getPassword().toString().toLowerCase())) {
-        		  PanelChangeControl.changeFrame(frame, new TodayWord());
+    				  new String(txtPassword.getPassword()))) {
+        		  	PanelChangeControl.changeFrame(frame, new TodayWord());
     		  } else {
     			  //login failed
-    			  System.out.println("id or password wrong");
+//    			  System.out.println("id or password wrong");
+    			  JOptionPane.showMessageDialog(login, "ID or Password wrong\nPlease try again :)");
     		  }
     		  
     	  }

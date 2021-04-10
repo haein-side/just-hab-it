@@ -29,6 +29,8 @@ private Properties prop = new Properties();
 		
 		String query = prop.getProperty("login");
 		
+		int result = 0;
+		
 		try {
 			psmt = con.prepareStatement(query);
 			psmt.setString(1, loginId);
@@ -37,7 +39,7 @@ private Properties prop = new Properties();
 			rset = psmt.executeQuery();
 			
 			if(rset.next())
-				return true;
+				result = rset.getInt(1);
 
 			
 		} catch (SQLException e) {
@@ -47,7 +49,7 @@ private Properties prop = new Properties();
 			close(psmt);
 		}
 		
-		return false;
+		return result == 0 ? false: true;
 	}
 
 	
