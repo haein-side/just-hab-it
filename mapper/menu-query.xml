@@ -73,6 +73,18 @@
         WHERE user_name = ?
           AND user_pwd = ?
    </entry>
+   <entry key="registerUser">
+       INSERT
+         INTO hbt_user
+       VALUES
+       (
+         seq_user_id
+       , ?
+       , ?
+       , ?
+       , ? 
+       )
+   </entry>
    
    
 </properties>
