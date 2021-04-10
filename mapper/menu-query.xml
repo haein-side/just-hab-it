@@ -55,6 +55,23 @@
         WHERE user_name = ?
           AND user_pwd = ?
    </entry>
-   
+   <entry key="registerUser">
+       INSERT
+         INTO hbt_user
+       VALUES
+       (
+         seq_user_id.nextval
+       , ?
+       , ?
+       , ?
+       , ? 
+       )
+   </entry>
+   <entry key="checkUsername">
+       SELECT
+              user_name
+         FROM hbt_user
+        WHERE user_name = ?
+   </entry>
    
 </properties>

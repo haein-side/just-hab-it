@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.Properties;
 
+import com.justhabit.model.dto.UserDTO;
 import com.justhabit.view.FirstFrame;
 
 import static com.justhabit.common.JDBC_EC2.close;
@@ -40,10 +41,10 @@ private Properties prop = new Properties();
 			
 			rset = psmt.executeQuery();
 			
-			if(rset.next())
+			if(rset.next()) {
 				result = rset.getInt(1);
 				FirstFrame.loggedUserID = result;
-			
+			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -52,6 +53,62 @@ private Properties prop = new Properties();
 		}
 		
 		return result == 0 ? false: true;
+	}
+
+	public boolean checkID(Connection con, String signup_name) {
+
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		
+		boolean available = true;
+		
+		String query = prop.getProperty("checkUsername");
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, signup_name);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next())
+				available = false;
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
+		}
+		
+		return available;
+	}
+
+	public boolean registerUser(Connection con, UserDTO registerUser) {
+
+		PreparedStatement psmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("registerUser");
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, registerUser.getUserName());
+			psmt.setString(2, registerUser.getUserPwd());
+			psmt.setString(3, registerUser.getUserEmail());
+			psmt.setInt(4, registerUser.getUserPin());
+			
+			result = psmt.executeUpdate();
+			
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		
+		
+		return result == 0 ? false : true;
 	}
 
 	

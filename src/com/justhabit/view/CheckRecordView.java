@@ -18,6 +18,7 @@ import javax.swing.JButton;
 import javax.swing.JCheckBox;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
@@ -120,15 +121,7 @@ public class CheckRecordView extends JFrame{
 
 		recordButton.setBounds(823,128, 60, 30);
 		
-		SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-		today = todayDateFormat.format(todayDate);
-		Date test = new Date(2021,3,8);
-		String testDate = todayDateFormat.format(test);
-		checkRecord.setUserId(registInfo.getUserID());
-		checkRecord.setHabitId(registInfo.getHabitID());
-		//테스트용
-		checkRecord.setDoDate(today);
-//		checkRecord.setDoDate(testDate);
+
 		recordButton.addActionListener(/**
 		 * @author user
 		 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
@@ -137,12 +130,28 @@ public class CheckRecordView extends JFrame{
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				checkRecord.setCheck(checkCount);
-				int result = habitInfoController.dateSelectController(checkRecord);
-				if(result==0){
-					habitInfoController.insertTimerController(checkRecord);
+				SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
+				
+				if(checkCount == 0) {
+					JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
 				} else {
-					habitInfoController.updateTimerController(checkRecord);
+					today = todayDateFormat.format(todayDate);
+					Date test = new Date(2021,3,8);
+					String testDate = todayDateFormat.format(test);
+					checkRecord.setUserId(registInfo.getUserID());
+					checkRecord.setHabitId(registInfo.getHabitID());
+					//테스트용
+					checkRecord.setDoDate(today);
+//				checkRecord.setDoDate(testDate);
+					checkRecord.setCheck(checkCount);
+					int result = habitInfoController.dateSelectController(checkRecord);
+					if(result==0){
+						habitInfoController.insertTimerController(checkRecord);
+						JOptionPane.showMessageDialog(mf, "기록등록 성공");
+					} else {
+						habitInfoController.updateTimerController(checkRecord);
+						JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
+					}
 				}
 			}
 		});
@@ -245,7 +254,7 @@ public class CheckRecordView extends JFrame{
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setBackground(Color.pink);
+			menuButton[i].setBackground(new Color(211,224,234));
 			botPan.add(menuButton[i]);
 		}
 		//메뉴버튼추가
