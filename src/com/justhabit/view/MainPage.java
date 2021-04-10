@@ -2,8 +2,12 @@ package com.justhabit.view;
 
 import java.awt.Color;
 import java.awt.GridLayout;
+
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -12,10 +16,18 @@ import javax.swing.JPanel;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import org.apache.log4j.chainsaw.Main;
 
+import com.justhabit.model.controller.HaeinController;
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.dto.AllHabitDTO;
 
 public class MainPage extends JFrame{
+	
+	private HaeinController habitDayController = new HaeinController();
+	private AllHabitDTO allHabitDTO = new AllHabitDTO();
+
+	
  
 	JFrame mf = this;
 	public MainPage() {
@@ -32,23 +44,77 @@ public class MainPage extends JFrame{
 		center.setBackground(new Color(246,245,245));
 		
 		
+		//습관 버튼
+//		JButton first = new JButton("습관 1");
+//		first.setSize(100,80);
+//		first.setLocation(150, 300);
+//		
+//		center.add(first);
+//		
+//		JButton second = new JButton("습관 2");
+//		second.setSize(100,80);
+//		second.setLocation(400, 300);
+//		center.add(second);
+//		
+//		JButton third = new JButton("습관 3");
+//		third.setSize(100,80);
+//		third.setLocation(650, 300);
+//		center.add(third);
+//		
+
 		
-		JButton first = new JButton("습관 1");
-		first.setSize(100,80);
-		first.setLocation(150, 300);
+		//로그인 한 USER_ID 넣기
+//		allHabitDTO.setHabitID(1);
 		
-		center.add(first);
+		//해당 ID의 모든 습관 리스트 받기
 		
-		JButton second = new JButton("습관 2");
-		second.setSize(100,80);
-		second.setLocation(400, 300);
-		center.add(second);
+//		int userid = 1;
+//		
+//		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(userid);
+//		for(AllHabitDTO habit : allhabitList) {
+//			System.out.println(habit.getHabitID() + "/" + habit.getHabitName() );
+//		}
 		
-		JButton third = new JButton("습관 3");
-		third.setSize(100,80);
-		third.setLocation(650, 300);
-		center.add(third);
 		
+		
+//		//오늘 요일 넣기
+//		Calendar cal = Calendar.getInstance(); 
+//		int day = cal.get(Calendar.DAY_OF_WEEK)-1;
+//		habitDayDTO.setHabitDays(day);
+//		
+//		//오늘 해당 이용자의 습관출력
+//		List<HaeinHabitDayDTO> habitDayList = new ArrayList<>();
+//		habitDayList = habitDayController.selectHabitDay
+//		
+		
+		
+		//버튼 생성
+//		JButton[] habitButtons = new JButton[allhabitList.size()];
+//		
+//		for(int i = 0; i < habitButtons.length; i++) {
+//			JButton box = new JButton()
+//			box.setSize(100, 80);
+//			box.setLocation(150*i + 100*(i-1), 300);
+//			box.setText(habit.getHabitName());
+//			this.add(box);
+//		}
+//		
+		
+	int userid = 1;
+		
+		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(userid);
+		JButton[] habitButtons = new JButton[allhabitList.size()];
+		for(int i = 0; i < allhabitList.size(); i++) {
+				JButton box = new JButton();
+				box.setSize(100, 80);
+				box.setLocation(150* + 100*(i-1), 300);
+				box.setText(allhabitList.get(i).getHabitName());
+				this.add(box);
+			
+		}
+		
+		
+		//오늘의 각오
 		JLabel promise = new JLabel("오늘의 각오를 입력해주세요!");
 //		promise.setFont(new Font("Serif", Font.BOLD, 30));
 	    promise.setSize(promise.getPreferredSize());
@@ -131,5 +197,24 @@ public class MainPage extends JFrame{
 		
 	}
 		
+	
+	public void displayHabit(){
+//		int userid = 1;
+//		
+//		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(userid);
+//		JButton[] habitButtons = new JButton[allhabitList.size()];
+//		for(int i = 0; i < allhabitList.size(); i++) {
+//				JButton box = new JButton();
+//				box.setSize(100, 80);
+//				box.setLocation(150* + 100*(i-1), 300);
+//				box.setText(allhabitList.get(i).getHabitName());
+//				this.add(box);
+//			
+//		}
+//		for(int i = 0; i < allhabitList.size(); i++) {
+//			System.out.println(allhabitList.get(i).getHabitID() + "/" + allhabitList.get(i).getHabitName() );
+//		}
+	}
+	
 	}
 	
