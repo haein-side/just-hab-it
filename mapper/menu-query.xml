@@ -6,8 +6,10 @@
     	SELECT
     	       HABIT_ID
     	     , HABIT_NAME
+    	     , HABIT_TYPE
     	  FROM HBT_REGISTER 
     	 WHERE USER_ID = 1
+    
     	 
     </entry>
 

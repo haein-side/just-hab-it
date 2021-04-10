@@ -92,6 +92,7 @@ public class HaeinDAO {
 					AllHabitDTO habit = new AllHabitDTO();
 					habit.setHabitID(rset.getInt("HABIT_ID"));
 					habit.setHabitName(rset.getString("HABIT_NAME"));
+					habit.setHabitType(rset.getString("HABIT_TYPE"));
 					
 					allhabitList.add(habit);
 					
