@@ -22,7 +22,7 @@ import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
 import javax.swing.text.StyledDocument;
 
-import org.apache.log4j.chainsaw.Main;
+//import org.apache.log4j.chainsaw.Main;
 
 import com.justhabit.model.controller.PanelChangeControl;
 

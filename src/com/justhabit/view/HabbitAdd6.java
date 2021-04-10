@@ -24,6 +24,7 @@ public class HabbitAdd6 extends JFrame{
 		   habbitAdd6.setLayout(null);
 		   habbitAdd6.setBounds(0, 100, 900, 462);
 		   habbitAdd6.setBackground(Color.lightGray);
+		   habbitAdd6.setLocationRelativeTo(null);
 		   habbitAdd6.setVisible(true);
 
 

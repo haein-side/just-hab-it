@@ -29,6 +29,8 @@ public class MainPage extends JFrame{
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
+		center.setBackground(new Color(246,245,245));
+		
 		
 		
 		JButton first = new JButton("습관 1");
@@ -75,7 +77,7 @@ public class MainPage extends JFrame{
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setBackground(Color.pink);
+			menuButton[i].setBackground(new Color(211,224,234));
 			botPan.add(menuButton[i]);
 		}
 		menuButton[0].setEnabled(false);

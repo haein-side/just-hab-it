@@ -30,15 +30,7 @@ public class FirstFrame {
    private Image ic_logo = new ImageIcon("images/login.png").getImage().getScaledInstance(160, 160, Image.SCALE_SMOOTH);
    private JTextField txtUsername;
    private JPasswordField txtPassword;
-   
-//   private JTextField sign_username;
-//   private JPasswordField sign_pwd;
-//   private JPasswordField sign_pwd_check;
-//   private JTextField sign_email;
-//   private JTextField sign_PIN;
-   
-   
-   
+      
    private int x, y;
    
    public static void main(String[] args) {
@@ -117,9 +109,7 @@ public class FirstFrame {
       lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);
       lblNewLabel_1.setFont(new Font("Tahoma", Font.BOLD, 20));
       lblNewLabel_1.setBounds(78, 290, 234, 36);
-      circlePanel.add(lblNewLabel_1);
-//////////////////////////////////////////////////////////////////////////////////
-      
+      circlePanel.add(lblNewLabel_1);      
       
       
       /* 오른쪽에 붙이는 로그인 패널*/
@@ -176,6 +166,9 @@ public class FirstFrame {
     	  
     	  @Override
     	  public void actionPerformed(ActionEvent e) {
+    		  
+//    		  txtUsername.getText());
+    		  
     		  PanelChangeControl.changeFrame(frame, new TodayWord());
     	  }
       });
