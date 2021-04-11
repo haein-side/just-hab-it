@@ -267,7 +267,7 @@ public class TimeRecordView extends JFrame{
 					int result = habitInfoController.dateTimerSelectController(timerRecord);
 					if(result==0){
 						habitInfoController.insertTimerController(timerRecord);
-						JOptionPane.showMessageDialog(mf, "기록 저장 성공");
+						JOptionPane.showMessageDialog(mf, "신규 저장 성공");
 					} else {
 						habitInfoController.updateTimerController(timerRecord);
 						JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
