@@ -22,7 +22,7 @@ public class HabbitAddService {
 		if(selectAllHabbit != 0) {
 			confirm += "성공 했다";
 		} else {
-			confirm += "성공했겠냐 시발";
+			confirm += "성공했겠냐 ";
 		}
 		
 		close(con);

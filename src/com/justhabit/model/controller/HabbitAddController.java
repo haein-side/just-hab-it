@@ -21,13 +21,13 @@ public class HabbitAddController {
 		
 		test = new HabbitAddDTO();
 		
-		test.setMemberId(MemberId);
-		test.setHabitType(habitType);
-		test.setHabitDate(habitDate);
-		test.setHabitselectDay(habitselectDay);
-		test.setHabitRecord(habitRecord);
-		test.setHabitRecordNext(habitRecordNext);
-		allhabitList.add(test);
+//		test.setMemberId(MemberId);
+//		test.setHabitType(habitType);
+//		test.setHabitDate(habitDate);
+//		test.setHabitselectDay(habitselectDay);
+//		test.setHabitRecord(habitRecord);
+//		test.setHabitRecordNext(habitRecordNext);
+//		allhabitList.add(test);
 		
 		String selectAllHabbit = HabbitAddService.selectAllHabbit(allhabitList);
 		

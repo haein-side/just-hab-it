@@ -1,37 +1,48 @@
 package com.justhabit.model.dto;
 
-import java.io.Serializable;
-
-public class HabbitAddDTO implements Serializable{
-	
-	private static final long serialVersionUID = 843061075072438592L;
-	private String MemberId;
+public class HabbitAddDTO {
+	private int UserID;
+	private int habitID;
+	private String habitName;
 	private String habitType;
-	private int habitDate;
-	private String habitselectDay;
-	private String habitRecord;
-	private String habitRecordNext;
+	private String habitDays;
+	private String HABIT_GOAL;
 	
-	
-	public HabbitAddDTO() {}
-	
-	public HabbitAddDTO(String memberId, String habitType, int habitDate, String habitselectDay, String habitRecord,
-			String habitRecordNext) {
-		
-		this.MemberId = memberId;
+	public HabbitAddDTO() {
+		super();
+	}
+
+	public HabbitAddDTO(int userID, int habitID, String habitName, String habitType, String habitDays) {
+		super();
+		UserID = userID;
+		this.habitID = habitID;
+		this.habitName = habitName;
 		this.habitType = habitType;
-		this.habitDate = habitDate;
-		this.habitselectDay = habitselectDay;
-		this.habitRecord = habitRecord;
-		this.habitRecordNext = habitRecordNext;
+		this.habitDays = habitDays;
 	}
 
-	public String getMemberId() {
-		return MemberId;
+	public int getUserID() {
+		return UserID;
 	}
 
-	public void setMemberId(String memberId) {
-		MemberId = memberId;
+	public void setUserID(int userID) {
+		UserID = userID;
+	}
+
+	public int getHabitID() {
+		return habitID;
+	}
+
+	public void setHabitID(int habitID) {
+		this.habitID = habitID;
+	}
+
+	public String getHabitName() {
+		return habitName;
+	}
+
+	public void setHabitName(String habitName) {
+		this.habitName = habitName;
 	}
 
 	public String getHabitType() {
@@ -42,51 +53,21 @@ public class HabbitAddDTO implements Serializable{
 		this.habitType = habitType;
 	}
 
-	public int getHabitDate() {
-		return habitDate;
+	public String getHabitDays() {
+		return habitDays;
 	}
 
-	public void setHabitDate(int habitDate) {
-		this.habitDate = habitDate;
-	}
-
-	public String getHabitselectDay() {
-		return habitselectDay;
-	}
-
-	public void setHabitselectDay(String habitselectDay) {
-		this.habitselectDay = habitselectDay;
-	}
-
-	public String getHabitRecord() {
-		return habitRecord;
-	}
-
-	public void setHabitRecord(String habitRecord) {
-		this.habitRecord = habitRecord;
-	}
-
-	public String getHabitRecordNext() {
-		return habitRecordNext;
-	}
-
-	public void setHabitRecordNext(String habitRecordNext) {
-		this.habitRecordNext = habitRecordNext;
-	}
-
-	public static long getSerialversionuid() {
-		return serialVersionUID;
+	public void setHabitDays(String habitDays) {
+		this.habitDays = habitDays;
 	}
 
 	@Override
 	public String toString() {
-		return "HabbitAddDTO [MemberId=" + MemberId + ", habitType=" + habitType + ", habitDate=" + habitDate
-				+ ", habitselectDay=" + habitselectDay + ", habitRecord=" + habitRecord + ", habitRecordNext="
-				+ habitRecordNext + "]";
+		return "AllHabitDTO [UserID=" + UserID + ", habitID=" + habitID + ", habitName=" + habitName + ", habitType="
+				+ habitType + ", habitDays=" + habitDays + "]";
 	}
+
 	
-	
-	
+
 	
 }
-	
