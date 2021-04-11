@@ -54,7 +54,7 @@ public class UserService {
 		
 		UserDTO user = userDAO.myUser(con, loggedUserID);
 		
-		
+		close(con);
 		
 		
 		return user;
