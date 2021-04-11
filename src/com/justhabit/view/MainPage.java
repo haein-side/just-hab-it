@@ -124,21 +124,26 @@ public class MainPage extends JFrame{
 				JButton box = new JButton();
 				box.setSize(100, 80);
 				if (h == 0) {
-					box.setLocation(400, 180);	
+					box.setLocation(400, 180);
+					box.setText(allhabitList.get(h).getHabitName());
 				} else if(h % 3 == 0) {
-					box.setLocation(400, 180 + 80 * (h/3*2));		
+					box.setLocation(400, 180 + 80 * (h/3*2));	
+					box.setText(allhabitList.get(h-1).getHabitName());
 				} else if(h % 3 == 1 ) {
 					box.setLocation(550, 180 + 80 * (h-1)/3*2);
+					box.setText(allhabitList.get(h-1).getHabitName());
 				} else if(h % 3 == 2 ) {
 					box.setLocation(700, 180 + 80 * (h-2)/3*2);
 				}
+				int i = h;
 				box.setText(allhabitList.get(h).getHabitName());
 				box.addActionListener(new ActionListener() {
+					
 			          
 			          @Override
 			          public void actionPerformed(ActionEvent e) {
-			        	  userhabitid = allhabitList.get(h-1).getHabitID();
-			        	  if(allhabitList.get(h-1).getHabitType().equals("C")) {
+			        	  userhabitid = allhabitList.get(i).getHabitID();
+			        	  if(allhabitList.get(i).getHabitType().equals("C")) {
 			        		  PanelChangeControl.changeFrame(mf, new CheckRecordView());
 			        		  
 			        	  } else {
@@ -327,25 +332,25 @@ public class MainPage extends JFrame{
 	}
 		
 	
-//	public void displayHabit(){
-////		int userid = 1;
-//		
-//		FirstFrame.loggedUserID = 1;
-//		
-//		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
-//		JButton[] habitButtons = new JButton[allhabitList.size()];
-//		for(int i = 0; i < allhabitList.size(); i++) {
-//				JButton box = new JButton();
-//				box.setSize(100, 80);
-//				box.setLocation(150* + 100*(i-1), 300);
-//				box.setText(allhabitList.get(i).getHabitName());
-//				this.add(box);
-//			
-//		}
-//		for(int i = 0; i < allhabitList.size(); i++) {
-//			System.out.println(allhabitList.get(i).getHabitID() + "/" + allhabitList.get(i).getHabitName() );
-//		}
-//	}
+	public void displayHabit(){
+//		int userid = 1;
+		
+		FirstFrame.loggedUserID = 1;
+		
+		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
+		JButton[] habitButtons = new JButton[allhabitList.size()];
+		for(int i = 0; i < allhabitList.size(); i++) {
+				JButton box = new JButton();
+				box.setSize(100, 80);
+				box.setLocation(150* + 100*(i-1), 300);
+				box.setText(allhabitList.get(i).getHabitName());
+				this.add(box);
+			
+		}
+		for(int i = 0; i < allhabitList.size(); i++) {
+			System.out.println(allhabitList.get(i).getHabitID() + "/" + allhabitList.get(i).getHabitName() );
+		}
+	}
 	
 	}
 	

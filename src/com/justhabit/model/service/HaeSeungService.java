@@ -6,6 +6,7 @@ import static com.justhabit.common.JDBCTemplate.getConnection;
 import static com.justhabit.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
+import java.util.List;
 
 import com.justhabit.model.dao.HaeseungDAO;
 import com.justhabit.model.dto.HaeseungMonthTotalDTO;
@@ -147,6 +148,25 @@ public class HaeSeungService {
 		
 		HaeseungMonthTotalDTO total = habitDAO.selectMonthTotal(con, totalRecord);
 		return total;
+	}
+
+	public HaeseungMonthTotalDTO selectMonthTimerTotal(HaeseungMonthTotalDTO totalRecord) {
+		Connection con =getConnection();
+		
+		HaeseungMonthTotalDTO total = habitDAO.selectMonthTimerTotal(con, totalRecord);
+		return total;
+	}
+
+	public List<HaeseungRecordDTO> selectRecordGoal(HaeseungRecordDTO recordInfo) {
+		Connection con = getConnection();
+		
+		List<HaeseungRecordDTO> selectRecordGoalList= null;
+		if(recordInfo.getRecordType().equals("a")) {
+			selectRecordGoalList = habitDAO.selectCheckRecordGoal(con, recordInfo);
+			
+		}
+		
+		return selectRecordGoalList;
 	}
 
 

@@ -13,7 +13,9 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTextField;
 
 import com.justhabit.model.controller.PanelChangeControl;
 import com.justhabit.model.controller.UserController;
@@ -64,7 +66,7 @@ public class MyPage extends JFrame {
 	    label_username.setBounds(400, 60, 150, 150);
 	    label_email.setBounds(400, 100, 150, 150);
 	    label_password.setBounds(400, 140, 150, 150);
-	    label_pin.setBounds(400, 190, 150, 150);
+	    label_pin.setBounds(550, 270, 150, 150);
 //		levelExp.setBounds(130, 290, 150, 150);
 		
 		userPanel.add(label_username);
@@ -76,7 +78,10 @@ public class MyPage extends JFrame {
 		
 //		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
 		//TODO: 테스트용 지우고 로그인된 유저로 정보가져오기.
-		UserDTO myUser = userController.userInfo(1); // test
+		UserDTO myUser = userController.userInfo(11); // test
+		
+		
+		
 		String pwd = "";
 		for(int i = 0; i < myUser.getUserPwd().length(); i++) {
 			if(i == 0)
@@ -95,20 +100,26 @@ public class MyPage extends JFrame {
 			
 		
 		
-		JLabel myUser_name  = new JLabel(myUser.getUserName());
-		JLabel myUser_email = new JLabel(myUser.getUserEmail());
-		JLabel myUser_pwd  = new JLabel(pwd);
-		JLabel myUser_pin = new JLabel(pin);
+		JTextField myUser_name  = new JTextField(myUser.getUserName());
+		JTextField myUser_email = new JTextField(myUser.getUserEmail());
+		JTextField myUser_pwd  = new JTextField(pwd);
+		JTextField myUser_pin = new JTextField(pin);
 		myUser_name.setFont(new Font("a디딤돌",Font.BOLD,20));
 		myUser_email.setFont(new Font("a디딤돌",Font.BOLD,20));
 		myUser_pwd.setFont(new Font("a디딤돌",Font.BOLD,20));
 		myUser_pin.setFont(new Font("a디딤돌",Font.BOLD,20));
 		
 		
-		myUser_name.setBounds(600, 60, 300, 150);
-		myUser_email.setBounds(600, 100, 300, 150);
-		myUser_pwd.setBounds(600, 140, 300, 150);
-		myUser_pin.setBounds(600, 190, 300, 150);
+		myUser_name.setBounds(600, 120, 200, 30);
+		myUser_email.setBounds(600, 160, 200, 30);
+		myUser_pwd.setBounds(600, 200, 200, 30);
+		myUser_pin.setBounds(600, 330, 200, 30);
+		
+		myUser_name.setEditable(false);
+		myUser_email.setEditable(false);
+		myUser_pwd.setEditable(false);
+		myUser_pin.setEditable(false);
+		
 		
 		userPanel.add(myUser_name);
 		userPanel.add(myUser_email);
@@ -116,6 +127,12 @@ public class MyPage extends JFrame {
 		userPanel.add(myUser_pin);
 		
 		
+		
+		JLabel instruction  = new JLabel();
+		instruction.setFont(new Font("a디딤돌",Font.ITALIC,21));
+		instruction.setVisible(false);
+		instruction.setBounds(400, 290, 390, 20);
+		userPanel.add(instruction);
 		
 		
 		
@@ -128,19 +145,77 @@ public class MyPage extends JFrame {
 		revise.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changeFrame(myPage , new ReviseInfo());
+            	myUser_name.setEditable(true);
+            	myUser_name.setBackground(Color.LIGHT_GRAY);
+        		myUser_email.setEditable(true);
+            	myUser_email.setBackground(Color.LIGHT_GRAY);
+        		myUser_pwd.setEditable(true);
+            	myUser_pwd.setBackground(Color.LIGHT_GRAY);
+            	
+            	
+            	if(myUser_pin.getText().equals(String.valueOf(myUser.getUserPin()))) {
+            		
+            		myUser.setUserName(myUser_name.getText());
+            		myUser.setUserEmail(myUser_email.getText());
+            		myUser.setUserPwd(myUser_pwd.getText());
+            		
+            		String result = userController.updateUser(myUser);
+            		
+//            		switch(result) {
+//            		case "" : 
+//            		
+//            		}
+            		
+            	}else {
+            		JOptionPane.showMessageDialog(myPage, "가입시 입력한 PIN을 입력해주세요");
+      			  	myUser_pin.setText("");
+            	}
+    
+
+            	instruction.setText("<html>회원정보 <font color=red>수정</font>를 위한 <font color=blue>PIN</font>을 입력해주세요 :)</html>");
+            	instruction.setVisible(true);
+            	
+        		myUser_pin.setEditable(true);
+        		myUser_pin.setText("");
+            	myUser_pin.setBackground(Color.GRAY);
+            	
+//            	PanelChangeControl.changeFrame(myPage , new ReviseInfo());
+            	
             }
          });
 		
-		
+//		UserDTO myUser = userController.userInfo(1); // test
+
 		JButton exit = new JButton("탈퇴하기");
 		exit.setSize(180,40);
 		exit.setLocation(600, 390);
 		userPanel.add(exit);
+		exit.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	
+            	instruction.setText("<html>회원 <font color=red>탈퇴</font>를 위한 <font color=blue>PIN</font>을 입력해주세요 :(</html>");
+            	instruction.setVisible(true);
+
+        		myUser_pin.setEditable(true);
+            	myUser_pin.setBackground(Color.GRAY);
+            	
+            	if(myUser_pin.getText().equals(String.valueOf(myUser.getUserPin()))) {
+            		if(userController.deleteUser(myUser))
+                		JOptionPane.showMessageDialog(myPage, myUser.getUserName() + "님의 탈퇴가 완료 되었습니다");
+            			
+            		else
+                		JOptionPane.showMessageDialog(myPage, myUser.getUserName() + "님의 탈퇴가 실패했습니다");
+            	} else {
+      			  	JOptionPane.showMessageDialog(myPage, "가입시 입력한 PIN을 입력해주세요");
+      			  	myUser_pin.setText("");
+
+            	}
+            }
+         });
 		
 		
-		
-		Image level = new ImageIcon("image/turtle1.jpeg").getImage().getScaledInstance(250, 250, 0);
+		Image level = new ImageIcon("image/5렙계란.PNG").getImage().getScaledInstance(250, 250, 0);
 		
 		JLabel levelImg = new JLabel(new ImageIcon(level));
 		levelImg.setBounds(80,60,300,300);

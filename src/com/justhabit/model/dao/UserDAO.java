@@ -145,6 +145,29 @@ private Properties prop = new Properties();
 		return user;
 	}
 
+	public boolean deleteUser(Connection con, int userId) {
+
+		PreparedStatement psmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("deleteUser");
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, userId);
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		
+		return result == 0? false : true;
+	}
+
 	
 
 	
