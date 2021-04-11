@@ -12,6 +12,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Properties;
 
+import com.justhabit.model.dto.HaeseungMonthTotalDTO;
 import com.justhabit.model.dto.HaeseungRecordDTO;
 import com.justhabit.model.dto.HaesungInfoDTO;
 
@@ -179,7 +180,6 @@ public class HaeseungDAO {
 	public int updateCheckRecord(Connection con, HaeseungRecordDTO checkRecord) {
 		
 		PreparedStatement pstmt = null;
-		ResultSet rset = null;
 		int result = 0;
 		
 		String query = prop.getProperty("updateCheck");
@@ -236,6 +236,14 @@ public class HaeseungDAO {
 		return result;
 	}
 
+	/**
+	 * <pre>
+	 * Timer습관 기록날짜 조회
+	 * </pre>
+	 * @param con
+	 * @param timerRecord
+	 * @return
+	 */
 	public HaeseungRecordDTO selectTimerDate(Connection con, HaeseungRecordDTO timerRecord) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -254,7 +262,6 @@ public class HaeseungDAO {
 				selectRecord.setDoDate(rset.getString("DO_DATE"));
 			} 
 			
-			System.out.println(selectRecord);
 		} catch (SQLException e) {
 			e.printStackTrace();
 		} finally {
@@ -262,6 +269,43 @@ public class HaeseungDAO {
 			close(pstmt);
 		}
 		return selectRecord;
+	}
+
+	/**
+	 * <pre>
+	 * 이번달 횟수기록 일수와 총갯수 조회
+	 * </pre>
+	 * @param con
+	 * @param totalRecord
+	 * @return
+	 */
+	public HaeseungMonthTotalDTO selectMonthTotal(Connection con, HaeseungMonthTotalDTO totalRecord) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		
+		String query = prop.getProperty("selectTotalCheck");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setString(1, totalRecord.getTodayMonth());
+			pstmt.setInt(2, totalRecord.getHabitId());
+			
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				totalRecord = new HaeseungMonthTotalDTO();
+				totalRecord.setDateCount(rset.getInt("COUNT(*)"));
+				totalRecord.setRecordSum(rset.getInt("SUM(COUNT_CHECK)"));
+			} 
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return totalRecord;
 	}
 
 	

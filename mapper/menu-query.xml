@@ -110,4 +110,12 @@
         WHERE HABIT_ID = ?
           AND DO_DATE = ?
    </entry>
+   <entry key="selectTotalCheck">
+       SELECT
+              COUNT(*)
+            , SUM(COUNT_CHECK)
+         FROM HBT_CHECK
+        WHERE SUBSTR(DO_DATE,4,2) = ?
+          AND HABIT_ID =?
+   </entry>
 </properties>

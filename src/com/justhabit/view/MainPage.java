@@ -120,7 +120,6 @@ public class MainPage extends JFrame{
 			        		  
 			        	  } else {
 			        		  PanelChangeControl.changeFrame(mf, new TimeRecordView());
-			        		  
 			        	  }
 			          }
 			       });

@@ -8,6 +8,7 @@ import static com.justhabit.common.JDBCTemplate.rollback;
 import java.sql.Connection;
 
 import com.justhabit.model.dao.HaeseungDAO;
+import com.justhabit.model.dto.HaeseungMonthTotalDTO;
 import com.justhabit.model.dto.HaeseungRecordDTO;
 import com.justhabit.model.dto.HaesungInfoDTO;
 
@@ -139,6 +140,13 @@ public class HaeSeungService {
 		
 		close(con);
 		return info;
+	}
+
+	public  HaeseungMonthTotalDTO selectMonthTotal(HaeseungMonthTotalDTO totalRecord) {
+		Connection con =getConnection();
+		
+		HaeseungMonthTotalDTO total = habitDAO.selectMonthTotal(con, totalRecord);
+		return total;
 	}
 
 

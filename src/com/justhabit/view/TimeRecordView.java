@@ -35,6 +35,9 @@ public class TimeRecordView extends JFrame{
 	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
+	private int totalDate =0; //습관실시 일수
+	private int totalTimer=0;//기록된 습관 총 수
+	private String thisMonth = "" ;//이번달 "00월"
 	JFrame mf = this;
 	int test = 5;
 	
@@ -89,44 +92,6 @@ public class TimeRecordView extends JFrame{
 		timer.setBounds(270, 0,400,50);
 		habitTop.add(timer);
 		
-		//저장 버튼 
-		JButton recordButton = new JButton("저장");
-		habitTop.add(recordButton);
-		
-		recordButton.addActionListener(/**
-				 * @author user
-				 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
-				 */
-				new ActionListener() {
-					
-					@Override
-					public void actionPerformed(ActionEvent e) {
-						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-						double hbtTimer = timerPanel.count / (60*60*100)*100;
-						if(hbtTimer == 0) {
-							JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
-						} else {
-//							today = todayDateFormat.format(todayDate);
-//							Date test = new Date(2021,3,8);
-//							String testDate = todayDateFormat.format(test);
-							timerRecord.setUserId(registInfo.getUserID());
-							timerRecord.setHabitId(registInfo.getHabitID());
-							//테스트용
-							timerRecord.setDoDate(today);
-//						checkRecord.setDoDate(testDate);
-							timerRecord.setTimer(hbtTimer);
-							int result = habitInfoController.dateTimerSelectController(timerRecord);
-							if(result==0){
-								habitInfoController.insertTimerController(timerRecord);
-								JOptionPane.showMessageDialog(mf, "기록 저장 성공");
-							} else {
-								habitInfoController.updateTimerController(timerRecord);
-								JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
-							}
-						}
-					}
-				});
-		
 		//달력
 		JPanel calendarPanel = new JPanel();
 		calendarPanel.setBounds(43, 95, 350, 340);
@@ -148,7 +113,14 @@ public class TimeRecordView extends JFrame{
 		monthPrint.setBounds(80,15,200,50);
 		monthPrint.setBackground(new Color(255,204,153));
 		
-		JLabel monthName = new JLabel(month+1+"월");
+		thisMonth = "";
+		if(month < 9) {
+			thisMonth = "0"+(month+1);
+		} else {
+			thisMonth = month+1+"";
+		}
+		
+		JLabel monthName = new JLabel(thisMonth+"월");
 		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
 		
 		monthPrint.add(monthName);
@@ -164,7 +136,7 @@ public class TimeRecordView extends JFrame{
 		//오늘날짜 확인
 		Date todayDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-		String today = dateFormat.format(todayDate);
+		today = dateFormat.format(todayDate);
 				
 		JButton[] day = new JButton[calArr.size()]; 
 		for(int i = 0; i < calArr.size();i++) {
@@ -197,9 +169,6 @@ public class TimeRecordView extends JFrame{
 			}
 		}
 		calendarPanel.add(calendar);
-
-		
-		
 		
 		//날짜 클릭시 그날 info 출력..진행중
 		Dialog dayInfo = new Dialog(mf,"day Info");
@@ -227,7 +196,7 @@ public class TimeRecordView extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				dayInfo.dispose();
 			}
-		});
+		});		
 		
 		//문구 표시
 		JPanel habitInfo = new JPanel();
@@ -239,7 +208,51 @@ public class TimeRecordView extends JFrame{
 		info.setText("여기에 \n \n어떻게 \n \n넣을것인가..");
 		habitInfo.add(info);
 		
-		//메뉴패널추가
+		//저장 버튼 
+		JButton recordButton = new JButton("저장");
+		habitTop.add(recordButton);
+		
+		recordButton.addActionListener(/**
+				 * @author user
+				 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
+				 */
+				new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
+						double hbtTimer = timerPanel.count / (60*60*100)*100;
+						if(hbtTimer == 0) {
+							JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
+						} else {
+							
+							//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
+							timerRecord.setUserId(registInfo.getUserID()); //유저아이디
+							timerRecord.setHabitId(registInfo.getHabitID()); //습관아이디
+							timerRecord.setTimer(hbtTimer); //기록시간
+							today = todayDateFormat.format(todayDate);
+							timerRecord.setDoDate(today);  // 오늘날짜
+							//테스트용
+//							Date test = new Date(2021,3,8);
+//							String testDate = todayDateFormat.format(test);
+//							checkRecord.setDoDate(testDate);
+							int result = habitInfoController.dateTimerSelectController(timerRecord);
+							if(result==0){
+								habitInfoController.insertTimerController(timerRecord);
+								JOptionPane.showMessageDialog(mf, "기록 저장 성공");
+							} else {
+								habitInfoController.updateTimerController(timerRecord);
+								JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
+							}
+						}
+					}
+				});
+		
+
+		
+		
+		
+		//하단패널
 		JPanel botPan = new JPanel();
 		botPan.setLayout(new GridLayout(1,6));
 		botPan.setSize(900, 100);

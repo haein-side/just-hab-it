@@ -3,6 +3,7 @@ package com.justhabit.model.controller;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import com.justhabit.model.dto.HaeseungMonthTotalDTO;
 import com.justhabit.model.dto.HaeseungRecordDTO;
 import com.justhabit.model.dto.HaesungInfoDTO;
 import com.justhabit.model.service.HaeSeungService;
@@ -126,6 +127,12 @@ public class HaeSeungController {
 		}
 		
 		return result;
+	}
+
+	public HaeseungMonthTotalDTO monthTotalController(HaeseungMonthTotalDTO totalRecord) {
+		
+		HaeseungMonthTotalDTO monthTotal = habitService.selectMonthTotal(totalRecord);
+		return monthTotal;
 	}
 
 
