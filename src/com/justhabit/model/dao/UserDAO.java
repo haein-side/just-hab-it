@@ -176,8 +176,23 @@ private Properties prop = new Properties();
 		
 		String query = prop.getProperty("updateUser");
 		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, myUser.getUserName());
+			psmt.setString(2, myUser.getUserPwd());
+			psmt.setString(3, myUser.getUserEmail());
+			psmt.setInt(4, myUser.getUserId());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
 		
-		return false;
+		
+		return result == 0 ? false: true;
 	}
 
 	
