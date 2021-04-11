@@ -48,4 +48,16 @@ public class UserService {
 		return isRegistered;
 	}
 
+	public UserDTO userInfo(int loggedUserID) {
+
+		Connection con = getConnection();
+		
+		UserDTO user = userDAO.myUser(con, loggedUserID);
+		
+		
+		
+		
+		return user;
+	}
+
 }

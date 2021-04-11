@@ -14,13 +14,16 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
-import javax.swing.JTextField;
 
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.controller.UserController;
+import com.justhabit.model.dto.UserDTO;
 
 public class MyPage extends JFrame {
 	
 	private MyPage myPage;
+	private UserController userController = new UserController();
+	
 	
 	public MyPage() {
 		
@@ -31,6 +34,7 @@ public class MyPage extends JFrame {
 		myPage.setBackground(Color.lightGray);
 		myPage.setLocationRelativeTo(null);
 		myPage.setVisible(true);
+		myPage.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		
 		JPanel top = new TopPanel();
 		myPage.add(top);
@@ -45,25 +49,74 @@ public class MyPage extends JFrame {
 		this.add(userPanel);
 		
 		
-		JLabel id  = new JLabel("ID : ");
-		JLabel userName  = new JLabel("닉네임 : ");
-		JLabel email = new JLabel("이메일 : ");
-		JLabel levelExp = new JLabel("레벨 : ");
-	    id.setFont(new Font("a디딤돌",Font.BOLD,20));
-	    userName.setFont(new Font("a디딤돌",Font.BOLD,20));
-	    email.setFont(new Font("a디딤돌",Font.BOLD,20));
-	    levelExp.setFont(new Font("a디딤돌",Font.BOLD,20));
+		JLabel label_username  = new JLabel("Username : ");
+		JLabel label_email  = new JLabel("Email : ");
+		JLabel label_password = new JLabel("Password : ");
+		JLabel label_pin = new JLabel("PIN : ");
+//		JLabel levelExp = new JLabel("레벨 : ");
+		label_username.setFont(new Font("a디딤돌",Font.BOLD,20));
+		label_email.setFont(new Font("a디딤돌",Font.BOLD,20));
+		label_password.setFont(new Font("a디딤돌",Font.BOLD,20));
+		label_pin.setFont(new Font("a디딤돌",Font.BOLD,20));
+//	    levelExp.setFont(new Font("a디딤돌",Font.BOLD,20));
 	    
 	    
-		id.setBounds(500, 110, 150, 150);
-		userName.setBounds(500, 150, 150, 150);
-		email.setBounds(500, 190, 150, 150);
-		levelExp.setBounds(130, 290, 150, 150);
+	    label_username.setBounds(400, 60, 150, 150);
+	    label_email.setBounds(400, 100, 150, 150);
+	    label_password.setBounds(400, 140, 150, 150);
+	    label_pin.setBounds(400, 190, 150, 150);
+//		levelExp.setBounds(130, 290, 150, 150);
 		
-		userPanel.add(id);
-		userPanel.add(userName);
-		userPanel.add(email);
-		userPanel.add(levelExp);
+		userPanel.add(label_username);
+		userPanel.add(label_email);
+		userPanel.add(label_password);
+		userPanel.add(label_pin);
+//		userPanel.add(levelExp);
+		
+		
+//		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
+		//TODO: 테스트용 지우고 로그인된 유저로 정보가져오기.
+		UserDTO myUser = userController.userInfo(1); // test
+		String pwd = "";
+		for(int i = 0; i < myUser.getUserPwd().length(); i++) {
+			if(i == 0)
+				pwd += myUser.getUserPwd().charAt(0);
+			else
+				pwd += "*";
+		}
+		
+		String pin = ""; 
+		for(int i = 0; i < 4; i++ ) {
+			if(i == 0)
+				pin += Integer.toString(myUser.getUserPin()).charAt(0);
+			else
+				pin += '*';
+		}
+			
+		
+		
+		JLabel myUser_name  = new JLabel(myUser.getUserName());
+		JLabel myUser_email = new JLabel(myUser.getUserEmail());
+		JLabel myUser_pwd  = new JLabel(pwd);
+		JLabel myUser_pin = new JLabel(pin);
+		myUser_name.setFont(new Font("a디딤돌",Font.BOLD,20));
+		myUser_email.setFont(new Font("a디딤돌",Font.BOLD,20));
+		myUser_pwd.setFont(new Font("a디딤돌",Font.BOLD,20));
+		myUser_pin.setFont(new Font("a디딤돌",Font.BOLD,20));
+		
+		
+		myUser_name.setBounds(600, 60, 300, 150);
+		myUser_email.setBounds(600, 100, 300, 150);
+		myUser_pwd.setBounds(600, 140, 300, 150);
+		myUser_pin.setBounds(600, 190, 300, 150);
+		
+		userPanel.add(myUser_name);
+		userPanel.add(myUser_email);
+		userPanel.add(myUser_pwd);
+		userPanel.add(myUser_pin);
+		
+		
+		
 		
 		
 		
@@ -81,8 +134,8 @@ public class MyPage extends JFrame {
 		
 		
 		JButton exit = new JButton("탈퇴하기");
-		exit.setSize(130,40);
-		exit.setLocation(670, 60);
+		exit.setSize(180,40);
+		exit.setLocation(600, 390);
 		userPanel.add(exit);
 		
 		
@@ -143,14 +196,5 @@ public class MyPage extends JFrame {
 	             PanelChangeControl.changeFrame(myPage, new TimeRecordView());
 	          }
 	       });
-		
-		
-		
-		
-		
-		
-		
 	}
-	
-	
 }

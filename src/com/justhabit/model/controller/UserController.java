@@ -58,4 +58,10 @@ public class UserController {
 		
 	}
 
+	public UserDTO userInfo(int loggedUserID) {
+		
+		/* 로그인 된 유저의 정보 가져오기 */
+		return userService.userInfo(loggedUserID);
+	}
+
 }

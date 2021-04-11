@@ -8,13 +8,13 @@ public class HaeseungRecordDTO {
 	private int habitId;
 	private String doDate;
 	private int check;
-	private int timer;
+	private double timer;
 	
 	public HaeseungRecordDTO() {
 		super();
 	}
 
-	public HaeseungRecordDTO(int userId, int habitId, String doDate, int check, int timer) {
+	public HaeseungRecordDTO(int userId, int habitId, String doDate, int check, double timer) {
 		super();
 		this.userId = userId;
 		this.habitId = habitId;
@@ -55,11 +55,11 @@ public class HaeseungRecordDTO {
 		this.check = check;
 	}
 
-	public int getTimer() {
+	public double getTimer() {
 		return timer;
 	}
 
-	public void setTimer(int timer) {
+	public void setTimer(double timer) {
 		this.timer = timer;
 	}
 

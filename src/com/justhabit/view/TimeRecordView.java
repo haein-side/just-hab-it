@@ -2,6 +2,7 @@ package com.justhabit.view;
 
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,22 +15,32 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.justhabit.model.controller.HaeSeungController;
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.dto.HaeseungRecordDTO;
+import com.justhabit.model.dto.HaesungInfoDTO;
 
 public class TimeRecordView extends JFrame{
-	
 
 	/**
 	 * 타이머 기록페이지
 	 */
+	
+	private HaeSeungController habitInfoController = new HaeSeungController();
+	private HaeseungRecordDTO timerRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
+	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
+	private Date todayDate= new Date(); // 오늘 날짜
+	private String today = ""; //날짜 문자열로 변환
+	private int totalDate =0; //습관실시 일수
+	private int totalTimer=0;//기록된 습관 총 수
+	private String thisMonth = "" ;//이번달 "00월"
 	JFrame mf = this;
-	static int myTime;
-	int i = 0;
 	int test = 5;
-	int k = 0;//버튼추가용
+	
 	public TimeRecordView() {
 		
 		this.setLayout(null);
@@ -44,31 +55,41 @@ public class TimeRecordView extends JFrame{
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
-		center.setBackground(Color.white);
+		center.setBackground(new Color(246,245,245));
 		
 		
+		//등록된 습관정보 불러오기
+//		registInfo.setHabitID(MainPage.userhabitid);
+		//TODO 삭제예정: 테스트용
+		registInfo.setHabitID(2); 
+		registInfo = habitInfoController.selectHabitInfo(registInfo);
 		//습관상단바
 		JPanel habitTop = new JPanel();
-		habitTop.setLayout(null);
-		habitTop.setBackground(new Color(51,153,51));
+		habitTop.setLayout(new FlowLayout(FlowLayout.CENTER));
+//		habitTop.setBackground(new Color(51,153,51));
 		habitTop.setBounds(43, 20, 800, 50);
 		
 		//습관상단바 - 습관명
 		JPanel habitName = new JPanel();
-		habitName.setBounds(10,0,200,50);
-		habitName.setBackground(new Color(51,153,51));
-		JLabel nameLabel = new JLabel("공부1시간하기");
+//		habitName.setBounds(0,0,200,50);
+		habitName.setBackground(new Color(211,224,234));
+		JLabel nameLabel = new JLabel(registInfo.getHabitName());
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		//폰트설정
-		nameLabel.setFont(new Font("D2Coding",Font.BOLD,30));
+		nameLabel.setFont(new Font("D2Coding",Font.BOLD,20));
 		habitName.add(nameLabel);
 		
 		habitTop.add(habitName);
 		
+		//습관목표출력
+		JLabel habitGoal = new JLabel("목표 : "+registInfo.getHabitGoal()+"시간 /");
+		habitGoal.setFont(new Font("D2Coding",Font.PLAIN,15));
+		habitTop.add(habitGoal);
+		
 		//습관 상단바 - 타이머
 		JPanel timer=  new timerPanel();
-		timer.setBounds(270, 0,550,50);
+		timer.setBounds(270, 0,400,50);
 		habitTop.add(timer);
 		
 		//달력
@@ -92,7 +113,14 @@ public class TimeRecordView extends JFrame{
 		monthPrint.setBounds(80,15,200,50);
 		monthPrint.setBackground(new Color(255,204,153));
 		
-		JLabel monthName = new JLabel(month+1+"월");
+		thisMonth = "";
+		if(month < 9) {
+			thisMonth = "0"+(month+1);
+		} else {
+			thisMonth = month+1+"";
+		}
+		
+		JLabel monthName = new JLabel(thisMonth+"월");
 		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
 		
 		monthPrint.add(monthName);
@@ -102,13 +130,13 @@ public class TimeRecordView extends JFrame{
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
 		calendar.setBackground(new Color(255,204,153));
-		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,5,5);
+		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
 		//오늘날짜 확인
 		Date todayDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
-		String today = dateFormat.format(todayDate);
+		today = dateFormat.format(todayDate);
 				
 		JButton[] day = new JButton[calArr.size()]; 
 		for(int i = 0; i < calArr.size();i++) {
@@ -141,9 +169,6 @@ public class TimeRecordView extends JFrame{
 			}
 		}
 		calendarPanel.add(calendar);
-
-		
-		
 		
 		//날짜 클릭시 그날 info 출력..진행중
 		Dialog dayInfo = new Dialog(mf,"day Info");
@@ -171,7 +196,7 @@ public class TimeRecordView extends JFrame{
 			public void actionPerformed(ActionEvent e) {
 				dayInfo.dispose();
 			}
-		});
+		});		
 		
 		//문구 표시
 		JPanel habitInfo = new JPanel();
@@ -183,7 +208,51 @@ public class TimeRecordView extends JFrame{
 		info.setText("여기에 \n \n어떻게 \n \n넣을것인가..");
 		habitInfo.add(info);
 		
-		//메뉴패널추가
+		//저장 버튼 
+		JButton recordButton = new JButton("저장");
+		habitTop.add(recordButton);
+		
+		recordButton.addActionListener(/**
+				 * @author user
+				 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
+				 */
+				new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
+						double hbtTimer = timerPanel.count / (60*60*100)*100;
+						if(hbtTimer == 0) {
+							JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
+						} else {
+							
+							//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
+							timerRecord.setUserId(registInfo.getUserID()); //유저아이디
+							timerRecord.setHabitId(registInfo.getHabitID()); //습관아이디
+							timerRecord.setTimer(hbtTimer); //기록시간
+							today = todayDateFormat.format(todayDate);
+							timerRecord.setDoDate(today);  // 오늘날짜
+							//테스트용
+//							Date test = new Date(2021,3,8);
+//							String testDate = todayDateFormat.format(test);
+//							checkRecord.setDoDate(testDate);
+							int result = habitInfoController.dateTimerSelectController(timerRecord);
+							if(result==0){
+								habitInfoController.insertTimerController(timerRecord);
+								JOptionPane.showMessageDialog(mf, "기록 저장 성공");
+							} else {
+								habitInfoController.updateTimerController(timerRecord);
+								JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
+							}
+						}
+					}
+				});
+		
+
+		
+		
+		
+		//하단패널
 		JPanel botPan = new JPanel();
 		botPan.setLayout(new GridLayout(1,6));
 		botPan.setSize(900, 100);

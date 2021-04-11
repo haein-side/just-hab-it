@@ -42,7 +42,7 @@ public class TodayWord extends JFrame {
 		todayWord.setBackground(Color.lightGray);
 		todayWord.setLocationRelativeTo(null);
 		todayWord.setVisible(true);
-		
+		todayWord.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
 		String[] words = new String[7];
 		words[0] = "<오늘의 명언>\n\n산다는 것, 그것은 치열한 전투이다.\n\n-로망로랑-";
