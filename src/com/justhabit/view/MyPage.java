@@ -161,10 +161,13 @@ public class MyPage extends JFrame {
             		
             		String result = userController.updateUser(myUser);
             		
-//            		switch(result) {
-//            		case "" : 
-//            		
-//            		}
+            		switch(result) {
+            		case "성공" : 
+            			JOptionPane.showMessageDialog(myPage, "회원정보 수정되었습니다!");
+            			break;
+            		default :
+            			JOptionPane.showMessageDialog(myPage, result);
+            		}
             		
             	}else {
             		JOptionPane.showMessageDialog(myPage, "가입시 입력한 PIN을 입력해주세요");

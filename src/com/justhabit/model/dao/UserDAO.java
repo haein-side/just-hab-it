@@ -168,6 +168,18 @@ private Properties prop = new Properties();
 		return result == 0? false : true;
 	}
 
+	public boolean updateUser(Connection con, UserDTO myUser) {
+		
+		PreparedStatement psmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("updateUser");
+		
+		
+		return false;
+	}
+
 	
 
 	
