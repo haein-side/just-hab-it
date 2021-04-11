@@ -55,31 +55,31 @@ public class MyPage extends JFrame {
 		JLabel label_email  = new JLabel("Email : ");
 		JLabel label_password = new JLabel("Password : ");
 		JLabel label_pin = new JLabel("PIN : ");
-//		JLabel levelExp = new JLabel("레벨 : ");
+		JLabel levelExp = new JLabel("레벨 : ");
 		label_username.setFont(new Font("a디딤돌",Font.BOLD,20));
 		label_email.setFont(new Font("a디딤돌",Font.BOLD,20));
 		label_password.setFont(new Font("a디딤돌",Font.BOLD,20));
 		label_pin.setFont(new Font("a디딤돌",Font.BOLD,20));
-//	    levelExp.setFont(new Font("a디딤돌",Font.BOLD,20));
+	    levelExp.setFont(new Font("a디딤돌",Font.BOLD,20));
 	    
 	    
 	    label_username.setBounds(400, 60, 150, 150);
 	    label_email.setBounds(400, 100, 150, 150);
 	    label_password.setBounds(400, 140, 150, 150);
 	    label_pin.setBounds(550, 270, 150, 150);
-//		levelExp.setBounds(130, 290, 150, 150);
+		levelExp.setBounds(130, 270, 150, 150);
 		
 		userPanel.add(label_username);
 		userPanel.add(label_email);
 		userPanel.add(label_password);
 		userPanel.add(label_pin);
-//		userPanel.add(levelExp);
+		userPanel.add(levelExp);
 		
 		
 //		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
 		//TODO: 테스트용 지우고 로그인된 유저로 정보가져오기.
 		UserDTO myUser = userController.userInfo(1); // test
-		
+		//TODO: level값을 가져오는 쿼리.어디서? 레벨에 따른 사진 변경 
 		
 		
 		String pwd = "";
@@ -215,7 +215,7 @@ public class MyPage extends JFrame {
          });
 		
 		
-		Image level = new ImageIcon("image/5렙계란.PNG").getImage().getScaledInstance(250, 250, 0);
+		Image level = new ImageIcon("image/5렙계란.PNG").getImage().getScaledInstance(150, 150, 0);
 		
 		JLabel levelImg = new JLabel(new ImageIcon(level));
 		levelImg.setBounds(80,60,300,300);
