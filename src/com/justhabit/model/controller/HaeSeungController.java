@@ -2,7 +2,9 @@ package com.justhabit.model.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
+import java.util.List;
 
+import com.justhabit.model.dto.HaeseungMonthTotalDTO;
 import com.justhabit.model.dto.HaeseungRecordDTO;
 import com.justhabit.model.dto.HaesungInfoDTO;
 import com.justhabit.model.service.HaeSeungService;
@@ -126,6 +128,38 @@ public class HaeSeungController {
 		}
 		
 		return result;
+	}
+
+	/**
+	 * <pre>
+	 *   월 횟수 total 출력을 위한 정보조회
+	 * </pre>
+	 * @param totalRecord
+	 * @return
+	 */
+	public HaeseungMonthTotalDTO monthTotalController(HaeseungMonthTotalDTO totalRecord) {
+		
+		HaeseungMonthTotalDTO monthTotal = habitService.selectMonthTotal(totalRecord);
+		return monthTotal;
+	}
+
+	/**
+	 * <pre>
+	 *   월 Timer total 출력을 위한 정보조회
+	 * </pre>
+	 * @param totalRecord
+	 * @return
+	 */
+	public HaeseungMonthTotalDTO monthTimerTotalController(HaeseungMonthTotalDTO totalRecord) {
+		
+		HaeseungMonthTotalDTO monthTotal = habitService.selectMonthTimerTotal(totalRecord);
+		
+		return monthTotal;
+	}
+
+	public List<HaeseungRecordDTO> selectRecordGoal(HaeseungRecordDTO checkRecord) {
+		List<HaeseungRecordDTO> recordAndGoalList = habitService.selectRecordGoal(checkRecord);
+		return recordAndGoalList;
 	}
 
 

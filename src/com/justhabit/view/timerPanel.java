@@ -37,7 +37,7 @@ public class timerPanel extends JPanel{
 	int ms;
 	int t;
 	
-	static int count = 0; //시간 카운트용
+	static double count = 0; //시간 카운트용
 	
 	public timerPanel() {
 		//타이머화면
