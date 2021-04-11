@@ -125,7 +125,6 @@ public class MainPage extends JFrame{
 			          }
 			       });
 				this.add(box);
-			
 		}
 		
 		

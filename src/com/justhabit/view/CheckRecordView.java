@@ -220,7 +220,7 @@ public class CheckRecordView extends JFrame{
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
 		calendar.setBackground(new Color(255,204,153));
-		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,5,5);
+		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
 		JButton[] dayButton = new JButton[calArr.size()]; 

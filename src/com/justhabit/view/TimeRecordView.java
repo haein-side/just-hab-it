@@ -102,13 +102,13 @@ public class TimeRecordView extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-						int hbtTimer = timerPanel.count;
+						double hbtTimer = timerPanel.count / (60*60*100)*100;
 						if(hbtTimer == 0) {
 							JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
 						} else {
-							today = todayDateFormat.format(todayDate);
-							Date test = new Date(2021,3,8);
-							String testDate = todayDateFormat.format(test);
+//							today = todayDateFormat.format(todayDate);
+//							Date test = new Date(2021,3,8);
+//							String testDate = todayDateFormat.format(test);
 							timerRecord.setUserId(registInfo.getUserID());
 							timerRecord.setHabitId(registInfo.getHabitID());
 							//테스트용
@@ -158,7 +158,7 @@ public class TimeRecordView extends JFrame{
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
 		calendar.setBackground(new Color(255,204,153));
-		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,5,5);
+		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
 		//오늘날짜 확인

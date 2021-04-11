@@ -153,7 +153,7 @@ public class HaeseungDAO {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, checkRecord.getTimer());
+			pstmt.setDouble(1, checkRecord.getTimer());
 			pstmt.setString(2, checkRecord.getDoDate());
 			pstmt.setInt(3, checkRecord.getUserId());
 			pstmt.setInt(4, checkRecord.getHabitId());
@@ -220,7 +220,7 @@ public class HaeseungDAO {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, timerRecord.getTimer());
+			pstmt.setDouble(1, timerRecord.getTimer());
 			pstmt.setInt(2, timerRecord.getHabitId());
 			pstmt.setString(3, timerRecord.getDoDate());
 			
