@@ -2,6 +2,7 @@ package com.justhabit.view;
 
 import java.awt.Color;
 import java.awt.Dialog;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -14,22 +15,29 @@ import java.util.Date;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
+import com.justhabit.model.controller.HaeSeungController;
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.dto.HaeseungRecordDTO;
+import com.justhabit.model.dto.HaesungInfoDTO;
 
 public class TimeRecordView extends JFrame{
-	
 
 	/**
 	 * 타이머 기록페이지
 	 */
+	
+	private HaeSeungController habitInfoController = new HaeSeungController();
+	private HaeseungRecordDTO timerRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
+	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
+	private Date todayDate= new Date(); // 오늘 날짜
+	private String today = ""; //날짜 문자열로 변환
 	JFrame mf = this;
-	static int myTime;
-	int i = 0;
 	int test = 5;
-	int k = 0;//버튼추가용
+	
 	public TimeRecordView() {
 		
 		this.setLayout(null);
@@ -44,32 +52,80 @@ public class TimeRecordView extends JFrame{
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
-		center.setBackground(Color.white);
+		center.setBackground(new Color(246,245,245));
 		
 		
+		//등록된 습관정보 불러오기
+//		registInfo.setHabitID(MainPage.userhabitid);
+		//TODO 삭제예정: 테스트용
+		registInfo.setHabitID(2); 
+		registInfo = habitInfoController.selectHabitInfo(registInfo);
 		//습관상단바
 		JPanel habitTop = new JPanel();
-		habitTop.setLayout(null);
-		habitTop.setBackground(new Color(51,153,51));
+		habitTop.setLayout(new FlowLayout(FlowLayout.CENTER));
+//		habitTop.setBackground(new Color(51,153,51));
 		habitTop.setBounds(43, 20, 800, 50);
 		
 		//습관상단바 - 습관명
 		JPanel habitName = new JPanel();
-		habitName.setBounds(10,0,200,50);
-		habitName.setBackground(new Color(51,153,51));
-		JLabel nameLabel = new JLabel("공부1시간하기");
+//		habitName.setBounds(0,0,200,50);
+		habitName.setBackground(new Color(211,224,234));
+		JLabel nameLabel = new JLabel(registInfo.getHabitName());
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		//폰트설정
-		nameLabel.setFont(new Font("D2Coding",Font.BOLD,30));
+		nameLabel.setFont(new Font("D2Coding",Font.BOLD,20));
 		habitName.add(nameLabel);
 		
 		habitTop.add(habitName);
 		
+		//습관목표출력
+		JLabel habitGoal = new JLabel("목표 : "+registInfo.getHabitGoal()+"시간 /");
+		habitGoal.setFont(new Font("D2Coding",Font.PLAIN,15));
+		habitTop.add(habitGoal);
+		
 		//습관 상단바 - 타이머
 		JPanel timer=  new timerPanel();
-		timer.setBounds(270, 0,550,50);
+		timer.setBounds(270, 0,400,50);
 		habitTop.add(timer);
+		
+		//저장 버튼 
+		JButton recordButton = new JButton("저장");
+		habitTop.add(recordButton);
+		
+		recordButton.addActionListener(/**
+				 * @author user
+				 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
+				 */
+				new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
+						int hbtTimer = timerPanel.count;
+						if(hbtTimer == 0) {
+							JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
+						} else {
+							today = todayDateFormat.format(todayDate);
+							Date test = new Date(2021,3,8);
+							String testDate = todayDateFormat.format(test);
+							timerRecord.setUserId(registInfo.getUserID());
+							timerRecord.setHabitId(registInfo.getHabitID());
+							//테스트용
+							timerRecord.setDoDate(today);
+//						checkRecord.setDoDate(testDate);
+							timerRecord.setTimer(hbtTimer);
+							int result = habitInfoController.dateTimerSelectController(timerRecord);
+							if(result==0){
+								habitInfoController.insertTimerController(timerRecord);
+								JOptionPane.showMessageDialog(mf, "기록 저장 성공");
+							} else {
+								habitInfoController.updateTimerController(timerRecord);
+								JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
+							}
+						}
+					}
+				});
 		
 		//달력
 		JPanel calendarPanel = new JPanel();

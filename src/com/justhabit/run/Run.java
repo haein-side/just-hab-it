@@ -8,6 +8,7 @@ import com.justhabit.view.FirstFrame;
 import com.justhabit.view.MainPage;
 import com.justhabit.view.MainView;
 import com.justhabit.view.MyPage;
+import com.justhabit.view.TimeRecordView;
 
 
 
@@ -20,6 +21,7 @@ public class Run {
 		/* 연결됐는지 확인하는 메소드 */
 //		Connection con = getConnection();
 //		System.out.println(con);
+
 		
 //		MainPage mainpage = new MainPage();
 //		mainpage.displayHabit();

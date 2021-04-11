@@ -26,6 +26,14 @@ public class HaeseungDAO {
 		}
 	}
 
+	/**
+	 * <pre>
+	 * 습관정보조회
+	 * </pre>
+	 * @param con
+	 * @param registInfo
+	 * @return
+	 */
 	public HaesungInfoDTO selectHabit(Connection con, HaesungInfoDTO registInfo) {
 		
 		PreparedStatement pstmt = null;
@@ -59,29 +67,16 @@ public class HaeseungDAO {
 		}
 		return info;
 	}
-
-	public int insertTimer(Connection con, HaeseungRecordDTO checkRecord) {
-		PreparedStatement pstmt = null;
-		int result = 0;
-		String query = prop.getProperty("insertRecord");
-		
-		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, checkRecord.getCheck());
-			pstmt.setString(2, checkRecord.getDoDate());
-			pstmt.setInt(3, checkRecord.getUserId());
-			pstmt.setInt(4, checkRecord.getHabitId());
-			
-			result = pstmt.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		} finally {
-			close(pstmt);
-		}
-		
-		return result;
-	}
-
+	
+	/**
+	 * <pre>
+	 * 날짜조회
+	 * </pre>
+	 * 
+	 * @param con
+	 * @param recordInfo
+	 * @return
+	 */
 	public HaeseungRecordDTO selectDate(Connection con, HaeseungRecordDTO recordInfo) {
 		
 		PreparedStatement pstmt = null;
@@ -112,7 +107,76 @@ public class HaeseungDAO {
 		return selectRecord;
 	}
 
-	public int updateRecord(Connection con, HaeseungRecordDTO checkRecord) {
+	/**
+	 * <pre>
+	 * CHECK INSERT
+	 * </pre>
+	 * @param con
+	 * @param checkRecord
+	 * @return
+	 */
+	public int insertCheck(Connection con, HaeseungRecordDTO checkRecord) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertCheck");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, checkRecord.getCheck());
+			pstmt.setString(2, checkRecord.getDoDate());
+			pstmt.setInt(3, checkRecord.getUserId());
+			pstmt.setInt(4, checkRecord.getHabitId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	
+	/**
+	 * <pre>
+	 * Timer INSERT
+	 * </pre>
+	 * @param con
+	 * @param checkRecord
+	 * @return
+	 */
+	public int insertTimer(Connection con, HaeseungRecordDTO checkRecord) {
+		PreparedStatement pstmt = null;
+		int result = 0;
+		String query = prop.getProperty("insertTimer");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, checkRecord.getTimer());
+			pstmt.setString(2, checkRecord.getDoDate());
+			pstmt.setInt(3, checkRecord.getUserId());
+			pstmt.setInt(4, checkRecord.getHabitId());
+			
+			result = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	/**
+	 * <pre>
+	 * CHECK UPDATE
+	 * </pre>
+	 * @param con
+	 * @param checkRecord
+	 * @return
+	 */
+	public int updateCheckRecord(Connection con, HaeseungRecordDTO checkRecord) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -131,10 +195,75 @@ public class HaeseungDAO {
 			System.out.println(result);
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
 		
 		return result;
 	}
+
+	/**
+	 * <pre>
+	 * TIMER UPDATE
+	 * </pre>
+	 * @param con
+	 * @param timerRecord
+	 * @return
+	 */
+	public int updateTimerRecord(Connection con, HaeseungRecordDTO timerRecord) {
+		
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		int result = 0;
+		
+		String query = prop.getProperty("updateTimer");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, timerRecord.getTimer());
+			pstmt.setInt(2, timerRecord.getHabitId());
+			pstmt.setString(3, timerRecord.getDoDate());
+			
+			
+			result = pstmt.executeUpdate();
+			System.out.println(result);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+		}
+		
+		return result;
+	}
+
+	public HaeseungRecordDTO selectTimerDate(Connection con, HaeseungRecordDTO timerRecord) {
+		PreparedStatement pstmt = null;
+		ResultSet rset = null;
+		HaeseungRecordDTO selectRecord = null;
+		
+		String query = prop.getProperty("selectTimerDateInfo");
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, timerRecord.getHabitId());
+			pstmt.setString(2, timerRecord.getDoDate());
+			rset = pstmt.executeQuery();
+			
+			if(rset.next()) {
+				selectRecord = new HaeseungRecordDTO();
+				selectRecord.setHabitId(rset.getInt("HABIT_ID"));
+				selectRecord.setDoDate(rset.getString("DO_DATE"));
+			} 
+			
+			System.out.println(selectRecord);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(pstmt);
+		}
+		return selectRecord;
+	}
+
 	
 
 }

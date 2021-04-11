@@ -1,6 +1,7 @@
 package com.justhabit.view;
 
 import java.awt.Color;
+import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
@@ -29,19 +30,16 @@ import com.justhabit.model.dto.HaesungInfoDTO;
 
 public class CheckRecordView extends JFrame{
 	
-	
-	private HaeSeungController habitInfoController = new HaeSeungController();
-//	Map<Integer,String> checkcount = null;//체크박스 카운트용
-	
-	private int checkCount = 0; // 체크박스카운트용
-	private int i = 0;
-	private Date todayDate= new Date(); // 오늘 날짜
-	private String today = ""; //날짜 문자열로 변환
-	private HaeseungRecordDTO checkRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
-	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
 	/**
 	 * 체크박스 기록페이지
 	 */
+	
+	private HaeSeungController habitInfoController = new HaeSeungController();
+	private HaeseungRecordDTO checkRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
+	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
+	private int checkCount = 0; // 체크박스카운트용
+	private Date todayDate= new Date(); // 오늘 날짜
+	private String today = ""; //날짜 문자열로 변환
 	JFrame mf = this;
 	public CheckRecordView() {
 		
@@ -57,24 +55,26 @@ public class CheckRecordView extends JFrame{
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
-		center.setBackground(Color.white);
+		center.setBackground(new Color(246,245,245));
 		
 		//등록된 습관정보 불러오기
-		registInfo.setHabitID(4);
+//		registInfo.setHabitID(MainPage.userhabitid);
+		//TODO 삭제예정: 테스트용
+		registInfo.setHabitID(1); 
 		registInfo = habitInfoController.selectHabitInfo(registInfo);
-		
 		
 		//습관상단바
 		JPanel habitTop = new JPanel();
-		habitTop.setLayout(null);
-		habitTop.setBounds(43, 20, 780, 50);
+		habitTop.setLayout(new FlowLayout(FlowLayout.CENTER));
+		habitTop.setBounds(43, 20, 800, 50);
 		
 		//습관상단바 - 습관명
 		JPanel namePanel = new JPanel();
-		namePanel.setBounds(10,0,200,50);
-		namePanel.setBackground(new Color(51,153,51));
-		String habitName = registInfo.getHabitName();
-		JLabel nameLabel = new JLabel(habitName);
+		namePanel.setBounds(0,0,200,50);
+		namePanel.setBackground(new Color(211,224,234));
+		JLabel nameLabel = new JLabel(registInfo.getHabitName());
+		nameLabel.setHorizontalAlignment(JLabel.CENTER);
+		
 
 		//폰트설정
 		nameLabel.setFont(new Font("D2Coding",Font.PLAIN,20));
@@ -82,37 +82,62 @@ public class CheckRecordView extends JFrame{
 		
 		habitTop.add(namePanel);
 		
-		//습관 상단바 - 체크박스
+		//습관 상단바 - 횟수
 		JPanel habitCheck =  new JPanel();
-		habitCheck.setLayout(new GridLayout());
-		habitCheck.setBounds(220,0,550,50);
+		habitCheck.setLayout(new FlowLayout(FlowLayout.CENTER));
 		
-		//체크박스 생성
-		JCheckBox[] buttons = new JCheckBox[registInfo.getHabitGoal()];
-		
-		for(int i = 0; i < buttons.length; i++) {
-			JCheckBox box = new JCheckBox((i+1)+"회");
-			box.setFont(new Font("D2Coding",Font.PLAIN,15));
-			buttons[i] = box;
-			habitCheck.add(buttons[i]);
-		}
-		
-		//체크 횟수 기록
-		for(int i = 0; i < buttons.length; i++ ) {
-//			checkcount = new HashMap<>();
-			buttons[i].addItemListener(new ItemListener() {
-				@Override
-				public void itemStateChanged(ItemEvent e) {
-					checkCount = 0;
-					for(int i = 0; i < buttons.length; i++) {
-						if(buttons[i].isSelected()) {
-//							checkcount.put(i,buttons[i].getText());
-							checkCount++;
-						}
-					}
+		//횟수표시 및 증가버튼
+		JLabel habitCount = new JLabel("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : 0회      ");
+		habitCount.setFont(new Font("D2Coding", Font.BOLD, 20));
+		habitCheck.add(habitCount);
+		JButton doIt = new JButton("실시");
+		habitCheck.add(doIt);
+		habitTop.add(habitCheck);
+		doIt.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				if(checkCount == registInfo.getHabitGoal()) {
+					JOptionPane.showMessageDialog(mf, "최대치입니다.");
+				} else {
+					checkCount++;
+					habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+checkCount + "회      ");
 				}
-			});
-		}
+			}
+		});
+//		habitCheck.setBounds(220,0,550,50);
+		
+//		JButton doButton = new JButton("1회실행");
+//		doButton.setLocation(400,0);
+//		habitCheck.add(doButton);
+		
+		
+//		//체크박스 생성
+//		JCheckBox[] buttons = new JCheckBox[registInfo.getHabitGoal()];
+//		
+//		for(int i = 0; i < buttons.length; i++) {
+//			JCheckBox box = new JCheckBox((i+1)+"회");
+//			box.setFont(new Font("D2Coding",Font.PLAIN,15));
+//			buttons[i] = box;
+//			habitCheck.add(buttons[i]);
+//		}
+//		
+//		//체크 횟수 기록
+//		for(int i = 0; i < buttons.length; i++ ) {
+////			checkcount = new HashMap<>();
+//			buttons[i].addItemListener(new ItemListener() {
+//				@Override
+//				public void itemStateChanged(ItemEvent e) {
+//					checkCount = 0;
+//					for(int i = 0; i < buttons.length; i++) {
+//						if(buttons[i].isSelected()) {
+////							checkcount.put(i,buttons[i].getText());
+//							checkCount++;
+//						}
+//					}
+//				}
+//			});
+//		}
 		
 		
 
@@ -120,7 +145,6 @@ public class CheckRecordView extends JFrame{
 		JButton recordButton = new JButton("저장");
 
 		recordButton.setBounds(823,128, 60, 30);
-		
 
 		recordButton.addActionListener(/**
 		 * @author user
@@ -146,10 +170,10 @@ public class CheckRecordView extends JFrame{
 					checkRecord.setCheck(checkCount);
 					int result = habitInfoController.dateSelectController(checkRecord);
 					if(result==0){
-						habitInfoController.insertTimerController(checkRecord);
+						habitInfoController.insertCheckController(checkRecord);
 						JOptionPane.showMessageDialog(mf, "기록등록 성공");
 					} else {
-						habitInfoController.updateTimerController(checkRecord);
+						habitInfoController.updateCheckController(checkRecord);
 						JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
 					}
 				}
@@ -157,9 +181,9 @@ public class CheckRecordView extends JFrame{
 		});
 		
 		
-		this.add(recordButton);
+		habitTop.add(recordButton);
 		
-		habitTop.add(habitCheck);
+		
 		
 		//달력
 		JPanel calendarPanel = new JPanel();
