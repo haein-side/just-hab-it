@@ -159,12 +159,12 @@ public class MyPage extends JFrame {
             		myUser.setUserEmail(myUser_email.getText());
             		myUser.setUserPwd(myUser_pwd.getText());
             		
-            		String result = userController.updateUser(myUser)
+            		String result = userController.updateUser(myUser);
             		
-            		switch(result) {
-            		case "" : 
-            		
-            		}
+//            		switch(result) {
+//            		case "" : 
+//            		
+//            		}
             		
             	}else {
             		JOptionPane.showMessageDialog(myPage, "가입시 입력한 PIN을 입력해주세요");

@@ -76,7 +76,7 @@ public class UserController {
 
 	public String updateUser(UserDTO myUser) {
 
-		String result = ""
+		String result = "";
 		
 		/* 시스템 계정 수정을 못하게 막는다. */
 		if(myUser.getUserId() < 10) {
