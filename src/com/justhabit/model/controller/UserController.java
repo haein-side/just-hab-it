@@ -78,21 +78,36 @@ public class UserController {
 
 		String result = "";
 		
-		/* 시스템 계정 수정을 못하게 막는다. */
-		if(myUser.getUserId() < 10) {
-			result = "시스템계정은 수정할 수 없습니다.";
-		}
-		
 		/* 유저가 입력한 값 유효성 검사 */
 		
-		// 1. username 중복인지 확인 -> 위에 만든 userIdCheck() 사용
+		// 1. 시스템 계정 수정을 못하게 막는다. 
+		if(myUser.getUserId() < 10) {
+			result = "시스템계정은 수정할 수 없습니다";
+		}
+		
+		// 2. 입력값이 빈값인지 체크.
+		else if(myUser.getUserName().trim().equals("") || myUser.getUserPwd().trim().equals("")
+				|| myUser.getUserEmail().trim().equals("")) {
+			result = "빈칸을 모두 채워주세요";
+		}
+
+		// 3. username 중복인지 확인 -> 위에 만든 userIdCheck() 사용
+		else if(!userService.userIdCheck(myUser.getUserName())) {
+			result = "입력한 아이디가 이미 존재하는 아이디입니다";
+		}
+		
+		// 4. 회원정보 수정 
+		else {
+			result = userService.userUpdate(myUser);
+		}
 		
 		
 		
 		
 		
 		
-		return "";
+		
+		return result;
 	}
 
 }

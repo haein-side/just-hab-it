@@ -124,7 +124,17 @@ WHERE USER_ID = ?
 
 
    </entry>
-
+   
+   <entry key="updateUser">
+       UPDATE hbt_user 
+          SET 
+              user_name = ?
+            , user_pwd = ?
+            , user_email = ?
+        WHERE user_id = ?
+   
+   </entry>
+   
    <entry key="insertAllHabbit">
        INSERT
    		 INTO HABBITADD (

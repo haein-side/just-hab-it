@@ -36,7 +36,7 @@ public class FirstFrame {
    private Image ic_logo = new ImageIcon("image/nike-logo-png-21194.png").getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH);
    private JTextField txtUsername;
    private JPasswordField txtPassword;
-      
+   
    private int x, y;
    
    public static void main(String[] args) {

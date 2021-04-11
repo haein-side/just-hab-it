@@ -168,6 +168,33 @@ private Properties prop = new Properties();
 		return result == 0? false : true;
 	}
 
+	public boolean updateUser(Connection con, UserDTO myUser) {
+		
+		PreparedStatement psmt = null;
+		
+		int result = 0;
+		
+		String query = prop.getProperty("updateUser");
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setString(1, myUser.getUserName());
+			psmt.setString(2, myUser.getUserPwd());
+			psmt.setString(3, myUser.getUserEmail());
+			psmt.setInt(4, myUser.getUserId());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		
+		
+		return result == 0 ? false: true;
+	}
+
 	
 
 	
