@@ -315,7 +315,7 @@ public class FirstFrame {
          email_label.setBounds(229, 150, 250, 14);
          signup.add(email_label);
          
-         JLabel pin_label = new JLabel("PIN");
+         JLabel pin_label = new JLabel("PIN(4digits)");
          pin_label.setForeground(Color.WHITE);
          pin_label.setFont(new Font("Tahoma", Font.BOLD, 16));
          pin_label.setBounds(229, 185, 250, 14);

@@ -94,7 +94,7 @@ public class HaeinDAO {
 					habit.setHabitName(rset.getString("HABIT_NAME"));
 					habit.setHabitType(rset.getString("HABIT_TYPE"));
 					habit.setHabitDays(rset.getString("HABIT_DAYS"));
-					
+					habit.setHabitGoal(rset.getInt("HABIT_GOAL"));
 					allhabitList.add(habit);
 					
 				}
