@@ -10,6 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -20,8 +21,8 @@ import javax.swing.JTextArea;
 
 import com.justhabit.model.controller.HaeSeungController;
 import com.justhabit.model.controller.PanelChangeControl;
-import com.justhabit.model.dto.HaeseungRecordDTO;
 import com.justhabit.model.dto.HaeseungMonthTotalDTO;
+import com.justhabit.model.dto.HaeseungRecordDTO;
 import com.justhabit.model.dto.HaesungInfoDTO;
 
 public class CheckRecordView extends JFrame{
@@ -149,33 +150,63 @@ public class CheckRecordView extends JFrame{
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
+		
+		
+		
+		
 		JButton[] dayButton = new JButton[calArr.size()]; 
 		for(int i = 0; i < calArr.size();i++) {
-			
+			String CalenderDate = "";
 			if(i<9) {
-				
-				dayButton[i] = new JButton("0"+calArr.get(i));			
+				CalenderDate ="0"+calArr.get(i);
+				dayButton[i] = new JButton(CalenderDate);			
 				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
 				dayButton[i].setVerticalAlignment(JLabel.CENTER);
 				dayButton[i].setBackground(Color.white);
 				calendar.add(dayButton[i]);
 			} else {
-				
-				dayButton[i] = new JButton(calArr.get(i)+"");			
+				CalenderDate = calArr.get(i)+"";
+				dayButton[i] = new JButton(CalenderDate);			
 				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
 				dayButton[i].setVerticalAlignment(JLabel.CENTER);
 				dayButton[i].setBackground(Color.white);
 				calendar.add(dayButton[i]);
 			}
 			
-			if(dayButton[i].getText().equals(today)) {
-				dayButton[i].setBackground(Color.yellow);
-			} else {
+			
+			//TODO 타입에 따라 쿼리문 다르게 출력해보기
+			if(checkRecord == null) {
+				dayButton[i].setBackground(Color.white);
+			} else if(checkRecord.getCheck() == checkRecord.getHabitGoal()) {
 				dayButton[i].setBackground(Color.green);
+			} else {
+				dayButton[i].setBackground(Color.yellow);
 			}
-			
-			
 		}
+		
+		//달성 여부에 따라 신호등 만들기
+		
+		checkRecord.setHabitId(1);
+		checkRecord.setRecordType("a");
+		List<HaeseungRecordDTO> recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
+		SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
+		String checkYearMonth = yearMonth.format(todayDate);
+		String searchDate =  "";
+//		for(int i = 0; i < recordAndGoalList.size(); i++) {
+//			
+//			if(searchDate.equals(recordAndGoalList.get(j).getDoDate())) {
+//				int goal = recordAndGoalList.get(j).getHabitGoal();
+//				int record = recordAndGoalList.get(j).getCheck();
+//				
+//				if(goal == record) {
+//					dayButton[i].setBackground(Color.green);
+//				} else if(record > 0 ){
+//					dayButton[i].setBackground(Color.yellow);
+//				}
+//			}
+//		}
+		
+		
 		calendarPanel.add(calendar);
 		
 		//문구 표시
@@ -204,6 +235,7 @@ public class CheckRecordView extends JFrame{
 		recordButton.addActionListener(/**
 		 * @author user
 		 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
+		 * total 출력 문구 바뀜
 		 */
 			new ActionListener() {
 			
@@ -216,7 +248,7 @@ public class CheckRecordView extends JFrame{
 						JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
 					} else {
 						
-							//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
+						//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
 						checkRecord.setUserId(registInfo.getUserID());  //유저아이디
 						checkRecord.setHabitId(registInfo.getHabitID()); // 습관아이디
 						checkRecord.setCheck(checkCount); // 체크횟수

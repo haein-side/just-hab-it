@@ -116,6 +116,24 @@
             , SUM(COUNT_CHECK)
          FROM HBT_CHECK
         WHERE SUBSTR(DO_DATE,4,2) = ?
-          AND HABIT_ID =?
+          AND HABIT_ID = ?
+   </entry>
+   <entry key = "selectTotalTimerCheck">
+       SELECT
+              COUNT(*)
+            , SUM(TIME_RECORD)
+         FROM HBT_TIMER
+        WHERE SUBSTR(DO_DATE,4,2) = ? 
+          AND HABIT_ID = ?    	
+   </entry>
+   <entry key="selectCheckGoalRecord">
+       SELECT 
+       DO_DATE
+     , COUNT_CHECK
+     , HABIT_GOAL
+  FROM HBT_CHECK C
+  JOIN HBT_REGISTER R ON (C.HABIT_ID = R.HABIT_ID)
+ WHERE C.HABIT_ID = ?
+ ORDER BY DO_DATE
    </entry>
 </properties>

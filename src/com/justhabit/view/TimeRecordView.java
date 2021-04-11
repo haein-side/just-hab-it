@@ -21,6 +21,7 @@ import javax.swing.JTextArea;
 
 import com.justhabit.model.controller.HaeSeungController;
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.dto.HaeseungMonthTotalDTO;
 import com.justhabit.model.dto.HaeseungRecordDTO;
 import com.justhabit.model.dto.HaesungInfoDTO;
 
@@ -33,6 +34,7 @@ public class TimeRecordView extends JFrame{
 	private HaeSeungController habitInfoController = new HaeSeungController();
 	private HaeseungRecordDTO timerRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
 	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
+	private HaeseungMonthTotalDTO totalRecord = new HaeseungMonthTotalDTO();
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
 	private int totalDate =0; //습관실시 일수
@@ -205,7 +207,16 @@ public class TimeRecordView extends JFrame{
 		JTextArea info = new JTextArea();
 		info.setBounds(10,10,400,320);
 		info.setFont(new Font("D2Coding",Font.PLAIN,20));
-		info.setText("여기에 \n \n어떻게 \n \n넣을것인가..");
+		
+		//출력할정보를 검색
+		totalRecord.setHabitId(registInfo.getHabitID());
+		totalRecord.setTodayMonth(thisMonth);
+		totalRecord = habitInfoController.monthTimerTotalController(totalRecord);
+		//습관 실시한 일수
+		totalDate = totalRecord.getDateCount();
+		//습관 총 횟수
+		totalTimer = totalRecord.getRecordSum();
+		info.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 총시간 : " + totalTimer + "시간");
 		habitInfo.add(info);
 		
 		//저장 버튼 
@@ -215,6 +226,7 @@ public class TimeRecordView extends JFrame{
 		recordButton.addActionListener(/**
 				 * @author user
 				 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
+				 * total 출력 문구 바뀜
 				 */
 				new ActionListener() {
 					
@@ -244,6 +256,13 @@ public class TimeRecordView extends JFrame{
 								habitInfoController.updateTimerController(timerRecord);
 								JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
 							}
+							//출력할정보를 검색
+							totalRecord.setHabitId(registInfo.getHabitID());
+							totalRecord.setTodayMonth(thisMonth);
+							totalRecord = habitInfoController.monthTimerTotalController(totalRecord);
+							totalDate = totalRecord.getDateCount();
+							totalTimer = totalRecord.getRecordSum();
+							info.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 총시간 : " + totalTimer + "시간");
 						}
 					}
 				});

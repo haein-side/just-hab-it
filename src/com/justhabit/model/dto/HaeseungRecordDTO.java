@@ -9,18 +9,22 @@ public class HaeseungRecordDTO {
 	private String doDate;
 	private int check;
 	private double timer;
+	private int habitGoal;
+	private String recordType;
 	
 	public HaeseungRecordDTO() {
 		super();
 	}
 
-	public HaeseungRecordDTO(int userId, int habitId, String doDate, int check, double timer) {
+	public HaeseungRecordDTO(int userId, int habitId, String doDate, int check, double timer, int habitGoal, String recordType) {
 		super();
 		this.userId = userId;
 		this.habitId = habitId;
 		this.doDate = doDate;
 		this.check = check;
 		this.timer = timer;
+		this.habitGoal = habitGoal;
+		this.recordType = recordType;
 	}
 
 	public int getUserId() {
@@ -63,11 +67,29 @@ public class HaeseungRecordDTO {
 		this.timer = timer;
 	}
 
+	public int getHabitGoal() {
+		return habitGoal;
+	}
+
+	public void setHabitGoal(int habitGoal) {
+		this.habitGoal = habitGoal;
+	}
+	
+	public String getRecordType() {
+		return recordType;
+	}
+
+	public void setRecordType(String recordType) {
+		this.recordType = recordType;
+	}
+
 	@Override
 	public String toString() {
 		return "HaeseungRecordDTO [userId=" + userId + ", habitId=" + habitId + ", doDate=" + doDate + ", check="
-				+ check + ", timer=" + timer + "]";
+				+ check + ", timer=" + timer + ", habitGoal=" + habitGoal + ", recordType=" + recordType + "]";
 	}
+
+	
 	
 	
 	
