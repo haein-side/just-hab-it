@@ -63,7 +63,7 @@ public class TimeRecordView extends JFrame{
 		//등록된 습관정보 불러오기
 //		registInfo.setHabitID(MainPage.userhabitid);
 		//TODO 삭제예정: 테스트용
-		registInfo.setHabitID(2); 
+		registInfo.setHabitID(MainPage.userhabitid); 
 		registInfo = habitInfoController.selectHabitInfo(registInfo);
 		//습관상단바
 		JPanel habitTop = new JPanel();
@@ -233,7 +233,11 @@ public class TimeRecordView extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-						double hbtTimer = timerPanel.count / (60*60*100)*100;
+						double div = 60*60*100;
+						double hbtTimer = timerPanel.t / div;
+						double test = timerPanel.t % div;
+						System.out.println(hbtTimer);
+						System.out.println(test);
 						if(hbtTimer == 0) {
 							JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
 						} else {

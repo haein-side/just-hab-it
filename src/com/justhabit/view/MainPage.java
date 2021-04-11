@@ -4,7 +4,7 @@ import java.awt.Color;
 import java.awt.FileDialog;
 import java.awt.Font;
 import java.awt.GridLayout;
-
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.io.BufferedReader;
@@ -16,6 +16,7 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -42,14 +43,21 @@ public class MainPage extends JFrame{
 		this.setLayout(null);
 		this.setSize(900, 700);
 		
+		
+		
+		
 		this.add(new TopPanel());
 		
 		//가운데 패널
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
-		center.setBackground(new Color(246,245,245));
+//		center.setBackground(new Color(246,245,245));
 		
+		
+//		ImageIcon icon = new ImageIcon(imgURL); 
+//		JLabel thumb = new JLabel();
+//		thumb.setIcon(icon);
 		
 		//습관 버튼
 //		JButton first = new JButton("습관 1");
@@ -116,21 +124,26 @@ public class MainPage extends JFrame{
 				JButton box = new JButton();
 				box.setSize(100, 80);
 				if (h == 0) {
-					box.setLocation(400, 180);	
+					box.setLocation(400, 180);
+					box.setText(allhabitList.get(h).getHabitName());
 				} else if(h % 3 == 0) {
-					box.setLocation(400, 180 + 80 * (h/3*2));		
+					box.setLocation(400, 180 + 80 * (h/3*2));	
+					box.setText(allhabitList.get(h-1).getHabitName());
 				} else if(h % 3 == 1 ) {
 					box.setLocation(550, 180 + 80 * (h-1)/3*2);
+					box.setText(allhabitList.get(h-1).getHabitName());
 				} else if(h % 3 == 2 ) {
 					box.setLocation(700, 180 + 80 * (h-2)/3*2);
 				}
+				int i = h;
 				box.setText(allhabitList.get(h).getHabitName());
 				box.addActionListener(new ActionListener() {
+					
 			          
 			          @Override
 			          public void actionPerformed(ActionEvent e) {
-			        	  userhabitid = allhabitList.get(h-1).getHabitID();
-			        	  if(allhabitList.get(h-1).getHabitType().equals("C")) {
+			        	  userhabitid = allhabitList.get(i).getHabitID();
+			        	  if(allhabitList.get(i).getHabitType().equals("C")) {
 			        		  PanelChangeControl.changeFrame(mf, new CheckRecordView());
 			        		  
 			        	  } else {
@@ -242,6 +255,11 @@ public class MainPage extends JFrame{
 	    
 	    
 	    
+		Image level = new ImageIcon("image/resizedbackground1.jpg").getImage().getScaledInstance(900, 700, 0);
+		JLabel levelImg = new JLabel(new ImageIcon(level));
+//		levelImg.setIcon(level);
+		levelImg.setBounds(0,0,900,700);
+		center.add(levelImg);
 		
 		
 		
@@ -314,25 +332,25 @@ public class MainPage extends JFrame{
 	}
 		
 	
-//	public void displayHabit(){
-////		int userid = 1;
-//		
-//		FirstFrame.loggedUserID = 1;
-//		
-//		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
-//		JButton[] habitButtons = new JButton[allhabitList.size()];
-//		for(int i = 0; i < allhabitList.size(); i++) {
-//				JButton box = new JButton();
-//				box.setSize(100, 80);
-//				box.setLocation(150* + 100*(i-1), 300);
-//				box.setText(allhabitList.get(i).getHabitName());
-//				this.add(box);
-//			
-//		}
-//		for(int i = 0; i < allhabitList.size(); i++) {
-//			System.out.println(allhabitList.get(i).getHabitID() + "/" + allhabitList.get(i).getHabitName() );
-//		}
-//	}
+	public void displayHabit(){
+//		int userid = 1;
+		
+		FirstFrame.loggedUserID = 1;
+		
+		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
+		JButton[] habitButtons = new JButton[allhabitList.size()];
+		for(int i = 0; i < allhabitList.size(); i++) {
+				JButton box = new JButton();
+				box.setSize(100, 80);
+				box.setLocation(150* + 100*(i-1), 300);
+				box.setText(allhabitList.get(i).getHabitName());
+				this.add(box);
+			
+		}
+		for(int i = 0; i < allhabitList.size(); i++) {
+			System.out.println(allhabitList.get(i).getHabitID() + "/" + allhabitList.get(i).getHabitName() );
+		}
+	}
 	
 	}
 	

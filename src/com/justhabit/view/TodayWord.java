@@ -57,7 +57,6 @@ public class TodayWord extends JFrame {
 		
 		JTextPane textfield = new JTextPane();
 
-		
 		textfield.setText(words[(int)(Math.random()*7)]);
 		
 		SimpleAttributeSet aSet = new SimpleAttributeSet(); 
