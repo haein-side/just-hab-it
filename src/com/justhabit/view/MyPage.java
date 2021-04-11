@@ -13,6 +13,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 
@@ -77,7 +78,10 @@ public class MyPage extends JFrame {
 		
 //		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
 		//TODO: 테스트용 지우고 로그인된 유저로 정보가져오기.
-		UserDTO myUser = userController.userInfo(1); // test
+		UserDTO myUser = userController.userInfo(11); // test
+		
+		
+		
 		String pwd = "";
 		for(int i = 0; i < myUser.getUserPwd().length(); i++) {
 			if(i == 0)
@@ -147,6 +151,26 @@ public class MyPage extends JFrame {
             	myUser_email.setBackground(Color.LIGHT_GRAY);
         		myUser_pwd.setEditable(true);
             	myUser_pwd.setBackground(Color.LIGHT_GRAY);
+            	
+            	
+            	if(myUser_pin.getText().equals(String.valueOf(myUser.getUserPin()))) {
+            		
+            		myUser.setUserName(myUser_name.getText());
+            		myUser.setUserEmail(myUser_email.getText());
+            		myUser.setUserPwd(myUser_pwd.getText());
+            		
+            		String result = userController.updateUser(myUser)
+            		
+            		switch(result) {
+            		case "" : 
+            		
+            		}
+            		
+            	}else {
+            		JOptionPane.showMessageDialog(myPage, "가입시 입력한 PIN을 입력해주세요");
+      			  	myUser_pin.setText("");
+            	}
+    
 
             	instruction.setText("<html>회원정보 <font color=red>수정</font>를 위한 <font color=blue>PIN</font>을 입력해주세요 :)</html>");
             	instruction.setVisible(true);
@@ -160,6 +184,7 @@ public class MyPage extends JFrame {
             }
          });
 		
+//		UserDTO myUser = userController.userInfo(1); // test
 
 		JButton exit = new JButton("탈퇴하기");
 		exit.setSize(180,40);
@@ -173,8 +198,19 @@ public class MyPage extends JFrame {
             	instruction.setVisible(true);
 
         		myUser_pin.setEditable(true);
-        		myUser_pin.setText("");
             	myUser_pin.setBackground(Color.GRAY);
+            	
+            	if(myUser_pin.getText().equals(String.valueOf(myUser.getUserPin()))) {
+            		if(userController.deleteUser(myUser))
+                		JOptionPane.showMessageDialog(myPage, myUser.getUserName() + "님의 탈퇴가 완료 되었습니다");
+            			
+            		else
+                		JOptionPane.showMessageDialog(myPage, myUser.getUserName() + "님의 탈퇴가 실패했습니다");
+            	} else {
+      			  	JOptionPane.showMessageDialog(myPage, "가입시 입력한 PIN을 입력해주세요");
+      			  	myUser_pin.setText("");
+
+            	}
             }
          });
 		

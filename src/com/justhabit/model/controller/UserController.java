@@ -64,4 +64,35 @@ public class UserController {
 		return userService.userInfo(loggedUserID);
 	}
 
+	public boolean deleteUser(UserDTO myUser) {
+		
+		/* 시스템 계정 삭제를 못하게 막는다. */
+		if(myUser.getUserId() < 10) {
+			return false;
+		}
+		
+		return userService.deleteUser(myUser.getUserId());
+	}
+
+	public String updateUser(UserDTO myUser) {
+
+		String result = ""
+		
+		/* 시스템 계정 수정을 못하게 막는다. */
+		if(myUser.getUserId() < 10) {
+			result = "시스템계정은 수정할 수 없습니다.";
+		}
+		
+		/* 유저가 입력한 값 유효성 검사 */
+		
+		// 1. username 중복인지 확인 -> 위에 만든 userIdCheck() 사용
+		
+		
+		
+		
+		
+		
+		return "";
+	}
+
 }

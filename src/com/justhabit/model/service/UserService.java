@@ -60,4 +60,15 @@ public class UserService {
 		return user;
 	}
 
+	public boolean deleteUser(int userId) {
+		
+		Connection con = getConnection();
+		
+		boolean isDeleted = userDAO.deleteUser(con, userId);
+		
+		close(con);
+		
+		return isDeleted;
+	}
+
 }

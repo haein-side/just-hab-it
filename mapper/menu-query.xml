@@ -110,4 +110,9 @@
         WHERE HABIT_ID = ?
           AND DO_DATE = ?
    </entry>
+   <entry key="deleteUser">
+       DELETE
+         FROM hbt_user
+        WHERE user_id = ?
+   </entry>
 </properties>
