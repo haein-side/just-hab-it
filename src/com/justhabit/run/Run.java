@@ -16,7 +16,7 @@ public class Run {
 
 	public static void main(String[] args) {
 //		new LoginFrame().initialize();
-//		new MainView();
+		new MainView();
 		
 		/* 연결됐는지 확인하는 메소드 */
 //		Connection con = getConnection();
@@ -26,7 +26,7 @@ public class Run {
 //		MainPage mainpage = new MainPage();
 //		mainpage.displayHabit();
 		
-		new MyPage();
+//		new MyPage();
 		
 	}
 }
