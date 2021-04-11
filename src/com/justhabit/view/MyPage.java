@@ -65,7 +65,7 @@ public class MyPage extends JFrame {
 	    label_username.setBounds(400, 60, 150, 150);
 	    label_email.setBounds(400, 100, 150, 150);
 	    label_password.setBounds(400, 140, 150, 150);
-	    label_pin.setBounds(400, 230, 150, 150);
+	    label_pin.setBounds(550, 270, 150, 150);
 //		levelExp.setBounds(130, 290, 150, 150);
 		
 		userPanel.add(label_username);
@@ -124,10 +124,10 @@ public class MyPage extends JFrame {
 		
 		
 		
-		JLabel instruction  = new JLabel("testdddddddddddd");
-		instruction.setFont(new Font("a디딤돌",Font.BOLD,40));
-		instruction.setVisible(true);
-		instruction.setBounds(600, 270, 200, 40);
+		JLabel instruction  = new JLabel();
+		instruction.setFont(new Font("a디딤돌",Font.ITALIC,21));
+		instruction.setVisible(false);
+		instruction.setBounds(400, 290, 390, 20);
 		userPanel.add(instruction);
 		
 		
@@ -148,6 +148,8 @@ public class MyPage extends JFrame {
         		myUser_pwd.setEditable(true);
             	myUser_pwd.setBackground(Color.LIGHT_GRAY);
 
+            	instruction.setText("<html>회원정보 <font color=red>수정</font>를 위한 <font color=blue>PIN</font>을 입력해주세요 :)</html>");
+            	instruction.setVisible(true);
             	
         		myUser_pin.setEditable(true);
         		myUser_pin.setText("");
@@ -166,7 +168,13 @@ public class MyPage extends JFrame {
 		exit.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-//            	test1.setEditable(true);            	
+            	
+            	instruction.setText("<html>회원 <font color=red>탈퇴</font>를 위한 <font color=blue>PIN</font>을 입력해주세요 :(</html>");
+            	instruction.setVisible(true);
+
+        		myUser_pin.setEditable(true);
+        		myUser_pin.setText("");
+            	myUser_pin.setBackground(Color.GRAY);
             }
          });
 		
