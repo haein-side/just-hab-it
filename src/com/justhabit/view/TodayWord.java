@@ -70,7 +70,7 @@ public class TodayWord extends JFrame {
 		StyleConstants.setFontSize(bSet, 24);
 		
 		textfield.setEditable(false);
-		textfield.setLocation(200,220);
+		textfield.setLocation(200,300);
 		textfield.setSize(500,200);
 		StyledDocument doc = textfield.getStyledDocument();
         doc.setCharacterAttributes(105, doc.getLength()-105, aSet, false);

@@ -70,7 +70,7 @@ public class HaeinDAO {
 //		return allhabitList;
 //	}
 
-	public List<AllHabitDTO> selectAllHabitBy(Connection con, int userid) {
+	public List<AllHabitDTO> selectAllHabitBy(Connection con, int loggedUserID) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
@@ -81,7 +81,7 @@ public class HaeinDAO {
 		
 			try {
 				pstmt = con.prepareStatement(query);
-//				pstmt.setInt(1, userid);
+				pstmt.setInt(1, loggedUserID);
 				
 				rset = pstmt.executeQuery();
 				
@@ -93,6 +93,7 @@ public class HaeinDAO {
 					habit.setHabitID(rset.getInt("HABIT_ID"));
 					habit.setHabitName(rset.getString("HABIT_NAME"));
 					habit.setHabitType(rset.getString("HABIT_TYPE"));
+					habit.setHabitDays(rset.getString("HABIT_DAYS"));
 					
 					allhabitList.add(habit);
 					
