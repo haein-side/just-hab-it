@@ -30,7 +30,7 @@ public class HabbitAddDAO {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		
-		String query = prop.getProperty("selectAllHabbit");
+		String query = prop.getProperty("insertAllHabbit");
 		
 //		try {
 //			pstmt = con.prepareStatement(query);

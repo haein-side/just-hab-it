@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.justhabit.model.dto.AllHabitDTO;
 import com.justhabit.model.service.HaeinService;
+import com.justhabit.view.FirstFrame;
 
 public class HaeinController {
 
@@ -13,9 +14,9 @@ public class HaeinController {
 //		return null;
 //	}
 
-	public List<AllHabitDTO> selectAllHabitBy(int userid) {
+	public List<AllHabitDTO> selectAllHabitBy(int loggedUserID) {
 		
-		return habitService.selectAllHabitBy(userid);
+		return habitService.selectAllHabitBy(loggedUserID);
 		
 	}
 

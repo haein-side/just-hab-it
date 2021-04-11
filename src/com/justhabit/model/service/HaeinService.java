@@ -13,11 +13,11 @@ public class HaeinService {
 	
 	private HaeinDAO habitDAO = new HaeinDAO();
 
-	public List<AllHabitDTO> selectAllHabitBy(int userid) {
+	public List<AllHabitDTO> selectAllHabitBy(int loggedUserID) {
 
 		Connection con = getConnection();
 		
-		List<AllHabitDTO> allhabitList = habitDAO.selectAllHabitBy(con, userid);
+		List<AllHabitDTO> allhabitList = habitDAO.selectAllHabitBy(con, loggedUserID);
 		
 		close(con);
 		
