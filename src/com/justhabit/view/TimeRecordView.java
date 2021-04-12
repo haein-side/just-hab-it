@@ -233,7 +233,11 @@ public class TimeRecordView extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-						double hbtTimer = timerPanel.count / (60*60*100)*100;
+						double div = 60*60*100;
+						double hbtTimer = timerPanel.t / div;
+						double test = timerPanel.t % div;
+						System.out.println(hbtTimer);
+						System.out.println(test);
 						if(hbtTimer == 0) {
 							JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
 						} else {

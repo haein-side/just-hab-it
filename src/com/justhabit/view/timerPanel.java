@@ -35,9 +35,9 @@ public class timerPanel extends JPanel{
 	int mm;
 	int ss;
 	int ms;
-	int t;
+	static int t;
 	
-	static double count = 0; //시간 카운트용
+//	static double count = 0; //시간 카운트용
 	
 	public timerPanel() {
 		//타이머화면
@@ -126,7 +126,7 @@ public class timerPanel extends JPanel{
 								hbtSec.setText(String.format("%02d", ss));
 								hbtMillsec.setText(String.format("%02d", ms));
 								t++;
-								count++;
+//								count++;
 							} catch(InterruptedException e1) {
 							}
 						}
@@ -150,10 +150,11 @@ public class timerPanel extends JPanel{
 				hbtMin.setText("00");
 				hbtSec.setText("00");
 				hbtMillsec.setText("00");
-				count = 0;
+//				count = 0;
 				t=0;
 				
-			}System.out.println(count);
+			}
+//			System.out.println(count);
 		}
 	}
 }

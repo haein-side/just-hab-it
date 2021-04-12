@@ -54,7 +54,7 @@ public class UserService {
 		
 		UserDTO user = userDAO.myUser(con, loggedUserID);
 		
-		
+		close(con);
 		
 		
 		return user;
@@ -69,6 +69,17 @@ public class UserService {
 		close(con);
 		
 		return isDeleted;
+	}
+
+	public String userUpdate(UserDTO myUser) {
+
+		Connection con = getConnection();
+		
+		boolean isUpdated = userDAO.updateUser(con, myUser);
+		
+		close(con);
+		
+		return isUpdated ? "성공" : "업데이트 실패하였습니다";
 	}
 
 }
