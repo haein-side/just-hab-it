@@ -43,6 +43,7 @@ public class TimeRecordView extends JFrame{
 	JFrame mf = this;
 	int test = 5;
 	
+	
 	public TimeRecordView() {
 		
 		this.setLayout(null);
