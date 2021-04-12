@@ -71,7 +71,8 @@
        , ?
        , ?
        , ?
-       , ? 
+       , ?
+       , default
        )
    </entry>
    <entry key="checkUsername">
@@ -99,7 +100,10 @@
             , user_pwd
             , user_email
             , user_pin
+            , level_num
+            , level_image
          FROM admin.hbt_user
+         JOIN admin.accom_level using(level_num)
         WHERE user_id = ?
    </entry>
    <entry key="updateTimer">

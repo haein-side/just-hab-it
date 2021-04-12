@@ -60,7 +60,7 @@ public class MyPage extends JFrame {
 		label_email.setFont(new Font("a디딤돌",Font.BOLD,20));
 		label_password.setFont(new Font("a디딤돌",Font.BOLD,20));
 		label_pin.setFont(new Font("a디딤돌",Font.BOLD,20));
-	    levelExp.setFont(new Font("a디딤돌",Font.BOLD,20));
+	    levelExp.setFont(new Font("a디딤돌",Font.BOLD,15));
 	    
 	    
 	    label_username.setBounds(400, 60, 150, 150);
@@ -104,16 +104,23 @@ public class MyPage extends JFrame {
 		JTextField myUser_email = new JTextField(myUser.getUserEmail());
 		JTextField myUser_pwd  = new JTextField(pwd);
 		JTextField myUser_pin = new JTextField(pin);
+		
+		JLabel myUser_level = new JLabel("<html><font color=green>"+ Integer.valueOf(myUser.getUserLevel()).toString()+"</font></html>");
 		myUser_name.setFont(new Font("a디딤돌",Font.BOLD,20));
 		myUser_email.setFont(new Font("a디딤돌",Font.BOLD,20));
 		myUser_pwd.setFont(new Font("a디딤돌",Font.BOLD,20));
 		myUser_pin.setFont(new Font("a디딤돌",Font.BOLD,20));
+		myUser_level.setFont(new Font("a디딤돌",Font.ITALIC,20));
+//		myUser_level.setBackground(Color.YELLOW);
+
 		
 		
 		myUser_name.setBounds(600, 120, 200, 30);
 		myUser_email.setBounds(600, 160, 200, 30);
 		myUser_pwd.setBounds(600, 200, 200, 30);
 		myUser_pin.setBounds(600, 330, 200, 30);
+		myUser_level.setBounds(200, 270, 150, 150);
+
 		
 		myUser_name.setEditable(false);
 		myUser_email.setEditable(false);
@@ -125,7 +132,8 @@ public class MyPage extends JFrame {
 		userPanel.add(myUser_email);
 		userPanel.add(myUser_pwd);
 		userPanel.add(myUser_pin);
-		
+		userPanel.add(myUser_level);
+
 		
 		
 		JLabel instruction  = new JLabel();
@@ -218,7 +226,7 @@ public class MyPage extends JFrame {
          });
 		
 		
-		Image level = new ImageIcon("image/5렙계란.PNG").getImage().getScaledInstance(150, 150, 0);
+		Image level = new ImageIcon("image/" + myUser.getUserImage()).getImage().getScaledInstance(130, 130, 0);
 		
 		JLabel levelImg = new JLabel(new ImageIcon(level));
 		levelImg.setBounds(80,60,300,300);
