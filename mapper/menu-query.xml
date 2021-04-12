@@ -4,13 +4,13 @@
     
     <entry key="selectAllHabit">    	 
     	 SELECT             
-      HABIT_ID
-    , HABIT_NAME
-    , HABIT_TYPE
-    , HABIT_DAYS
-    , HABIT_GOAL
-  FROM HBT_REGISTER
-WHERE USER_ID = ?
+      habit_id
+    , habit_name
+    , habit_type
+    , habit_days
+    , habit_goal
+  FROM admin.hbt_register
+WHERE user_id = ?
   AND EXISTS (SELECT TO_CHAR(SYSDATE, 'DY')
                 FROM DUAL
               WHERE HABIT_DAYS LIKE '%'|| TO_CHAR(SYSDATE, 'DY')||'%')
@@ -57,7 +57,7 @@ WHERE USER_ID = ?
    <entry key="login">
        SELECT
               user_id
-         FROM hbt_user
+         FROM admin.hbt_user
         WHERE user_name = ?
           AND user_pwd = ?
    </entry>

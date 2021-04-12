@@ -73,5 +73,27 @@ public class JDBC_EC2 {
 		}
 	}
 
+	/* 데이터를 저장을 위한 Connection클래스의 commit()메소드를 이용 */
+	public static void commit(Connection con) {
+		
+		try {
+			if(con != null && !con.isClosed())
+				con.commit();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	/* 데이터의 자동저장을 막기위한 Connection클래스의 rollback()메소드를 이용 */
+	public static void rollback(Connection con) {
+		
+		try {
+			if(con != null && !con.isClosed())
+				con.rollback();	
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+	}
 
 }

@@ -21,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
@@ -115,9 +116,23 @@ public class MainPage extends JFrame{
 //		}
 //		
 		
-	int userid = 1;
+//        // 스크롤
+//        JScrollPane scrollbar = new JScrollPane(middlePanel);
+//        scrollbar.setPreferredSize(new Dimension(685,700));
+//        scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+//        int width = scrollbar.getPreferredSize().width;
+//        int height = scrollbar.getPreferredSize().height;
+//        scrollbar.setBounds(0,100,width,height);
+//        scrollbar.setBorder(pinkborder);
+//        scrollbar.setBackground(Color.pink);
+//        this.getContentPane().add(scrollbar);
 		
-		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(userid);
+//	int userid = 1;
+		
+//		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(userid);
+//		JButton[] habitButtons = new JButton[allhabitList.size()];
+	
+		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
 		JButton[] habitButtons = new JButton[allhabitList.size()];
 		
 		for(h = 0; h < allhabitList.size(); h++) {
@@ -143,7 +158,7 @@ public class MainPage extends JFrame{
 			          @Override
 			          public void actionPerformed(ActionEvent e) {
 			        	  userhabitid = allhabitList.get(i).getHabitID();
-			        	  if(allhabitList.get(i).getHabitType().equals("C")) {
+			        	  if(allhabitList.get(i).getHabitType().equals("c")) {
 			        		  PanelChangeControl.changeFrame(mf, new CheckRecordView());
 			        		  
 			        	  } else {
@@ -332,25 +347,25 @@ public class MainPage extends JFrame{
 	}
 		
 	
-	public void displayHabit(){
-//		int userid = 1;
-		
-		FirstFrame.loggedUserID = 1;
-		
-		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
-		JButton[] habitButtons = new JButton[allhabitList.size()];
-		for(int i = 0; i < allhabitList.size(); i++) {
-				JButton box = new JButton();
-				box.setSize(100, 80);
-				box.setLocation(150* + 100*(i-1), 300);
-				box.setText(allhabitList.get(i).getHabitName());
-				this.add(box);
-			
-		}
-		for(int i = 0; i < allhabitList.size(); i++) {
-			System.out.println(allhabitList.get(i).getHabitID() + "/" + allhabitList.get(i).getHabitName() );
-		}
-	}
+//	public void displayHabit(){
+////		int userid = 1;
+//		
+//		FirstFrame.loggedUserID = 1;
+//		
+//		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
+//		JButton[] habitButtons = new JButton[allhabitList.size()];
+//		for(int i = 0; i < allhabitList.size(); i++) {
+//				JButton box = new JButton();
+//				box.setSize(100, 80);
+//				box.setLocation(150* + 100*(i-1), 300);
+//				box.setText(allhabitList.get(i).getHabitName());
+//				this.add(box);
+//			
+//		}
+//		for(int i = 0; i < allhabitList.size(); i++) {
+//			System.out.println(allhabitList.get(i).getHabitID() + "/" + allhabitList.get(i).getHabitName() );
+//		}
+//	}
 	
 	}
 	
