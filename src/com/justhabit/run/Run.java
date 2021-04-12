@@ -1,6 +1,7 @@
 
 package com.justhabit.run;
 
+import com.justhabit.view.HabbitAdd;
 import com.justhabit.view.MyPage;
 
 public class Run {
@@ -18,7 +19,7 @@ public class Run {
 //		mainpage.displayHabit();
 		
 //		new MyPage();
-//		new HabbitAdd();
+		new HabbitAdd();
 		
 	}
 }
@@ -45,7 +46,7 @@ public class Run {
 
 //		new MainView();
 		
-		new HabbitAdd();
+//		new HabbitAdd();
 		
 		/* 연결됐는지 확인하는 메소드 */
 //		Connection con = getConnection();
@@ -56,6 +57,6 @@ public class Run {
 //		mainpage.displayHabit();
 		
 //		new MyPage();
-		
-	}
-}
+//		
+//	}
+//}

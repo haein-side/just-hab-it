@@ -9,6 +9,7 @@ import com.justhabit.model.service.HabbitAddService;
 
 
 public class HabbitAddController {
+	
 	private HabbitAddService habbitAddService = new HabbitAddService();
 	
 
@@ -41,8 +42,7 @@ public class HabbitAddController {
 //		return null;
 //	}
 
-	public List<HabbitAddDTO> insertAllHabbit(int userID, int habitID, String habitName, String habitType,
-			String habitDays, int habitGoal) {
+	public HabbitAddDTO insertAllHabbit(HabbitAddDTO habitAddDTO) {
 		
 //		HabbitAddDTO test = null;
 //		
@@ -53,11 +53,7 @@ public class HabbitAddController {
 //		String insertAllHabbit = HabbitAddService.insertAllHabbit(allhabitList);
 		
 		
-		return habbitAddService.insertAllHabbit(userID, habitID, habitName, habitType,
-			habitDays, habitGoal);
+		return habbitAddService.insertAllHabbit();
 	}
-
-	
-	
 
 }

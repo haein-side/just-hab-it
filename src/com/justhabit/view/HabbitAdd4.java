@@ -15,12 +15,13 @@ import javax.swing.JPanel;
 import javax.swing.JRadioButton;
 
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.dto.HabbitAddDTO;
 
 public class HabbitAdd4 extends JFrame {
 
 	private HabbitAdd4 habbitAdd4;
 
-   public HabbitAdd4() {
+   public HabbitAdd4(HabbitAddDTO habbit) {
 	   
 	   this.habbitAdd4 = this;
 
@@ -68,19 +69,18 @@ public class HabbitAdd4 extends JFrame {
 		
 		@Override
 		public void actionPerformed(ActionEvent e) {
-			PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd5());
+//			저장은 c아니면 t로 저장되게
+//			HabbitAdd.habbitAddDTO.setHabitType();
 			
+			//if (횟수)
+			PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd5());
+			//else (체크)
+			PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd6());
+
 		}
      });
      
-      	timer.addActionListener(new ActionListener() {
- 		
- 		@Override
- 		public void actionPerformed(ActionEvent e) {
- 			PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd6());
- 			
- 		}
- 	 });
+      
       	
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override

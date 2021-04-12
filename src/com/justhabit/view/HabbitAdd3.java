@@ -4,6 +4,9 @@ import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.swing.JButton;
 import javax.swing.JCheckBox;
@@ -12,10 +15,12 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.dto.HabbitAddDTO;
 
 public class HabbitAdd3 extends JFrame {
 
 	private HabbitAdd3 habbitAdd3;
+	
 	
    public HabbitAdd3() {
 	   
@@ -41,20 +46,20 @@ public class HabbitAdd3 extends JFrame {
        
        JCheckBox jcb[] = new JCheckBox[7];
 
-		jcb[0] = new JCheckBox("월");
+        jcb[0] = new JCheckBox("일");
 		jcb[1] = new JCheckBox("화");
 		jcb[2] = new JCheckBox("수");
 		jcb[3] = new JCheckBox("목");
 		jcb[4] = new JCheckBox("금");
 		jcb[5] = new JCheckBox("토");
 		jcb[6] = new JCheckBox("일");
-	
 		
 		
 
 		for (int i = 0; i < jcb.length; i++) {
 		    checkPanel.add(jcb[i]);
 		}
+		
 		
 		habbitAdd3.add(checkPanel);
 		
@@ -63,15 +68,15 @@ public class HabbitAdd3 extends JFrame {
        jbutton1.setLocation(300, 280);
        habbitAdd3.add(jbutton1);	
        
-      JButton jbutton2 = new JButton("다음");
-      jbutton2.setSize(80,50);
-      jbutton2.setLocation(450, 280);
+       JButton jbutton2 = new JButton("다음");
+       jbutton2.setSize(80,50);
+       jbutton2.setLocation(450, 280);
       habbitAdd3.add(jbutton2);
       	
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-
+            	
             	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd2());
 
             }
@@ -80,9 +85,32 @@ public class HabbitAdd3 extends JFrame {
       	jbutton2.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
-            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4());
+            	//set할때 "월화수"
+            	HabbitAddDTO habbit = new HabbitAddDTO();
+            	habbit.setHabitDays(alist);
+            	for(String a : alist) {
+            		System.out.println(a);
+            	}
+            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4(habbit));
             }
          });
+      	
+      	
+      	jcb[0].addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				// TODO Auto-generated method stub
+				
+				if(jcb[0].isSelected()) {
+					if(!(alist.eueals(jcb[0].getText()))) {
+						
+						alist.add(jcb[0].getText());
+					}
+				}
+			}
+		});
+
       	     
    }
 }

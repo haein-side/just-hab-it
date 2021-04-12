@@ -137,15 +137,17 @@ WHERE USER_ID = ?
    
    <entry key="insertAllHabbit">
        INSERT
-   		 INTO HBT_REGISTER (
-              USER_ID
-            , HABIT_ID
-            , HABIT_NAME
-            , HABIT_TYPE
-            , HABIT_DAYS
-            , HABIT_GOAL
-            )
+   		 INTO hbt_register 
+   		 (
+              user_id
+            , habit_id
+            , habit_name
+            , habit_type
+            , habit_days
+            , habit_goal
+          )
        VALUES (
+       		   ?
              , ?
              , ?
              , ?
