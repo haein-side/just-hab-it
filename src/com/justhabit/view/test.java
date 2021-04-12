@@ -11,16 +11,17 @@ public class test {
 	
 	public static void main(String[] args) {
 		
-		 String MemberId = "gag";
-		 String habitType = "fanla";
-		 int habitDate = 14;
-		 String habitselectDay = "123";
-		 String habitRecord="시간";
-		 String habitRecordNext = "3";
+		 String userID = "gag";
+		 int habitID = 10;
+		 int habitName = 14;
+		 String habitType = "123";
+		 String habitDays="시간";
+		 int habitGoal = 3;
 		
-		 List<HabbitAddDTO> allhabitList = HabbitAddController.selectAllHabbit(MemberId, habitType, habitDate,habitselectDay ,habitRecord, habitRecordNext);
+		 
+		 List<HabbitAddDTO> allhabitList = HabbitAddController.insertAllHabbit(userID, habitID, habitName,habitType ,habitDays, habitGoal);
 		
-		
+		 
 	}
 
 }

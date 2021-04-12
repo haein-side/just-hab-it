@@ -82,19 +82,19 @@ public class MainView extends JFrame{
 
 		
 		
-		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage", "menu3","menu4", "test"};
-		
-		//버튼추가
-		JButton[] menuButton = new JButton[menu.length];
-		for(int i =0; i <menu.length; i++) {
-			
-			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setBackground(Color.pink);
-			botPan.add(menuButton[i]);
-		}
-		
-		
+//		//메뉴목록
+//		String[] menu = {"Main", "습관등록", "mypage", "menu3","menu4", "test"};
+//		
+//		//버튼추가
+//		JButton[] menuButton = new JButton[menu.length];
+//		for(int i =0; i <menu.length; i++) {
+//			
+//			menuButton[i] = new JButton(menu[i]);
+//			menuButton[i].setBackground(Color.pink);
+//			botPan.add(menuButton[i]);
+//		}
+//		
+//		
 //		menuButton[0].addActionListener(new ActionListener() {
 //			
 //			@Override

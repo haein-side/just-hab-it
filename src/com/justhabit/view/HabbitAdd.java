@@ -25,7 +25,7 @@ public class HabbitAdd extends JFrame {
    private HabbitAdd habbitAdd = this;
    
 
-public HabbitAdd() {
+   public HabbitAdd() {
 
 	habbitAdd.setLayout(null);
 	habbitAdd.setSize(900, 462);
@@ -61,7 +61,9 @@ public HabbitAdd() {
   	jbutton2.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
+        	
         	PanelChangeControl.changeFrame(habbitAdd , new HabbitAdd2());
+        	System.out.println(text.getText());
         }
      });
   	

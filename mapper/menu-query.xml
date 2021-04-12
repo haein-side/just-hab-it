@@ -137,22 +137,21 @@ WHERE USER_ID = ?
    
    <entry key="insertAllHabbit">
        INSERT
-   		 INTO HABBITADD (
-              MEMBER_ID
+   		 INTO HBT_REGISTER (
+              USER_ID
+            , HABIT_ID
+            , HABIT_NAME
             , HABIT_TYPE
-            , HABIT_DATE
-            , HABIT_SELECTDAY
-            , HABIT_RECORD
-            , HABIT_RECORD_NEXT
+            , HABIT_DAYS
+            , HABIT_GOAL
             )
        VALUES (
-               ?
              , ?
              , ?
              , ?
              , ?
              , ?
-)
+		)
 	</entry>
    <entry key="selectTotalCheck">
        SELECT
