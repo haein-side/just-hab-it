@@ -6,6 +6,8 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 
@@ -119,7 +121,7 @@ public class MyPage extends JFrame {
 		myUser_email.setBounds(600, 160, 200, 30);
 		myUser_pwd.setBounds(600, 200, 200, 30);
 		myUser_pin.setBounds(600, 330, 200, 30);
-		myUser_level.setBounds(200, 270, 150, 150);
+		myUser_level.setBounds(220, 270, 150, 150);
 
 		
 		myUser_name.setEditable(false);
@@ -149,6 +151,18 @@ public class MyPage extends JFrame {
 		revise.setSize(180,40);
 		revise.setLocation(365, 390);
 		userPanel.add(revise);
+		
+		myUser_pin.addKeyListener(new KeyAdapter() {
+            public void keyPressed(KeyEvent ke) {
+                if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' 
+               		 || ke.getKeyChar() == '\b') {
+                	myUser_pin.setEditable(true);
+                } else {
+               	 JOptionPane.showMessageDialog(myPage, "Please type only number(0~9)");
+               	myUser_pin.setText("");
+                }
+             }
+          });
 		
 		revise.addMouseListener(new MouseAdapter() {
             @Override
