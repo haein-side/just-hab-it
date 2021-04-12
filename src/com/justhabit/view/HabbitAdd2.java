@@ -62,6 +62,8 @@ public class HabbitAdd2 extends JFrame {
       jbutton2.setSize(80,50);
       jbutton2.setLocation(450, 280);
       habbitAdd2.add(jbutton2);
+      
+  		
       	
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override

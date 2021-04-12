@@ -3,34 +3,35 @@
 <properties>
     
     <entry key="selectAllHabit">    	 
-    	 SELECT             
-      habit_id
-    , habit_name
-    , habit_type
-    , habit_days
-    , habit_goal
-  FROM admin.hbt_register
-WHERE user_id = ?
-  AND EXISTS (SELECT TO_CHAR(SYSDATE, 'DY')
-                FROM DUAL
-              WHERE HABIT_DAYS LIKE '%'|| TO_CHAR(SYSDATE, 'DY')||'%')
+
+         SELECT             
+                habit_id
+              , habit_name
+              , habit_type
+              , habit_days
+              , habit_goal
+           FROM admin.hbt_register
+          WHERE user_id = ?
+            AND EXISTS (SELECT TO_CHAR(SYSDATE, 'DY')
+                          FROM DUAL
+                         WHERE habit_days LIKE '%'|| TO_CHAR(SYSDATE, 'DY')||'%')
     
     </entry>
 
    <entry key="selectHabitInfo">
 	   SELECT 
-	          USER_ID
-	        , HABIT_ID
-	        , HABIT_NAME
-	        , HABIT_TYPE
-	        , HABIT_GOAL
-	        , HABIT_DAYS
-	     FROM HBT_REGISTER
-	    WHERE HABIT_ID = ?
+	          user_id
+	        , habit_id
+	        , habit_name
+	        , habit_type
+	        , habit_goal
+	        , habit_days
+	     FROM admin.hbt_register
+	    WHERE habit_id = ?
    </entry>
    <entry key="insertCheck">
        INSERT
-         INTO HBT_CHECK
+         INTO admin.hbt_check
        VALUES
             (
               ?
@@ -41,18 +42,18 @@ WHERE user_id = ?
    </entry>
    <entry key="selectDateInfo">
         SELECT 
-               HABIT_ID
-             , DO_DATE 
-          FROM HBT_CHECK 
-         WHERE HABIT_ID = ?
-           AND DO_DATE = ?
+               habit_id
+             , do_date 
+          FROM admin.hbt_check 
+         WHERE habit_id = ?
+           AND do_date = ?
    </entry>
    <entry key="updateCheck">
        UPDATE
-              HBT_CHECK
-          SET COUNT_CHECK = ?
-        WHERE HABIT_ID = ?
-          AND DO_DATE = ?
+              admin.hbt_check
+          SET count_check = ?
+        WHERE habit_id = ?
+          AND do_date = ?
    </entry>
    <entry key="login">
        SELECT
@@ -63,7 +64,7 @@ WHERE user_id = ?
    </entry>
    <entry key="registerUser">
        INSERT
-         INTO hbt_user
+         INTO admin.hbt_user
        VALUES
        (
          seq_user_id.nextval
@@ -76,13 +77,13 @@ WHERE user_id = ?
    <entry key="checkUsername">
        SELECT
               user_name
-         FROM hbt_user
+         FROM admin.hbt_user
         WHERE user_name = ?
    </entry>
    
    <entry key="insertTimer">
        INSERT
-         INTO HBT_TIMER
+         INTO admin.hbt_timer
        VALUES
             (
               ?
@@ -98,35 +99,33 @@ WHERE user_id = ?
             , user_pwd
             , user_email
             , user_pin
-         FROM hbt_user
+         FROM admin.hbt_user
         WHERE user_id = ?
    </entry>
    <entry key="updateTimer">
        UPDATE
-              HBT_TIMER
-          SET TIME_RECORD = ?
-        WHERE HABIT_ID = ?
-          AND DO_DATE = ?
+              admin.hbt_timer
+          SET time_record = ?
+        WHERE habit_id = ?
+          AND do_date = ?
    </entry>
    <entry key="selectTimerDateInfo">
        SELECT 
-              HABIT_ID
-            , DO_DATE 
-         FROM HBT_TIMER 
-        WHERE HABIT_ID = ?
-          AND DO_DATE = ?
+              habit_id
+            , do_date 
+         FROM admin.hbt_timer
+        WHERE habit_id = ?
+          AND do_date = ?
    </entry>
 
    <entry key="deleteUser">
        DELETE
-         FROM hbt_user
+         FROM admin.hbt_user
         WHERE user_id = ?
-
-
    </entry>
    
    <entry key="updateUser">
-       UPDATE hbt_user 
+       UPDATE admin.hbt_user 
           SET 
               user_name = ?
             , user_pwd = ?
@@ -137,48 +136,47 @@ WHERE user_id = ?
    
    <entry key="insertAllHabbit">
        INSERT
-   		 INTO HABBITADD (
-              MEMBER_ID
-            , HABIT_TYPE
-            , HABIT_DATE
-            , HABIT_SELECTDAY
-            , HABIT_RECORD
-            , HABIT_RECORD_NEXT
+   		 INTO admin.hbt_register (
+              user_id
+            , habit_id
+            , habit_name
+            , habit_type
+            , habit_days
+            , habit_goal
             )
        VALUES (
-               ?
              , ?
              , ?
              , ?
              , ?
              , ?
-)
+		)
 	</entry>
    <entry key="selectTotalCheck">
        SELECT
               COUNT(*)
-            , SUM(COUNT_CHECK)
-         FROM HBT_CHECK
-        WHERE SUBSTR(DO_DATE,4,2) = ?
-          AND HABIT_ID = ?
+            , SUM(count_check)
+         FROM admin.hbt_check
+        WHERE SUBSTR(do_date,4,2) = ?
+          AND habit_id = ?
    </entry>
    <entry key = "selectTotalTimerCheck">
        SELECT
               COUNT(*)
-            , SUM(TIME_RECORD)
-         FROM HBT_TIMER
-        WHERE SUBSTR(DO_DATE,4,2) = ? 
-          AND HABIT_ID = ?    	
+            , SUM(time_record)
+         FROM admin.hbt_timer
+        WHERE SUBSTR(do_date,4,2) = ? 
+          AND habit_id = ?    	
    </entry>
    <entry key="selectCheckGoalRecord">
        SELECT 
-       DO_DATE
-     , COUNT_CHECK
-     , HABIT_GOAL
-  FROM HBT_CHECK C
-  JOIN HBT_REGISTER R ON (C.HABIT_ID = R.HABIT_ID)
- WHERE C.HABIT_ID = ?
- ORDER BY DO_DATE
+              do_date
+            , count_check
+            , habit_goal
+         FROM admin.hbt_check c
+         JOIN admin.hbt_register r ON (c.habit_id = r.habit_id)
+        WHERE c.habit_id = ?
+        ORDER BY do_date
 
    </entry>
 </properties>

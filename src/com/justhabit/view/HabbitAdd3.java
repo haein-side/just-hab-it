@@ -49,7 +49,8 @@ public class HabbitAdd3 extends JFrame {
 		jcb[5] = new JCheckBox("토");
 		jcb[6] = new JCheckBox("일");
 	
-
+		
+		
 
 		for (int i = 0; i < jcb.length; i++) {
 		    checkPanel.add(jcb[i]);

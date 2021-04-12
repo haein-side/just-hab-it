@@ -43,6 +43,7 @@ public class TimeRecordView extends JFrame{
 	JFrame mf = this;
 	int test = 5;
 	
+	
 	public TimeRecordView() {
 		
 		this.setLayout(null);
@@ -63,7 +64,7 @@ public class TimeRecordView extends JFrame{
 		//등록된 습관정보 불러오기
 //		registInfo.setHabitID(MainPage.userhabitid);
 		//TODO 삭제예정: 테스트용
-		registInfo.setHabitID(MainPage.userhabitid); 
+		registInfo.setHabitID(2); 
 		registInfo = habitInfoController.selectHabitInfo(registInfo);
 		//습관상단바
 		JPanel habitTop = new JPanel();

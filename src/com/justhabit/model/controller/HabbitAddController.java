@@ -9,38 +9,55 @@ import com.justhabit.model.service.HabbitAddService;
 
 
 public class HabbitAddController {
-	private static HabbitAddService HabbitAddService = new HabbitAddService();
+	private HabbitAddService habbitAddService = new HabbitAddService();
 	
 
-	public static List<HabbitAddDTO> selectAllHabbit(String MemberId, String habitType, int habitDate,
-			String habitselectDay,String habitRecord, String habitRecordNext) {
-		HabbitAddDTO test = null;
+//	public static List<HabbitAddDTO> selectAllHabbit(String MemberId, String habitType, int habitDate,
+//			String habitselectDay,String habitRecord, String habitRecordNext) {
+//		HabbitAddDTO test = null;
 //		List<HabbitAddDTO> allhabitList = new ArrayList<HabbitAddDTO>();
 //		allhabitList.add(MemberId);
-		List<HabbitAddDTO> allhabitList = new ArrayList<>();
+//		List<HabbitAddDTO> allhabitList = new ArrayList<>();
+//		
+//		test = new HabbitAddDTO();
 		
-		test = new HabbitAddDTO();
+//		test.setMemberId(MemberId);
+//		test.setHabitType(habitType);
+//		test.setHabitDate(habitDate);
+//		test.setHabitselectDay(habitselectDay);
+//		test.setHabitRecord(habitRecord);
+//		test.setHabitRecordNext(habitRecordNext);
+//		allhabitList.add(test);
 		
-		test.setMemberId(MemberId);
-		test.setHabitType(habitType);
-		test.setHabitDate(habitDate);
-		test.setHabitselectDay(habitselectDay);
-		test.setHabitRecord(habitRecord);
-		test.setHabitRecordNext(habitRecordNext);
-		allhabitList.add(test);
+//		String selectAllHabbit = HabbitAddService.selectAllHabbit(allhabitList);
+//		
+//		System.out.println(selectAllHabbit);
+//		
+//		return allhabitList;
+//	}
+
+//	public static List<HabbitAddDTO> selectAllHabbit2() {
+//		// TODO Auto-generated method stub
+//		return null;
+//	}
+
+	public List<HabbitAddDTO> insertAllHabbit(int userID, int habitID, String habitName, String habitType,
+			String habitDays, int habitGoal) {
 		
-		String selectAllHabbit = HabbitAddService.selectAllHabbit(allhabitList);
+//		HabbitAddDTO test = null;
+//		
+//		List<HabbitAddDTO> allhabitList = new ArrayList<>();
+//		
+//		test = new HabbitAddDTO();
+//		
+//		String insertAllHabbit = HabbitAddService.insertAllHabbit(allhabitList);
 		
-		System.out.println(selectAllHabbit);
 		
-		return allhabitList;
+		return habbitAddService.insertAllHabbit(userID, habitID, habitName, habitType,
+			habitDays, habitGoal);
 	}
 
-	public static List<HabbitAddDTO> selectAllHabbit2() {
-		// TODO Auto-generated method stub
-		return null;
-	}
-
-
+	
+	
 
 }
