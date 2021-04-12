@@ -158,6 +158,7 @@ public class MainPage extends JFrame{
 			          @Override
 			          public void actionPerformed(ActionEvent e) {
 			        	  userhabitid = allhabitList.get(i).getHabitID();
+			        	  System.out.println("------------------------------"+userhabitid);
 			        	  if(allhabitList.get(i).getHabitType().equals("c")) {
 			        		  PanelChangeControl.changeFrame(mf, new CheckRecordView());
 			        		  
@@ -285,7 +286,7 @@ public class MainPage extends JFrame{
 		botPan.setBackground(Color.GREEN);
 		
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage", "횟수보기","타이머보기"};
+		String[] menu = {"Main", "습관등록", "mypage"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
@@ -311,27 +312,6 @@ public class MainPage extends JFrame{
 	             PanelChangeControl.changeFrame(mf, new MyPage());
 	          }
 	       });
-		
-		menuButton[3].addActionListener(new ActionListener() {
-	          
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	             PanelChangeControl.changeFrame(mf, new CheckRecordView());
-	          }
-	       });
-		
-		menuButton[4].addActionListener(new ActionListener() {
-	          
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	             PanelChangeControl.changeFrame(mf, new TimeRecordView());
-	          }
-	       });
-		
-		
-		
-		
-		
 		
 		this.add(botPan);
 		

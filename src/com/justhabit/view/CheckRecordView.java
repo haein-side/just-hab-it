@@ -281,8 +281,8 @@ public class CheckRecordView extends JFrame{
 						totalCheck = totalRecord.getRecordSum();
 						infoText.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 						
-						checkRecord.setHabitId(1);
-						checkRecord.setRecordType("a");
+						checkRecord.setHabitId(MainPage.userhabitid);
+						checkRecord.setRecordType(registInfo.getHabitType());
 						List<HaeseungRecordDTO> recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
 						SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
 						String checkYearMonth = yearMonth.format(todayDate);
@@ -322,7 +322,7 @@ public class CheckRecordView extends JFrame{
 		
 		this.add(botPan);
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage", "횟수보기","타이머보기"};
+		String[] menu = {"Main", "습관등록", "mypage"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
@@ -354,16 +354,6 @@ public class CheckRecordView extends JFrame{
 	          @Override
 	          public void actionPerformed(ActionEvent e) {
 	             PanelChangeControl.changeFrame(mf, new MyPage());
-	          }
-	       });
-		
-		menuButton[3].setEnabled(false);
-		
-		menuButton[4].addActionListener(new ActionListener() {
-	          
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	             PanelChangeControl.changeFrame(mf, new TimeRecordView());
 	          }
 	       });
 		
