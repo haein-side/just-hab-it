@@ -5,7 +5,7 @@ public class HaeseungMonthTotalDTO {
 	private int habitId;
 	private String todayMonth;
 	private int dateCount;
-	private int recordSum;
+	private double recordSum;
 	
 	public HaeseungMonthTotalDTO() {
 		super();
@@ -43,11 +43,11 @@ public class HaeseungMonthTotalDTO {
 		this.dateCount = dateCount;
 	}
 
-	public int getRecordSum() {
+	public double getRecordSum() {
 		return recordSum;
 	}
 
-	public void setRecordSum(int recordSum) {
+	public void setRecordSum(double recordSum) {
 		this.recordSum = recordSum;
 	}
 
