@@ -80,7 +80,7 @@ public class MyPage extends JFrame {
 		
 //		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
 		//TODO: 테스트용 지우고 로그인된 유저로 정보가져오기.
-		UserDTO myUser = userController.userInfo(15); // test
+		UserDTO myUser = userController.userInfo(1); // test
 		//TODO: level값을 가져오는 쿼리.어디서? 레벨에 따른 사진 변경 
 		
 		
