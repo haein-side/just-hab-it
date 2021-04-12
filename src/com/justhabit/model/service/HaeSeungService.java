@@ -1,9 +1,14 @@
 package com.justhabit.model.service;
 
-import static com.justhabit.common.JDBCTemplate.close;
-import static com.justhabit.common.JDBCTemplate.commit;
-import static com.justhabit.common.JDBCTemplate.getConnection;
-import static com.justhabit.common.JDBCTemplate.rollback;
+import static com.justhabit.common.JDBC_EC2.close;
+import static com.justhabit.common.JDBC_EC2.commit;
+import static com.justhabit.common.JDBC_EC2.getConnection;
+import static com.justhabit.common.JDBC_EC2.rollback;
+
+//import static com.justhabit.common.JDBCTemplate.close;
+//import static com.justhabit.common.JDBCTemplate.commit;
+//import static com.justhabit.common.JDBCTemplate.getConnection;
+//import static com.justhabit.common.JDBCTemplate.rollback;
 
 import java.sql.Connection;
 import java.util.List;
@@ -161,7 +166,7 @@ public class HaeSeungService {
 		Connection con = getConnection();
 		
 		List<HaeseungRecordDTO> selectRecordGoalList= null;
-		if(recordInfo.getRecordType().equals("a")) {
+		if(recordInfo.getRecordType().equals("c")) {
 			selectRecordGoalList = habitDAO.selectCheckRecordGoal(con, recordInfo);
 			
 		}

@@ -6,14 +6,14 @@ public class HaesungInfoDTO {
 	private String habitName;
 	private String habitType;
 	private int habitGoal;
-	private int habitDays;
+	private String habitDays;
 	private int UserID;
 	
 	public HaesungInfoDTO() {
 		super();
 	}
 
-	public HaesungInfoDTO(int habitID, String habitName, String habitType, int habitGoal, int habitDays,
+	public HaesungInfoDTO(int habitID, String habitName, String habitType, int habitGoal, String habitDays,
 			int userID) {
 		super();
 		this.habitID = habitID;
@@ -56,11 +56,11 @@ public class HaesungInfoDTO {
 		this.habitGoal = habitGoal;
 	}
 
-	public int getHabitDays() {
+	public String getHabitDays() {
 		return habitDays;
 	}
 
-	public void setHabitDays(int habitDays) {
+	public void setHabitDays(String habitDays) {
 		this.habitDays = habitDays;
 	}
 

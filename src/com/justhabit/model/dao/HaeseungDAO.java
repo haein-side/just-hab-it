@@ -53,12 +53,12 @@ public class HaeseungDAO {
 			
 			if(rset.next()) {
 				info = new HaesungInfoDTO();
-				info.setUserID(rset.getInt("USER_ID"));
-				info.setHabitID(rset.getInt("HABIT_ID"));
-				info.setHabitName(rset.getString("HABIT_NAME"));
-				info.setHabitType(rset.getString("HABIT_TYPE"));
-				info.setHabitGoal(rset.getInt("HABIT_GOAL"));
-				info.setHabitDays(rset.getInt("HABIT_DAYS"));
+				info.setUserID(rset.getInt("user_id"));
+				info.setHabitID(rset.getInt("habit_id"));
+				info.setHabitName(rset.getString("habit_name"));
+				info.setHabitType(rset.getString("habit_type"));
+				info.setHabitGoal(rset.getInt("habit_goal"));
+				info.setHabitDays(rset.getString("habit_days"));
 				
 				
 			}
@@ -96,8 +96,8 @@ public class HaeseungDAO {
 			
 			if(rset.next()) {
 				selectRecord = new HaeseungRecordDTO();
-				selectRecord.setHabitId(rset.getInt("HABIT_ID"));
-				selectRecord.setDoDate(rset.getString("DO_DATE"));
+				selectRecord.setHabitId(rset.getInt("habit_id"));
+				selectRecord.setDoDate(rset.getString("do_date"));
 			} 
 			
 			
@@ -125,10 +125,10 @@ public class HaeseungDAO {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, checkRecord.getCheck());
-			pstmt.setString(2, checkRecord.getDoDate());
-			pstmt.setInt(3, checkRecord.getUserId());
-			pstmt.setInt(4, checkRecord.getHabitId());
+			pstmt.setInt(1, checkRecord.getUserId());
+			pstmt.setInt(2, checkRecord.getHabitId());
+			pstmt.setString(3, checkRecord.getDoDate());
+			pstmt.setInt(4, checkRecord.getCheck());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -156,10 +156,10 @@ public class HaeseungDAO {
 		
 		try {
 			pstmt = con.prepareStatement(query);
-			pstmt.setDouble(1, checkRecord.getTimer());
-			pstmt.setString(2, checkRecord.getDoDate());
-			pstmt.setInt(3, checkRecord.getUserId());
-			pstmt.setInt(4, checkRecord.getHabitId());
+			pstmt.setInt(1, checkRecord.getUserId());
+			pstmt.setInt(2, checkRecord.getHabitId());
+			pstmt.setString(3, checkRecord.getDoDate());
+			pstmt.setDouble(4, checkRecord.getTimer());
 			
 			result = pstmt.executeUpdate();
 		} catch (SQLException e) {
@@ -260,8 +260,8 @@ public class HaeseungDAO {
 			
 			if(rset.next()) {
 				selectRecord = new HaeseungRecordDTO();
-				selectRecord.setHabitId(rset.getInt("HABIT_ID"));
-				selectRecord.setDoDate(rset.getString("DO_DATE"));
+				selectRecord.setHabitId(rset.getInt("habit_id"));
+				selectRecord.setDoDate(rset.getString("do_date"));
 			} 
 			
 		} catch (SQLException e) {
@@ -298,7 +298,7 @@ public class HaeseungDAO {
 			if(rset.next()) {
 				totalRecord = new HaeseungMonthTotalDTO();
 				totalRecord.setDateCount(rset.getInt("COUNT(*)"));
-				totalRecord.setRecordSum(rset.getInt("SUM(COUNT_CHECK)"));
+				totalRecord.setRecordSum(rset.getInt("SUM(count_check)"));
 			} 
 			
 		} catch (SQLException e) {
@@ -336,7 +336,7 @@ public class HaeseungDAO {
 			if(rset.next()) {
 				totalRecord = new HaeseungMonthTotalDTO();
 				totalRecord.setDateCount(rset.getInt("COUNT(*)"));
-				totalRecord.setRecordSum(rset.getInt("SUM(TIME_RECORD)"));
+				totalRecord.setRecordSum(rset.getInt("SUM(time_record)"));
 			} 
 			
 		} catch (SQLException e) {
@@ -373,9 +373,9 @@ public class HaeseungDAO {
 			
 			while(rset.next()) {
 				row = new HaeseungRecordDTO();
-				row.setDoDate(rset.getString("DO_DATE"));
-				row.setCheck(rset.getInt("COUNT_CHECK"));
-				row.setHabitGoal(rset.getInt("HABIT_GOAL"));
+				row.setDoDate(rset.getString("do_date"));
+				row.setCheck(rset.getInt("count_check"));
+				row.setHabitGoal(rset.getInt("habit_goal"));
 				
 				userRecordGoalList.add(row);
 			}

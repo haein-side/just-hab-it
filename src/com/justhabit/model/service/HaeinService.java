@@ -1,7 +1,12 @@
 package com.justhabit.model.service;
 
-import static com.justhabit.common.JDBCTemplate.close;
-import static com.justhabit.common.JDBCTemplate.getConnection;
+import static com.justhabit.common.JDBC_EC2.close;
+import static com.justhabit.common.JDBC_EC2.getConnection;
+
+//import static com.justhabit.common.JDBCTemplate.close;
+//import static com.justhabit.common.JDBCTemplate.getConnection;
+
+
 
 import java.sql.Connection;
 import java.util.List;

@@ -259,20 +259,5 @@ public class MyPage extends JFrame {
 		
 		menuButton[2].setEnabled(false);
 		
-		menuButton[3].addActionListener(new ActionListener() {
-	          
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	             PanelChangeControl.changeFrame(myPage, new CheckRecordView());
-	          }
-	       });
-		
-		menuButton[4].addActionListener(new ActionListener() {
-	          
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	             PanelChangeControl.changeFrame(myPage, new TimeRecordView());
-	          }
-	       });
-	}
+		}
 }
