@@ -1,8 +1,10 @@
 package com.justhabit.view;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.FileDialog;
 import java.awt.Font;
+import java.awt.Graphics;
 import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
@@ -16,6 +18,8 @@ import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.List;
 
+import javax.swing.BorderFactory;
+import javax.swing.GrayFilter;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -60,72 +64,7 @@ public class MainPage extends JFrame{
 //		JLabel thumb = new JLabel();
 //		thumb.setIcon(icon);
 		
-		//습관 버튼
-//		JButton first = new JButton("습관 1");
-//		first.setSize(100,80);
-//		first.setLocation(150, 300);
-//		
-//		center.add(first);
-//		
-//		JButton second = new JButton("습관 2");
-//		second.setSize(100,80);
-//		second.setLocation(400, 300);
-//		center.add(second);
-//		
-//		JButton third = new JButton("습관 3");
-//		third.setSize(100,80);
-//		third.setLocation(650, 300);
-//		center.add(third);
-//		
 
-		
-		//로그인 한 USER_ID 넣기
-//		allHabitDTO.setHabitID(1);
-		
-		//해당 ID의 모든 습관 리스트 받기
-		
-//		int userid = 1;
-//		
-//		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(userid);
-//		for(AllHabitDTO habit : allhabitList) {
-//			System.out.println(habit.getHabitID() + "/" + habit.getHabitName() );
-//		}
-		
-		
-		
-//		//오늘 요일 넣기
-//		Calendar cal = Calendar.getInstance(); 
-//		int day = cal.get(Calendar.DAY_OF_WEEK)-1;
-//		habitDayDTO.setHabitDays(day);
-//		
-//		//오늘 해당 이용자의 습관출력
-//		List<HaeinHabitDayDTO> habitDayList = new ArrayList<>();
-//		habitDayList = habitDayController.selectHabitDay
-//		
-		
-		
-		//버튼 생성
-//		JButton[] habitButtons = new JButton[allhabitList.size()];
-//		
-//		for(int i = 0; i < habitButtons.length; i++) {
-//			JButton box = new JButton()
-//			box.setSize(100, 80);
-//			box.setLocation(150*i + 100*(i-1), 300);
-//			box.setText(habit.getHabitName());
-//			this.add(box);
-//		}
-//		
-		
-//        // 스크롤
-//        JScrollPane scrollbar = new JScrollPane(middlePanel);
-//        scrollbar.setPreferredSize(new Dimension(685,700));
-//        scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-//        int width = scrollbar.getPreferredSize().width;
-//        int height = scrollbar.getPreferredSize().height;
-//        scrollbar.setBounds(0,100,width,height);
-//        scrollbar.setBorder(pinkborder);
-//        scrollbar.setBackground(Color.pink);
-//        this.getContentPane().add(scrollbar);
 		
 //	int userid = 1;
 		
@@ -135,29 +74,23 @@ public class MainPage extends JFrame{
 		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
 		JButton[] habitButtons = new JButton[allhabitList.size()];
 		
+		JPanel right = new JPanel();
+		right.setBounds(400, 100, 500, 462);
+		right.setLayout(null);
+		
 		for(h = 0; h < allhabitList.size(); h++) {
 				JButton box = new JButton();
-				box.setSize(100, 80);
-				if (h == 0) {
-					box.setLocation(400, 180);
-					box.setText(allhabitList.get(h).getHabitName());
-				} else if(h % 3 == 0) {
-					box.setLocation(400, 180 + 80 * (h/3*2));	
-					box.setText(allhabitList.get(h-1).getHabitName());
-				} else if(h % 3 == 1 ) {
-					box.setLocation(550, 180 + 80 * (h-1)/3*2);
-					box.setText(allhabitList.get(h-1).getHabitName());
-				} else if(h % 3 == 2 ) {
-					box.setLocation(700, 180 + 80 * (h-2)/3*2);
-				}
+				box.setSize(400, 60);
+				box.setLocation(400, 180 + 100 * (h-1));	
+				box.setText(allhabitList.get(h).getHabitName());
+				
 				int i = h;
 				box.setText(allhabitList.get(h).getHabitName());
 				box.addActionListener(new ActionListener() {
 					
-			          
 			          @Override
 			          public void actionPerformed(ActionEvent e) {
-			        	  userhabitid = allhabitList.get(i).getHabitID();
+			        	  userhabitid = allhabitList.get(h).getHabitID();
 			        	  if(allhabitList.get(i).getHabitType().equals("c")) {
 			        		  PanelChangeControl.changeFrame(mf, new CheckRecordView());
 			        		  
@@ -166,11 +99,35 @@ public class MainPage extends JFrame{
 			        	  }
 			          }
 			       });
-				this.add(box);
+				center.add(box);
 		}
 		
 		
-		//오늘의 각오
+        // 스크롤
+        JScrollPane scrollbar = new JScrollPane();
+        scrollbar.setPreferredSize(new Dimension(20,300));
+        scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        int width = scrollbar.getPreferredSize().width;
+        int height = scrollbar.getPreferredSize().height;
+        scrollbar.setBounds(850,60,20,300);
+        scrollbar.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        scrollbar.setBackground(Color.pink);
+        center.add(scrollbar);
+        
+//        JScrollPane scrollPane =
+//        	      new JScrollPane(
+//        	          center,
+//        	          JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
+//        	          JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+//        	  scrollPane.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+////        	  int width = scrollPane.getPreferredSize().width;
+////              int height = scrollPane.getPreferredSize().height;
+//              scrollPane.setBounds(700,60,10,300);
+//        this.add(scrollPane);
+
+		
+		
+		//오늘의 일기
 		JLabel promise = new JLabel("<오늘의 일기>");
 		
 		Font font = new Font("맑은 고딕", Font.BOLD, 20);
@@ -190,11 +147,26 @@ public class MainPage extends JFrame{
 	    JTextArea chat = new JTextArea();
 	    chat.setBounds(50,60,300,300);
 	    chat.setEditable(true);
+	    
+	    Font font1 = new Font("맑은 고딕", Font.PLAIN, 15);
+		chat.setFont(font1);
+		
+	    
+	    chat.setOpaque(false);
+	    chat.setBorder(BorderFactory.createEmptyBorder());
+	    chat.setBackground(new Color(0,0,0,0));
 	    center.add(chat);
 	    center.validate();
+	    
+        Image diary = new ImageIcon("image/diary.jpg").getImage().getScaledInstance(300, 300, 0);
+		JLabel yellow = new JLabel(new ImageIcon(diary));
+		yellow.setBounds(50,60,300,300);
+		center.add(yellow);
 		
-	    JButton save = new JButton("일기 저장");
-	    JButton open = new JButton("일기 읽기");
+		
+		
+	    JButton save = new JButton("일기 감춰놓기");
+	    JButton open = new JButton("일기 불러오기");
 	    
 		save.addActionListener(new ActionListener() {
 			@Override
@@ -206,15 +178,12 @@ public class MainPage extends JFrame{
 	                String path = dialog.getDirectory() + dialog.getFile();
 	                
 	                try {
-	                   
 	                   FileWriter w = new FileWriter( path );
 	                   String s = chat.getText();
 	                   s = s.replace("\n","\r\n");
 	                   w.write( s  ); 
 	                   w.close();
-	            
 	                } catch (Exception e2) {
-	                
 	                    System.out.println("저장오류"+e2);
 	                }  
 				
@@ -234,27 +203,18 @@ public class MainPage extends JFrame{
                    String s ="";
                    
                    if( dialog.getFile() == null ) return;
-                           
                    try {
-                      
                       FileReader r = new FileReader( path );
-                      
                       int k;              
-                      
                       for( ;  ; ) {
-                       
                           k = r.read();
                           if( k == -1) break;
                           s += (char)k;               
                       }           
-                      
                       r.close();
-               
                    } catch (Exception e2) {
-                   
                        System.out.println("오류"+e);
                    } 
-                   
                    chat.setText(s);   
             }            
         }); 
@@ -263,18 +223,17 @@ public class MainPage extends JFrame{
 		
 		
 //		save.setLocation(370,100);
-		save.setBounds(80, 380, 100, 40);
-		open.setBounds(200, 380, 100, 40);
+		save.setBounds(65, 380, 120, 40);
+		open.setBounds(215, 380, 120, 40);
 		center.add(save);
 		center.add(open);
 	    
 	    
 	    
-		Image level = new ImageIcon("image/resizedbackground1.jpg").getImage().getScaledInstance(900, 700, 0);
-		JLabel levelImg = new JLabel(new ImageIcon(level));
-//		levelImg.setIcon(level);
-		levelImg.setBounds(0,0,900,700);
-		center.add(levelImg);
+		Image back = new ImageIcon("image/resizedbackground1.jpg").getImage().getScaledInstance(900, 700, 0);
+		JLabel backImg = new JLabel(new ImageIcon(back));
+		backImg.setBounds(0,0,900,700);
+		center.add(backImg);
 		
 		
 		
