@@ -1,32 +1,36 @@
 package com.justhabit.model.dto;
 
 public class HabbitAddDTO {
-	private int UserID;
+	private int userID;
 	private int habitID;
 	private String habitName;
 	private String habitType;
 	private String habitDays;
-	private String HABIT_GOAL;
+	private int habitGoal;
 	
 	public HabbitAddDTO() {
 		super();
 	}
 
-	public HabbitAddDTO(int userID, int habitID, String habitName, String habitType, String habitDays) {
+	public HabbitAddDTO(int userID, int habitID, String habitName, String habitType, String habitDays,
+			int habitGoal) {
 		super();
-		UserID = userID;
+		this.userID = userID;
 		this.habitID = habitID;
 		this.habitName = habitName;
 		this.habitType = habitType;
 		this.habitDays = habitDays;
+		this.habitGoal = habitGoal;
 	}
 
+	
+
 	public int getUserID() {
-		return UserID;
+		return userID;
 	}
 
 	public void setUserID(int userID) {
-		UserID = userID;
+		this.userID = userID;
 	}
 
 	public int getHabitID() {
@@ -61,13 +65,26 @@ public class HabbitAddDTO {
 		this.habitDays = habitDays;
 	}
 
+	public int getHabitGoal() {
+		return habitGoal;
+	}
+
+	public void setHabitGoal(int habitGoal) {
+		this.habitGoal = habitGoal;
+	}
+
 	@Override
 	public String toString() {
-		return "AllHabitDTO [UserID=" + UserID + ", habitID=" + habitID + ", habitName=" + habitName + ", habitType="
-				+ habitType + ", habitDays=" + habitDays + "]";
+		return "HabbitAddDTO [userID=" + userID + ", habitID=" + habitID + ", habitName=" + habitName + ", habitType="
+				+ habitType + ", habitDays=" + habitDays + ", habitGoal=" + habitGoal + "]";
 	}
 
 	
+	
+	
+	
+	
 
+	
 	
 }

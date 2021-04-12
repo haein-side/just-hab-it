@@ -1,4 +1,5 @@
 
+
 package com.justhabit.run;
 
 import static com.justhabit.common.JDBCTemplate.getConnection;
@@ -20,11 +21,12 @@ public class Run {
 //		new LoginFrame().initialize();
 //		new MainView();
 		
+		new HabbitAdd();
+		
 		/* 연결됐는지 확인하는 메소드 */
 //		Connection con = getConnection();
 //		System.out.println(con);
 
-		new HabbitAdd();
 		
 //		MainPage mainpage = new MainPage();
 //		mainpage.displayHabit();
