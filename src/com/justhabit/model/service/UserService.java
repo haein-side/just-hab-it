@@ -110,4 +110,18 @@ public class UserService {
 		return user;
 	}
 
+	public void userLvlUpdate(UserLevelDTO user) {
+
+		Connection con = getConnection();
+		
+		boolean isUpdated = userDAO.userLvlUpdate(con, user);
+		
+		if(isUpdated)
+			commit(con);
+		else 
+			rollback(con);
+		
+		close(con);
+	}
+
 }

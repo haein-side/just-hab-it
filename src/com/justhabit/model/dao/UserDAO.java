@@ -233,7 +233,26 @@ private Properties prop = new Properties();
 		return user;
 	}
 
-	
-
-	
+	public boolean userLvlUpdate(Connection con, UserLevelDTO user) {
+		
+		PreparedStatement psmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("userLvlUpdate");
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, user.getUserLevel());
+			psmt.setInt(2, user.getUserId());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		
+		return result == 0 ? false : true;
+	}
 }

@@ -226,9 +226,11 @@ public class MyPage extends JFrame {
             	myUser_pin.setBackground(Color.GRAY);
             	
             	if(myUser_pin.getText().equals(String.valueOf(myUser.getUserPin()))) {
-            		if(userController.deleteUser(myUser))
+            		if(userController.deleteUser(myUser)) {
                 		JOptionPane.showMessageDialog(myPage, myUser.getUserName() + "님의 탈퇴가 완료 되었습니다");
-            			
+            			myPage.setVisible(false);
+            			FirstFrame.main(null);
+            		}
             		else
                 		JOptionPane.showMessageDialog(myPage, myUser.getUserName() + "님의 탈퇴가 실패했습니다");
             	} else {

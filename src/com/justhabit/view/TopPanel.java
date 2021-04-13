@@ -10,7 +10,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.justhabit.model.controller.UserController;
+import com.justhabit.model.dto.UserLevelDTO;
+
 public class TopPanel extends JPanel{
+	
+	private UserController userController = new UserController();
 	
 	public TopPanel() {
 		//상단바
@@ -26,10 +31,23 @@ public class TopPanel extends JPanel{
 		Title.setVisible(true);
 		this.add(Title);
 		
+		
+		UserLevelDTO user = null;
+		user = userController.userLevel(FirstFrame.loggedUserID);
+		
 
+		String level_image = "";
+		switch(user.getUserLevel()) {
+			case 1 : level_image = "1렙계란.PNG"; break;
+			case 2 : level_image = "2렙계란.PNG"; break;
+			case 3 : level_image = "3렙계란.PNG"; break;
+			case 4 : level_image = "4렙계란.PNG"; break;
+			case 5 : level_image = "5렙계란.PNG"; break;
+		}
+		
 		
 		//좌측이미지
-		Image leftImage = new ImageIcon("image/" + TodayWord.image_name).getImage().getScaledInstance(100, 70, 0);
+		Image leftImage = new ImageIcon("image/" + level_image).getImage().getScaledInstance(100, 70, 0);
 		
 		JLabel leftLabel = new JLabel(new ImageIcon(leftImage));
 		
