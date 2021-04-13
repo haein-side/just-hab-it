@@ -67,7 +67,7 @@
          INTO admin.hbt_user
        VALUES
        (
-         seq_user_id.nextval
+         admin.seq_user_id.nextval
        , ?
        , ?
        , ?
