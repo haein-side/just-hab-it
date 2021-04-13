@@ -3,6 +3,8 @@ package com.justhabit.view;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.Image;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
@@ -29,6 +31,13 @@ public class TopPanel extends JPanel{
 		Image leftImage = new ImageIcon("image/turtle1.jpeg").getImage().getScaledInstance(100, 100, 0);
 		
 		JLabel leftLabel = new JLabel(new ImageIcon(leftImage));
+		
+		Date today = new Date();
+		SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy년 MM월 dd일 E요일");
+		JLabel dayPrint = new JLabel(dayFormat.format(today));
+		dayPrint.setBounds(740,0, 200, 50);
+		dayPrint.setVisible(true);
+		this.add(dayPrint);
 		
 		leftLabel.setBounds(0, 0, 80, 80);
 		topPanLeft.add(leftLabel);
