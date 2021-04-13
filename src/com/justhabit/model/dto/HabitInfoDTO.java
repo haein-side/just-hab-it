@@ -1,6 +1,6 @@
 package com.justhabit.model.dto;
 
-public class HaesungInfoDTO {
+public class HabitInfoDTO {
 
 	private int habitID;
 	private String habitName;
@@ -9,11 +9,11 @@ public class HaesungInfoDTO {
 	private String habitDays;
 	private int UserID;
 	
-	public HaesungInfoDTO() {
+	public HabitInfoDTO() {
 		super();
 	}
 
-	public HaesungInfoDTO(int habitID, String habitName, String habitType, int habitGoal, String habitDays,
+	public HabitInfoDTO(int habitID, String habitName, String habitType, int habitGoal, String habitDays,
 			int userID) {
 		super();
 		this.habitID = habitID;

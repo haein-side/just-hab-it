@@ -86,7 +86,7 @@ public class TodayWord extends JFrame {
 		first.setLocation(410, 560);
 		this.add(first);
 		
-		image_name = userLevel(); 
+		userLevel();
 
 		Image level = new ImageIcon("image/오늘의명언배경.jpeg").getImage().getScaledInstance(900, 700, 0);
 		
@@ -111,7 +111,7 @@ public class TodayWord extends JFrame {
 	 * </pre>
 	 * @return 이미지 이름 리턴
 	 */
-	public String userLevel() {
+	public void userLevel() {
 		
 		// 1. 로그인된 유저의 레벨과 습관 갯수와 성공횟수 select
 //		UserLevelDTO user = new UserLevelDTO();
@@ -120,18 +120,15 @@ public class TodayWord extends JFrame {
 		UserLevelDTO user = null;
 		user = userController.userLevel(FirstFrame.loggedUserID);
 		
+		
 		// 2. 기준에 맞게 레벨 update
+		TodayWord.image_name = user.getUserImage();
 		
 		
+		// 3. 업데이트 된 유저 정보로 사진 선택.
 		
-		// 3. 이미지 이름 return
 		
-		return user.getUserImage();
 	}
-
-
-
-	  
 }	
 	
 	
