@@ -1,5 +1,7 @@
 package com.justhabit.model.dto;
 
+import java.util.List;
+
 public class HabbitAddDTO {
 	private int userID;
 	private int habitID;
@@ -9,7 +11,6 @@ public class HabbitAddDTO {
 	private int habitGoal;
 	
 	public HabbitAddDTO() {
-		super();
 	}
 
 	public HabbitAddDTO(int userID, int habitID, String habitName, String habitType, String habitDays,
@@ -22,8 +23,6 @@ public class HabbitAddDTO {
 		this.habitDays = habitDays;
 		this.habitGoal = habitGoal;
 	}
-
-	
 
 	public int getUserID() {
 		return userID;
@@ -79,12 +78,4 @@ public class HabbitAddDTO {
 				+ habitType + ", habitDays=" + habitDays + ", habitGoal=" + habitGoal + "]";
 	}
 
-	
-	
-	
-	
-	
-
-	
-	
 }
