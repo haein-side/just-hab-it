@@ -257,7 +257,6 @@ public class MainPage extends JFrame{
 		botPan.setLayout(new GridLayout(1,6));
 		botPan.setSize(900, 100);
 		botPan.setLocation(0, 562);
-		botPan.setBackground(Color.GREEN);
 		
 		//메뉴목록
 		String[] menu = {"Main", "습관등록", "습관삭제", "mypage"};

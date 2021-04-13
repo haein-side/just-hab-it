@@ -10,7 +10,12 @@ import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
+import com.justhabit.model.controller.UserController;
+import com.justhabit.model.dto.UserLevelDTO;
+
 public class TopPanel extends JPanel{
+	
+	private UserController userController = new UserController();
 	
 	public TopPanel() {
 		//상단바
@@ -19,20 +24,33 @@ public class TopPanel extends JPanel{
 		this.setLayout(null);
 		this.setBackground(new Color(211,224,234));
 		
-		//TODO Title(JUSTHABBIT)추가
 		JLabel Title = new JLabel("JUST HAB' IT");
 		Title.setFont(new Font("D2Coding", Font.BOLD,50));
 		Title.setBounds(300,20,500,70);
 		Title.setVisible(true);
 		this.add(Title);
 		
+		
+		UserLevelDTO user = null;
+		user = userController.userLevel(FirstFrame.loggedUserID);
+		
 
+		String level_image = "";
+		switch(user.getUserLevel()) {
+			case 1 : level_image = "1렙계란.PNG"; break;
+			case 2 : level_image = "2렙계란.PNG"; break;
+			case 3 : level_image = "3렙계란.PNG"; break;
+			case 4 : level_image = "4렙계란.PNG"; break;
+			case 5 : level_image = "5렙계란.PNG"; break;
+		}
+		
 		
 		//좌측이미지
-		Image leftImage = new ImageIcon("image/" + TodayWord.image_name).getImage().getScaledInstance(100, 70, 0);
+		Image leftImage = new ImageIcon("image/" + level_image).getImage().getScaledInstance(100, 70, 0);
 		
 		JLabel leftLabel = new JLabel(new ImageIcon(leftImage));
 		
+
 		leftLabel.setBounds(10, 0, 80, 80);
 
 		this.add(leftLabel);

@@ -114,7 +114,46 @@ public class UserController {
 
 	public UserLevelDTO userLevel(int loggedUserID) {
 		
-		return userService.userLevel(loggedUserID);
+		/* 1. 유저 정보 가져오기 */ 
+		UserLevelDTO user = userService.userLevel(loggedUserID);
+		
+		/* 2. 기준에 맞게 레벨 update */
+		/////////////////////////
+		// 레벨 1 습관수 0 성공횟수 0// 
+		// 레벨 2 습관수 1 성공횟수 1// 
+		// 레벨 3 습관수 3 성공횟수 3//
+		// 레벨 4 습관수 5 성공횟수 5////////
+		// 레벨 5 습관수 7이상 성공횟수 7이상// 
+		/////////////////////////////
+		int userLevel = user.getUserLevel();
+		int totalHabits = user.getNumOfHabits();
+		int successOfChecks = user.getSuccessOfCheck();
+		int successOfTimers = user.getSuccessOfTimer();
+		
+		int level = 1;
+		
+		if(userLevel != 5) {
+		
+			if((successOfChecks + successOfTimers >= 7 ) && totalHabits >= 7  ) {
+				level = 5;
+			} else if((successOfChecks + successOfTimers >= 5 ) && totalHabits >= 5) {
+				level = 4;
+			} else if((successOfChecks + successOfTimers >= 3 ) && totalHabits >= 3) {
+				level = 3;
+			} else if((successOfChecks + successOfTimers >= 1 ) && totalHabits >= 1) {
+				level = 2;
+			}
+			
+			/* 3. 유저레벨에 변경이 생길 시, 유저 정보 업데이트 
+			 * 3-1 View로 리턴값 변경
+			 * 3-2 DB update  */
+			if( userLevel != level ) {
+				user.setUserLevel(level);
+				userService.userLvlUpdate(user);
+			}
+		} 
+		
+		return user;
 	}
 
 }
