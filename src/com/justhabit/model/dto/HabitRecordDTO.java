@@ -2,7 +2,7 @@ package com.justhabit.model.dto;
 
 import java.sql.Date;
 
-public class HaeseungRecordDTO {
+public class HabitRecordDTO {
 
 	private int userId;
 	private int habitId;
@@ -12,11 +12,11 @@ public class HaeseungRecordDTO {
 	private int habitGoal;
 	private String recordType;
 	
-	public HaeseungRecordDTO() {
+	public HabitRecordDTO() {
 		super();
 	}
 
-	public HaeseungRecordDTO(int userId, int habitId, String doDate, int check, double timer, int habitGoal, String recordType) {
+	public HabitRecordDTO(int userId, int habitId, String doDate, int check, double timer, int habitGoal, String recordType) {
 		super();
 		this.userId = userId;
 		this.habitId = habitId;

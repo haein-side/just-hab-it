@@ -71,7 +71,8 @@
        , ?
        , ?
        , ?
-       , ? 
+       , ?
+       , default
        )
    </entry>
    <entry key="checkUsername">
@@ -99,7 +100,10 @@
             , user_pwd
             , user_email
             , user_pin
+            , level_num
+            , level_image
          FROM admin.hbt_user
+         JOIN admin.accom_level using(level_num)
         WHERE user_id = ?
    </entry>
    <entry key="updateTimer">
@@ -143,6 +147,7 @@
    
    <entry key="insertAllHabbit">
        INSERT
+
    		 INTO admin.hbt_register (
               user_id
             , habit_id
@@ -151,7 +156,9 @@
             , habit_days
             , habit_goal
             )
+
        VALUES (
+       		   ?
              , ?
              , ?
              , ?
@@ -196,4 +203,32 @@
         ORDER BY do_date
        
    </entry>
+   
+   <entry key="userLevel">
+       SELECT
+       	 	  user_id
+      		, level_num
+      		, level_image
+      		, (select count(*)
+           		 from admin.hbt_register
+          		where user_id = ?
+         	   ) as "habits"
+      		, (select count(*)
+           		 from admin.hbt_register a
+           		 join admin.hbt_check using (habit_id)
+          		where count_check = habit_goal
+            	  and a.user_id = ?
+         	   ) as "success_check"
+      		, (select count(*)
+           		 from admin.hbt_register a
+           		 join admin.hbt_timer using (habit_id)
+          		where time_record = habit_goal
+            	  and a.user_id = ?
+         	   ) as "success_timer"
+  		FROM admin.hbt_user 
+  		JOIN admin.accom_level USING(level_num)
+ 	   WHERE user_id = ?
+   </entry>
+   
+   
 </properties>

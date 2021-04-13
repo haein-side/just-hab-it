@@ -16,41 +16,25 @@ public class HabbitAddService {
 	
 	private HabbitAddDAO habbitAddDAO = new HabbitAddDAO();
 
-//	public String selectAllHabbit(List<HabbitAddDTO> allhabitList) {
-		
-//		String confirm = null;
-		
-//		Connection con = getConnection();
-		
-//		int selectAllHabbit = HabbitAddDAO.insertAllHabbit(allhabitList, con);
+
+
+//	public List<HabbitAddDTO> insertAllHabbit() {
 //		
-//		if(selectAllHabbit != 0) {
-//			confirm += "성공 했다";
-//		} else {
-//			confirm += "성공했 ";
-//		}
+//		Connection con = getConnection();
+//		
+//		List<HabbitAddDTO> habbitAddList = habbitAddDAO.insertAllHabbit(con, userID, habitID, habitDate, habitType,
+//				habitDays, habitGoal);
 //		
 //		close(con);
 //		
-//		return confirm;
-//	}
-//
-//	public String insertAllHabbit(List<HabbitAddDTO> allhabitList) {
-//		// TODO Auto-generated method stub
-//		return null;
+//		return habbitAddList;
 //	}
 
-	public List<HabbitAddDTO> insertAllHabbit(int habitDate, int habitID, String userID, String habitType,
-			String habitDays, int habitGoal) {
-		
-		Connection con = getConnection();
-		
-		List<HabbitAddDTO> habbitAddList = habbitAddDAO.insertAllHabbit(con, userID, habitID, habitDate, habitType,
-				habitDays, habitGoal);
-		
-		close(con);
-		
-		return habbitAddList;
+
+
+	public List<HabbitAddDTO> insertAllHabbit(HabbitAddDTO habitAddDTO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

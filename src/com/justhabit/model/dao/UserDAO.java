@@ -1,5 +1,7 @@
 package com.justhabit.model.dao;
 
+import static com.justhabit.common.JDBC_EC2.close;
+
 import java.io.FileInputStream;
 import java.io.IOException;
 import java.sql.Connection;
@@ -9,9 +11,8 @@ import java.sql.SQLException;
 import java.util.Properties;
 
 import com.justhabit.model.dto.UserDTO;
+import com.justhabit.model.dto.UserLevelDTO;
 import com.justhabit.view.FirstFrame;
-
-import static com.justhabit.common.JDBC_EC2.close;
 
 public class UserDAO {
 
@@ -132,6 +133,8 @@ private Properties prop = new Properties();
 				user.setUserPwd(rset.getString("user_pwd"));
 				user.setUserEmail(rset.getString("user_email"));
 				user.setUserPin(rset.getInt("user_pin"));
+				user.setUserLevel(rset.getInt("level_num"));
+				user.setUserImage(rset.getString("level_image"));
 			}
 			
 			
@@ -193,6 +196,41 @@ private Properties prop = new Properties();
 		
 		
 		return result == 0 ? false: true;
+	}
+
+	public UserLevelDTO userLevel(Connection con, int loggedUserID) {
+		
+		PreparedStatement psmt = null;
+		ResultSet rset = null;
+		UserLevelDTO user = null;
+		
+		String query = prop.getProperty("userLevel");
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, loggedUserID);
+			psmt.setInt(2, loggedUserID);
+			psmt.setInt(3, loggedUserID);
+			psmt.setInt(4, loggedUserID);
+			
+			rset = psmt.executeQuery();
+			
+			if(rset.next()) {
+				user = new UserLevelDTO();
+				user.setUserId(rset.getInt("user_id"));
+				user.setUserLevel(rset.getInt("level_num"));
+				user.setUserImage(rset.getString("level_image"));
+				user.setNumOfHabits(rset.getInt("habits"));
+				user.setSuccessOfCheck(rset.getInt("success_check"));
+				user.setSuccessOfTimer(rset.getInt("success_timer"));
+			}
+			
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		
+		return user;
 	}
 
 	

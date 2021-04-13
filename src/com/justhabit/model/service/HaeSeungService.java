@@ -12,15 +12,16 @@ import static com.justhabit.common.JDBC_EC2.rollback;
 
 import java.sql.Connection;
 import java.util.List;
+import java.util.Map;
 
-import com.justhabit.model.dao.HaeseungDAO;
-import com.justhabit.model.dto.HaeseungMonthTotalDTO;
-import com.justhabit.model.dto.HaeseungRecordDTO;
-import com.justhabit.model.dto.HaesungInfoDTO;
+import com.justhabit.model.dao.HabitRecordDAO;
+import com.justhabit.model.dto.HabitInfoDTO;
+import com.justhabit.model.dto.HabitMonthTotalDTO;
+import com.justhabit.model.dto.HabitRecordDTO;
 
 public class HaeSeungService {
 	
-	HaeseungDAO habitDAO = new HaeseungDAO();
+	HabitRecordDAO habitDAO = new HabitRecordDAO();
 
 	/**
 	 * <pre>
@@ -30,11 +31,11 @@ public class HaeSeungService {
 	 * @param 
 	 * @return
 	 */
-	public HaesungInfoDTO selectHabitInfo(HaesungInfoDTO registInfo) {
+	public HabitInfoDTO selectHabitInfo(HabitInfoDTO registInfo) {
 		
 		Connection con = getConnection();
 		
-		HaesungInfoDTO info = habitDAO.selectHabit(con, registInfo);
+		HabitInfoDTO info = habitDAO.selectHabit(con, registInfo);
 		close(con);
 		return info;
 	}
@@ -46,7 +47,7 @@ public class HaeSeungService {
 	 * @param checkRecord
 	 * @return
 	 */
-	public int insertCheckService(HaeseungRecordDTO checkRecord) {
+	public int insertCheckService(HabitRecordDTO checkRecord) {
 		
 		Connection con = getConnection();
 		
@@ -67,7 +68,7 @@ public class HaeSeungService {
 	 * @param checkRecord
 	 * @return
 	 */
-	public int insertTimerService(HaeseungRecordDTO checkRecord) {
+	public int insertTimerService(HabitRecordDTO checkRecord) {
 		Connection con = getConnection();
 		
 		int result = habitDAO.insertTimer(con, checkRecord);
@@ -88,11 +89,11 @@ public class HaeSeungService {
 	 * @param recordInfo
 	 * @return
 	 */
-	public HaeseungRecordDTO selectDateinfo(HaeseungRecordDTO recordInfo) {
+	public HabitRecordDTO selectDateinfo(HabitRecordDTO recordInfo) {
 		
 		Connection con = getConnection();
 		
-		HaeseungRecordDTO info= habitDAO.selectDate(con, recordInfo);
+		HabitRecordDTO info= habitDAO.selectDate(con, recordInfo);
 		
 		close(con);
 		return info;
@@ -105,7 +106,7 @@ public class HaeSeungService {
 	 * @param checkRecord
 	 * @return
 	 */
-	public int updateCheckRecordService(HaeseungRecordDTO checkRecord) {
+	public int updateCheckRecordService(HabitRecordDTO checkRecord) {
 		
 		Connection con = getConnection();
 		
@@ -126,7 +127,7 @@ public class HaeSeungService {
 	 * @param timerRecord
 	 * @return
 	 */
-	public int updateTimerRecordService(HaeseungRecordDTO timerRecord) {
+	public int updateTimerRecordService(HabitRecordDTO timerRecord) {
 		Connection con = getConnection();
 		
 		int result = habitDAO.updateTimerRecord(con, timerRecord);
@@ -139,33 +140,33 @@ public class HaeSeungService {
 		return result;
 	}
 
-	public Object selectTimerDateinfo(HaeseungRecordDTO timerRecord) {
+	public Object selectTimerDateinfo(HabitRecordDTO timerRecord) {
 		Connection con = getConnection();
 		
-		HaeseungRecordDTO info= habitDAO.selectTimerDate(con, timerRecord);
+		HabitRecordDTO info= habitDAO.selectTimerDate(con, timerRecord);
 		
 		close(con);
 		return info;
 	}
 
-	public  HaeseungMonthTotalDTO selectMonthTotal(HaeseungMonthTotalDTO totalRecord) {
+	public  HabitMonthTotalDTO selectMonthTotal(HabitMonthTotalDTO totalRecord) {
 		Connection con =getConnection();
 		
-		HaeseungMonthTotalDTO total = habitDAO.selectMonthTotal(con, totalRecord);
+		HabitMonthTotalDTO total = habitDAO.selectMonthTotal(con, totalRecord);
 		return total;
 	}
 
-	public HaeseungMonthTotalDTO selectMonthTimerTotal(HaeseungMonthTotalDTO totalRecord) {
+	public HabitMonthTotalDTO selectMonthTimerTotal(HabitMonthTotalDTO totalRecord) {
 		Connection con =getConnection();
 		
-		HaeseungMonthTotalDTO total = habitDAO.selectMonthTimerTotal(con, totalRecord);
+		HabitMonthTotalDTO total = habitDAO.selectMonthTimerTotal(con, totalRecord);
 		return total;
 	}
 
-	public List<HaeseungRecordDTO> selectRecordGoal(HaeseungRecordDTO recordInfo) {
+	public Map<String,HabitRecordDTO> selectRecordGoal(HabitRecordDTO recordInfo) {
 		Connection con = getConnection();
 		
-		List<HaeseungRecordDTO> selectRecordGoalList= null;
+		Map<String,HabitRecordDTO> selectRecordGoalList= null;
 		if(recordInfo.getRecordType().equals("c")) {
 			selectRecordGoalList = habitDAO.selectCheckRecordGoal(con, recordInfo);
 		} else {

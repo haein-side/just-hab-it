@@ -16,9 +16,9 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-import com.justhabit.model.controller.HaeSeungController;
-import com.justhabit.model.dto.HaeseungRecordDTO;
-import com.justhabit.model.dto.HaesungInfoDTO;
+import com.justhabit.model.controller.HabitRecordController;
+import com.justhabit.model.dto.HabitRecordDTO;
+import com.justhabit.model.dto.HabitInfoDTO;
 
 public class timerPanel extends JPanel{
 	
@@ -120,7 +120,7 @@ public class timerPanel extends JPanel{
 							hr = t / (60*60*100) % 24;
 							mm = t /(60*100) % 60;
 							ss = t / 100 % 60;
-							ms = t % 100;
+							ms =  t % 100;
 							 
 							try {
 								Thread.sleep(10);

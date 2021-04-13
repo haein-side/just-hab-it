@@ -1,17 +1,17 @@
 package com.justhabit.model.dto;
 
-public class HaeseungMonthTotalDTO {
+public class HabitMonthTotalDTO {
 
 	private int habitId;
 	private String todayMonth;
 	private int dateCount;
 	private double recordSum;
 	
-	public HaeseungMonthTotalDTO() {
+	public HabitMonthTotalDTO() {
 		super();
 	}
 
-	public HaeseungMonthTotalDTO(int habitId, String todayMonth, int dateCount, int recordSum) {
+	public HabitMonthTotalDTO(int habitId, String todayMonth, int dateCount, int recordSum) {
 		super();
 		this.habitId = habitId;
 		this.todayMonth = todayMonth;

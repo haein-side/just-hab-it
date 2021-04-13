@@ -1,6 +1,7 @@
 package com.justhabit.model.controller;
 
 import com.justhabit.model.dto.UserDTO;
+import com.justhabit.model.dto.UserLevelDTO;
 import com.justhabit.model.service.UserService;
 
 public class UserController {
@@ -74,7 +75,7 @@ public class UserController {
 		return userService.deleteUser(myUser.getUserId());
 	}
 
-	public String updateUser(UserDTO myUser) {
+	public String updateUser(UserDTO myUser, String input_username) {
 
 		String result = "";
 		
@@ -90,24 +91,30 @@ public class UserController {
 				|| myUser.getUserEmail().trim().equals("")) {
 			result = "빈칸을 모두 채워주세요";
 		}
+		
+		// 3. 비밀번호에 기본값인 *이 포함되어있는지 확인
+		else if(myUser.getUserPwd().contains("*")) {
+			result = "비밀번호에 *포함 될 수 없습니다";
+		}
 
-		// 3. username 중복인지 확인 -> 위에 만든 userIdCheck() 사용
-		else if(!userService.userIdCheck(myUser.getUserName())) {
-			result = "입력한 아이디가 이미 존재하는 아이디입니다";
+		// 4. 사용자가 입력한 아이디가 현재 사용중인 아이디가 아닌 다른 아이디로 변경 하려고 할 때
+		//    username 중복인지 확인 -> 위에 만든 userIdCheck() 사용
+		else if(!myUser.getUserName().equals(input_username)) {
+			if(!userService.userIdCheck(myUser.getUserName()))
+				result = "입력한 아이디가 이미 존재하는 아이디입니다";
 		}
 		
-		// 4. 회원정보 수정 
+		// 5. 회원정보 수정 
 		else {
 			result = userService.userUpdate(myUser);
 		}
 		
-		
-		
-		
-		
-		
-		
 		return result;
+	}
+
+	public UserLevelDTO userLevel(int loggedUserID) {
+		
+		return userService.userLevel(loggedUserID);
 	}
 
 }

@@ -13,6 +13,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.dto.HabbitAddDTO;
 
 public class HabbitAdd extends JFrame {
 
@@ -21,11 +22,13 @@ public class HabbitAdd extends JFrame {
 //	private JLabel label; // 라벨
 //	private JTextField text; // 텍스트 입력
 	
-	
+   public static HabbitAddDTO habbitAddDTO = new HabbitAddDTO();
    private HabbitAdd habbitAdd = this;
    
 
    public HabbitAdd() {
+	   
+	HabbitAdd.habbitAddDTO.setUserID(FirstFrame.loggedUserID);
 
 	habbitAdd.setLayout(null);
 	habbitAdd.setSize(900, 462);
@@ -61,9 +64,10 @@ public class HabbitAdd extends JFrame {
   	jbutton2.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-        	
-        	PanelChangeControl.changeFrame(habbitAdd , new HabbitAdd2());
         	System.out.println(text.getText());
+        	HabbitAdd.habbitAddDTO.setHabitName(text.getText());
+        	PanelChangeControl.changeFrame(habbitAdd , new HabbitAdd3());
+        	
         }
      });
   	

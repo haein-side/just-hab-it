@@ -2,14 +2,14 @@ package com.justhabit.model.controller;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
-import com.justhabit.model.dto.HaeseungMonthTotalDTO;
-import com.justhabit.model.dto.HaeseungRecordDTO;
-import com.justhabit.model.dto.HaesungInfoDTO;
+import com.justhabit.model.dto.HabitInfoDTO;
+import com.justhabit.model.dto.HabitMonthTotalDTO;
+import com.justhabit.model.dto.HabitRecordDTO;
 import com.justhabit.model.service.HaeSeungService;
 
-public class HaeSeungController {
+public class HabitRecordController {
 	
 	private HaeSeungService habitService = new HaeSeungService();
 	
@@ -20,9 +20,9 @@ public class HaeSeungController {
 	 * @param habitID
 	 * @return
 	 */
-	public HaesungInfoDTO selectHabitInfo(HaesungInfoDTO registInfo) {
+	public HabitInfoDTO selectHabitInfo(HabitInfoDTO registInfo) {
 		
-		HaesungInfoDTO info = habitService.selectHabitInfo(registInfo);
+		HabitInfoDTO info = habitService.selectHabitInfo(registInfo);
 		return info;
 	}
 
@@ -33,7 +33,7 @@ public class HaeSeungController {
 	 * @param record
 	 * @return
 	 */
-	public int dateSelectController(HaeseungRecordDTO recordInfo) {
+	public int dateSelectController(HabitRecordDTO recordInfo) {
 		
 		int result = 0;
 		if(!(habitService.selectDateinfo(recordInfo)==null)) {
@@ -50,7 +50,7 @@ public class HaeSeungController {
 	 * </pre>
 	 * @param checkRecord
 	 */
-	public void insertCheckController(HaeseungRecordDTO checkRecord) {
+	public void insertCheckController(HabitRecordDTO checkRecord) {
 //		오늘날짜로 설정. 테스트시 주석처리
 		Date todayDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
@@ -71,7 +71,7 @@ public class HaeSeungController {
 	 * 시간기록 INSERT
 	 * @param checkRecord
 	 */
-	public void insertTimerController(HaeseungRecordDTO timerRecord) {
+	public void insertTimerController(HabitRecordDTO timerRecord) {
 //		오늘날짜로 설정. 테스트시 주석처리
 		Date todayDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yy/MM/dd");
@@ -93,7 +93,7 @@ public class HaeSeungController {
 	 * </pre>
 	 * @param checkRecord
 	 */
-	public void updateCheckController(HaeseungRecordDTO checkRecord) {
+	public void updateCheckController(HabitRecordDTO checkRecord) {
 		
 		int result = habitService.updateCheckRecordService(checkRecord);
 		
@@ -110,7 +110,7 @@ public class HaeSeungController {
 	 * </pre>  
 	 * @param timerRecord
 	 */
-	public void updateTimerController(HaeseungRecordDTO timerRecord) {
+	public void updateTimerController(HabitRecordDTO timerRecord) {
 		
 		int result = habitService.updateTimerRecordService(timerRecord);
 		
@@ -121,7 +121,7 @@ public class HaeSeungController {
 		}
 	}
 
-	public int dateTimerSelectController(HaeseungRecordDTO timerRecord) {
+	public int dateTimerSelectController(HabitRecordDTO timerRecord) {
 		int result = 0;
 		if(!(habitService.selectTimerDateinfo(timerRecord)==null)) {
 			result = 1;
@@ -137,9 +137,9 @@ public class HaeSeungController {
 	 * @param totalRecord
 	 * @return
 	 */
-	public HaeseungMonthTotalDTO monthTotalController(HaeseungMonthTotalDTO totalRecord) {
+	public HabitMonthTotalDTO monthTotalController(HabitMonthTotalDTO totalRecord) {
 		
-		HaeseungMonthTotalDTO monthTotal = habitService.selectMonthTotal(totalRecord);
+		HabitMonthTotalDTO monthTotal = habitService.selectMonthTotal(totalRecord);
 		return monthTotal;
 	}
 
@@ -150,15 +150,15 @@ public class HaeSeungController {
 	 * @param totalRecord
 	 * @return
 	 */
-	public HaeseungMonthTotalDTO monthTimerTotalController(HaeseungMonthTotalDTO totalRecord) {
+	public HabitMonthTotalDTO monthTimerTotalController(HabitMonthTotalDTO totalRecord) {
 		
-		HaeseungMonthTotalDTO monthTotal = habitService.selectMonthTimerTotal(totalRecord);
+		HabitMonthTotalDTO monthTotal = habitService.selectMonthTimerTotal(totalRecord);
 		
 		return monthTotal;
 	}
 
-	public List<HaeseungRecordDTO> selectRecordGoal(HaeseungRecordDTO Record) {
-		List<HaeseungRecordDTO> recordAndGoalList = habitService.selectRecordGoal(Record);
+	public Map<String,HabitRecordDTO> selectRecordGoal(HabitRecordDTO Record) {
+		Map<String,HabitRecordDTO> recordAndGoalList = habitService.selectRecordGoal(Record);
 		return recordAndGoalList;
 	}
 

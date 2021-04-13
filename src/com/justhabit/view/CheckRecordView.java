@@ -10,7 +10,7 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
-import java.util.List;
+import java.util.Map;
 
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -19,11 +19,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import com.justhabit.model.controller.HaeSeungController;
+import com.justhabit.model.controller.HabitRecordController;
 import com.justhabit.model.controller.PanelChangeControl;
-import com.justhabit.model.dto.HaeseungMonthTotalDTO;
-import com.justhabit.model.dto.HaeseungRecordDTO;
-import com.justhabit.model.dto.HaesungInfoDTO;
+import com.justhabit.model.dto.HabitInfoDTO;
+import com.justhabit.model.dto.HabitMonthTotalDTO;
+import com.justhabit.model.dto.HabitRecordDTO;
 
 public class CheckRecordView extends JFrame{
 	
@@ -31,11 +31,11 @@ public class CheckRecordView extends JFrame{
 	 * 체크박스 기록페이지
 	 */
 	
-	private HaeSeungController habitInfoController = new HaeSeungController();
-	private HaeseungRecordDTO checkRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
-	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
-	private HaeseungMonthTotalDTO totalRecord = new HaeseungMonthTotalDTO();
-	List<HaeseungRecordDTO> recordAndGoalList = null;
+	private HabitRecordController habitInfoController = new HabitRecordController();
+	private HabitRecordDTO checkRecord = new HabitRecordDTO(); //습관 기록전달DTO
+	private HabitInfoDTO registInfo = new HabitInfoDTO(); //습관등록정보전달DTO
+	private HabitMonthTotalDTO totalRecord = new HabitMonthTotalDTO();
+	Map<String,HabitRecordDTO> recordAndGoalList = null;
 	private int checkCount = 0; // 체크박스카운트용
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
@@ -61,8 +61,6 @@ public class CheckRecordView extends JFrame{
 		
 		//등록된 습관정보 불러오기
 		registInfo.setHabitID(MainPage.userhabitid);
-		//TODO 삭제예정: 테스트용
-//		registInfo.setHabitID(1); 
 		registInfo = habitInfoController.selectHabitInfo(registInfo);
 		
 		//습관상단바
@@ -176,6 +174,7 @@ public class CheckRecordView extends JFrame{
 				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
 				dayButton[i].setVerticalAlignment(JLabel.CENTER);
 				dayButton[i].setBackground(Color.white);
+//				dayButton[i].setBackground(Color.decode("#ffff64"));
 				calendar.add(dayButton[i]);
 			} else {
 				CalenderDate = calArr.get(i)+"";
@@ -198,40 +197,50 @@ public class CheckRecordView extends JFrame{
 		for(int i = 0; i < calArr.size(); i++) {
 			
 			searchDate = checkYearMonth+"/"+dayButton[i].getText();
-			for(int j = 0; j < recordAndGoalList.size(); j++) {
-				
-				if(searchDate.equals(recordAndGoalList.get(j).getDoDate())) {
-					int goal = recordAndGoalList.get(j).getHabitGoal();
-					int record = recordAndGoalList.get(j).getCheck();
-					if(goal == record) {
-						dayButton[i].setBackground(Color.green);
-					} else if(record > 0 ){
-						dayButton[i].setBackground(Color.yellow);
-					}
+			if(recordAndGoalList.get(searchDate)!=null) {
+				int goal = recordAndGoalList.get(searchDate).getHabitGoal();
+				int record = recordAndGoalList.get(searchDate).getCheck();
+				if(goal == record) {
+					dayButton[i].setBackground(Color.green);
+				} else {
+					dayButton[i].setBackground(Color.yellow);
 				}
 			}
 		}
-		
-		//클릭시 그날 기록 출력하기,기록있는날만 나옴  
+				
+		//클릭시 그날 기록 출력하기  
 		for(int i = 0; i < calArr.size(); i++) {
 			searchDate = checkYearMonth+"/"+dayButton[i].getText();
-			for(int j = 0; j < recordAndGoalList.size(); j++) {
-				int a = j;
-				String b = searchDate;
-					dayButton[i].addActionListener(new ActionListener() {
-						boolean ade = false;
-						@Override
-						public void actionPerformed(ActionEvent e) {
-							if(b.equals(recordAndGoalList.get(a).getDoDate())) {
-								JOptionPane.showMessageDialog(mf, b +"\n\n"+recordAndGoalList.get(a).getCheck() + " / " + recordAndGoalList.get(a).getHabitGoal());
-							} 
-						}	
-					});
+			if(recordAndGoalList.get(searchDate)==null) {
+				String dialogDate = searchDate;
+				dayButton[i].addActionListener(new ActionListener() {
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(mf, dialogDate +"\n\n"+ 0 + " / " + registInfo.getHabitGoal());
+					}
+				});
+			} else {
+				String dialogDate = searchDate;
+				dayButton[i].addActionListener(new ActionListener() {
+					
+					@Override
+					public void actionPerformed(ActionEvent e) {
+						JOptionPane.showMessageDialog(mf, dialogDate +"\n\n"+ recordAndGoalList.get(dialogDate).getCheck() + " / " + registInfo.getHabitGoal());
+						
+					}
+				});
 			}
 		}
 		
-		
 		calendarPanel.add(calendar);
+		
+		//기존 등록된 습관이 있으면 횟수 출력하기
+		SimpleDateFormat todayRecord = new SimpleDateFormat("yy/MM/dd");
+		String existingRecordDaty = todayRecord.format(todayDate);
+		if(recordAndGoalList.get(existingRecordDaty)!=null) {
+			habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
+			checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
+		}
 		
 		//문구 표시
 		JPanel infoPanel = new JPanel();
@@ -288,6 +297,7 @@ public class CheckRecordView extends JFrame{
 							habitInfoController.updateCheckController(checkRecord);
 							JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
 						}
+						//월기록 출력문구 바꾸기
 						totalRecord.setHabitId(registInfo.getHabitID());
 						totalRecord.setTodayMonth(thisMonth);
 						totalRecord = habitInfoController.monthTotalController(totalRecord);
@@ -295,31 +305,29 @@ public class CheckRecordView extends JFrame{
 						totalCheck = (int)totalRecord.getRecordSum();
 						infoText.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 						
+						//달력 값 바꾸기
 						checkRecord.setHabitId(MainPage.userhabitid);
 						checkRecord.setRecordType(registInfo.getHabitType());
 						recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
 						SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
 						String checkYearMonth = yearMonth.format(todayDate);
-						System.out.println(checkYearMonth);
 						String searchDate =  "";
 						for(int i = 0; i < calArr.size(); i++) {
 							
 							searchDate = checkYearMonth+"/"+dayButton[i].getText();
 							System.out.println("비교할 날짜 : " +  searchDate);
-							for(int j = 0; j < recordAndGoalList.size(); j++) {
-								
-								if(searchDate.equals(recordAndGoalList.get(j).getDoDate())) {
-									int goal = recordAndGoalList.get(j).getHabitGoal();
-									int record = recordAndGoalList.get(j).getCheck();
-									
-									if(goal == record) {
-										dayButton[i].setBackground(Color.green);
-									} else if(record > 0 ){
-										dayButton[i].setBackground(Color.yellow);
-									}
+							if(recordAndGoalList.get(searchDate)!=null) {
+								int goal = recordAndGoalList.get(searchDate).getHabitGoal();
+								int record = recordAndGoalList.get(searchDate).getCheck();
+								if(goal == record) {
+									dayButton[i].setBackground(Color.green);
+								} else if(record > 0 ){
+									dayButton[i].setBackground(Color.yellow);
 								}
 							}
 						}
+						habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
+						checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
 					}
 				}
 			});

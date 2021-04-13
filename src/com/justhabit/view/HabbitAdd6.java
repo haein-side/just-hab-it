@@ -54,12 +54,12 @@ public class HabbitAdd6 extends JFrame{
 	      jbutton2.setLocation(450, 280);
 	      habbitAdd6.add(jbutton2);
 	      	
-	      	jbutton1.addMouseListener(new MouseAdapter() {
-	            @Override
-	            public void mouseClicked(MouseEvent e) {
-	            	PanelChangeControl.changeFrame(habbitAdd6 , new HabbitAdd4());
-	            }
-	         }); 
+//	      	jbutton1.addMouseListener(new MouseAdapter() {
+//	            @Override
+//	            public void mouseClicked(MouseEvent e) {
+//	            	PanelChangeControl.changeFrame(habbitAdd6 , new HabbitAdd4());
+//	            }
+//	         }); 
 	      	
 	      	jbutton2.addMouseListener(new MouseAdapter() {
 	      		@Override
