@@ -124,6 +124,13 @@
         WHERE user_id = ?
    </entry>
    
+   <entry key="deleteHabit">
+   	   DELETE
+   	     FROM admin.hbt_register
+   	    WHERE habit_name = ? 
+   	
+   </entry>
+   
    <entry key="updateUser">
        UPDATE admin.hbt_user 
           SET 
