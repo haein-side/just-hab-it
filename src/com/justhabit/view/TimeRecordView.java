@@ -5,6 +5,7 @@ import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -60,7 +62,7 @@ public class TimeRecordView extends JFrame{
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
-		center.setBackground(new Color(246,245,245));
+		center.setBackground(new Color(47,49,54));
 		
 		
 		//등록된 습관정보 불러오기
@@ -111,22 +113,19 @@ public class TimeRecordView extends JFrame{
 		}
 		
 		//월표시
-		JPanel monthPrint = new JPanel();
-		monthPrint.setBounds(80,15,200,50);
-		monthPrint.setBackground(new Color(255,204,153));
-		
 		thisMonth = "";
 		if(month < 9) {
 			thisMonth = "0"+(month+1);
 		} else {
 			thisMonth = month+1+"";
 		}
-		
 		JLabel monthName = new JLabel(thisMonth+"월");
+		monthName.setBounds(160,15,80,50);
 		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
+		monthName.setForeground(new Color(255,255,204));
 		
-		monthPrint.add(monthName);
-		calendarPanel.add(monthPrint);
+		calendarPanel.add(monthName);
+		
 		
 		//달력표시
 		JPanel calendar = new JPanel();
@@ -172,10 +171,12 @@ public class TimeRecordView extends JFrame{
 				int goal = recordAndGoalList.get(searchDate).getHabitGoal();
 				double record = recordAndGoalList.get(searchDate).getTimer();
 				if(goal <= record) {
-					dayButton[i].setBackground(Color.green);
+					dayButton[i].setBackground(new Color(102,204,153));
 				} else {
-					dayButton[i].setBackground(Color.yellow);
+					dayButton[i].setBackground(new Color(255,204,51));
 				}
+			} else {
+				dayButton[i].setBackground(new Color(255,255,255));
 			}
 		}
 		calendarPanel.add(calendar);
@@ -295,9 +296,9 @@ public class TimeRecordView extends JFrame{
 									int goal = recordAndGoalList.get(searchDate).getHabitGoal();
 									double record = recordAndGoalList.get(searchDate).getTimer();
 									if(goal <= record) {
-										dayButton[i].setBackground(Color.green);
+										dayButton[i].setBackground(new Color(102,204,153));
 									} else if(record > 0 ){
-										dayButton[i].setBackground(Color.yellow);
+										dayButton[i].setBackground(new Color(255,204,51));
 									}
 								}
 							}
@@ -355,7 +356,16 @@ public class TimeRecordView extends JFrame{
 		center.add(habitInfo);
 		center.add(calendarPanel);
 		center.add(habitTop);
-		
+		//달력배경
+		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 450, 0);
+		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
+		CalendarBackground.setBounds(0, 0, 350, 340);
+		//배경화면
+		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
+		JLabel background = new JLabel(new ImageIcon(backImg));
+		background.setBounds(0, 0, 900, 462);
+		calendarPanel.add(CalendarBackground);
+		center.add(background);
 		this.add(center);
 		
 	}

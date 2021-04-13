@@ -322,9 +322,9 @@ public class CheckRecordView extends JFrame{
 								int goal = recordAndGoalList.get(searchDate).getHabitGoal();
 								int record = recordAndGoalList.get(searchDate).getCheck();
 								if(goal == record) {
-									dayButton[i].setBackground(Color.green);
+									dayButton[i].setBackground(new Color(102,204,153));
 								} else if(record > 0 ){
-									dayButton[i].setBackground(Color.yellow);
+									dayButton[i].setBackground(new Color(255,204,51));
 								}
 							}
 						}
