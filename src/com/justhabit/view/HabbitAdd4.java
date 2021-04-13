@@ -75,7 +75,7 @@ public class HabbitAdd4 extends JFrame {
             	PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd3());
             }
          }); 
-      	
+
       	jbutton2.addMouseListener(new MouseAdapter() {
       		
             @Override
@@ -94,5 +94,10 @@ public class HabbitAdd4 extends JFrame {
             	 }
             }
          }); 
+
+      	
+
+
+
    } 
 }

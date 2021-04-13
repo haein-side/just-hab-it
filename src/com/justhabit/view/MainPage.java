@@ -56,6 +56,8 @@ public class MainPage extends JFrame{
 		//가운데 패널
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
+//		center.setLocation(0, 100);
+		center.setPreferredSize(new Dimension(900,462));
 		center.setLayout(null);
 //		center.setBackground(new Color(246,245,245));
 		
@@ -72,7 +74,7 @@ public class MainPage extends JFrame{
 //		JButton[] habitButtons = new JButton[allhabitList.size()];
 	
 		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
-		JButton[] habitButtons = new JButton[allhabitList.size()];
+//		JButton[] habitButtons = new JButton[allhabitList.size()];
 		
 		JPanel right = new JPanel();
 		right.setBounds(400, 100, 500, 462);
@@ -81,7 +83,7 @@ public class MainPage extends JFrame{
 		for(h = 0; h < allhabitList.size(); h++) {
 				JButton box = new JButton();
 				box.setSize(400, 60);
-				box.setLocation(400, 180 + 100 * (h-1));	
+				box.setLocation(400, 180 + 50 * (h-1));	
 				box.setText(allhabitList.get(h).getHabitName());
 				
 				int i = h;
@@ -106,26 +108,26 @@ public class MainPage extends JFrame{
 		
 		
         // 스크롤
-        JScrollPane scrollbar = new JScrollPane();
-        scrollbar.setPreferredSize(new Dimension(20,300));
+        JScrollPane scrollbar = new JScrollPane(center);
+        scrollbar.setPreferredSize(new Dimension(900,600));
         scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         int width = scrollbar.getPreferredSize().width;
         int height = scrollbar.getPreferredSize().height;
-        scrollbar.setBounds(850,60,20,300);
+        scrollbar.setBounds(850,100,width,height);
         scrollbar.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        scrollbar.setBackground(Color.pink);
-        center.add(scrollbar);
+//        scrollbar.setBackground(Color.pink);
+        this.add(scrollbar);
         
-//        JScrollPane scrollPane =
-//        	      new JScrollPane(
-//        	          center,
-//        	          JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED,
-//        	          JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
-//        	  scrollPane.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-////        	  int width = scrollPane.getPreferredSize().width;
-////              int height = scrollPane.getPreferredSize().height;
-//              scrollPane.setBounds(700,60,10,300);
-//        this.add(scrollPane);
+        // 스크롤
+//        JScrollPane scrollbar = new JScrollPane(middlePanel);
+//        scrollbar.setPreferredSize(new Dimension(685,700));
+//        scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+//        int width = scrollbar.getPreferredSize().width;
+//        int height = scrollbar.getPreferredSize().height;
+//        scrollbar.setBounds(0,100,width,height);
+//        scrollbar.setBorder(pinkborder);
+//        scrollbar.setBackground(Color.pink);
+//        this.getContentPane().add(scrollbar);
 
 		
 		
@@ -234,7 +236,7 @@ public class MainPage extends JFrame{
 	    
 		Image back = new ImageIcon("image/resizedbackground1.jpg").getImage().getScaledInstance(900, 700, 0);
 		JLabel backImg = new JLabel(new ImageIcon(back));
-		backImg.setBounds(0,0,900,700);
+		backImg.setBounds(0,0,900,462);
 		center.add(backImg);
 		
 		
@@ -246,7 +248,7 @@ public class MainPage extends JFrame{
 		botPan.setBackground(Color.GREEN);
 		
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage"};
+		String[] menu = {"Main", "습관등록", "습관삭제", "mypage"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
@@ -264,8 +266,16 @@ public class MainPage extends JFrame{
 	             PanelChangeControl.changeFrame(mf, new HabbitAdd());
 	          }
 	       });
-		
 		menuButton[2].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+//	             PanelChangeControl.changeFrame(mf, new DeleteHabit());
+	        	  new DeleteHabbit();
+	          }
+	       });
+		
+		menuButton[3].addActionListener(new ActionListener() {
 	          
 	          @Override
 	          public void actionPerformed(ActionEvent e) {

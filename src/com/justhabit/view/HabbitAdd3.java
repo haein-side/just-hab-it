@@ -75,8 +75,12 @@ public class HabbitAdd3 extends JFrame {
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
+
             	
             	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd());
+
+
+            
 
             }
          }); 
