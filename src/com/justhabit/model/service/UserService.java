@@ -1,7 +1,10 @@
 package com.justhabit.model.service;
 
-import static com.justhabit.common.JDBC_EC2.getConnection;
 import static com.justhabit.common.JDBC_EC2.close;
+import static com.justhabit.common.JDBC_EC2.getConnection;
+import static com.justhabit.common.JDBC_EC2.commit;
+import static com.justhabit.common.JDBC_EC2.rollback;
+
 
 
 import java.sql.Connection;
@@ -43,6 +46,11 @@ public class UserService {
 		
 		boolean isRegistered = userDAO.registerUser(con, registerUser);
 		
+		if(isRegistered)
+			commit(con);
+		else 
+			rollback(con);
+		
 		close(con);
 		
 		return isRegistered;
@@ -66,6 +74,11 @@ public class UserService {
 		
 		boolean isDeleted = userDAO.deleteUser(con, userId);
 		
+		if(isDeleted)
+			commit(con);
+		else 
+			rollback(con);
+		
 		close(con);
 		
 		return isDeleted;
@@ -76,6 +89,11 @@ public class UserService {
 		Connection con = getConnection();
 		
 		boolean isUpdated = userDAO.updateUser(con, myUser);
+		
+		if(isUpdated)
+			commit(con);
+		else 
+			rollback(con);
 		
 		close(con);
 		

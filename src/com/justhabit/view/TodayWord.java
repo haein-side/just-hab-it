@@ -54,32 +54,7 @@ public class TodayWord extends JFrame {
 		words[5] = "<오늘의 명언>\n\n습관은 나무 껍질에 새겨놓은 \n 문자 같아서 그 나무가\n 자라남에 따라 확대된다.\n\n-새뮤얼 스마일스-";
 		words[6] = "<오늘의 명언>\n\n우리가 반복해서 하는 행동이\n 바로 우리이다.\n 그러므로 탁월함이란,\n 행동이 아니라 습관이다. \n\n-아리스토텔레스-";
 		
-//		words[7] = "-로망로랑-";
-//		words[8] = "충분을 끌어내는 기술이다.";
-//		words[9] = "S.버틀러-";
-//		words[10] = "-타키투스-";
-//		words[11] = " 어떤 일이든지 하게 만든다.";
-//		words[12] = "-도스토예프스키-";
-//		words[13] = "인생은 오늘의 나 안에 있고";
-//		words[13] = "인생은 오늘의 나 안에 있고";
-//		
-//	
-//		JLabel head = new JLabel("<오늘의 명언>");
-//		
-//		Font font = new Font("궁서", Font.BOLD, 20);
-//		head.setFont(font);
-//	
-//		head.setSize(300,100);
-//		head.setLocation(390, 230);
-//	    this.add(head);
-//		
-//		JLabel promise = new JLabel(words[(int)(Math.random()*7)]);
-//		
-//		promise.setFont(font);
-//	
-//	    promise.setSize(500,300);
-//	    promise.setLocation(300, 300);
-//	    this.add(promise);
+
 		
 		JTextPane textfield = new JTextPane();
 

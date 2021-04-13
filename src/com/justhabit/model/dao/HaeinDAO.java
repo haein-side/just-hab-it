@@ -47,11 +47,11 @@ public class HaeinDAO {
 				while(rset.next()) {
 					
 					AllHabitDTO habit = new AllHabitDTO();
-					habit.setHabitID(rset.getInt("HABIT_ID"));
-					habit.setHabitName(rset.getString("HABIT_NAME"));
-					habit.setHabitType(rset.getString("HABIT_TYPE"));
-					habit.setHabitDays(rset.getString("HABIT_DAYS"));
-					habit.setHabitGoal(rset.getInt("HABIT_GOAL"));
+					habit.setHabitID(rset.getInt("habit_id"));
+					habit.setHabitName(rset.getString("habit_name"));
+					habit.setHabitType(rset.getString("habit_type"));
+					habit.setHabitDays(rset.getString("habit_days"));
+					habit.setHabitGoal(rset.getInt("habit_goal"));
 					allhabitList.add(habit);
 					
 				}

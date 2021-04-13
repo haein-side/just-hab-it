@@ -132,6 +132,8 @@ private Properties prop = new Properties();
 				user.setUserPwd(rset.getString("user_pwd"));
 				user.setUserEmail(rset.getString("user_email"));
 				user.setUserPin(rset.getInt("user_pin"));
+				user.setUserLevel(rset.getInt("level_num"));
+				user.setUserImage(rset.getString("level_image"));
 			}
 			
 			

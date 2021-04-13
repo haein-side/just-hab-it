@@ -13,6 +13,8 @@ public class UserDTO implements Serializable {
 	private String userPwd;
 	private String userEmail;
 	private int userPin;
+	private int userLevel;
+	private String userImage;
 	
 	public UserDTO() {
 		super();
@@ -66,13 +68,30 @@ public class UserDTO implements Serializable {
 	public void setUserPin(int userPin) {
 		this.userPin = userPin;
 	}
+	
+
+	public int getUserLevel() {
+		return userLevel;
+	}
+
+	public void setUserLevel(int userLevel) {
+		this.userLevel = userLevel;
+	}
+
+	public String getUserImage() {
+		return userImage;
+	}
+
+	public void setUserImage(String userImage) {
+		this.userImage = userImage;
+	}
 
 	@Override
 	public String toString() {
 		return "UserDTO [userId=" + userId + ", userName=" + userName + ", userPwd=" + userPwd + ", userEmail="
-				+ userEmail + ", userPin=" + userPin + "]";
+				+ userEmail + ", userPin=" + userPin + ", userLevel=" + userLevel + ", userImage=" + userImage + "]";
 	}
-	
+
 	
 	
 }

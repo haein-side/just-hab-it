@@ -18,11 +18,18 @@ public class Run {
 //		MainPage mainpage = new MainPage();
 //		mainpage.displayHabit();
 		
+
 //		new MyPage();
 		new HabbitAdd();
 		
 	}
 }
+
+//		new HabbitAdd();
+//		
+//	}
+//}
+
 //
 //
 //package com.justhabit.run;
