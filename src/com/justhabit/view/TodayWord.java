@@ -28,6 +28,8 @@ public class TodayWord extends JFrame {
   private Image back;
   private TodayWord todayWord = this;
   
+  public static String image_name;
+  
   private UserController userController = new UserController();
 	
 	public TodayWord() {
@@ -84,7 +86,7 @@ public class TodayWord extends JFrame {
 		first.setLocation(410, 560);
 		this.add(first);
 		
-		String userImage = userLevel(); 
+		image_name = userLevel(); 
 
 		Image level = new ImageIcon("image/오늘의명언배경.jpeg").getImage().getScaledInstance(900, 700, 0);
 		
@@ -124,7 +126,7 @@ public class TodayWord extends JFrame {
 		
 		// 3. 이미지 이름 return
 		
-		return "";
+		return user.getUserImage();
 	}
 
 

@@ -216,17 +216,21 @@ private Properties prop = new Properties();
 			rset = psmt.executeQuery();
 			
 			if(rset.next()) {
-				
-				
+				user = new UserLevelDTO();
+				user.setUserId(rset.getInt("user_id"));
+				user.setUserLevel(rset.getInt("level_num"));
+				user.setUserImage(rset.getString("level_image"));
+				user.setNumOfHabits(rset.getInt("habits"));
+				user.setSuccessOfCheck(rset.getInt("success_check"));
+				user.setSuccessOfTimer(rset.getInt("success_timer"));
 			}
-			
 			
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		
-		return null;
+		return user;
 	}
 
 	
