@@ -26,20 +26,17 @@ public class TopPanel extends JPanel{
 		Title.setVisible(true);
 		this.add(Title);
 		
-		//상단바 좌측
-		JPanel topPanLeft = new JPanel();
-		topPanLeft.setSize(100, 100);
-		//topPanLeft.setBackground(Color.W);
+
 		
 		//좌측이미지
-		Image leftImage = new ImageIcon("image/turtle1.jpeg").getImage().getScaledInstance(100, 100, 0);
+		Image leftImage = new ImageIcon("image/" + TodayWord.image_name).getImage().getScaledInstance(100, 70, 0);
 		
 		JLabel leftLabel = new JLabel(new ImageIcon(leftImage));
 		
-		leftLabel.setBounds(0, 0, 80, 80);
-		topPanLeft.add(leftLabel);
-		this.add(topPanLeft);
-		
+		leftLabel.setBounds(10, 0, 80, 80);
+
+		this.add(leftLabel);
+	
 		//오늘날짜 출력
 		Date today = new Date();
 		SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy년 MM월 dd일 E요일");
