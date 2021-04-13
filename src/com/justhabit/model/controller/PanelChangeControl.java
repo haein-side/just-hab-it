@@ -5,6 +5,9 @@ import java.awt.Container;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 
+import com.justhabit.view.FirstFrame;
+import com.justhabit.view.LoginPanel;
+
 public class PanelChangeControl {
 
 	public static JFrame mainFrame;
@@ -43,6 +46,10 @@ public class PanelChangeControl {
     	  pane.add(panNew); 
 //    	  LoadPanListener.curPane = panNew; 
     	  mainFrame.setContentPane(pane); 
-    } 
+    }
+
+	public static void changePanel(JFrame frame, LoginPanel signup, FirstFrame firstFrame) {
+		frame.setVisible(false);
+	} 
     
 }
