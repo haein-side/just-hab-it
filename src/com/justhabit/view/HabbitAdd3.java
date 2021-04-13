@@ -2,6 +2,10 @@ package com.justhabit.view;
 
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.ItemEvent;
+import java.awt.event.ItemListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseListener;
@@ -47,12 +51,12 @@ public class HabbitAdd3 extends JFrame {
        JCheckBox jcb[] = new JCheckBox[7];
 
         jcb[0] = new JCheckBox("일");
-		jcb[1] = new JCheckBox("화");
-		jcb[2] = new JCheckBox("수");
-		jcb[3] = new JCheckBox("목");
-		jcb[4] = new JCheckBox("금");
-		jcb[5] = new JCheckBox("토");
-		jcb[6] = new JCheckBox("일");
+        jcb[1] = new JCheckBox("월");
+		jcb[2] = new JCheckBox("화");
+		jcb[3] = new JCheckBox("수");
+		jcb[4] = new JCheckBox("목");
+		jcb[5] = new JCheckBox("금");
+		jcb[6] = new JCheckBox("토");
 		
 		
 
@@ -63,15 +67,15 @@ public class HabbitAdd3 extends JFrame {
 		
 		habbitAdd3.add(checkPanel);
 		
-	   JButton jbutton1 = new JButton("이전");
-       jbutton1.setSize(80,50);
-       jbutton1.setLocation(300, 280);
-       habbitAdd3.add(jbutton1);	
+		JButton jbutton1 = new JButton("이전");
+	   	jbutton1.setSize(80,50);
+       	jbutton1.setLocation(300, 280);
+       	habbitAdd3.add(jbutton1);	
        
-       JButton jbutton2 = new JButton("다음");
-       jbutton2.setSize(80,50);
-       jbutton2.setLocation(450, 280);
-      habbitAdd3.add(jbutton2);
+       	JButton jbutton2 = new JButton("다음");
+       	jbutton2.setSize(80,50);
+       	jbutton2.setLocation(450, 280);
+       	habbitAdd3.add(jbutton2);
       	
       	jbutton1.addMouseListener(new MouseAdapter() {
             @Override
@@ -82,36 +86,27 @@ public class HabbitAdd3 extends JFrame {
             }
          }); 
       	
-      	jbutton2.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            	//set할때 "월화수"
-            	HabbitAddDTO habbit = new HabbitAddDTO();
-            	habbit.setHabitDays(alist);
-            	for(String a : alist) {
-            		System.out.println(a);
-            	}
-            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4(habbit));
-            }
-         });
+//      	jbutton2.addMouseListener(new MouseAdapter() {
+//            @Override
+//            public void mouseClicked(MouseEvent e) {
+//            	//set할때 "월화수"
+//            	
+//            	for(int i = 0; i < jcb.length; i++) {
+//        			
+//            	jcb[i].addItemListener(new ItemListener() {
+//					
+//					@Override
+//					public void itemStateChanged(ItemEvent e) {
+//						
+//						
+//					}
+//				});
+//            	
+//            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4(habbit));
+//            }
+//         });
       	
-      	
-      	jcb[0].addMouseListener(new MouseAdapter() {
-			
-			@Override
-			public void mouseClicked(MouseEvent e) {
-				// TODO Auto-generated method stub
-				
-				if(jcb[0].isSelected()) {
-					if(!(alist.eueals(jcb[0].getText()))) {
-						
-						alist.add(jcb[0].getText());
-					}
-				}
-			}
-		});
-
-      	     
+     
    }
 }
 

@@ -18,17 +18,23 @@ public class HabbitAddService {
 
 
 
-	public List<HabbitAddDTO> insertAllHabbit(int habitDate, int habitID, String userID, String habitType,
-			String habitDays, int habitGoal) {
-		
-		Connection con = getConnection();
-		
-		List<HabbitAddDTO> habbitAddList = habbitAddDAO.insertAllHabbit(con, userID, habitID, habitDate, habitType,
-				habitDays, habitGoal);
-		
-		close(con);
-		
-		return habbitAddList;
+//	public List<HabbitAddDTO> insertAllHabbit() {
+//		
+//		Connection con = getConnection();
+//		
+//		List<HabbitAddDTO> habbitAddList = habbitAddDAO.insertAllHabbit(con, userID, habitID, habitDate, habitType,
+//				habitDays, habitGoal);
+//		
+//		close(con);
+//		
+//		return habbitAddList;
+//	}
+
+
+
+	public List<HabbitAddDTO> insertAllHabbit(HabbitAddDTO habitAddDTO) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

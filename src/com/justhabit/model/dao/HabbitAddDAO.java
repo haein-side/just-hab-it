@@ -32,7 +32,6 @@ public class HabbitAddDAO {
 			String habitType, String habitDays, int habitGoal) {
 		
 		PreparedStatement pstmt = null;
-//		ResultSet rset = null;
 		
 		int result = 0;
 		
