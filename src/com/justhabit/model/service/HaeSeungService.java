@@ -166,9 +166,10 @@ public class HaeSeungService {
 		Connection con = getConnection();
 		
 		List<HaeseungRecordDTO> selectRecordGoalList= null;
-		if(recordInfo.getRecordType().equals("a")) {
+		if(recordInfo.getRecordType().equals("c")) {
 			selectRecordGoalList = habitDAO.selectCheckRecordGoal(con, recordInfo);
-			
+		} else {
+			selectRecordGoalList = habitDAO.selectTimerRecordGoal(con, recordInfo);
 		}
 		
 		return selectRecordGoalList;

@@ -90,7 +90,7 @@
               ?
             , ?
             , ?
-            , ?   
+            , ROUND(?,3)
             )  
    </entry>
    
@@ -109,7 +109,7 @@
    <entry key="updateTimer">
        UPDATE
               admin.hbt_timer
-          SET time_record = ?
+          SET time_record = ROUND(?+0.0005,3)
         WHERE habit_id = ?
           AND do_date = ?
    </entry>
@@ -181,6 +181,16 @@
          JOIN admin.hbt_register r ON (c.habit_id = r.habit_id)
         WHERE c.habit_id = ?
         ORDER BY do_date
-
+   </entry>
+   <entry key="selectTimerGoalRecord">
+       SELECT 
+              do_date
+            , time_record
+            , habit_goal
+         FROM admin.hbt_timer t
+         JOIN admin.hbt_register r ON (t.habit_id = r.habit_id)
+        WHERE t.habit_id = ?
+        ORDER BY do_date
+       
    </entry>
 </properties>

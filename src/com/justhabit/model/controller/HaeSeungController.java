@@ -157,8 +157,8 @@ public class HaeSeungController {
 		return monthTotal;
 	}
 
-	public List<HaeseungRecordDTO> selectRecordGoal(HaeseungRecordDTO checkRecord) {
-		List<HaeseungRecordDTO> recordAndGoalList = habitService.selectRecordGoal(checkRecord);
+	public List<HaeseungRecordDTO> selectRecordGoal(HaeseungRecordDTO Record) {
+		List<HaeseungRecordDTO> recordAndGoalList = habitService.selectRecordGoal(Record);
 		return recordAndGoalList;
 	}
 
