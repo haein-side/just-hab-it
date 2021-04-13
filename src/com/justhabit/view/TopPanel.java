@@ -24,7 +24,6 @@ public class TopPanel extends JPanel{
 		this.setLayout(null);
 		this.setBackground(new Color(211,224,234));
 		
-		//TODO Title(JUSTHABBIT)추가
 		JLabel Title = new JLabel("JUST HAB' IT");
 		Title.setFont(new Font("D2Coding", Font.BOLD,50));
 		Title.setBounds(300,20,500,70);
@@ -51,6 +50,7 @@ public class TopPanel extends JPanel{
 		
 		JLabel leftLabel = new JLabel(new ImageIcon(leftImage));
 		
+
 		leftLabel.setBounds(10, 0, 80, 80);
 
 		this.add(leftLabel);

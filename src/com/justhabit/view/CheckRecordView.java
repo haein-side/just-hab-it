@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -12,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -34,8 +36,8 @@ public class CheckRecordView extends JFrame{
 	private HabitRecordController habitInfoController = new HabitRecordController();
 	private HabitRecordDTO checkRecord = new HabitRecordDTO(); //습관 기록전달DTO
 	private HabitInfoDTO registInfo = new HabitInfoDTO(); //습관등록정보전달DTO
-	private HabitMonthTotalDTO totalRecord = new HabitMonthTotalDTO();
-	Map<String,HabitRecordDTO> recordAndGoalList = null;
+	private HabitMonthTotalDTO totalRecord = new HabitMonthTotalDTO(); //습관의 월 total 기록 조회결과
+	private Map<String,HabitRecordDTO> recordAndGoalList = null; //습관의 날짜별 기록 조회결과 
 	private int checkCount = 0; // 체크박스카운트용
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
@@ -48,16 +50,13 @@ public class CheckRecordView extends JFrame{
 		
 		this.setLayout(null);
 		
-		this.setSize(900, 700);
-		this.setLocationRelativeTo(null);
-		this.setVisible(true);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		
 		this.add(new TopPanel());
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
-		center.setBackground(new Color(246,245,245));
+		center.setBackground(new Color(47,49,54));
+		
+		
 		
 		//등록된 습관정보 불러오기
 		registInfo.setHabitID(MainPage.userhabitid);
@@ -126,7 +125,7 @@ public class CheckRecordView extends JFrame{
 		JPanel calendarPanel = new JPanel();
 		calendarPanel.setBounds(43, 95, 350, 340);
 		calendarPanel.setLayout(null);
-		calendarPanel.setBackground(new Color(255,204,153));
+//		calendarPanel.setBackground(new Color(255,204,153));
 		
 		//달력 날짜 입력
 		ArrayList<Integer>calArr = new ArrayList<>();
@@ -140,9 +139,8 @@ public class CheckRecordView extends JFrame{
 		}
 		
 		//월표시
-		JPanel monthPrint = new JPanel();
-		monthPrint.setBounds(80,15,200,50);
-		monthPrint.setBackground(new Color(255,204,153));
+//		JLabel monthPrint = new JLabel();
+//		monthPrint.setBackground(new Color(255,204,153));
 		
 		if(month < 9) {
 			thisMonth = "0"+(month+1);
@@ -150,10 +148,13 @@ public class CheckRecordView extends JFrame{
 			thisMonth = month+1+"";
 		}
 		JLabel monthName = new JLabel(thisMonth+"월");
+		monthName.setBounds(160,15,80,50);
 		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
+		monthName.setForeground(new Color(255,255,204));
 		
-		monthPrint.add(monthName);
-		calendarPanel.add(monthPrint);
+//		monthPrint.add(monthName);
+		calendarPanel.add(monthName);
+//		calendarPanel.add(monthPrint);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
 		
@@ -161,7 +162,7 @@ public class CheckRecordView extends JFrame{
 		//달력표시
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
-		calendar.setBackground(new Color(255,204,153));
+//		calendar.setBackground(new Color(255,204,153));
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
@@ -174,7 +175,6 @@ public class CheckRecordView extends JFrame{
 				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
 				dayButton[i].setVerticalAlignment(JLabel.CENTER);
 				dayButton[i].setBackground(Color.white);
-//				dayButton[i].setBackground(Color.decode("#ffff64"));
 				calendar.add(dayButton[i]);
 			} else {
 				CalenderDate = calArr.get(i)+"";
@@ -192,7 +192,6 @@ public class CheckRecordView extends JFrame{
 		recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
 		SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
 		String checkYearMonth = yearMonth.format(todayDate);
-		System.out.println(checkYearMonth);
 		String searchDate =  "";
 		for(int i = 0; i < calArr.size(); i++) {
 			
@@ -201,10 +200,12 @@ public class CheckRecordView extends JFrame{
 				int goal = recordAndGoalList.get(searchDate).getHabitGoal();
 				int record = recordAndGoalList.get(searchDate).getCheck();
 				if(goal == record) {
-					dayButton[i].setBackground(Color.green);
+					dayButton[i].setBackground(new Color(102,204,153));
 				} else {
-					dayButton[i].setBackground(Color.yellow);
+					dayButton[i].setBackground(new Color(255,204,51));
 				}
+			} else {
+				dayButton[i].setBackground(new Color(255,255,255));
 			}
 		}
 				
@@ -226,7 +227,6 @@ public class CheckRecordView extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						JOptionPane.showMessageDialog(mf, dialogDate +"\n\n"+ recordAndGoalList.get(dialogDate).getCheck() + " / " + registInfo.getHabitGoal());
-						
 					}
 				});
 			}
@@ -267,8 +267,10 @@ public class CheckRecordView extends JFrame{
 		recordButton.setBounds(823,128, 60, 40);
 		recordButton.addActionListener(/**
 		 * @author user
-		 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
-		 * total 출력 문구 바뀜
+		 * 저장버튼 클릭 시 
+		 * 1.일치하는 날짜 검색->있으면update /없으면 insert;
+		 * 2.total 출력 문구 변경
+		 * 3.달력 클릭 시 출력되는 값 변경
 		 */
 			new ActionListener() {
 			
@@ -288,7 +290,7 @@ public class CheckRecordView extends JFrame{
 						today = todayDateFormat.format(todayDate);
 						checkRecord.setDoDate(today);   // 오늘날짜
 						
-						//출력문구 변화를 위한 값 받기
+						//날짜에 등록된 기록이 없으면 update, 있으면 insert	
 						int result = habitInfoController.dateSelectController(checkRecord);
 						if(result==0){
 							habitInfoController.insertCheckController(checkRecord);
@@ -297,7 +299,7 @@ public class CheckRecordView extends JFrame{
 							habitInfoController.updateCheckController(checkRecord);
 							JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
 						}
-						//월기록 출력문구 바꾸기
+						//total 출력문구 바꾸기
 						totalRecord.setHabitId(registInfo.getHabitID());
 						totalRecord.setTodayMonth(thisMonth);
 						totalRecord = habitInfoController.monthTotalController(totalRecord);
@@ -305,17 +307,17 @@ public class CheckRecordView extends JFrame{
 						totalCheck = (int)totalRecord.getRecordSum();
 						infoText.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 						
-						//달력 값 바꾸기
+						//날짜 클릭시 조회되는 값 바꾸기
 						checkRecord.setHabitId(MainPage.userhabitid);
 						checkRecord.setRecordType(registInfo.getHabitType());
 						recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
 						SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
 						String checkYearMonth = yearMonth.format(todayDate);
 						String searchDate =  "";
+						
 						for(int i = 0; i < calArr.size(); i++) {
 							
 							searchDate = checkYearMonth+"/"+dayButton[i].getText();
-							System.out.println("비교할 날짜 : " +  searchDate);
 							if(recordAndGoalList.get(searchDate)!=null) {
 								int goal = recordAndGoalList.get(searchDate).getHabitGoal();
 								int record = recordAndGoalList.get(searchDate).getCheck();
@@ -326,6 +328,7 @@ public class CheckRecordView extends JFrame{
 								}
 							}
 						}
+						//상단에 출력되는 값 변경
 						habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
 						checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
 					}
@@ -333,6 +336,8 @@ public class CheckRecordView extends JFrame{
 			});
 				
 		habitTop.add(recordButton);
+		
+		
 		
 		//하단패널
 		JPanel botPan = new JPanel();
@@ -381,6 +386,25 @@ public class CheckRecordView extends JFrame{
 		center.add(infoPanel);
 		center.add(calendarPanel);
 		center.add(habitTop);
+		
+		
+		//달력배경
+		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 450, 0);
+		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
+		CalendarBackground.setBounds(0, 0, 350, 340);
+		//배경화면
+		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
+		JLabel background = new JLabel(new ImageIcon(backImg));
+		background.setBounds(0, 0, 900, 462);
+		calendarPanel.add(CalendarBackground);
+		center.add(background);
+		
+		
 		this.add(center);
+		this.setSize(900, 700);
+		this.setLocationRelativeTo(null);
+		this.setVisible(true);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		
 	}
 }
