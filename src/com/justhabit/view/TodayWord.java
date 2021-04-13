@@ -88,6 +88,18 @@ public class TodayWord extends JFrame {
 		first.setLocation(410, 560);
 		this.add(first);
 		
+		/* 유저 레벨에 따른 이미지 설정과 습관횟수와 성공횟수를 판단하여 레벨 update, commit*/
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
+		
 		
 
 		Image level = new ImageIcon("image/오늘의명언배경.jpeg").getImage().getScaledInstance(900, 700, 0);
