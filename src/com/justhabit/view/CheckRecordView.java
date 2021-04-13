@@ -174,6 +174,7 @@ public class CheckRecordView extends JFrame{
 				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
 				dayButton[i].setVerticalAlignment(JLabel.CENTER);
 				dayButton[i].setBackground(Color.white);
+//				dayButton[i].setBackground(Color.decode("#ffff64"));
 				calendar.add(dayButton[i]);
 			} else {
 				CalenderDate = calArr.get(i)+"";
@@ -207,7 +208,7 @@ public class CheckRecordView extends JFrame{
 			}
 		}
 				
-		//클릭시 그날 기록 출력하기,기록있는날만 나옴  
+		//클릭시 그날 기록 출력하기  
 		for(int i = 0; i < calArr.size(); i++) {
 			searchDate = checkYearMonth+"/"+dayButton[i].getText();
 			if(recordAndGoalList.get(searchDate)==null) {
@@ -296,6 +297,7 @@ public class CheckRecordView extends JFrame{
 							habitInfoController.updateCheckController(checkRecord);
 							JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
 						}
+						//월기록 출력문구 바꾸기
 						totalRecord.setHabitId(registInfo.getHabitID());
 						totalRecord.setTodayMonth(thisMonth);
 						totalRecord = habitInfoController.monthTotalController(totalRecord);
@@ -303,20 +305,12 @@ public class CheckRecordView extends JFrame{
 						totalCheck = (int)totalRecord.getRecordSum();
 						infoText.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 						
+						//달력 값 바꾸기
 						checkRecord.setHabitId(MainPage.userhabitid);
 						checkRecord.setRecordType(registInfo.getHabitType());
 						recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
 						SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
-//						SimpleDateFormat todayFormat = new SimpleDateFormat("yy/MM/dd");
 						String checkYearMonth = yearMonth.format(todayDate);
-//						String seacrhToday = todayFormat.format(todayDate);
-//						int goal = recordAndGoalList.get(seacrhToday).getHabitGoal();
-//						int doCheck = recordAndGoalList.get(seacrhToday).getCheck();
-//						if(goal == doCheck) {
-//										dayButton[i].setBackground(Color.green);
-//						}
-////										dayButton[i].setBackground(Color.yellow);
-//						
 						String searchDate =  "";
 						for(int i = 0; i < calArr.size(); i++) {
 							
@@ -330,20 +324,7 @@ public class CheckRecordView extends JFrame{
 								} else if(record > 0 ){
 									dayButton[i].setBackground(Color.yellow);
 								}
-						
 							}
-							
-//							for(int j = 0; j < recordAndGoalList.size(); j++) {
-//								
-//								if(searchDate.equals(recordAndGoalList.get(j).getDoDate())) {
-//									
-//									if(goal == record) {
-//										dayButton[i].setBackground(Color.green);
-//									} else if(record > 0 ){
-//										dayButton[i].setBackground(Color.yellow);
-//									}
-//								}
-//							}
 						}
 						habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
 						checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();

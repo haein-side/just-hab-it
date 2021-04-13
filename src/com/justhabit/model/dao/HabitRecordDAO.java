@@ -405,9 +405,12 @@ public class HabitRecordDAO {
 			
 			while(rset.next()) {
 				row = new HabitRecordDTO();
-				row.setDoDate(rset.getString("do_date"));
+				String doDate = (rset.getString("do_date"));
 				row.setTimer(rset.getDouble("time_record"));
 				row.setHabitGoal(rset.getInt("habit_goal"));
+
+				userRecordGoalList.put(doDate, row);
+//				row.setDoDate(rset.getString("do_date"));
 				
 //				userRecordGoalList.add(row);
 			}
