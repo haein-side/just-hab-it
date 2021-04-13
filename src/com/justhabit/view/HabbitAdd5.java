@@ -15,66 +15,67 @@ import com.justhabit.model.controller.PanelChangeControl;
 
 public class HabbitAdd5 extends JFrame {
 
-//	private JButton nextButton; // 다음버튼
-//	private JButton preButton; //  이전버튼
-//	private JLabel label; // 라벨
-//	private JTextField text; // 텍스트 입력
-	
-	
 	private HabbitAdd5 habbitAdd5;
 	
-   public HabbitAdd5() {
+	public HabbitAdd5() {
 
-	   this.habbitAdd5 = this;
+	   	this.habbitAdd5 = this;
 	   
-	   habbitAdd5.setLayout(null);
-	   habbitAdd5.setBounds(0, 100, 900, 462);
-	   habbitAdd5.setBackground(Color.lightGray);
-	   habbitAdd5.setLocationRelativeTo(null);
-	   habbitAdd5.setVisible(true);
+	   	habbitAdd5.setLayout(null);
+	   	habbitAdd5.setBounds(0, 100, 900, 462);
+	   	habbitAdd5.setBackground(Color.lightGray);
+	   	habbitAdd5.setLocationRelativeTo(null);
+	   	habbitAdd5.setVisible(true);
 
 
-	   JLabel label1 = new JLabel("5번) 하루에 몇번 할건가요?");
+	   	JLabel label1 = new JLabel("5번) 하루에 몇번 할건가요?");
 	   
-	   label1.setFont(new Font("Serif", Font.BOLD, 30));
-	   label1.setSize(500,200);
-	   label1.setLocation(250,0);
-	   habbitAdd5.add(label1);
+	   	label1.setFont(new Font("Serif", Font.BOLD, 30));
+	   	label1.setSize(500,200);
+	   	label1.setLocation(250,0);
+	   	habbitAdd5.add(label1);
        
 
-       SpinnerNumberModel value = new SpinnerNumberModel(0,0,10,1);
-       JSpinner spin = new JSpinner(value);
-       spin.setFont(new Font("Serif", Font.BOLD, 30));
-       spin.setSize(250,50);
-       spin.setLocation(300,180);
-       habbitAdd5.add(spin);
+	   	SpinnerNumberModel value = new SpinnerNumberModel(0,0,10,1); // 시작값, 최소값, 최대값, 증가값
+
+	   	JSpinner spin = new JSpinner(value);
+	   	spin.setFont(new Font("Serif", Font.BOLD, 30));
+	   	spin.setSize(250,50);
+       	spin.setLocation(300,180);
+       	habbitAdd5.add(spin);
       	
-    	 JButton jbutton1 = new JButton("이전");
-         jbutton1.setSize(80,50);
-         jbutton1.setLocation(300, 280);
-         habbitAdd5.add(jbutton1);
+    	JButton jbutton1 = new JButton("이전");
+        jbutton1.setSize(80,50);
+        jbutton1.setLocation(300, 280);
+        habbitAdd5.add(jbutton1);
        
       
-      JButton jbutton2 = new JButton("다음");
-      jbutton2.setSize(80,50);
-      jbutton2.setLocation(450, 280);
-      habbitAdd5.add(jbutton2);
+        JButton jbutton2 = new JButton("다음");
+        jbutton2.setSize(80,50);
+        jbutton2.setLocation(450, 280);
+        habbitAdd5.add(jbutton2);
       	
-//      	jbutton1.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//            	PanelChangeControl.changeFrame(habbitAdd5 , new HabbitAdd4());
-//            }
-//         }); 
+      	jbutton1.addMouseListener(new MouseAdapter() {
+      		
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	
+            	PanelChangeControl.changeFrame(habbitAdd5 , new HabbitAdd4());
+            	
+            	
+            }
+         }); 
+      	
       	
       	jbutton2.addMouseListener(new MouseAdapter() {
+      		
       		@Override
       		public void mouseClicked(MouseEvent e) {
+      			
       			PanelChangeControl.changeFrame(habbitAdd5 , new MainPage());
+      			
+      			
       		}
       	}); 
-      	
-      	
-      	
    }
 }

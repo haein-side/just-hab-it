@@ -23,7 +23,9 @@ import com.justhabit.model.dto.HabbitAddDTO;
 
 public class HabbitAdd3 extends JFrame {
 
+	public static HabbitAddDTO habbitAddDTO = new HabbitAddDTO();
 	private HabbitAdd3 habbitAdd3;
+	String result = "";
 	
 	
    public HabbitAdd3() {
@@ -48,23 +50,16 @@ public class HabbitAdd3 extends JFrame {
        checkPanel.setSize(350,50);
        checkPanel.setLocation(250,170);
        
-       JCheckBox jcb[] = new JCheckBox[7];
-
-        jcb[0] = new JCheckBox("일");
-        jcb[1] = new JCheckBox("월");
-		jcb[2] = new JCheckBox("화");
-		jcb[3] = new JCheckBox("수");
-		jcb[4] = new JCheckBox("목");
-		jcb[5] = new JCheckBox("금");
-		jcb[6] = new JCheckBox("토");
-		
-		
-
-		for (int i = 0; i < jcb.length; i++) {
-		    checkPanel.add(jcb[i]);
-		}
-		
-		
+       String[] Days = {"일","월","화","수","목","금","토"};
+       
+       JCheckBox[] buttons = new JCheckBox[7];
+       
+       for(int i = 0; i < buttons.length; i++) {
+    	   
+    	   buttons[i] = new JCheckBox(Days[i]);
+    	   checkPanel.add(buttons[i]);
+       }
+       
 		habbitAdd3.add(checkPanel);
 		
 		JButton jbutton1 = new JButton("이전");
@@ -81,32 +76,29 @@ public class HabbitAdd3 extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
             	
-            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd2());
+            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd());
 
             }
          }); 
-      	
-//      	jbutton2.addMouseListener(new MouseAdapter() {
-//            @Override
-//            public void mouseClicked(MouseEvent e) {
-//            	//set할때 "월화수"
-//            	
-//            	for(int i = 0; i < jcb.length; i++) {
-//        			
-//            	jcb[i].addItemListener(new ItemListener() {
-//					
-//					@Override
-//					public void itemStateChanged(ItemEvent e) {
-//						
-//						
-//					}
-//				});
-//            	
-//            	PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4(habbit));
-//            }
-//         });
-      	
-     
+
+      	jbutton2.addMouseListener(new MouseAdapter() {
+      		@Override
+      		public void mouseClicked(MouseEvent e) {
+      			
+      			PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4());
+      			
+      			HabbitAddDTO habbitAddDTO = new HabbitAddDTO();
+      			String selectDay = "";
+      			
+      			for (int i = 0; i < buttons.length; i++) {
+					if(buttons[i].isSelected()) {
+						selectDay += buttons[i].getText();
+					}
+				}
+      			System.out.println("strDay : " + selectDay);
+      			habbitAddDTO.setHabitDays(selectDay);
+      		}
+      	});
+
    }
 }
-
