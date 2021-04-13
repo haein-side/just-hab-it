@@ -382,5 +382,7 @@ public class CheckRecordView extends JFrame{
 		center.add(calendarPanel);
 		center.add(habitTop);
 		this.add(center);
+		
+		
 	}
 }

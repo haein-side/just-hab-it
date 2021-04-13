@@ -67,7 +67,7 @@
          INTO admin.hbt_user
        VALUES
        (
-         seq_user_id.nextval
+         admin.seq_user_id.nextval
        , ?
        , ?
        , ?
@@ -131,7 +131,7 @@
    <entry key="deleteHabit">
    	   DELETE
    	     FROM admin.hbt_register
-   	    WHERE habit_name = ? 
+   	    WHERE habit_id = ? 
    	
    </entry>
    
