@@ -1,6 +1,7 @@
 package com.justhabit.model.controller;
 
 import com.justhabit.model.dto.UserDTO;
+import com.justhabit.model.dto.UserLevelDTO;
 import com.justhabit.model.service.UserService;
 
 public class UserController {
@@ -109,6 +110,11 @@ public class UserController {
 		}
 		
 		return result;
+	}
+
+	public UserLevelDTO userLevel(int loggedUserID) {
+		
+		return userService.userLevel(loggedUserID);
 	}
 
 }

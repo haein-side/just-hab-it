@@ -1,11 +1,6 @@
 package com.justhabit.view;
 
 import java.awt.Color;
-import java.awt.Dimension;
-import java.awt.Font;
-import java.awt.FontMetrics;
-import java.awt.Graphics;
-import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -15,9 +10,6 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextArea;
-import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.text.SimpleAttributeSet;
 import javax.swing.text.StyleConstants;
@@ -26,6 +18,8 @@ import javax.swing.text.StyledDocument;
 //import org.apache.log4j.chainsaw.Main;
 
 import com.justhabit.model.controller.PanelChangeControl;
+import com.justhabit.model.controller.UserController;
+import com.justhabit.model.dto.UserLevelDTO;
 
 public class TodayWord extends JFrame {
 
@@ -33,6 +27,8 @@ public class TodayWord extends JFrame {
   String title;
   private Image back;
   private TodayWord todayWord = this;
+  
+  private UserController userController = new UserController();
 	
 	public TodayWord() {
 		
@@ -88,19 +84,7 @@ public class TodayWord extends JFrame {
 		first.setLocation(410, 560);
 		this.add(first);
 		
-		/* 유저 레벨에 따른 이미지 설정과 습관횟수와 성공횟수를 판단하여 레벨 update, commit*/
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
-		
+		String userImage = userLevel(); 
 
 		Image level = new ImageIcon("image/오늘의명언배경.jpeg").getImage().getScaledInstance(900, 700, 0);
 		
@@ -116,11 +100,34 @@ public class TodayWord extends JFrame {
             }
          });
 
-			
-		
-	
 	}
 	
+	
+	/**
+	 * <pre>
+	 *  유저 레벨에 따른 이미지 설정과 습관횟수와 성공횟수를 판단하여 레벨 update, commit
+	 * </pre>
+	 * @return 이미지 이름 리턴
+	 */
+	public String userLevel() {
+		
+		// 1. 로그인된 유저의 레벨과 습관 갯수와 성공횟수 select
+//		UserLevelDTO user = new UserLevelDTO();
+//		user.setUserId(FirstFrame.loggedUserID);
+		
+		UserLevelDTO user = null;
+		user = userController.userLevel(FirstFrame.loggedUserID);
+		
+		// 2. 기준에 맞게 레벨 update
+		
+		
+		
+		// 3. 이미지 이름 return
+		
+		return "";
+	}
+
+
 
 	  
 }	

@@ -196,4 +196,32 @@
         ORDER BY do_date
        
    </entry>
+   
+   <entry key="userLevel">
+       SELECT
+       	 	  user_id
+      		, level_num
+      		, level_image
+      		, (select count(*)
+           		 from hbt_register
+          		where user_id = ?
+         	   ) as "habits"
+      		, (select count(*)
+           		 from hbt_register a
+           		 join hbt_check using (habit_id)
+          		where count_check = habit_goal
+            	  and a.user_id = ?
+         	   ) as "success_check"
+      		, (select count(*)
+           		 from hbt_register a
+           		 join hbt_timer using (habit_id)
+          		where time_record = habit_goal
+            	  and a.user_id = ?
+         	   ) as "success_timer"
+  		FROM hbt_user 
+  		JOIN accom_level USING(level_num)
+ 	   WHERE user_id = ?
+   </entry>
+   
+   
 </properties>
