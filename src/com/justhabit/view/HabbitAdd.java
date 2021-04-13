@@ -54,12 +54,25 @@ public class HabbitAdd extends JFrame {
 	habbitAdd.add(text);
 	question.validate();
   	
+	JButton jbutton1 = new JButton("메인으로");
+    jbutton1.setSize(80,50);
+    jbutton1.setLocation(300, 280);
+    habbitAdd.add(jbutton1); 
+	
 	JButton jbutton2 = new JButton("다음");
 	jbutton2.setSize(80,50);
 	jbutton2.setLocation(450, 280);
 	habbitAdd.add(jbutton2);
       	
-
+	jbutton1.addMouseListener(new MouseAdapter() {
+        @Override
+        public void mouseClicked(MouseEvent e) {
+        	System.out.println(text.getText());
+        	HabbitAdd.habbitAddDTO.setHabitName(text.getText());
+        	PanelChangeControl.changeFrame(habbitAdd , new MainPage());
+        	
+        }
+     });
 
   	jbutton2.addMouseListener(new MouseAdapter() {
         @Override

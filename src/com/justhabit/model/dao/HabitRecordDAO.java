@@ -8,20 +8,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 
-import com.justhabit.model.dto.HaeseungMonthTotalDTO;
-import com.justhabit.model.dto.HaeseungRecordDTO;
-import com.justhabit.model.dto.HaesungInfoDTO;
+import com.justhabit.model.dto.HabitInfoDTO;
+import com.justhabit.model.dto.HabitMonthTotalDTO;
+import com.justhabit.model.dto.HabitRecordDTO;
 
-public class HaeseungDAO {
+public class HabitRecordDAO {
 	private Properties prop = new Properties();
 	
-	public HaeseungDAO() {
+	public HabitRecordDAO() {
 		try {
 			prop.loadFromXML(new FileInputStream("mapper/menu-query.xml"));
 		} catch (IOException e) {
@@ -37,12 +37,12 @@ public class HaeseungDAO {
 	 * @param registInfo
 	 * @return
 	 */
-	public HaesungInfoDTO selectHabit(Connection con, HaesungInfoDTO registInfo) {
+	public HabitInfoDTO selectHabit(Connection con, HabitInfoDTO registInfo) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
 		
-		HaesungInfoDTO info = null;
+		HabitInfoDTO info = null;
 		
 		String query = prop.getProperty("selectHabitInfo");
 		
@@ -52,7 +52,7 @@ public class HaeseungDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				info = new HaesungInfoDTO();
+				info = new HabitInfoDTO();
 				info.setUserID(rset.getInt("user_id"));
 				info.setHabitID(rset.getInt("habit_id"));
 				info.setHabitName(rset.getString("habit_name"));
@@ -80,11 +80,11 @@ public class HaeseungDAO {
 	 * @param recordInfo
 	 * @return
 	 */
-	public HaeseungRecordDTO selectDate(Connection con, HaeseungRecordDTO recordInfo) {
+	public HabitRecordDTO selectDate(Connection con, HabitRecordDTO recordInfo) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		HaeseungRecordDTO selectRecord = null;
+		HabitRecordDTO selectRecord = null;
 		
 		String query = prop.getProperty("selectDateInfo");
 		
@@ -95,7 +95,7 @@ public class HaeseungDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				selectRecord = new HaeseungRecordDTO();
+				selectRecord = new HabitRecordDTO();
 				selectRecord.setHabitId(rset.getInt("habit_id"));
 				selectRecord.setDoDate(rset.getString("do_date"));
 			} 
@@ -118,7 +118,7 @@ public class HaeseungDAO {
 	 * @param checkRecord
 	 * @return
 	 */
-	public int insertCheck(Connection con, HaeseungRecordDTO checkRecord) {
+	public int insertCheck(Connection con, HabitRecordDTO checkRecord) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = prop.getProperty("insertCheck");
@@ -149,7 +149,7 @@ public class HaeseungDAO {
 	 * @param checkRecord
 	 * @return
 	 */
-	public int insertTimer(Connection con, HaeseungRecordDTO checkRecord) {
+	public int insertTimer(Connection con, HabitRecordDTO checkRecord) {
 		PreparedStatement pstmt = null;
 		int result = 0;
 		String query = prop.getProperty("insertTimer");
@@ -179,7 +179,7 @@ public class HaeseungDAO {
 	 * @param checkRecord
 	 * @return
 	 */
-	public int updateCheckRecord(Connection con, HaeseungRecordDTO checkRecord) {
+	public int updateCheckRecord(Connection con, HabitRecordDTO checkRecord) {
 		
 		PreparedStatement pstmt = null;
 		int result = 0;
@@ -212,7 +212,7 @@ public class HaeseungDAO {
 	 * @param timerRecord
 	 * @return
 	 */
-	public int updateTimerRecord(Connection con, HaeseungRecordDTO timerRecord) {
+	public int updateTimerRecord(Connection con, HabitRecordDTO timerRecord) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -246,10 +246,10 @@ public class HaeseungDAO {
 	 * @param timerRecord
 	 * @return
 	 */
-	public HaeseungRecordDTO selectTimerDate(Connection con, HaeseungRecordDTO timerRecord) {
+	public HabitRecordDTO selectTimerDate(Connection con, HabitRecordDTO timerRecord) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		HaeseungRecordDTO selectRecord = null;
+		HabitRecordDTO selectRecord = null;
 		
 		String query = prop.getProperty("selectTimerDateInfo");
 		try {
@@ -259,7 +259,7 @@ public class HaeseungDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				selectRecord = new HaeseungRecordDTO();
+				selectRecord = new HabitRecordDTO();
 				selectRecord.setHabitId(rset.getInt("habit_id"));
 				selectRecord.setDoDate(rset.getString("do_date"));
 			} 
@@ -281,7 +281,7 @@ public class HaeseungDAO {
 	 * @param totalRecord
 	 * @return
 	 */
-	public HaeseungMonthTotalDTO selectMonthTotal(Connection con, HaeseungMonthTotalDTO totalRecord) {
+	public HabitMonthTotalDTO selectMonthTotal(Connection con, HabitMonthTotalDTO totalRecord) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -296,7 +296,7 @@ public class HaeseungDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				totalRecord = new HaeseungMonthTotalDTO();
+				totalRecord = new HabitMonthTotalDTO();
 				totalRecord.setDateCount(rset.getInt("COUNT(*)"));
 				totalRecord.setRecordSum(rset.getInt("SUM(count_check)"));
 			} 
@@ -319,7 +319,7 @@ public class HaeseungDAO {
 	 * @param totalRecord
 	 * @return
 	 */
-	public HaeseungMonthTotalDTO selectMonthTimerTotal(Connection con, HaeseungMonthTotalDTO totalRecord) {
+	public HabitMonthTotalDTO selectMonthTimerTotal(Connection con, HabitMonthTotalDTO totalRecord) {
 		
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
@@ -334,7 +334,7 @@ public class HaeseungDAO {
 			rset = pstmt.executeQuery();
 			
 			if(rset.next()) {
-				totalRecord = new HaeseungMonthTotalDTO();
+				totalRecord = new HabitMonthTotalDTO();
 				totalRecord.setDateCount(rset.getInt("COUNT(*)"));
 				totalRecord.setRecordSum(rset.getDouble("SUM(time_record)"));
 			} 
@@ -357,11 +357,11 @@ public class HaeseungDAO {
 	 * @param recordInfo
 	 * @return
 	 */
-	public List<HaeseungRecordDTO> selectCheckRecordGoal(Connection con, HaeseungRecordDTO recordInfo) {
+	public Map<String,HabitRecordDTO> selectCheckRecordGoal(Connection con, HabitRecordDTO recordInfo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		HaeseungRecordDTO row = null;
-		List<HaeseungRecordDTO> userRecordGoalList = null;
+		HabitRecordDTO row = null;
+		Map<String,HabitRecordDTO> userRecordGoalList = null;
 		String query = prop.getProperty("selectCheckGoalRecord");
 		
 		try {
@@ -369,15 +369,15 @@ public class HaeseungDAO {
 			pstmt.setInt(1, recordInfo.getHabitId());
 			rset = pstmt.executeQuery();
 			
-			userRecordGoalList = new ArrayList<HaeseungRecordDTO>();
+			userRecordGoalList = new HashMap<>();
 			
 			while(rset.next()) {
-				row = new HaeseungRecordDTO();
-				row.setDoDate(rset.getString("do_date"));
+				row = new HabitRecordDTO();
+				String dodate = rset.getString("do_date");
+//				row.setDoDate();
 				row.setCheck(rset.getInt("count_check"));
 				row.setHabitGoal(rset.getInt("habit_goal"));
-				
-				userRecordGoalList.add(row);
+				userRecordGoalList.put(dodate, row);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -389,11 +389,11 @@ public class HaeseungDAO {
 		return userRecordGoalList;
 	}
 
-	public List<HaeseungRecordDTO> selectTimerRecordGoal(Connection con, HaeseungRecordDTO recordInfo) {
+	public Map<String,HabitRecordDTO> selectTimerRecordGoal(Connection con, HabitRecordDTO recordInfo) {
 		PreparedStatement pstmt = null;
 		ResultSet rset = null;
-		HaeseungRecordDTO row = null;
-		List<HaeseungRecordDTO> userRecordGoalList = null;
+		HabitRecordDTO row = null;
+		Map<String,HabitRecordDTO> userRecordGoalList = null;
 		String query = prop.getProperty("selectTimerGoalRecord");
 		
 		try {
@@ -401,15 +401,18 @@ public class HaeseungDAO {
 			pstmt.setInt(1, recordInfo.getHabitId());
 			rset = pstmt.executeQuery();
 			
-			userRecordGoalList = new ArrayList<HaeseungRecordDTO>();
+			userRecordGoalList = new HashMap<String,HabitRecordDTO>();
 			
 			while(rset.next()) {
-				row = new HaeseungRecordDTO();
-				row.setDoDate(rset.getString("do_date"));
+				row = new HabitRecordDTO();
+				String doDate = (rset.getString("do_date"));
 				row.setTimer(rset.getDouble("time_record"));
 				row.setHabitGoal(rset.getInt("habit_goal"));
+
+				userRecordGoalList.put(doDate, row);
+//				row.setDoDate(rset.getString("do_date"));
 				
-				userRecordGoalList.add(row);
+//				userRecordGoalList.add(row);
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
