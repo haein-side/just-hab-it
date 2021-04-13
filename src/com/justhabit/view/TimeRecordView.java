@@ -20,11 +20,11 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextArea;
 
-import com.justhabit.model.controller.HaeSeungController;
+import com.justhabit.model.controller.HabitRecordController;
 import com.justhabit.model.controller.PanelChangeControl;
-import com.justhabit.model.dto.HaeseungMonthTotalDTO;
-import com.justhabit.model.dto.HaeseungRecordDTO;
-import com.justhabit.model.dto.HaesungInfoDTO;
+import com.justhabit.model.dto.HabitMonthTotalDTO;
+import com.justhabit.model.dto.HabitRecordDTO;
+import com.justhabit.model.dto.HabitInfoDTO;
 
 public class TimeRecordView extends JFrame{
 
@@ -32,11 +32,11 @@ public class TimeRecordView extends JFrame{
 	 * 타이머 기록페이지
 	 */
 	
-	private HaeSeungController habitInfoController = new HaeSeungController();
-	private HaeseungRecordDTO timerRecord = new HaeseungRecordDTO(); //습관 기록전달DTO
-	private HaesungInfoDTO registInfo = new HaesungInfoDTO(); //습관등록정보전달DTO
-	private HaeseungMonthTotalDTO totalRecord = new HaeseungMonthTotalDTO();
-	List<HaeseungRecordDTO> recordAndGoalList = null;
+	private HabitRecordController habitInfoController = new HabitRecordController();
+	private HabitRecordDTO timerRecord = new HabitRecordDTO(); //습관 기록전달DTO
+	private HabitInfoDTO registInfo = new HabitInfoDTO(); //습관등록정보전달DTO
+	private HabitMonthTotalDTO totalRecord = new HabitMonthTotalDTO();
+	List<HabitRecordDTO> recordAndGoalList = null;
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
 	private int totalDate =0; //습관실시 일수
@@ -163,7 +163,7 @@ public class TimeRecordView extends JFrame{
 		//달성 여부에 따라 신호등 만들기
 		timerRecord.setHabitId(MainPage.userhabitid);
 		timerRecord.setRecordType(registInfo.getHabitType());
-		recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
+//		recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
 		SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
 		String checkYearMonth = yearMonth.format(todayDate);
 		System.out.println(checkYearMonth);
@@ -198,7 +198,7 @@ public class TimeRecordView extends JFrame{
 					dayButton[i].addActionListener(new ActionListener() {
 						@Override
 						public void actionPerformed(ActionEvent e) {
-							recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
+//							recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
 							if(b.equals(recordAndGoalList.get(a).getDoDate())) {
 							JOptionPane.showMessageDialog(mf, b +"\n\n"+recordAndGoalList.get(a).getTimer()+"시간");
 						} 
@@ -274,7 +274,7 @@ public class TimeRecordView extends JFrame{
 							
 							timerRecord.setHabitId(MainPage.userhabitid);
 							timerRecord.setRecordType(registInfo.getHabitType());
-							recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
+//							recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
 							SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
 							String checkYearMonth = yearMonth.format(todayDate);
 							System.out.println(checkYearMonth);
