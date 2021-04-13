@@ -130,7 +130,7 @@ public class UserController {
 		int successOfChecks = user.getSuccessOfCheck();
 		int successOfTimers = user.getSuccessOfTimer();
 		
-		int level = 0;
+		int level = 1;
 		
 		if(userLevel != 5) {
 		
