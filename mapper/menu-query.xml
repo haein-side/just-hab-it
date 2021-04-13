@@ -230,5 +230,11 @@
  	   WHERE user_id = ?
    </entry>
    
+   <entry key="userLvlUpdate">
+       UPDATE admin.hbt_user
+          SET level_num = ?
+        WHERE user_id = ?
+   </entry>
+   
    
 </properties>
