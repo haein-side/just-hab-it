@@ -54,13 +54,9 @@ public class CheckRecordView extends JFrame{
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
-//		center.setBackground(new Color(246,245,245));
+		center.setBackground(new Color(47,49,54));
 		
-		//배경화면
-		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
-		JLabel background = new JLabel(new ImageIcon(backImg));
-		background.setBounds(0, 0, 900, 462);
-		center.add(background);
+		
 		
 		//등록된 습관정보 불러오기
 		registInfo.setHabitID(MainPage.userhabitid);
@@ -129,7 +125,7 @@ public class CheckRecordView extends JFrame{
 		JPanel calendarPanel = new JPanel();
 		calendarPanel.setBounds(43, 95, 350, 340);
 		calendarPanel.setLayout(null);
-		calendarPanel.setBackground(new Color(255,204,153));
+//		calendarPanel.setBackground(new Color(255,204,153));
 		
 		//달력 날짜 입력
 		ArrayList<Integer>calArr = new ArrayList<>();
@@ -143,9 +139,8 @@ public class CheckRecordView extends JFrame{
 		}
 		
 		//월표시
-		JPanel monthPrint = new JPanel();
-		monthPrint.setBounds(80,15,200,50);
-		monthPrint.setBackground(new Color(255,204,153));
+//		JLabel monthPrint = new JLabel();
+//		monthPrint.setBackground(new Color(255,204,153));
 		
 		if(month < 9) {
 			thisMonth = "0"+(month+1);
@@ -153,10 +148,13 @@ public class CheckRecordView extends JFrame{
 			thisMonth = month+1+"";
 		}
 		JLabel monthName = new JLabel(thisMonth+"월");
+		monthName.setBounds(160,15,80,50);
 		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
+		monthName.setForeground(new Color(255,255,204));
 		
-		monthPrint.add(monthName);
-		calendarPanel.add(monthPrint);
+//		monthPrint.add(monthName);
+		calendarPanel.add(monthName);
+//		calendarPanel.add(monthPrint);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
 		
@@ -164,7 +162,7 @@ public class CheckRecordView extends JFrame{
 		//달력표시
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
-		calendar.setBackground(new Color(255,204,153));
+//		calendar.setBackground(new Color(255,204,153));
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
@@ -388,8 +386,21 @@ public class CheckRecordView extends JFrame{
 		center.add(infoPanel);
 		center.add(calendarPanel);
 		center.add(habitTop);
-		this.add(center);
 		
+		
+		//달력배경
+		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 450, 0);
+		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
+		CalendarBackground.setBounds(0, 0, 350, 340);
+		//배경화면
+		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
+		JLabel background = new JLabel(new ImageIcon(backImg));
+		background.setBounds(0, 0, 900, 462);
+		calendarPanel.add(CalendarBackground);
+		center.add(background);
+		
+		
+		this.add(center);
 		this.setSize(900, 700);
 		this.setLocationRelativeTo(null);
 		this.setVisible(true);
