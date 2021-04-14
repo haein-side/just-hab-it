@@ -49,7 +49,7 @@ public class HabbitAdd extends JFrame {
 	question.validate();
   	
 	JButton jbutton1 = new JButton("메인으로");
-    jbutton1.setSize(80,50);
+    jbutton1.setSize(100,50);
     jbutton1.setLocation(300, 280);
     habbitAdd.add(jbutton1); 
 	

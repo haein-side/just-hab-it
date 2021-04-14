@@ -27,30 +27,31 @@ public class HabbitAddDAO {
 		}
 	}
 
-
-	public int insertAllHabbit(Connection con, String userID, int habitID, int habitDate,
-			String habitType, String habitDays, int habitGoal) {
+	public int insertAllHabbit(Connection con, HabbitAddDTO habitAddDTO) {
 		
 		PreparedStatement pstmt = null;
-		
 		int result = 0;
-		
-		HabbitAddDTO habbitAdd = null;
 		
 		String query = prop.getProperty("insertAllHabbit");
 		
-			
 		try {
-			pstmt = con.prepareStatement(query);
-			pstmt.setInt(1, result);
-		} catch (SQLException e) {
 			
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, habitAddDTO.getUserID());
+			pstmt.setInt(2, habitAddDTO.getHabitID());
+			pstmt.setString(3, habitAddDTO.getHabitName());
+			pstmt.setString(4, habitAddDTO.getHabitType());
+			pstmt.setString(5, habitAddDTO.getHabitDays());
+			pstmt.setInt(6, habitAddDTO.getHabitGoal());
+		
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(pstmt);
 		}
-		
-		
-		
-		return 0;
+		return result;
 	}
 
 	

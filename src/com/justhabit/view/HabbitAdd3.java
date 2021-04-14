@@ -39,7 +39,7 @@ public class HabbitAdd3 extends JFrame {
 	   habbitAdd3.setVisible(true);
 
 
-	   JLabel label1 = new JLabel("3번) 어떤 요일에 하고 싶나요?");
+	   JLabel label1 = new JLabel("2번) 어떤 요일에 하고 싶나요?");
 	   
 	   label1.setFont(new Font("Serif", Font.BOLD, 30));
 	   label1.setSize(500,200);
