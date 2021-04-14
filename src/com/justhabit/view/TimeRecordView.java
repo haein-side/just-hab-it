@@ -333,7 +333,7 @@ public class TimeRecordView extends JFrame{
 				for(int i =0; i <menu.length; i++) {
 					
 					menuButton[i] = new JButton(menu[i]);
-					menuButton[i].setBackground(new Color(211,224,234));
+					menuButton[i].setBackground(Color.decode("#e65758"));
 					botPan.add(menuButton[i]);
 				}
 		

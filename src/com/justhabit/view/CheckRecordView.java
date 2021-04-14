@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -239,10 +240,15 @@ public class CheckRecordView extends JFrame{
 		//문구 표시
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(null);
-		infoPanel.setBounds(420, 95, 420, 340);
+		infoPanel.setBounds(420, 95, 370, 320);
 		JTextArea infoText = new JTextArea();
-		infoText.setBounds(10,10,400,320);
+		
+		infoText.setBounds(0,0,370,320);
 		infoText.setFont(new Font("D2Coding",Font.PLAIN,20));
+		infoText.setEditable(false);
+		infoText.setOpaque(false);
+//		infoText.setBorder(BorderFactory.createEmptyBorder());
+//		infoText.setBackground(new Color(0,0,0,0));
 
 		//출력할 정보를 검색
 		totalRecord.setHabitId(registInfo.getHabitID());
@@ -353,7 +359,7 @@ public class CheckRecordView extends JFrame{
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setBackground(new Color(211,224,234));
+			menuButton[i].setBackground(Color.decode("#e65758"));
 			botPan.add(menuButton[i]);
 		}
 		//메뉴버튼추가
@@ -398,10 +404,19 @@ public class CheckRecordView extends JFrame{
 		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 450, 0);
 		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
 		CalendarBackground.setBounds(0, 0, 350, 340);
+		
+		//기록배경
+		Image monthTotal = new ImageIcon("image/기록화면표시.png").getImage().getScaledInstance(380, 350, 0);
+		JLabel monthTotalBackground = new JLabel(new ImageIcon(monthTotal));
+		monthTotalBackground.setBounds(-10,0,380,350);
+		
 		//배경화면
 		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
 		JLabel background = new JLabel(new ImageIcon(backImg));
 		background.setBounds(0, 0, 900, 462);
+		
+		
+		infoPanel.add(monthTotalBackground);
 		calendarPanel.add(CalendarBackground);
 		center.add(background);
 		
