@@ -17,6 +17,8 @@ public class TopPanel extends JPanel{
 	
 	private UserController userController = new UserController();
 	
+	private UserLevelDTO userLevelInfo = null;
+	
 	public TopPanel() {
 		//상단바
 		this.setLocation(0, 0);
@@ -24,19 +26,26 @@ public class TopPanel extends JPanel{
 		this.setLayout(null);
 		this.setBackground(new Color(211,224,234));
 		
+		
+		/* 로그인 된 유저의 레벨관련 정보 객체 생성*/
+		userLevelInfo = userInfo();
+		
 		JLabel Title = new JLabel("JUST HAB' IT");
 		Title.setFont(new Font("D2Coding", Font.BOLD,50));
 		Title.setBounds(300,20,500,70);
 		Title.setVisible(true);
 		this.add(Title);
 		
+		JLabel userLvl = new JLabel("Lvl : "+ userLevelInfo.getUserLevel());
+		userLvl.setFont(new Font("a디딤돌",Font.BOLD, 15));
+		userLvl.setBounds(25, 55, 60, 60);
+		userLvl.setVisible(true);
+		this.add(userLvl);
 		
-		UserLevelDTO user = null;
-		user = userController.userLevel(FirstFrame.loggedUserID);
-		
+		System.out.println(userLvl.getText() + " *****************************");
 
 		String level_image = "";
-		switch(user.getUserLevel()) {
+		switch(userLevelInfo.getUserLevel()) {
 			case 1 : level_image = "1렙계란.PNG"; break;
 			case 2 : level_image = "2렙계란.PNG"; break;
 			case 3 : level_image = "3렙계란.PNG"; break;
@@ -63,6 +72,13 @@ public class TopPanel extends JPanel{
 		dayPrint.setFont(new Font("D2Coding",Font.BOLD,15));
 		dayPrint.setVisible(true);
 		this.add(dayPrint);
+	}
+	
+	public UserLevelDTO userInfo() {
+		
+		UserLevelDTO userLevelInfo = userController.userLevel(FirstFrame.loggedUserID);
+		
+		return userLevelInfo;
 	}
 			
 }

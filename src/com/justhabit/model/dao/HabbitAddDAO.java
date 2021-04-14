@@ -21,7 +21,7 @@ public class HabbitAddDAO {
 	public HabbitAddDAO() {
 		
 		try {
-			prop.loadFromXML(new FileInputStream("mapper/menu-query.xml"));
+			prop.loadFromXML(new FileInputStream("mapper/habit-query.xml"));
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

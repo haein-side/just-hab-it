@@ -141,7 +141,7 @@ public class MyPage extends JFrame {
 		JLabel instruction  = new JLabel();
 		instruction.setFont(new Font("a디딤돌",Font.ITALIC,21));
 		instruction.setVisible(false);
-		instruction.setBounds(400, 290, 390, 20);
+		instruction.setBounds(400, 290, 420, 20);
 		userPanel.add(instruction);
 		
 		
@@ -256,7 +256,7 @@ public class MyPage extends JFrame {
 		botPan.setBackground(Color.GREEN);
 		this.add(botPan);
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage"};
+		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
@@ -281,7 +281,17 @@ public class MyPage extends JFrame {
 	          }
 	       });
 		
-		menuButton[2].setEnabled(false);
+		menuButton[2].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	        	  new DeleteHabit(myPage);
+	          }
+	       });
 		
-		}
+		menuButton[3].setEnabled(false);
+		
+	}
+	
+		
 }
