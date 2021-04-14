@@ -152,10 +152,7 @@ public class MainPage extends JFrame{
 ////        scrollbar.setBackground(Color.pink);
 //        this.add(scrollbar);
 //        
-        JScrollPane scroll_pane = new JScrollPane(right);
-        scroll_pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        scroll_pane.setBounds(0,100,10,400);
-        this.add(scroll_pane);
+   
 
 		
 		
