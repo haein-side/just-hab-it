@@ -286,87 +286,161 @@ public class CheckRecordView extends JFrame{
 		infoPanel.add(infoText);
 		
 		//습관기록저장
-		JButton recordButton = new JButton("저장");
-
-		recordButton.setBounds(823,128, 60, 40);
-		recordButton.addActionListener(/**
-		 * @author user
-		 * 저장버튼 클릭 시 
-		 * 1.일치하는 날짜 검색->있으면update /없으면 insert;
-		 * 2.total 출력 문구 변경
-		 * 3.달력 클릭 시 출력되는 값 변경
-		 */
-			new ActionListener() {
-			
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-					accomon = 0;
+		
+		Image saveImg = new ImageIcon("image/저장버튼.png").getImage().getScaledInstance(60, 50, 0);
+		JLabel saveLabel = new JLabel(new ImageIcon(saveImg));
+		saveLabel.setBounds(840,128,60,45);
+		habitTop.add(saveLabel);
+		saveLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e) {
+				SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
+				accomon = 0;
+				
+				if(checkCount == 0) {
+					JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
+				} else {
 					
-					if(checkCount == 0) {
-						JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
+					//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
+					
+					checkRecord.setUserId(registInfo.getUserID());  //유저아이디
+					checkRecord.setHabitId(registInfo.getHabitID()); // 습관아이디
+					checkRecord.setCheck(checkCount); // 체크횟수
+					today = todayDateFormat.format(todayDate);
+					checkRecord.setDoDate(today);   // 오늘날짜
+					
+					//날짜에 등록된 기록이 없으면 update, 있으면 insert	
+					int result = habitInfoController.dateSelectController(checkRecord);
+					if(result==0){
+						habitInfoController.insertCheckController(checkRecord);
+						JOptionPane.showMessageDialog(mf, "기록등록 성공");
 					} else {
+						habitInfoController.updateCheckController(checkRecord);
+						JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
+					}
+					//total 출력문구 바꾸기
+					totalRecord.setHabitId(registInfo.getHabitID());
+					totalRecord.setTodayMonth(thisMonth);
+					totalRecord = habitInfoController.monthTotalController(totalRecord);
+					totalDate = totalRecord.getDateCount();
+					totalCheck = (int)totalRecord.getRecordSum();
+					
+					//날짜 클릭시 조회되는 값 바꾸기
+					checkRecord.setHabitId(MainPage.userhabitid);
+					checkRecord.setRecordType(registInfo.getHabitType());
+					recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
+					SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
+					String checkYearMonth = yearMonth.format(todayDate);
+					String searchDate =  "";
+					
+					for(int i = 0; i < calArr.size(); i++) {
 						
-						//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
-						
-						checkRecord.setUserId(registInfo.getUserID());  //유저아이디
-						checkRecord.setHabitId(registInfo.getHabitID()); // 습관아이디
-						checkRecord.setCheck(checkCount); // 체크횟수
-						today = todayDateFormat.format(todayDate);
-						checkRecord.setDoDate(today);   // 오늘날짜
-						
-						//날짜에 등록된 기록이 없으면 update, 있으면 insert	
-						int result = habitInfoController.dateSelectController(checkRecord);
-						if(result==0){
-							habitInfoController.insertCheckController(checkRecord);
-							JOptionPane.showMessageDialog(mf, "기록등록 성공");
-						} else {
-							habitInfoController.updateCheckController(checkRecord);
-							JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
-						}
-						//total 출력문구 바꾸기
-						totalRecord.setHabitId(registInfo.getHabitID());
-						totalRecord.setTodayMonth(thisMonth);
-						totalRecord = habitInfoController.monthTotalController(totalRecord);
-						totalDate = totalRecord.getDateCount();
-						totalCheck = (int)totalRecord.getRecordSum();
-						
-						//날짜 클릭시 조회되는 값 바꾸기
-						checkRecord.setHabitId(MainPage.userhabitid);
-						checkRecord.setRecordType(registInfo.getHabitType());
-						recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
-						SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
-						String checkYearMonth = yearMonth.format(todayDate);
-						String searchDate =  "";
-						
-						for(int i = 0; i < calArr.size(); i++) {
-							
-							searchDate = checkYearMonth+"/"+dayButton[i].getText();
-							if(recordAndGoalList.get(searchDate)!=null) {
-								int goal = recordAndGoalList.get(searchDate).getHabitGoal();
-								int record = recordAndGoalList.get(searchDate).getCheck();
-								if(goal == record) {
-									dayButton[i].setBackground(new Color(102,204,153));
-									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
-									accomon++;
-								} else if(record > 0 ){
-									dayButton[i].setBackground(new Color(255,204,51));
-									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
-								} else {
-									dayButton[i].setBackground(new Color(255,255,255));
-									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
-								}
+						searchDate = checkYearMonth+"/"+dayButton[i].getText();
+						if(recordAndGoalList.get(searchDate)!=null) {
+							int goal = recordAndGoalList.get(searchDate).getHabitGoal();
+							int record = recordAndGoalList.get(searchDate).getCheck();
+							if(goal == record) {
+								dayButton[i].setBackground(new Color(102,204,153));
+								dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
+								accomon++;
+							} else if(record > 0 ){
+								dayButton[i].setBackground(new Color(255,204,51));
+								dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
+							} else {
+								dayButton[i].setBackground(new Color(255,255,255));
+								dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
 							}
 						}
-						//상단에 출력되는 값 변경
-						habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
-						checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
-						infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 					}
+					//상단에 출력되는 값 변경
+					habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
+					checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
+					infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 				}
-			});
-				
-		habitTop.add(recordButton);
+			}
+		});		
+		
+//		JButton recordButton = new JButton("저장");
+//
+//		recordButton.setBounds(823,128, 60, 40);
+//		recordButton.addActionListener(/**
+//		 * @author user
+//		 * 저장버튼 클릭 시 
+//		 * 1.일치하는 날짜 검색->있으면update /없으면 insert;
+//		 * 2.total 출력 문구 변경
+//		 * 3.달력 클릭 시 출력되는 값 변경
+//		 */
+//			new ActionListener() {
+//			
+//				@Override
+//				public void actionPerformed(ActionEvent e) {
+//					SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
+//					accomon = 0;
+//					
+//					if(checkCount == 0) {
+//						JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
+//					} else {
+//						
+//						//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
+//						
+//						checkRecord.setUserId(registInfo.getUserID());  //유저아이디
+//						checkRecord.setHabitId(registInfo.getHabitID()); // 습관아이디
+//						checkRecord.setCheck(checkCount); // 체크횟수
+//						today = todayDateFormat.format(todayDate);
+//						checkRecord.setDoDate(today);   // 오늘날짜
+//						
+//						//날짜에 등록된 기록이 없으면 update, 있으면 insert	
+//						int result = habitInfoController.dateSelectController(checkRecord);
+//						if(result==0){
+//							habitInfoController.insertCheckController(checkRecord);
+//							JOptionPane.showMessageDialog(mf, "기록등록 성공");
+//						} else {
+//							habitInfoController.updateCheckController(checkRecord);
+//							JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
+//						}
+//						//total 출력문구 바꾸기
+//						totalRecord.setHabitId(registInfo.getHabitID());
+//						totalRecord.setTodayMonth(thisMonth);
+//						totalRecord = habitInfoController.monthTotalController(totalRecord);
+//						totalDate = totalRecord.getDateCount();
+//						totalCheck = (int)totalRecord.getRecordSum();
+//						
+//						//날짜 클릭시 조회되는 값 바꾸기
+//						checkRecord.setHabitId(MainPage.userhabitid);
+//						checkRecord.setRecordType(registInfo.getHabitType());
+//						recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
+//						SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
+//						String checkYearMonth = yearMonth.format(todayDate);
+//						String searchDate =  "";
+//						
+//						for(int i = 0; i < calArr.size(); i++) {
+//							
+//							searchDate = checkYearMonth+"/"+dayButton[i].getText();
+//							if(recordAndGoalList.get(searchDate)!=null) {
+//								int goal = recordAndGoalList.get(searchDate).getHabitGoal();
+//								int record = recordAndGoalList.get(searchDate).getCheck();
+//								if(goal == record) {
+//									dayButton[i].setBackground(new Color(102,204,153));
+//									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
+//									accomon++;
+//								} else if(record > 0 ){
+//									dayButton[i].setBackground(new Color(255,204,51));
+//									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
+//								} else {
+//									dayButton[i].setBackground(new Color(255,255,255));
+//									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
+//								}
+//							}
+//						}
+//						//상단에 출력되는 값 변경
+//						habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
+//						checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
+//						infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
+//					}
+//				}
+//			});
+//				
+//		habitTop.add(recordButton);
 		
 		
 		
