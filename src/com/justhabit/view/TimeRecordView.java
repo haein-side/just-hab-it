@@ -327,7 +327,7 @@ public class TimeRecordView extends JFrame{
 		botPan.setBackground(Color.GREEN);
 		this.add(botPan);
 		// 메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage"};
+		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
 		//버튼추가
 				JButton[] menuButton = new JButton[menu.length];
 				for(int i =0; i <menu.length; i++) {
@@ -356,10 +356,16 @@ public class TimeRecordView extends JFrame{
 	          
 	          @Override
 	          public void actionPerformed(ActionEvent e) {
+	        	  new DeleteHabit(mf);
+	          }
+	       });
+		menuButton[3].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
 	             PanelChangeControl.changeFrame(mf, new MyPage());
 	          }
 	       });
-		
 		center.add(habitInfo);
 		center.add(calendarPanel);
 		center.add(habitTop);
@@ -375,7 +381,8 @@ public class TimeRecordView extends JFrame{
 		calendarPanel.add(CalendarBackground);
 		center.add(background);
 		
-		this.add(center);
 		
+		this.add(center);
+		this.setResizable(false);
 	}
 }

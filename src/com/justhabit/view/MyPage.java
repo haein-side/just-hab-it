@@ -256,7 +256,7 @@ public class MyPage extends JFrame {
 		botPan.setBackground(Color.GREEN);
 		this.add(botPan);
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage"};
+		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
@@ -281,7 +281,17 @@ public class MyPage extends JFrame {
 	          }
 	       });
 		
-		menuButton[2].setEnabled(false);
+		menuButton[2].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	        	  new DeleteHabit(myPage);
+	          }
+	       });
 		
-		}
+		menuButton[3].setEnabled(false);
+		
+	}
+	
+		
 }
