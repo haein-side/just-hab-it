@@ -81,14 +81,14 @@ public class TimeRecordView extends JFrame{
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		//폰트설정
-		nameLabel.setFont(new Font("D2Coding",Font.BOLD,20));
+		nameLabel.setFont(new Font("THE외계인설명서",Font.BOLD,20));
 		habitName.add(nameLabel);
 		
 		habitTop.add(habitName);
 		
 		//습관목표출력
 		JLabel habitGoal = new JLabel("목표 : "+registInfo.getHabitGoal()+"시간 /");
-		habitGoal.setFont(new Font("D2Coding",Font.PLAIN,15));
+		habitGoal.setFont(new Font("THE외계인설명서",Font.PLAIN,15));
 		habitTop.add(habitGoal);
 		
 		//습관 상단바 - 타이머
@@ -122,7 +122,7 @@ public class TimeRecordView extends JFrame{
 		}
 		JLabel monthName = new JLabel(thisMonth+"월");
 		monthName.setBounds(160,15,80,50);
-		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
+		monthName.setFont(new Font("THE외계인설명서",Font.BOLD,20));
 		monthName.setForeground(new Color(255,255,204));
 		
 		calendarPanel.add(monthName);
@@ -217,7 +217,7 @@ public class TimeRecordView extends JFrame{
 		habitInfo.setBounds(420, 95, 420, 340);
 		JTextArea info = new JTextArea();
 		info.setBounds(10,10,400,320);
-		info.setFont(new Font("D2Coding",Font.PLAIN,20));
+		info.setFont(new Font("THE외계인설명서",Font.PLAIN,20));
 		
 		//출력할정보를 검색
 		totalRecord.setHabitId(registInfo.getHabitID());

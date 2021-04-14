@@ -75,7 +75,7 @@ public class CheckRecordView extends JFrame{
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		//폰트설정
-		nameLabel.setFont(new Font("D2Coding",Font.PLAIN,20));
+		nameLabel.setFont(new Font("THE외계인설명서",Font.PLAIN,20));
 		namePanel.add(nameLabel);
 		
 		habitTop.add(namePanel);
@@ -86,7 +86,7 @@ public class CheckRecordView extends JFrame{
 		
 		//횟수표시 및 증가버튼
 		JLabel habitCount = new JLabel("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : 0회      ");
-		habitCount.setFont(new Font("D2Coding", Font.BOLD, 20));
+		habitCount.setFont(new Font("THE외계인설명서", Font.BOLD, 20));
 		habitCheck.add(habitCount);
 		JButton doIt = new JButton(" + ");
 		doIt.setSize(60,40);
@@ -146,7 +146,7 @@ public class CheckRecordView extends JFrame{
 		}
 		JLabel monthName = new JLabel(thisMonth+"월");
 		monthName.setBounds(160,15,80,50);
-		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
+		monthName.setFont(new Font("THE외계인설명서",Font.BOLD,20));
 		monthName.setForeground(new Color(255,255,204));
 		
 		calendarPanel.add(monthName);
@@ -244,7 +244,7 @@ public class CheckRecordView extends JFrame{
 		JTextArea infoText = new JTextArea();
 		
 		infoText.setBounds(0,0,370,320);
-		infoText.setFont(new Font("D2Coding",Font.PLAIN,20));
+		infoText.setFont(new Font("THE외계인설명서",Font.PLAIN,20));
 		infoText.setEditable(false);
 		infoText.setOpaque(false);
 //		infoText.setBorder(BorderFactory.createEmptyBorder());
