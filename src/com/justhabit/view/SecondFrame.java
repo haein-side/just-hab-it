@@ -242,10 +242,6 @@ public class SecondFrame {
          	else {
          		JOptionPane.showMessageDialog(signup, result);
          		
-//         		switch(result) {
-//         		    case "모든 필요한 정보가 채워지지 않았습니다":
-//         		    	
-//         		}
          	}
          }
       });
