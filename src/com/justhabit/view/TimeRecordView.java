@@ -45,6 +45,7 @@ public class TimeRecordView extends JFrame{
 	private int totalDate =0; //습관실시 일수
 	private double totalTimer=0;//기록된 습관 총 시간
 	private String thisMonth = "" ;//이번달 "00월"
+	private int accomon = 0;
 	JFrame mf = this;
 	
 	
@@ -126,11 +127,9 @@ public class TimeRecordView extends JFrame{
 		
 		calendarPanel.add(monthName);
 		
-		
 		//달력표시
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
-		calendar.setBackground(new Color(255,204,153));
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
@@ -172,6 +171,7 @@ public class TimeRecordView extends JFrame{
 				double record = recordAndGoalList.get(searchDate).getTimer();
 				if(goal <= record) {
 					dayButton[i].setBackground(new Color(102,204,153));
+					accomon++;
 				} else {
 					dayButton[i].setBackground(new Color(255,204,51));
 				}
@@ -227,7 +227,7 @@ public class TimeRecordView extends JFrame{
 		totalDate = totalRecord.getDateCount();
 		//습관 총 횟수
 		totalTimer = totalRecord.getRecordSum();
-		info.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 총시간 : " + totalTimer + "시간");
+		info.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalTimer + "회");
 		habitInfo.add(info);
 		
 		//저장 버튼 
@@ -248,6 +248,8 @@ public class TimeRecordView extends JFrame{
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
+						accomon = 0;
+						
 						double div = 60*60*100;
 						double hbtTimer = timerPanel.t / div;
 						double test = timerPanel.t % div;
@@ -277,7 +279,6 @@ public class TimeRecordView extends JFrame{
 							totalRecord = habitInfoController.monthTimerTotalController(totalRecord);
 							totalDate = totalRecord.getDateCount();
 							totalTimer = totalRecord.getRecordSum();
-							info.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 총시간 : " + totalTimer + "시간");
 							
 							timerRecord.setHabitId(MainPage.userhabitid);
 							timerRecord.setRecordType(registInfo.getHabitType());
@@ -297,18 +298,16 @@ public class TimeRecordView extends JFrame{
 									double record = recordAndGoalList.get(searchDate).getTimer();
 									if(goal <= record) {
 										dayButton[i].setBackground(new Color(102,204,153));
+										accomon++;
 									} else if(record > 0 ){
 										dayButton[i].setBackground(new Color(255,204,51));
+									} else {
+										dayButton[i].setBackground(new Color(255,255,255));
 									}
 								}
 							}
-							//저장버튼 누를 떄 기존값변경,,타이머보류
-//							String existingRecordDate = todayRecord.format(todayDate);
-//							if(recordAndGoalList.get(existingRecordDate)!=null) {
-//								timerPanel.t = recordAndGoalList.get(existingRecordDate).getTimer()*60*60*100;
-//								System.out.println(timerPanel.t);
-//							}
 						}
+						info.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalTimer + "회");
 					}
 				});
 		
@@ -320,13 +319,15 @@ public class TimeRecordView extends JFrame{
 		botPan.setBackground(Color.GREEN);
 		this.add(botPan);
 		// 메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage"};
+		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
 		//버튼추가
 				JButton[] menuButton = new JButton[menu.length];
 				for(int i =0; i <menu.length; i++) {
 					
 					menuButton[i] = new JButton(menu[i]);
-					menuButton[i].setBackground(new Color(211,224,234));
+					menuButton[i].setBackground(Color.decode("#e65758"));
+					menuButton[i].setForeground(new Color(255,249,247));
+					menuButton[i].setFont(new Font("THE외계인설명서", Font.BOLD, 17));
 					botPan.add(menuButton[i]);
 				}
 		
@@ -349,10 +350,16 @@ public class TimeRecordView extends JFrame{
 	          
 	          @Override
 	          public void actionPerformed(ActionEvent e) {
+	        	  new DeleteHabit(mf);
+	          }
+	       });
+		menuButton[3].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
 	             PanelChangeControl.changeFrame(mf, new MyPage());
 	          }
 	       });
-		
 		center.add(habitInfo);
 		center.add(calendarPanel);
 		center.add(habitTop);
@@ -366,7 +373,8 @@ public class TimeRecordView extends JFrame{
 		background.setBounds(0, 0, 900, 462);
 		calendarPanel.add(CalendarBackground);
 		center.add(background);
-		this.add(center);
 		
+		this.add(center);
+		this.setResizable(false);
 	}
 }

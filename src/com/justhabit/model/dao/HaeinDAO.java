@@ -71,4 +71,31 @@ public class HaeinDAO {
 		return allhabitList;
 	}
 
+
+	public int deleteHabitBy(Connection con, int deleteHabitID) {
+		
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("deleteHabit");
+		
+		try {
+			pstmt = con.prepareStatement(query);
+			pstmt.setInt(1, deleteHabitID);
+			
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(pstmt);
+			close(con);
+		}
+		
+		
+		
+		
+		return 0;
+	}
+
 }

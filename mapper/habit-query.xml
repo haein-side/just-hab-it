@@ -19,26 +19,26 @@
     </entry>
 
    <entry key="selectHabitInfo">
-	   SELECT 
-	          user_id
-	        , habit_id
-	        , habit_name
-	        , habit_type
-	        , habit_goal
-	        , habit_days
-	     FROM admin.hbt_register
-	    WHERE habit_id = ?
+        SELECT 
+               user_id
+	         , habit_id
+	         , habit_name
+	         , habit_type
+	         , habit_goal
+	         , habit_days
+	      FROM admin.hbt_register
+	     WHERE habit_id = ?
    </entry>
    <entry key="insertCheck">
-       INSERT
-         INTO admin.hbt_check
-       VALUES
-            (
-              ?
-            , ?
-            , ?
-            , ?   
-            )  
+        INSERT
+          INTO admin.hbt_check
+        VALUES
+             (
+               ?
+             , ?
+             , ?
+             , ?   
+             )  
    </entry>
    <entry key="selectDateInfo">
         SELECT 
@@ -49,11 +49,11 @@
            AND do_date = ?
    </entry>
    <entry key="updateCheck">
-       UPDATE
-              admin.hbt_check
-          SET count_check = ?
-        WHERE habit_id = ?
-          AND do_date = ?
+        UPDATE
+               admin.hbt_check
+           SET count_check = ?
+         WHERE habit_id = ?
+           AND do_date = ?
    </entry>
    <entry key="login">
        SELECT
@@ -83,15 +83,15 @@
    </entry>
    
    <entry key="insertTimer">
-       INSERT
-         INTO admin.hbt_timer
-       VALUES
-            (
-              ?
-            , ?
-            , ?
-            , ROUND(?,3)
-            )  
+        INSERT
+          INTO admin.hbt_timer
+        VALUES
+             (
+               ?
+             , ?
+             , ?
+             , ROUND(?,3)
+             )  
    </entry>
    
    <entry key="myUser">
@@ -107,19 +107,19 @@
         WHERE user_id = ?
    </entry>
    <entry key="updateTimer">
-       UPDATE
-              admin.hbt_timer
-          SET time_record = ROUND(?+0.0005,3)
-        WHERE habit_id = ?
-          AND do_date = ?
+        UPDATE
+               admin.hbt_timer
+           SET time_record = ROUND(?+0.0005,3)
+         WHERE habit_id = ?
+           AND do_date = ?
    </entry>
    <entry key="selectTimerDateInfo">
-       SELECT 
-              habit_id
-            , do_date 
-         FROM admin.hbt_timer
-        WHERE habit_id = ?
-          AND do_date = ?
+        SELECT 
+               habit_id
+             , do_date 
+          FROM admin.hbt_timer
+         WHERE habit_id = ?
+           AND do_date = ?
    </entry>
 
    <entry key="deleteUser">
@@ -131,7 +131,7 @@
    <entry key="deleteHabit">
    	   DELETE
    	     FROM admin.hbt_register
-   	    WHERE habit_name = ? 
+   	    WHERE habit_id = ? 
    	
    </entry>
    
@@ -159,7 +159,7 @@
 
        VALUES (
        		   ?
-             , ?
+             , admin.seq_habit_id.nextval
              , ?
              , ?
              , ?
@@ -167,41 +167,40 @@
 		)
 	</entry>
    <entry key="selectTotalCheck">
-       SELECT
-              COUNT(*)
-            , SUM(count_check)
-         FROM admin.hbt_check
-        WHERE SUBSTR(do_date,4,2) = ?
-          AND habit_id = ?
+        SELECT
+               COUNT(*)
+             , SUM(count_check)
+          FROM admin.hbt_check
+         WHERE SUBSTR(do_date,4,2) = ?
+           AND habit_id = ?
    </entry>
    <entry key = "selectTotalTimerCheck">
-       SELECT
-              COUNT(*)
-            , SUM(time_record)
-         FROM admin.hbt_timer
-        WHERE SUBSTR(do_date,4,2) = ? 
-          AND habit_id = ?    	
+        SELECT
+               COUNT(*)
+             , SUM(time_record)
+          FROM admin.hbt_timer
+         WHERE SUBSTR(do_date,4,2) = ? 
+           AND habit_id = ?    	
    </entry>
    <entry key="selectCheckGoalRecord">
-       SELECT 
-              do_date
-            , count_check
-            , habit_goal
-         FROM admin.hbt_check c
-         JOIN admin.hbt_register r ON (c.habit_id = r.habit_id)
-        WHERE c.habit_id = ?
-        ORDER BY do_date
+        SELECT 
+               do_date
+             , count_check
+             , habit_goal
+          FROM admin.hbt_check c
+          JOIN admin.hbt_register r ON (c.habit_id = r.habit_id)
+         WHERE c.habit_id = ?
+         ORDER BY do_date
    </entry>
    <entry key="selectTimerGoalRecord">
-       SELECT 
-              do_date
-            , time_record
-            , habit_goal
-         FROM admin.hbt_timer t
-         JOIN admin.hbt_register r ON (t.habit_id = r.habit_id)
-        WHERE t.habit_id = ?
-        ORDER BY do_date
-       
+        SELECT 
+               do_date
+             , time_record
+             , habit_goal
+          FROM admin.hbt_timer t
+          JOIN admin.hbt_register r ON (t.habit_id = r.habit_id)
+         WHERE t.habit_id = ?
+         ORDER BY do_date
    </entry>
    
    <entry key="userLevel">

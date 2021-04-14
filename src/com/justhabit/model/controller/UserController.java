@@ -130,28 +130,30 @@ public class UserController {
 		int successOfChecks = user.getSuccessOfCheck();
 		int successOfTimers = user.getSuccessOfTimer();
 		
-		int level = 0;
+		int level = 1;
 		
-		if(userLevel != 5) {
 		
-			if((successOfChecks + successOfTimers >= 7 ) && totalHabits >= 7  ) {
-				level = 5;
-			} else if((successOfChecks + successOfTimers >= 5 ) && totalHabits >= 5) {
-				level = 4;
-			} else if((successOfChecks + successOfTimers >= 3 ) && totalHabits >= 3) {
-				level = 3;
-			} else if((successOfChecks + successOfTimers >= 1 ) && totalHabits >= 1) {
-				level = 2;
-			}
-			
-			/* 3. 유저레벨에 변경이 생길 시, 유저 정보 업데이트 
-			 * 3-1 View로 리턴값 변경
-			 * 3-2 DB update  */
-			if( userLevel != level ) {
-				user.setUserLevel(level);
-				userService.userLvlUpdate(user);
-			}
-		} 
+		
+		if((successOfChecks + successOfTimers >= 7 ) && totalHabits >= 7  ) {
+			level = 5;
+		} else if((successOfChecks + successOfTimers >= 5 ) && totalHabits >= 5) {
+			level = 4;
+		} else if((successOfChecks + successOfTimers >= 3 ) && totalHabits >= 3) {
+			level = 3;
+		} else if((successOfChecks + successOfTimers >= 1 ) && totalHabits >= 1) {
+			level = 2;
+		} else {
+			level = 1;
+		}
+		
+		/* 3. 유저레벨에 변경이 생길 시, 유저 정보 업데이트 
+		 * 3-1 View로 리턴값 변경
+		 * 3-2 DB update  */
+		if( userLevel != level ) {
+			user.setUserLevel(level);
+			userService.userLvlUpdate(user);
+		}
+		
 		
 		return user;
 	}

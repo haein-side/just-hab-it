@@ -20,5 +20,18 @@ public class HaeinController {
 		
 	}
 
+	public void deleteHabitBy(int deleteHabitID) {
 
+		int result = habitService.deleteHabitBy(deleteHabitID);
+		if(result > 0) {
+			System.out.println("삭제를 성공했습니다.");
+		} else {
+			System.out.println("삭제를 실패했습니다.");
+		}
+		
+		
+	}
+
+
+	
 }

@@ -17,11 +17,7 @@ import com.justhabit.model.dto.HabbitAddDTO;
 
 public class HabbitAdd extends JFrame {
 
-//	private JButton nextButton; // 다음버튼
-//	private JButton preButton; //  이전버튼
-//	private JLabel label; // 라벨
-//	private JTextField text; // 텍스트 입력
-	
+
    public static HabbitAddDTO habbitAddDTO = new HabbitAddDTO();
    private HabbitAdd habbitAdd = this;
    
@@ -37,8 +33,6 @@ public class HabbitAdd extends JFrame {
 	
 	JPanel question = new JPanel();
 	
-//	question.setBounds(200,200,600,200);
-//	question.setLayout(new BorderLayout());
 	JLabel label1 = new JLabel("1번) 무슨 습관을 들이고 싶나요?");
    
 	label1.setFont(new Font("Serif", Font.BOLD, 20));
@@ -55,7 +49,7 @@ public class HabbitAdd extends JFrame {
 	question.validate();
   	
 	JButton jbutton1 = new JButton("메인으로");
-    jbutton1.setSize(80,50);
+    jbutton1.setSize(100,50);
     jbutton1.setLocation(300, 280);
     habbitAdd.add(jbutton1); 
 	
@@ -78,16 +72,18 @@ public class HabbitAdd extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e) {
         	System.out.println(text.getText());
+        	
+        	
         	HabbitAdd.habbitAddDTO.setHabitName(text.getText());
         	PanelChangeControl.changeFrame(habbitAdd , new HabbitAdd3());
         	
         }
      });
   	
-//  	this.add(question);
+
   	habbitAdd.setVisible(true);
   	habbitAdd.setResizable(false);
-  	habbitAdd.setLocationRelativeTo(null); // 화면 가운데로
+  	habbitAdd.setLocationRelativeTo(null); 
   	habbitAdd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
    } 

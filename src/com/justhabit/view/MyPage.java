@@ -22,6 +22,7 @@ import javax.swing.JTextField;
 import com.justhabit.model.controller.PanelChangeControl;
 import com.justhabit.model.controller.UserController;
 import com.justhabit.model.dto.UserDTO;
+import com.justhabit.model.dto.UserLevelDTO;
 
 public class MyPage extends JFrame {
 	
@@ -69,7 +70,7 @@ public class MyPage extends JFrame {
 	    label_email.setBounds(400, 100, 150, 150);
 	    label_password.setBounds(400, 140, 150, 150);
 	    label_pin.setBounds(550, 270, 150, 150);
-		levelExp.setBounds(130, 270, 150, 150);
+		levelExp.setBounds(130, 190, 150, 150);
 		
 		userPanel.add(label_username);
 		userPanel.add(label_email);
@@ -79,9 +80,19 @@ public class MyPage extends JFrame {
 		
 		
 		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
-		//TODO: 테스트용 지우고 로그인된 유저로 정보가져오기.
-//		UserDTO myUser = userController.userInfo(1); // test
-		//TODO: level값을 가져오는 쿼리.어디서? 레벨에 따른 사진 변경 
+//		UserLevelDTO myUserLevel = new TopPanel().userInfo(FirstFrame.loggedUserID);
+//		
+//		JLabel level_info = new JLabel("");
+//		
+//		level_info.setText("<html><b>" + myUser.getUserName() + "</b>님의 현재 총 습관의 수는<font color=green> " + myUserLevel.getNumOfHabits() + "</font>,<br>"
+//				            +  "총 습관 성공 횟수 : <font color=green>" + (myUserLevel.getSuccessOfCheck() + myUserLevel.getSuccessOfTimer()) + "</font><br>"
+//				            +  "-카운트 습관 성공 횟수 : <font color=green>" + myUserLevel.getSuccessOfCheck() + "</font><br>"
+//				            +  "-타이머 습관 성공 횟수 : <font color=green>" + myUserLevel.getSuccessOfTimer() + "</font>");
+//		
+//		
+//		level_info.setFont(new Font("a디딤돌",Font.BOLD,20));
+//		level_info.setBounds(130, 250, 400, 400);
+//		userPanel.add(level_info);
 		
 		
 		String pwd = "";
@@ -121,7 +132,7 @@ public class MyPage extends JFrame {
 		myUser_email.setBounds(600, 160, 200, 30);
 		myUser_pwd.setBounds(600, 200, 200, 30);
 		myUser_pin.setBounds(600, 330, 200, 30);
-		myUser_level.setBounds(220, 270, 150, 150);
+		myUser_level.setBounds(220, 190, 150, 150);
 
 		
 		myUser_name.setEditable(false);
@@ -141,15 +152,29 @@ public class MyPage extends JFrame {
 		JLabel instruction  = new JLabel();
 		instruction.setFont(new Font("a디딤돌",Font.ITALIC,21));
 		instruction.setVisible(false);
-		instruction.setBounds(400, 290, 390, 20);
+		instruction.setBounds(400, 290, 420, 20);
 		userPanel.add(instruction);
+		
+		
+		
+		JButton level_info = new JButton("레벨 정보");
+		level_info.setSize(150,30);
+		level_info.setLocation(120, 290);
+		userPanel.add(level_info);
+		level_info.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseClicked(MouseEvent e) {
+            	
+            	new LevelInfoPage(myPage);
+            }
+         });
 		
 		
 		
 		
 		JButton revise = new JButton("회원정보 수정하기");
 		revise.setSize(180,40);
-		revise.setLocation(365, 390);
+		revise.setLocation(385, 390);
 		userPanel.add(revise);
 		
 		myUser_pin.addKeyListener(new KeyAdapter() {
@@ -213,7 +238,7 @@ public class MyPage extends JFrame {
 
 		JButton exit = new JButton("탈퇴하기");
 		exit.setSize(180,40);
-		exit.setLocation(600, 390);
+		exit.setLocation(610, 390);
 		userPanel.add(exit);
 		exit.addMouseListener(new MouseAdapter() {
             @Override
@@ -245,7 +270,7 @@ public class MyPage extends JFrame {
 		Image level = new ImageIcon("image/" + myUser.getUserImage()).getImage().getScaledInstance(130, 130, 0);
 		
 		JLabel levelImg = new JLabel(new ImageIcon(level));
-		levelImg.setBounds(80,60,300,300);
+		levelImg.setBounds(50,30,300,300);
 		userPanel.add(levelImg);
 		
 		//메뉴패널추가
@@ -253,17 +278,19 @@ public class MyPage extends JFrame {
 		botPan.setLayout(new GridLayout(1,6));
 		botPan.setSize(900, 100);
 		botPan.setLocation(0, 562);
-		botPan.setBackground(Color.GREEN);
+		botPan.setBackground(Color.decode("#771d32"));
 		this.add(botPan);
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage"};
+		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setBackground(new Color(211,224,234));
+			menuButton[i].setBackground(Color.decode("#e65758"));
+			menuButton[i].setForeground(new Color(255,249,247));
+			menuButton[i].setFont(new Font("THE외계인설명서", Font.BOLD, 17));
 			botPan.add(menuButton[i]);
 		}
 		menuButton[0].addActionListener(new ActionListener() {
@@ -281,7 +308,17 @@ public class MyPage extends JFrame {
 	          }
 	       });
 		
-		menuButton[2].setEnabled(false);
+		menuButton[2].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
+	        	  new DeleteHabit(myPage);
+	          }
+	       });
 		
-		}
+		menuButton[3].setEnabled(false);
+		
+	}
+	
+		
 }
