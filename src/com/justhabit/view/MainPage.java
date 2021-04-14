@@ -262,8 +262,8 @@ public class MainPage extends JFrame{
 		
 		JPanel botPan = new JPanel();
 		botPan.setLayout(new GridLayout(1,4));
-		botPan.setSize(900, 100);
-		botPan.setLocation(0, 562);
+		botPan.setSize(900, 50);
+		botPan.setLocation(0, 615);
 		
 		//메뉴목록
 		String[] menu = {"메인페이지", "습관등록","습관삭제","마이페이지"};
