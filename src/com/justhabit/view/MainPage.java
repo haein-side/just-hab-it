@@ -1,5 +1,6 @@
 package com.justhabit.view;
 
+import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.FileDialog;
@@ -48,23 +49,40 @@ public class MainPage extends JFrame{
 		this.setLayout(null);
 		this.setSize(900, 700);
 		
-		
-		
-		
 		this.add(new TopPanel());
 		
-		//가운데 패널
-		JPanel center = new JPanel();
-		center.setBounds(0, 100, 900, 462);
+		//맨뒤에 패널
+//		JPanel backP = new JPanel();
+//		backP.setBounds(0,100,900,462);
+//		backP.setLayout(null);
+//		backP.setBackground(Color.GREEN);
+//		backP.setVisible(false);
+//		this.add(backP);
+			
+		
+		//좌측 패널
+		JPanel left = new JPanel();
+		left.setBounds(0, 100, 400, 462);
 //		center.setLocation(0, 100);
-		center.setPreferredSize(new Dimension(900,462));
-		center.setLayout(null);
+//		left.setPreferredSize(new Dimension(900,462));
+		left.setLayout(null);
+		left.setBackground(Color.GRAY);
+		left.setVisible(true);
+		this.add(left);
 //		center.setBackground(new Color(246,245,245));
 		
-		
-//		ImageIcon icon = new ImageIcon(imgURL); 
-//		JLabel thumb = new JLabel();
-//		thumb.setIcon(icon);
+
+		JPanel right = new JPanel();
+		right.setLocation(400,100);
+		right.setSize(500,462);
+//		right.setBounds(400, 100, 500, 462);
+//		right.setPreferredSize(new Dimension(800,562));
+//		center.setLocation(0, 100);
+//		right.setPreferredSize(new Dimension(900,462));
+		right.setLayout(null);
+		right.setBackground(Color.GREEN);
+		right.setVisible(true);
+		this.add(right);
 		
 
 		
@@ -76,27 +94,30 @@ public class MainPage extends JFrame{
 		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
 //		JButton[] habitButtons = new JButton[allhabitList.size()];
 		
-		JPanel right = new JPanel();
-		right.setBounds(400, 100, 500, 462);
-		right.setLayout(null);
+//		JPanel right = new JPanel();
+//		this.add(right);
+//		right.setBounds(400, 100, 500, 462);
+//		right.setLayout(null);
+//		right.setBackground(Color.YELLOW);
+//		right.setVisible(false);
+		
+//		JPanel test = new JPanel();
+//		test.setBounds(0,100, 400, 462);
+//		test.setPreferredSize(new Dimension(800,562));
+//		test.setLayout(null);
+//		test.setBackground(Color.blue);
+//		this.add(test);
+//		
+
+		
 		
 		for(h = 0; h < allhabitList.size(); h++) {
 				JButton box = new JButton();
 				box.setSize(400, 60);
-				box.setLocation(400, 180 + 100 * (h-1));	
+				box.setLocation(50, 80 * (h + 1));
 				box.setText(allhabitList.get(h).getHabitName());
 				
-				// 버튼 이미지 넣으려고 했으나 실패
-//				box.setOpaque(false);
-//				box.setContentAreaFilled(false);
-//				box.setBorderPainted(false);
-				
-//				Image button = new ImageIcon("button1/diary.jpg").getImage();
-//				JLabel button1 = new JLabel(new ImageIcon(button));
-//				button1.setBounds(400,60,400,180 + 100 * (h-1));
-//				
-//				center.add(button1);
-//				
+
 				
 				int i = h;
 				box.setText(allhabitList.get(h).getHabitName());
@@ -115,31 +136,26 @@ public class MainPage extends JFrame{
 			        	  }
 			          }
 			       });
-				center.add(box);
+				right.add(box);
 		}
 		
 		
         // 스크롤
-        JScrollPane scrollbar = new JScrollPane(center);
-        scrollbar.setPreferredSize(new Dimension(900,600));
-        scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-        int width = scrollbar.getPreferredSize().width;
-        int height = scrollbar.getPreferredSize().height;
-        scrollbar.setBounds(850,100,width,height);
-        scrollbar.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-//        scrollbar.setBackground(Color.pink);
-        this.add(scrollbar);
-        
-        // 스크롤
-//        JScrollPane scrollbar = new JScrollPane(middlePanel);
-//        scrollbar.setPreferredSize(new Dimension(685,700));
+//        JScrollPane scrollbar = new JScrollPane(right);
 //        scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-//        int width = scrollbar.getPreferredSize().width;
+//        scrollbar.setPreferredSize(new Dimension(900,452));
+////        scrollbar.setPreferredSize(new Dimension(900,462));
+//        int width = scrollbar.getPreferredSize().width-13;
 //        int height = scrollbar.getPreferredSize().height;
 //        scrollbar.setBounds(0,100,width,height);
-//        scrollbar.setBorder(pinkborder);
-//        scrollbar.setBackground(Color.pink);
-//        this.getContentPane().add(scrollbar);
+//        scrollbar.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+////        scrollbar.setBackground(Color.pink);
+//        this.add(scrollbar);
+//        
+        JScrollPane scroll_pane = new JScrollPane(right);
+        scroll_pane.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scroll_pane.setBounds(0,100,10,400);
+        this.add(scroll_pane);
 
 		
 		
@@ -151,14 +167,14 @@ public class MainPage extends JFrame{
 	
 	    promise.setSize(300,50);
 	    promise.setLocation(60, 15);
-	    center.add(promise);
+	    left.add(promise);
 	    
 	    JLabel habit = new JLabel("<오늘의 습관>");
 	    habit.setFont(font);
 	
 	    habit.setSize(300,50);
-	    habit.setLocation(400, 15);
-	    center.add(habit);
+	    habit.setLocation(60, 15);
+	    right.add(habit);
 	    
 	    JTextArea chat = new JTextArea();
 	    chat.setBounds(50,60,300,300);
@@ -171,13 +187,13 @@ public class MainPage extends JFrame{
 	    chat.setOpaque(false);
 	    chat.setBorder(BorderFactory.createEmptyBorder());
 	    chat.setBackground(new Color(0,0,0,0));
-	    center.add(chat);
-	    center.validate();
+	    left.add(chat);
+	    left.validate();
 	    
         Image diary = new ImageIcon("image/diary.jpg").getImage().getScaledInstance(300, 300, 0);
 		JLabel yellow = new JLabel(new ImageIcon(diary));
 		yellow.setBounds(50,60,300,300);
-		center.add(yellow);
+		left.add(yellow);
 		
 		
 		
@@ -241,17 +257,11 @@ public class MainPage extends JFrame{
 //		save.setLocation(370,100);
 		save.setBounds(65, 380, 120, 40);
 		open.setBounds(215, 380, 120, 40);
-		center.add(save);
-		center.add(open);
+		left.add(save);
+		left.add(open);
 	    
 	    
-	    
-//		Image back = new ImageIcon("image/resizedbackground1.jpg").getImage().getScaledInstance(900, 700, 0);
-//		JLabel backImg = new JLabel(new ImageIcon(back));
-//		backImg.setBounds(0,0,900,462);
-//		center.add(backImg);
-		
-		
+
 		
 		JPanel botPan = new JPanel();
 		botPan.setLayout(new GridLayout(1,6));
@@ -296,11 +306,11 @@ public class MainPage extends JFrame{
 		
 		this.add(botPan);
 		
-		Image button = new ImageIcon("button1/diary.jpg").getImage().getScaledInstance(900, 700, 0);
-		JLabel button1 = new JLabel(new ImageIcon(button));
-		button1.setBounds(0,0,400,80);
-		
-		center.add(button1);
+//		Image button = new ImageIcon("button1/diary.jpg").getImage().getScaledInstance(900, 700, 0);
+//		JLabel button1 = new JLabel(new ImageIcon(button));
+//		button1.setBounds(0,0,400,80);
+//		
+//		center.add(button1);
 		
 //		Image back = new ImageIcon("image/resizedbackground1.jpg").getImage().getScaledInstance(900, 700, 0);
 //		JLabel backImg = new JLabel(new ImageIcon(back));
@@ -310,9 +320,10 @@ public class MainPage extends JFrame{
 		
 		
 		
-		this.add(center);
+//		this.add(center);
+//		this.add(right);
 		this.setVisible(true);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.setLocationRelativeTo(null); // 화면 가운데로
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
@@ -321,25 +332,6 @@ public class MainPage extends JFrame{
 	}
 		
 	
-//	public void displayHabit(){
-////		int userid = 1;
-//		
-//		FirstFrame.loggedUserID = 1;
-//		
-//		List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
-//		JButton[] habitButtons = new JButton[allhabitList.size()];
-//		for(int i = 0; i < allhabitList.size(); i++) {
-//				JButton box = new JButton();
-//				box.setSize(100, 80);
-//				box.setLocation(150* + 100*(i-1), 300);
-//				box.setText(allhabitList.get(i).getHabitName());
-//				this.add(box);
-//			
-//		}
-//		for(int i = 0; i < allhabitList.size(); i++) {
-//			System.out.println(allhabitList.get(i).getHabitID() + "/" + allhabitList.get(i).getHabitName() );
-//		}
-//	}
 	
 	}
 	
