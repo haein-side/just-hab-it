@@ -276,8 +276,8 @@ public class MyPage extends JFrame {
 		//메뉴패널추가
 		JPanel botPan = new JPanel();
 		botPan.setLayout(new GridLayout(1,6));
-		botPan.setSize(900, 100);
-		botPan.setLocation(0, 562);
+		botPan.setSize(900, 50);
+		botPan.setLocation(0, 615);
 		botPan.setBackground(Color.decode("#771d32"));
 		this.add(botPan);
 		//메뉴목록
@@ -289,6 +289,8 @@ public class MyPage extends JFrame {
 			
 			menuButton[i] = new JButton(menu[i]);
 			menuButton[i].setBackground(Color.decode("#e65758"));
+			menuButton[i].setForeground(new Color(255,249,247));
+			menuButton[i].setFont(new Font("THE외계인설명서", Font.BOLD, 17));
 			botPan.add(menuButton[i]);
 		}
 		menuButton[0].addActionListener(new ActionListener() {

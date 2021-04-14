@@ -263,9 +263,9 @@ public class MainPage extends JFrame{
 
 		
 		JPanel botPan = new JPanel();
-		botPan.setLayout(new GridLayout(1,6));
-		botPan.setSize(900, 100);
-		botPan.setLocation(0, 562);
+		botPan.setLayout(new GridLayout(1,4));
+		botPan.setSize(900, 50);
+		botPan.setLocation(0, 615);
 		
 		Font  buttonF  = new Font("빙그레체Ⅱ", Font.PLAIN,  20);
 		
@@ -280,6 +280,8 @@ public class MainPage extends JFrame{
 			menuButton[i] = new JButton(menu[i]);
 			menuButton[i].setFont(buttonF);
 			menuButton[i].setBackground(Color.decode("#e65758"));
+			menuButton[i].setForeground(new Color(255,249,247));
+			menuButton[i].setFont(new Font("THE외계인설명서", Font.BOLD, 17));
 			botPan.add(menuButton[i]);
 		}
 		menuButton[0].setEnabled(false);

@@ -38,15 +38,15 @@ public class TimeRecordView extends JFrame{
 	private HabitRecordController habitInfoController = new HabitRecordController();
 	private HabitRecordDTO timerRecord = new HabitRecordDTO(); //습관 기록전달DTO
 	private HabitInfoDTO registInfo = new HabitInfoDTO(); //습관등록정보전달DTO
-	private HabitMonthTotalDTO totalRecord = new HabitMonthTotalDTO();
-	Map<String,HabitRecordDTO> recordAndGoalList = null;
+	private HabitMonthTotalDTO totalRecord = new HabitMonthTotalDTO(); //습관의 월 total 기록 조회결과
+	private Map<String,HabitRecordDTO> recordAndGoalList = null; //일별 기록전달DTO
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
 	private int totalDate =0; //습관실시 일수
 	private double totalTimer=0;//기록된 습관 총 시간
 	private String thisMonth = "" ;//이번달 "00월"
-	private int accomon = 0;
-	JFrame mf = this;
+	private int accomon = 0; //습관성취도 수 카운트
+	private JFrame mf = this; 
 	
 	
 	public TimeRecordView() {
@@ -61,9 +61,9 @@ public class TimeRecordView extends JFrame{
 		this.add(top);
 		
 		JPanel center = new JPanel();
-		center.setBounds(0, 100, 900, 462);
+		center.setBounds(0, 100, 900, 530);
 		center.setLayout(null);
-		center.setBackground(new Color(47,49,54));
+		center.setBackground(new Color(255,255,255));
 		
 		
 		//등록된 습관정보 불러오기
@@ -81,14 +81,14 @@ public class TimeRecordView extends JFrame{
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 
 		//폰트설정
-		nameLabel.setFont(new Font("D2Coding",Font.BOLD,20));
+		nameLabel.setFont(new Font("THE외계인설명서",Font.BOLD,20));
 		habitName.add(nameLabel);
 		
 		habitTop.add(habitName);
 		
 		//습관목표출력
 		JLabel habitGoal = new JLabel("목표 : "+registInfo.getHabitGoal()+"시간 /");
-		habitGoal.setFont(new Font("D2Coding",Font.PLAIN,15));
+		habitGoal.setFont(new Font("THE외계인설명서",Font.PLAIN,15));
 		habitTop.add(habitGoal);
 		
 		//습관 상단바 - 타이머
@@ -114,7 +114,6 @@ public class TimeRecordView extends JFrame{
 		}
 		
 		//월표시
-		
 		thisMonth = "";
 		if(month < 9) {
 			thisMonth = "0"+(month+1);
@@ -123,9 +122,8 @@ public class TimeRecordView extends JFrame{
 		}
 		JLabel monthName = new JLabel(thisMonth+"월");
 		monthName.setBounds(160,15,80,50);
-		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
+		monthName.setFont(new Font("THE외계인설명서",Font.BOLD,20));
 		monthName.setForeground(new Color(255,255,204));
-	
 		
 		calendarPanel.add(monthName);
 		
@@ -219,7 +217,7 @@ public class TimeRecordView extends JFrame{
 		habitInfo.setBounds(420, 95, 420, 340);
 		JTextArea info = new JTextArea();
 		info.setBounds(10,10,400,320);
-		info.setFont(new Font("D2Coding",Font.PLAIN,20));
+		info.setFont(new Font("THE외계인설명서",Font.PLAIN,20));
 		
 		//출력할정보를 검색
 		totalRecord.setHabitId(registInfo.getHabitID());
@@ -308,12 +306,6 @@ public class TimeRecordView extends JFrame{
 									}
 								}
 							}
-							//저장버튼 누를 떄 기존값변경,,타이머보류
-//							String existingRecordDate = todayRecord.format(todayDate);
-//							if(recordAndGoalList.get(existingRecordDate)!=null) {
-//								timerPanel.t = recordAndGoalList.get(existingRecordDate).getTimer()*60*60*100;
-//								System.out.println(timerPanel.t);
-//							}
 						}
 						info.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalTimer + "회");
 					}
@@ -321,10 +313,10 @@ public class TimeRecordView extends JFrame{
 		
 		//하단패널
 		JPanel botPan = new JPanel();
-		botPan.setLayout(new GridLayout(1,6));
-		botPan.setSize(900, 100);
-		botPan.setLocation(0, 562);
-		botPan.setBackground(Color.GREEN);
+		botPan.setLayout(new GridLayout(1,4));
+		botPan.setSize(900, 50);
+		botPan.setLocation(0, 615);
+		botPan.setBackground(new Color(255,255,255));
 		this.add(botPan);
 		// 메뉴목록
 		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
@@ -334,6 +326,8 @@ public class TimeRecordView extends JFrame{
 					
 					menuButton[i] = new JButton(menu[i]);
 					menuButton[i].setBackground(Color.decode("#e65758"));
+					menuButton[i].setForeground(new Color(255,249,247));
+					menuButton[i].setFont(new Font("THE외계인설명서", Font.BOLD, 17));
 					botPan.add(menuButton[i]);
 				}
 		
@@ -369,7 +363,6 @@ public class TimeRecordView extends JFrame{
 		center.add(habitInfo);
 		center.add(calendarPanel);
 		center.add(habitTop);
-		
 		//달력배경
 		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 450, 0);
 		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
@@ -380,7 +373,6 @@ public class TimeRecordView extends JFrame{
 		background.setBounds(0, 0, 900, 462);
 		calendarPanel.add(CalendarBackground);
 		center.add(background);
-		
 		
 		this.add(center);
 		this.setResizable(false);

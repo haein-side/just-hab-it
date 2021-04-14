@@ -31,7 +31,7 @@ public class TopPanel extends JPanel{
 		userLevelInfo = userInfo(FirstFrame.loggedUserID);
 		
 		JLabel title = new JLabel("JUST HAB' IT");
-		title.setFont(new Font("D2Coding", Font.BOLD,50));
+		title.setFont(new Font("THE외계인설명서", Font.BOLD,50));
 		title.setBounds(300,20,500,70);
 		title.setForeground(new Color(255,249,247));
 		title.setVisible(true);
@@ -40,6 +40,7 @@ public class TopPanel extends JPanel{
 		JLabel userLvl = new JLabel("Lvl :  "+ userLevelInfo.getUserLevel());
 		userLvl.setFont(new Font("a디딤돌",Font.BOLD, 15));
 		userLvl.setBounds(10, 55, 60, 60);
+		userLvl.setForeground(new Color(255,249,247));
 		userLvl.setVisible(true);
 		this.add(userLvl);
 		
@@ -70,7 +71,7 @@ public class TopPanel extends JPanel{
 		SimpleDateFormat dayFormat = new SimpleDateFormat("yyyy년 MM월 dd일 E요일");
 		JLabel dayPrint = new JLabel(dayFormat.format(today));
 		dayPrint.setBounds(680,0, 200, 50);
-		dayPrint.setFont(new Font("D2Coding",Font.BOLD,15));
+		dayPrint.setFont(new Font("THE외계인설명서",Font.BOLD,15));
 		dayPrint.setForeground(new Color(255,249,247));
 		this.add(dayPrint);
 	}
