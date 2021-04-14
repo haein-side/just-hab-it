@@ -17,7 +17,7 @@ public class BotMenuPanel extends JPanel{
 	public BotMenuPanel(JFrame mf) {
 		
 		String[] menu = {"Main", "습관등록", "습관삭제","mypage"};
-		JFrame[] page = {new MainPage(), new HabbitAdd(), new DeleteHabit(), new MyPage()}; 
+//		JFrame[] page = {new MainPage(), new HabbitAdd(), new DeleteHabit(), new MyPage()}; 
 		this.setLocation(0, 562);
 		this.setSize(800, 100);
 		this.setLayout(new GridLayout(1,4));
