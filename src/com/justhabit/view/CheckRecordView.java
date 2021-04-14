@@ -57,8 +57,6 @@ public class CheckRecordView extends JFrame{
 		center.setLayout(null);
 		center.setBackground(new Color(47,49,54));
 		
-		
-		
 		//등록된 습관정보 불러오기
 		registInfo.setHabitID(MainPage.userhabitid);
 		registInfo = habitInfoController.selectHabitInfo(registInfo);
@@ -348,7 +346,7 @@ public class CheckRecordView extends JFrame{
 		
 		this.add(botPan);
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage"};
+		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
@@ -379,6 +377,14 @@ public class CheckRecordView extends JFrame{
 	          
 	          @Override
 	          public void actionPerformed(ActionEvent e) {
+	        	  new DeleteHabit();
+	          }
+	       });
+		
+		menuButton[3].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
 	             PanelChangeControl.changeFrame(mf, new MyPage());
 	          }
 	       });
@@ -399,7 +405,7 @@ public class CheckRecordView extends JFrame{
 		calendarPanel.add(CalendarBackground);
 		center.add(background);
 		
-		
+		this.setResizable(false);
 		this.add(center);
 		this.setSize(900, 700);
 		this.setLocationRelativeTo(null);
