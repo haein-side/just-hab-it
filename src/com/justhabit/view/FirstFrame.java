@@ -33,7 +33,7 @@ public class FirstFrame {
    private JFrame frame ;
    private LoginPanel login;
    
-   private Image ic_logo = new ImageIcon("image/nike-logo-png-21194.png").getImage().getScaledInstance(130, 130, Image.SCALE_SMOOTH);
+   private Image ic_logo = new ImageIcon("image/nike-logo-png-21194.png").getImage().getScaledInstance(130, 70, Image.SCALE_SMOOTH);
    private JTextField txtUsername;
    private JPasswordField txtPassword;
    
@@ -100,7 +100,7 @@ public class FirstFrame {
       JLabel lblLogo = new JLabel("");
       lblLogo.setIcon(new ImageIcon(ic_logo));
       lblLogo.setHorizontalAlignment(SwingConstants.CENTER);
-      lblLogo.setBounds(78, 71, 234, 160);
+      lblLogo.setBounds(78, 90, 234, 160);
       circlePanel.add(lblLogo);
       
 //      JLabel lblNewLabel = new JLabel("W E L C O M E");
