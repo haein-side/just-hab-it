@@ -80,20 +80,6 @@ public class MyPage extends JFrame {
 		
 		
 		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
-//		UserLevelDTO myUserLevel = new TopPanel().userInfo(FirstFrame.loggedUserID);
-//		
-//		JLabel level_info = new JLabel("");
-//		
-//		level_info.setText("<html><b>" + myUser.getUserName() + "</b>님의 현재 총 습관의 수는<font color=green> " + myUserLevel.getNumOfHabits() + "</font>,<br>"
-//				            +  "총 습관 성공 횟수 : <font color=green>" + (myUserLevel.getSuccessOfCheck() + myUserLevel.getSuccessOfTimer()) + "</font><br>"
-//				            +  "-카운트 습관 성공 횟수 : <font color=green>" + myUserLevel.getSuccessOfCheck() + "</font><br>"
-//				            +  "-타이머 습관 성공 횟수 : <font color=green>" + myUserLevel.getSuccessOfTimer() + "</font>");
-//		
-//		
-//		level_info.setFont(new Font("a디딤돌",Font.BOLD,20));
-//		level_info.setBounds(130, 250, 400, 400);
-//		userPanel.add(level_info);
-		
 		
 		String pwd = "";
 		for(int i = 0; i < myUser.getUserPwd().length(); i++) {
@@ -132,7 +118,7 @@ public class MyPage extends JFrame {
 		myUser_email.setBounds(600, 160, 200, 30);
 		myUser_pwd.setBounds(600, 200, 200, 30);
 		myUser_pin.setBounds(600, 330, 200, 30);
-		myUser_level.setBounds(220, 190, 150, 150);
+		myUser_level.setBounds(200, 190, 150, 150);
 
 		
 		myUser_name.setEditable(false);
@@ -165,7 +151,7 @@ public class MyPage extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
             	
-            	new LevelInfoPage(myPage);
+            	new LevelInfoPage(myPage, myUser.getUserName());
             }
          });
 		
