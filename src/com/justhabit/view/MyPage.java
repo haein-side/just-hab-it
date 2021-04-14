@@ -278,7 +278,7 @@ public class MyPage extends JFrame {
 		botPan.setLayout(new GridLayout(1,6));
 		botPan.setSize(900, 100);
 		botPan.setLocation(0, 562);
-		botPan.setBackground(Color.GREEN);
+		botPan.setBackground(Color.decode("#771d32"));
 		this.add(botPan);
 		//메뉴목록
 		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
@@ -288,7 +288,7 @@ public class MyPage extends JFrame {
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setBackground(new Color(211,224,234));
+			menuButton[i].setBackground(Color.decode("#e65758"));
 			botPan.add(menuButton[i]);
 		}
 		menuButton[0].addActionListener(new ActionListener() {
