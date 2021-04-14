@@ -217,10 +217,12 @@ public class TimeRecordView extends JFrame{
 		//문구 표시
 		JPanel habitInfo = new JPanel();
 		habitInfo.setLayout(null);
-		habitInfo.setBounds(420, 95, 420, 340);
+		habitInfo.setBounds(470, 95, 338, 350);
 		JTextArea info = new JTextArea();
-		info.setBounds(10,10,400,320);
+		info.setBounds(0,0,370,320);
 		info.setFont(new Font("THE외계인설명서",Font.PLAIN,20));
+		info.setEditable(false);
+		info.setOpaque(false);
 		
 		//출력할정보를 검색
 		totalRecord.setHabitId(registInfo.getHabitID());
@@ -230,7 +232,7 @@ public class TimeRecordView extends JFrame{
 		totalDate = totalRecord.getDateCount();
 		//습관 총 횟수
 		totalTimer = totalRecord.getRecordSum();
-		info.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalTimer + "회");
+		info.setText("\n \n \n                           이번 달 기록 \n \n        달성한 일수   :   " + accomon + "일\n \n        실시한 일수   :   " + totalDate + "일 \n \n        실시한 시간   :   " + totalTimer + "시간");
 		habitInfo.add(info);
 		
 		//저장 버튼 
@@ -304,7 +306,7 @@ public class TimeRecordView extends JFrame{
 						}
 					}
 				}
-				info.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalTimer + "회");
+				info.setText("\n \n \n                           이번 달 기록 \n \n        달성한 일수   :   " + accomon + "일\n \n        실시한 일수   :   " + totalDate + "일 \n \n        실시한 시간   :   " + totalTimer + "시간");
 			}
 		});
 		
@@ -443,14 +445,17 @@ public class TimeRecordView extends JFrame{
 		center.add(habitInfo);
 		center.add(calendarPanel);
 		center.add(habitTop);
+	
 		//달력배경
 		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 450, 0);
 		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
 		CalendarBackground.setBounds(0, 0, 350, 340);
-		//배경화면
-//		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
-//		JLabel background = new JLabel(new ImageIcon(backImg));
-//		background.setBounds(0, 0, 900, 462);
+		
+		//기록배경
+		Image monthTotal = new ImageIcon("image/포스트잇.png").getImage().getScaledInstance(380, 350, 0);
+		JLabel monthTotalBackground = new JLabel(new ImageIcon(monthTotal));
+		monthTotalBackground.setBounds(0,0,338,350);
+		habitInfo.add(monthTotalBackground);
 		calendarPanel.add(CalendarBackground);
 //		center.add(background);
 		

@@ -97,7 +97,6 @@ public class CheckRecordView extends JFrame{
 		habitCheck.add(plusLabel);
 		habitCheck.addMouseListener(new MouseAdapter() {
 			
-		
 			@Override
 			public void mouseClicked(MouseEvent e) {
 				if(checkCount == registInfo.getHabitGoal()) {
@@ -264,7 +263,7 @@ public class CheckRecordView extends JFrame{
 		//문구 표시
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(null);
-		infoPanel.setBounds(420, 95, 370, 320);
+		infoPanel.setBounds(470, 95, 338, 350);
 		JTextArea infoText = new JTextArea();
 		
 		infoText.setBounds(0,0,370,320);
@@ -282,7 +281,7 @@ public class CheckRecordView extends JFrame{
 		totalDate = totalRecord.getDateCount();
 		//습관 총 횟수
 		totalCheck = (int)totalRecord.getRecordSum();
-		infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
+		infoText.setText("\n \n \n                           이번 달 기록 \n \n \n        달성한 일수   :   " + accomon + "일\n \n        실시한 일수   :   " + totalDate + "일 \n \n        실시한 횟수   :   " + totalCheck + "회");
 		infoPanel.add(infoText);
 		
 		//습관기록저장
@@ -355,7 +354,7 @@ public class CheckRecordView extends JFrame{
 					//상단에 출력되는 값 변경
 					habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
 					checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
-					infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
+					infoText.setText("\n \n \n                           이번 달 기록 \n \n \n        달성한 일수   :   " + accomon + "일\n \n        실시한 일수   :   " + totalDate + "일 \n \n        실시한 횟수   :   " + totalCheck + "회");
 				}
 			}
 		});		
@@ -509,19 +508,19 @@ public class CheckRecordView extends JFrame{
 		CalendarBackground.setBounds(0, 0, 350, 340);
 		
 		//기록배경
-		Image monthTotal = new ImageIcon("image/기록화면표시.png").getImage().getScaledInstance(380, 350, 0);
+		Image monthTotal = new ImageIcon("image/포스트잇.png").getImage().getScaledInstance(380, 350, 0);
 		JLabel monthTotalBackground = new JLabel(new ImageIcon(monthTotal));
-		monthTotalBackground.setBounds(-10,0,380,350);
+		monthTotalBackground.setBounds(0,0,338,350);
 		
 		//배경화면
-		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
-		JLabel background = new JLabel(new ImageIcon(backImg));
-		background.setBounds(0, 0, 900, 462);
+//		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
+//		JLabel background = new JLabel(new ImageIcon(backImg));
+//		background.setBounds(0, 0, 900, 462);
 		
 		//습관상단바
-		Image topImg = new ImageIcon("image/상세습관타이틀.png").getImage().getScaledInstance(800, 50, 0);
-		JLabel topbackground = new JLabel(new ImageIcon(topImg));
-		topbackground.setBounds(0, 0, 800, 50);
+//		Image topImg = new ImageIcon("image/포스트잇.png").getImage().getScaledInstance(800, 50, 0);
+//		JLabel topbackground = new JLabel(new ImageIcon(topImg));
+//		topbackground.setBounds(0, 0, 800, 50);
 //		habitTop.add(topbackground);
 			
 		
