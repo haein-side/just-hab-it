@@ -7,13 +7,14 @@ import java.awt.GridLayout;
 import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
-import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -39,14 +40,14 @@ public class CheckRecordView extends JFrame{
 	private HabitInfoDTO registInfo = new HabitInfoDTO(); //습관등록정보전달DTO
 	private HabitMonthTotalDTO totalRecord = new HabitMonthTotalDTO(); //습관의 월 total 기록 조회결과
 	private Map<String,HabitRecordDTO> recordAndGoalList = null; //습관의 날짜별 기록 조회결과 
-	private int checkCount = 0; // 체크박스카운트용
+	private int checkCount = 0; // 횟수 카운트용
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
 	private int totalDate =0; //습관실시 일수
 	private int totalCheck=0;//기록된 습관 총 수 
 	private String thisMonth = "" ;//이번달 "00월"
-	private int accomon = 0;
-	JFrame mf = this;
+	private int accomon = 0; //목표달성일 수 카운트
+	private JFrame mf = this;
 	
 	public CheckRecordView() {
 		
@@ -54,9 +55,9 @@ public class CheckRecordView extends JFrame{
 		
 		this.add(new TopPanel());
 		JPanel center = new JPanel();
-		center.setBounds(0, 100, 900, 462);
+		center.setBounds(0, 100, 900, 530);
 		center.setLayout(null);
-		center.setBackground(new Color(47,49,54));
+		center.setBackground(new Color(255,255,255));
 		
 		//등록된 습관정보 불러오기
 		registInfo.setHabitID(MainPage.userhabitid);
@@ -65,17 +66,18 @@ public class CheckRecordView extends JFrame{
 		//습관상단바
 		JPanel habitTop = new JPanel();
 		habitTop.setLayout(new FlowLayout(FlowLayout.CENTER));
-		habitTop.setBounds(43, 20, 800, 50);
+		habitTop.setBounds(43, 35, 800, 50);
+		habitTop.setBackground(new Color(249,228,183));
 		
 		//습관상단바 - 습관명
 		JPanel namePanel = new JPanel();
 		namePanel.setBounds(0,0,200,50);
-		namePanel.setBackground(new Color(211,224,234));
+		namePanel.setBackground(new Color(249,228,183));
 		JLabel nameLabel = new JLabel(registInfo.getHabitName());
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
 		
 		//폰트설정
-		nameLabel.setFont(new Font("THE외계인설명서",Font.PLAIN,20));
+		nameLabel.setFont(new Font("THE외계인설명서",Font.BOLD,30));
 		namePanel.add(nameLabel);
 		
 		habitTop.add(namePanel);
@@ -83,18 +85,21 @@ public class CheckRecordView extends JFrame{
 		//습관 상단바 - 횟수
 		JPanel habitCheck =  new JPanel();
 		habitCheck.setLayout(new FlowLayout(FlowLayout.CENTER));
+		habitCheck.setBackground(new Color(249,228,183));
 		
 		//횟수표시 및 증가버튼
 		JLabel habitCount = new JLabel("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : 0회      ");
-		habitCount.setFont(new Font("THE외계인설명서", Font.BOLD, 20));
+		habitCount.setFont(new Font("THE외계인설명서", Font.PLAIN, 20));
 		habitCheck.add(habitCount);
-		JButton doIt = new JButton(" + ");
-		doIt.setSize(60,40);
-		habitCheck.add(doIt);
-		doIt.addActionListener(new ActionListener() {
+
+		Image plusImg = new ImageIcon("image/더하기사진.png").getImage().getScaledInstance(35, 35, 0);
+		JLabel plusLabel = new JLabel(new ImageIcon(plusImg));
+		habitCheck.add(plusLabel);
+		habitCheck.addMouseListener(new MouseAdapter() {
 			
+		
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				if(checkCount == registInfo.getHabitGoal()) {
 					JOptionPane.showMessageDialog(mf, "최대치입니다.");
 				} else {
@@ -104,13 +109,12 @@ public class CheckRecordView extends JFrame{
 			}
 		});
 
-		JButton minus = new JButton(" - ");
-		minus.setSize(60,40);
-		habitCheck.add(minus);
-		minus.addActionListener(new ActionListener() {
-			
+		Image minusImg = new ImageIcon("image/빼기사진.png").getImage().getScaledInstance(35, 35, 0);
+		JLabel minusLabel = new JLabel(new ImageIcon(minusImg));
+		habitCheck.add(minusLabel);
+		minusLabel.addMouseListener(new MouseAdapter() {
 			@Override
-			public void actionPerformed(ActionEvent e) {
+			public void mouseClicked(MouseEvent e) {
 				if(checkCount == 0) {
 					JOptionPane.showMessageDialog(mf, "0보다 작을 수 없습니다.");
 				} else {
@@ -120,11 +124,28 @@ public class CheckRecordView extends JFrame{
 			}
 		});
 		
+//		JButton minus = new JButton(" - ");
+//		minus.setSize(60,40);
+//		habitCheck.add(minus);
+//		minus.addActionListener(new ActionListener() {
+//			
+//			@Override
+//			public void actionPerformed(ActionEvent e) {
+//				if(checkCount == 0) {
+//					JOptionPane.showMessageDialog(mf, "0보다 작을 수 없습니다.");
+//				} else {
+//					checkCount--;
+//					habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+checkCount + "회      ");
+//				}
+//			}
+//		});
+		
 		habitTop.add(habitCheck);
 		//달력
 		JPanel calendarPanel = new JPanel();
-		calendarPanel.setBounds(43, 95, 350, 340);
+		calendarPanel.setBounds(43, 110, 350, 340);
 		calendarPanel.setLayout(null);
+		calendarPanel.setBackground(new Color(255,255,255));
 		
 		//달력 날짜 입력
 		ArrayList<Integer>calArr = new ArrayList<>();
@@ -145,8 +166,8 @@ public class CheckRecordView extends JFrame{
 			thisMonth = month+1+"";
 		}
 		JLabel monthName = new JLabel(thisMonth+"월");
-		monthName.setBounds(160,15,80,50);
-		monthName.setFont(new Font("THE외계인설명서",Font.BOLD,20));
+		monthName.setBounds(160,17,80,50);
+		monthName.setFont(new Font("THE외계인설명서",Font.BOLD,30));
 		monthName.setForeground(new Color(255,255,204));
 		
 		calendarPanel.add(monthName);
@@ -156,7 +177,7 @@ public class CheckRecordView extends JFrame{
 		String day = dateFormat.format(todayDate);
 		//달력표시
 		JPanel calendar = new JPanel();
-		calendar.setBounds(0, 80, 350, 250);
+		calendar.setBounds(0, 83, 350, 250);
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
@@ -168,14 +189,14 @@ public class CheckRecordView extends JFrame{
 				dayButton[i] = new JButton(CalenderDate);			
 				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
 				dayButton[i].setVerticalAlignment(JLabel.CENTER);
-				dayButton[i].setBackground(Color.white);
+				dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
 				calendar.add(dayButton[i]);
 			} else {
 				CalenderDate = calArr.get(i)+"";
 				dayButton[i] = new JButton(CalenderDate);			
 				dayButton[i].setHorizontalAlignment(JLabel.CENTER);
 				dayButton[i].setVerticalAlignment(JLabel.CENTER);
-				dayButton[i].setBackground(Color.white);
+				dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
 				calendar.add(dayButton[i]);
 			}
 		}
@@ -195,12 +216,15 @@ public class CheckRecordView extends JFrame{
 				int record = recordAndGoalList.get(searchDate).getCheck();
 				if(goal == record) {
 					dayButton[i].setBackground(new Color(102,204,153));
+					dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
 					accomon++;
 				} else {
 					dayButton[i].setBackground(new Color(255,204,51));
+					dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
 				}
 			} else {
 				dayButton[i].setBackground(new Color(255,255,255));
+				dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
 			}
 		}
 				
@@ -323,11 +347,14 @@ public class CheckRecordView extends JFrame{
 								int record = recordAndGoalList.get(searchDate).getCheck();
 								if(goal == record) {
 									dayButton[i].setBackground(new Color(102,204,153));
+									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
 									accomon++;
 								} else if(record > 0 ){
 									dayButton[i].setBackground(new Color(255,204,51));
+									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
 								} else {
 									dayButton[i].setBackground(new Color(255,255,255));
+									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
 								}
 							}
 						}
@@ -345,14 +372,14 @@ public class CheckRecordView extends JFrame{
 		
 		//하단패널
 		JPanel botPan = new JPanel();
-		botPan.setLayout(new GridLayout(1,6));
-		botPan.setSize(900, 100);
-		botPan.setLocation(0, 562);
-		botPan.setBackground(Color.GREEN);
+		botPan.setLayout(new GridLayout(1,4));
+		botPan.setSize(900, 50);
+		botPan.setLocation(0, 615);
+		botPan.setBackground(new Color(255,255,255));
 		
 		this.add(botPan);
 		//메뉴목록
-		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
+		String[] menu = {"메인페이지", "습관등록","습관삭제", "마이페이지"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
@@ -403,7 +430,7 @@ public class CheckRecordView extends JFrame{
 		
 		
 		//달력배경
-		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 450, 0);
+		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 430, 0);
 		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
 		CalendarBackground.setBounds(0, 0, 350, 340);
 		
@@ -417,10 +444,16 @@ public class CheckRecordView extends JFrame{
 		JLabel background = new JLabel(new ImageIcon(backImg));
 		background.setBounds(0, 0, 900, 462);
 		
+		//습관상단바
+		Image topImg = new ImageIcon("image/상세습관타이틀.png").getImage().getScaledInstance(800, 50, 0);
+		JLabel topbackground = new JLabel(new ImageIcon(topImg));
+		topbackground.setBounds(0, 0, 800, 50);
+//		habitTop.add(topbackground);
+			
 		
 		infoPanel.add(monthTotalBackground);
 		calendarPanel.add(CalendarBackground);
-		center.add(background);
+//		center.add(background);
 		
 		this.setResizable(false);
 		this.add(center);

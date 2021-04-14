@@ -262,12 +262,12 @@ public class MyPage extends JFrame {
 		//메뉴패널추가
 		JPanel botPan = new JPanel();
 		botPan.setLayout(new GridLayout(1,6));
-		botPan.setSize(900, 100);
-		botPan.setLocation(0, 562);
+		botPan.setSize(900, 50);
+		botPan.setLocation(0, 615);
 		botPan.setBackground(Color.decode("#771d32"));
 		this.add(botPan);
 		//메뉴목록
-		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
+		String[] menu = {"메인페이지", "습관등록","습관삭제", "마이페이지"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];

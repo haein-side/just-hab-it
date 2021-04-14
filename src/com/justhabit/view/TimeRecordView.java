@@ -38,15 +38,15 @@ public class TimeRecordView extends JFrame{
 	private HabitRecordController habitInfoController = new HabitRecordController();
 	private HabitRecordDTO timerRecord = new HabitRecordDTO(); //습관 기록전달DTO
 	private HabitInfoDTO registInfo = new HabitInfoDTO(); //습관등록정보전달DTO
-	private HabitMonthTotalDTO totalRecord = new HabitMonthTotalDTO();
-	Map<String,HabitRecordDTO> recordAndGoalList = null;
+	private HabitMonthTotalDTO totalRecord = new HabitMonthTotalDTO(); //습관의 월 total 기록 조회결과
+	private Map<String,HabitRecordDTO> recordAndGoalList = null; //일별 기록전달DTO
 	private Date todayDate= new Date(); // 오늘 날짜
 	private String today = ""; //날짜 문자열로 변환
 	private int totalDate =0; //습관실시 일수
 	private double totalTimer=0;//기록된 습관 총 시간
 	private String thisMonth = "" ;//이번달 "00월"
-	private int accomon = 0;
-	JFrame mf = this;
+	private int accomon = 0; //습관성취도 수 카운트
+	private JFrame mf = this; 
 	
 	
 	public TimeRecordView() {
@@ -61,9 +61,9 @@ public class TimeRecordView extends JFrame{
 		this.add(top);
 		
 		JPanel center = new JPanel();
-		center.setBounds(0, 100, 900, 462);
+		center.setBounds(0, 100, 900, 530);
 		center.setLayout(null);
-		center.setBackground(new Color(47,49,54));
+		center.setBackground(new Color(255,255,255));
 		
 		
 		//등록된 습관정보 불러오기
@@ -313,13 +313,13 @@ public class TimeRecordView extends JFrame{
 		
 		//하단패널
 		JPanel botPan = new JPanel();
-		botPan.setLayout(new GridLayout(1,6));
-		botPan.setSize(900, 100);
-		botPan.setLocation(0, 562);
-		botPan.setBackground(Color.GREEN);
+		botPan.setLayout(new GridLayout(1,4));
+		botPan.setSize(900, 50);
+		botPan.setLocation(0, 615);
+		botPan.setBackground(new Color(255,255,255));
 		this.add(botPan);
 		// 메뉴목록
-		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
+		String[] menu = {"메인페이지", "습관등록","습관삭제", "마이페이지"};
 		//버튼추가
 				JButton[] menuButton = new JButton[menu.length];
 				for(int i =0; i <menu.length; i++) {
