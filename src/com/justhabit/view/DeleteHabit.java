@@ -1,6 +1,7 @@
 package com.justhabit.view;
 
 import java.awt.FlowLayout;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.HashMap;
@@ -42,6 +43,7 @@ public class DeleteHabit extends JFrame {
 		this.setVisible(true);
 		
 		JLabel ask = new JLabel("어떤 습관을 삭제하시겠습니까?");
+		ask.setFont(new Font("THE외계인설명서", Font.BOLD, 15));
 		ask.setBounds(50, 40, 200, 20);
 		this.add(ask);
 		
@@ -54,7 +56,7 @@ public class DeleteHabit extends JFrame {
 		JComboBox habitCombo = new JComboBox(habit);
 		
 		
-		habitCombo.setBounds(40, 80, 200, 20);
+		habitCombo.setBounds(50, 80, 200, 20);
 		this.add(habitCombo);
 		
 		 ActionListener actionListener = new ActionListener() {

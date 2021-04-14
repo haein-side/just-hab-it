@@ -62,25 +62,25 @@ public class MainPage extends JFrame{
 		
 		//좌측 패널
 		JPanel left = new JPanel();
-		left.setBounds(0, 100, 400, 462);
+		left.setBounds(0, 100, 400, 515);
 //		center.setLocation(0, 100);
 //		left.setPreferredSize(new Dimension(500,462));
 		left.setLayout(null);
-		left.setBackground(Color.GRAY);
+		left.setBackground(Color.WHITE);
 		left.setVisible(true);
 		this.add(left);
 //		center.setBackground(new Color(246,245,245));
 		
 
 		JPanel right = new JPanel();
-		right.setSize(500,462);
+		right.setSize(500,515);
 //		right.setBounds(400, 100, 500, 462)5
 //		right.setPreferredSize(new Dimension(500,550));
 		right.setLocation(400,100);
 //		center.setLocation(0, 100);
 //		right.setPreferredSize(new Dimension(900,462));
 		right.setLayout(null);
-		right.setBackground(Color.GREEN);
+		right.setBackground(Color.WHITE);
 		right.setVisible(true);
 		this.add(right);
 		
@@ -143,14 +143,14 @@ public class MainPage extends JFrame{
 		
         // 스크롤
         JScrollPane scrollbar = new JScrollPane(right);
-        scrollbar.setPreferredSize(new Dimension(500,462));
+        scrollbar.setPreferredSize(new Dimension(500,515));
         scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
         scrollbar.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
         int width = scrollbar.getPreferredSize().width-13;
         int height = scrollbar.getPreferredSize().height;
         scrollbar.setBounds(400,100,width,height);
         scrollbar.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-        scrollbar.setBackground(Color.pink);
+//        scrollbar.setBackground(Color.pink);
         this.getContentPane().add(scrollbar);
       
    
@@ -161,7 +161,8 @@ public class MainPage extends JFrame{
 		//오늘의 일기
 		JLabel promise = new JLabel("<오늘의 일기>");
 		
-		Font font = new Font("맑은 고딕", Font.BOLD, 20);
+		Font font = new Font("THE외계인설명서", Font.BOLD, 18);
+		
 		promise.setFont(font);
 	
 	    promise.setSize(300,50);
@@ -178,9 +179,7 @@ public class MainPage extends JFrame{
 	    JTextArea chat = new JTextArea();
 	    chat.setBounds(50,60,300,300);
 	    chat.setEditable(true);
-	    
-	    Font font1 = new Font("맑은 고딕", Font.PLAIN, 15);
-		chat.setFont(font1);
+		chat.setFont(font);
 		
 	    
 	    chat.setOpaque(false);
@@ -267,7 +266,6 @@ public class MainPage extends JFrame{
 		botPan.setSize(900, 50);
 		botPan.setLocation(0, 615);
 		
-		Font  buttonF  = new Font("빙그레체Ⅱ", Font.PLAIN,  20);
 		
 		
 		//메뉴목록
@@ -278,7 +276,6 @@ public class MainPage extends JFrame{
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setFont(buttonF);
 			menuButton[i].setBackground(Color.decode("#e65758"));
 			menuButton[i].setForeground(new Color(255,249,247));
 			menuButton[i].setFont(new Font("THE외계인설명서", Font.BOLD, 17));
@@ -330,7 +327,7 @@ public class MainPage extends JFrame{
 //		right.setLocation(400,100);
 //		this.add(right);
 		this.setVisible(true);
-		this.setResizable(true);
+		this.setResizable(false);
 		this.setLocationRelativeTo(null); // 화면 가운데로
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 

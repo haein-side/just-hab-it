@@ -319,7 +319,7 @@ public class TimeRecordView extends JFrame{
 		botPan.setBackground(new Color(255,255,255));
 		this.add(botPan);
 		// 메뉴목록
-		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
+		String[] menu = {"메인페이지", "습관등록","습관삭제", "마이페이지"};
 		//버튼추가
 				JButton[] menuButton = new JButton[menu.length];
 				for(int i =0; i <menu.length; i++) {
