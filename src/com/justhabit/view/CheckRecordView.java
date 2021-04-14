@@ -13,6 +13,7 @@ import java.util.Calendar;
 import java.util.Date;
 import java.util.Map;
 
+import javax.swing.BorderFactory;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
@@ -44,6 +45,7 @@ public class CheckRecordView extends JFrame{
 	private int totalDate =0; //습관실시 일수
 	private int totalCheck=0;//기록된 습관 총 수 
 	private String thisMonth = "" ;//이번달 "00월"
+	private int accomon = 0;
 	JFrame mf = this;
 	
 	public CheckRecordView() {
@@ -55,8 +57,6 @@ public class CheckRecordView extends JFrame{
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
 		center.setBackground(new Color(47,49,54));
-		
-		
 		
 		//등록된 습관정보 불러오기
 		registInfo.setHabitID(MainPage.userhabitid);
@@ -125,7 +125,6 @@ public class CheckRecordView extends JFrame{
 		JPanel calendarPanel = new JPanel();
 		calendarPanel.setBounds(43, 95, 350, 340);
 		calendarPanel.setLayout(null);
-//		calendarPanel.setBackground(new Color(255,204,153));
 		
 		//달력 날짜 입력
 		ArrayList<Integer>calArr = new ArrayList<>();
@@ -139,8 +138,6 @@ public class CheckRecordView extends JFrame{
 		}
 		
 		//월표시
-//		JLabel monthPrint = new JLabel();
-//		monthPrint.setBackground(new Color(255,204,153));
 		
 		if(month < 9) {
 			thisMonth = "0"+(month+1);
@@ -152,9 +149,7 @@ public class CheckRecordView extends JFrame{
 		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
 		monthName.setForeground(new Color(255,255,204));
 		
-//		monthPrint.add(monthName);
 		calendarPanel.add(monthName);
-//		calendarPanel.add(monthPrint);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
 		
@@ -162,7 +157,6 @@ public class CheckRecordView extends JFrame{
 		//달력표시
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
-//		calendar.setBackground(new Color(255,204,153));
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
@@ -201,6 +195,7 @@ public class CheckRecordView extends JFrame{
 				int record = recordAndGoalList.get(searchDate).getCheck();
 				if(goal == record) {
 					dayButton[i].setBackground(new Color(102,204,153));
+					accomon++;
 				} else {
 					dayButton[i].setBackground(new Color(255,204,51));
 				}
@@ -245,10 +240,15 @@ public class CheckRecordView extends JFrame{
 		//문구 표시
 		JPanel infoPanel = new JPanel();
 		infoPanel.setLayout(null);
-		infoPanel.setBounds(420, 95, 420, 340);
+		infoPanel.setBounds(420, 95, 370, 320);
 		JTextArea infoText = new JTextArea();
-		infoText.setBounds(10,10,400,320);
+		
+		infoText.setBounds(0,0,370,320);
 		infoText.setFont(new Font("D2Coding",Font.PLAIN,20));
+		infoText.setEditable(false);
+		infoText.setOpaque(false);
+//		infoText.setBorder(BorderFactory.createEmptyBorder());
+//		infoText.setBackground(new Color(0,0,0,0));
 
 		//출력할 정보를 검색
 		totalRecord.setHabitId(registInfo.getHabitID());
@@ -258,7 +258,7 @@ public class CheckRecordView extends JFrame{
 		totalDate = totalRecord.getDateCount();
 		//습관 총 횟수
 		totalCheck = (int)totalRecord.getRecordSum();
-		infoText.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
+		infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 		infoPanel.add(infoText);
 		
 		//습관기록저장
@@ -277,13 +277,14 @@ public class CheckRecordView extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-					
+					accomon = 0;
 					
 					if(checkCount == 0) {
 						JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
 					} else {
 						
 						//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
+						
 						checkRecord.setUserId(registInfo.getUserID());  //유저아이디
 						checkRecord.setHabitId(registInfo.getHabitID()); // 습관아이디
 						checkRecord.setCheck(checkCount); // 체크횟수
@@ -305,7 +306,6 @@ public class CheckRecordView extends JFrame{
 						totalRecord = habitInfoController.monthTotalController(totalRecord);
 						totalDate = totalRecord.getDateCount();
 						totalCheck = (int)totalRecord.getRecordSum();
-						infoText.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 						
 						//날짜 클릭시 조회되는 값 바꾸기
 						checkRecord.setHabitId(MainPage.userhabitid);
@@ -322,15 +322,19 @@ public class CheckRecordView extends JFrame{
 								int goal = recordAndGoalList.get(searchDate).getHabitGoal();
 								int record = recordAndGoalList.get(searchDate).getCheck();
 								if(goal == record) {
-									dayButton[i].setBackground(Color.green);
+									dayButton[i].setBackground(new Color(102,204,153));
+									accomon++;
 								} else if(record > 0 ){
-									dayButton[i].setBackground(Color.yellow);
+									dayButton[i].setBackground(new Color(255,204,51));
+								} else {
+									dayButton[i].setBackground(new Color(255,255,255));
 								}
 							}
 						}
 						//상단에 출력되는 값 변경
 						habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
 						checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
+						infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 					}
 				}
 			});
@@ -348,14 +352,14 @@ public class CheckRecordView extends JFrame{
 		
 		this.add(botPan);
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "mypage"};
+		String[] menu = {"Main", "습관등록","습관삭제", "mypage"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setBackground(new Color(211,224,234));
+			menuButton[i].setBackground(Color.decode("#e65758"));
 			botPan.add(menuButton[i]);
 		}
 		//메뉴버튼추가
@@ -379,6 +383,14 @@ public class CheckRecordView extends JFrame{
 	          
 	          @Override
 	          public void actionPerformed(ActionEvent e) {
+	        	  new DeleteHabit(mf);
+	          }
+	       });
+		
+		menuButton[3].addActionListener(new ActionListener() {
+	          
+	          @Override
+	          public void actionPerformed(ActionEvent e) {
 	             PanelChangeControl.changeFrame(mf, new MyPage());
 	          }
 	       });
@@ -392,14 +404,23 @@ public class CheckRecordView extends JFrame{
 		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 450, 0);
 		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
 		CalendarBackground.setBounds(0, 0, 350, 340);
+		
+		//기록배경
+		Image monthTotal = new ImageIcon("image/기록화면표시.png").getImage().getScaledInstance(380, 350, 0);
+		JLabel monthTotalBackground = new JLabel(new ImageIcon(monthTotal));
+		monthTotalBackground.setBounds(-10,0,380,350);
+		
 		//배경화면
 		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
 		JLabel background = new JLabel(new ImageIcon(backImg));
 		background.setBounds(0, 0, 900, 462);
+		
+		
+		infoPanel.add(monthTotalBackground);
 		calendarPanel.add(CalendarBackground);
 		center.add(background);
 		
-		
+		this.setResizable(false);
 		this.add(center);
 		this.setSize(900, 700);
 		this.setLocationRelativeTo(null);

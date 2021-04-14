@@ -120,7 +120,7 @@ public class timerPanel extends JPanel{
 							hr = t / (60*60*100) % 24;
 							mm = t /(60*100) % 60;
 							ss = t / 100 % 60;
-							ms =  t % 100;
+							ms = t % 100;
 							 
 							try {
 								Thread.sleep(10);

@@ -17,26 +17,36 @@ public class TopPanel extends JPanel{
 	
 	private UserController userController = new UserController();
 	
+	private UserLevelDTO userLevelInfo = null;
+	
 	public TopPanel() {
 		//상단바
 		this.setLocation(0, 0);
 		this.setSize(900, 100);
 		this.setLayout(null);
-		this.setBackground(new Color(211,224,234));
-		
-		JLabel Title = new JLabel("JUST HAB' IT");
-		Title.setFont(new Font("D2Coding", Font.BOLD,50));
-		Title.setBounds(300,20,500,70);
-		Title.setVisible(true);
-		this.add(Title);
+		this.setBackground(Color.decode("#e65758"));
 		
 		
-		UserLevelDTO user = null;
-		user = userController.userLevel(FirstFrame.loggedUserID);
+		/* 로그인 된 유저의 레벨관련 정보 객체 생성*/
+		userLevelInfo = userInfo(FirstFrame.loggedUserID);
 		
+		JLabel title = new JLabel("JUST HAB' IT");
+		title.setFont(new Font("D2Coding", Font.BOLD,50));
+		title.setBounds(300,20,500,70);
+		title.setForeground(new Color(255,249,247));
+		title.setVisible(true);
+		this.add(title);
+		
+		JLabel userLvl = new JLabel("Lvl :  "+ userLevelInfo.getUserLevel());
+		userLvl.setFont(new Font("a디딤돌",Font.BOLD, 15));
+		userLvl.setBounds(10, 55, 60, 60);
+		userLvl.setVisible(true);
+		this.add(userLvl);
+		
+		System.out.println(userLvl.getText() + " *****************************");
 
 		String level_image = "";
-		switch(user.getUserLevel()) {
+		switch(userLevelInfo.getUserLevel()) {
 			case 1 : level_image = "1렙계란.PNG"; break;
 			case 2 : level_image = "2렙계란.PNG"; break;
 			case 3 : level_image = "3렙계란.PNG"; break;
@@ -51,7 +61,7 @@ public class TopPanel extends JPanel{
 		JLabel leftLabel = new JLabel(new ImageIcon(leftImage));
 		
 
-		leftLabel.setBounds(10, 0, 80, 80);
+		leftLabel.setBounds(0, 0, 80, 80);
 
 		this.add(leftLabel);
 	
@@ -61,8 +71,15 @@ public class TopPanel extends JPanel{
 		JLabel dayPrint = new JLabel(dayFormat.format(today));
 		dayPrint.setBounds(680,0, 200, 50);
 		dayPrint.setFont(new Font("D2Coding",Font.BOLD,15));
-		dayPrint.setVisible(true);
+		dayPrint.setForeground(new Color(255,249,247));
 		this.add(dayPrint);
+	}
+	
+	public UserLevelDTO userInfo(int loggedID) {
+		
+		UserLevelDTO userLevelInfo = userController.userLevel(loggedID);
+		
+		return userLevelInfo;
 	}
 			
 }

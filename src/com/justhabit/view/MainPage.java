@@ -266,14 +266,14 @@ public class MainPage extends JFrame{
 		botPan.setLocation(0, 562);
 		
 		//메뉴목록
-		String[] menu = {"Main", "습관등록", "습관삭제", "mypage"};
+		String[] menu = {"메인페이지", "습관등록","습관삭제","마이페이지"};
 		
 		//버튼추가
 		JButton[] menuButton = new JButton[menu.length];
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
-			menuButton[i].setBackground(new Color(211,224,234));
+			menuButton[i].setBackground(Color.decode("#e65758"));
 			botPan.add(menuButton[i]);
 		}
 		menuButton[0].setEnabled(false);
@@ -289,7 +289,7 @@ public class MainPage extends JFrame{
 	          @Override
 	          public void actionPerformed(ActionEvent e) {
 //	             PanelChangeControl.changeFrame(mf, new DeleteHabit());
-	        	  new DeleteHabit();
+	        	  new DeleteHabit(mf);
 	          }
 	       });
 		
