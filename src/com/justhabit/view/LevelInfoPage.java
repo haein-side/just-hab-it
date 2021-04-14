@@ -26,6 +26,7 @@ public class LevelInfoPage extends JFrame {
 		this.setLayout(null);
 		this.setSize(600,500);
 		this.setVisible(true);
+		this.setBackground(Color.white);
 		this.setLocationRelativeTo(null);
 		
 		UserLevelDTO myUserLevel = new TopPanel().userInfo(FirstFrame.loggedUserID);
