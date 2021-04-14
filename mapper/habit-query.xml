@@ -159,7 +159,7 @@
 
        VALUES (
        		   ?
-             , ?
+             , admin.seq_habit_id.nextval
              , ?
              , ?
              , ?

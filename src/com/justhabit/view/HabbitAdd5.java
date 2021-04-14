@@ -87,6 +87,8 @@ public class HabbitAdd5 extends JFrame {
       			
       			habbitAddController.insertAllHabbit(HabbitAdd.habbitAddDTO);
       			
+      			System.out.println(HabbitAdd.habbitAddDTO);
+      			
       			
       			PanelChangeControl.changeFrame(habbitAdd5 , new MainPage());
       		}
