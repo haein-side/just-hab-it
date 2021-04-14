@@ -73,7 +73,6 @@ public class FirstFrame {
       frame.getContentPane().setLayout(null);
       frame.setLocationRelativeTo(null);
 
-///////////////////////////////////////////////////////////////////////////////////
       /* CIRCLEPANEL AT LEFT */
       LoginPanel circlePanel = new LoginPanel(Color.LIGHT_GRAY, Color.DARK_GRAY);
       circlePanel.addMouseMotionListener(new MouseMotionAdapter() {
@@ -103,12 +102,6 @@ public class FirstFrame {
       lblLogo.setBounds(78, 90, 234, 160);
       circlePanel.add(lblLogo);
       
-//      JLabel lblNewLabel = new JLabel("W E L C O M E");
-//      lblNewLabel.setForeground(Color.WHITE);
-//      lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//      lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-//      lblNewLabel.setBounds(78, 242, 234, 36);
-//      circlePanel.add(lblNewLabel);
       
       JLabel lblNewLabel_1 = new JLabel("JUST HAB' IT");
       lblNewLabel_1.setForeground(Color.black);

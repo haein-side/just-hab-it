@@ -105,12 +105,6 @@ public class SecondFrame {
       lblLogo.setBounds(78, 71, 234, 160);
       circlePanel.add(lblLogo);
       
-//      JLabel lblNewLabel = new JLabel("W E L C O M E");
-//      lblNewLabel.setForeground(Color.WHITE);
-//      lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-//      lblNewLabel.setFont(new Font("Tahoma", Font.BOLD, 20));
-//      lblNewLabel.setBounds(78, 242, 234, 36);
-//      circlePanel.add(lblNewLabel);
       
       JLabel lblNewLabel_1 = new JLabel("JUST HAB' IT");
       lblNewLabel_1.setForeground(Color.black);
@@ -161,7 +155,6 @@ public class SecondFrame {
       sign_PIN.addKeyListener(new KeyAdapter() {
           public void keyPressed(KeyEvent ke) {
               String value = sign_PIN.getText();
-//              int l = value.length();
               if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' 
              		 || ke.getKeyChar() == '\b') {
              	 sign_PIN.setEditable(true);
