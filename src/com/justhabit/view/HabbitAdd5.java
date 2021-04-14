@@ -11,6 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JSpinner;
 import javax.swing.SpinnerNumberModel;
 
+import com.justhabit.model.controller.HabbitAddController;
 import com.justhabit.model.controller.PanelChangeControl;
 
 public class HabbitAdd5 extends JFrame {
@@ -27,16 +28,22 @@ public class HabbitAdd5 extends JFrame {
 	   	habbitAdd5.setLocationRelativeTo(null);
 	   	habbitAdd5.setVisible(true);
 
-
-	   	JLabel label1 = new JLabel("5번) 하루에 몇번 할건가요?");
-	   
+	   	JLabel label1 = new JLabel();
+	   	
 	   	label1.setFont(new Font("Serif", Font.BOLD, 30));
 	   	label1.setSize(500,200);
 	   	label1.setLocation(250,0);
-	   	habbitAdd5.add(label1);
-       
+	   	
+	   	if(HabbitAdd.habbitAddDTO.getHabitType() == "c") {
+	   		label1.setText("5번) 하루에 몇번 할건가요?");
+	   		habbitAdd5.add(label1);
+	   	} else {
+	   		label1.setText("5번) 하루에 몇시간 할건가요?");
+	   		habbitAdd5.add(label1);
+	   	}
+	   	
 
-	   	SpinnerNumberModel value = new SpinnerNumberModel(0,0,10,1); // 시작값, 최소값, 최대값, 증가값
+	   	SpinnerNumberModel value = new SpinnerNumberModel(0,0,10,1); // 시작값, 최소값, 최대값, 증가값 , 스피너 규칙정하기
 
 	   	JSpinner spin = new JSpinner(value);
 	   	spin.setFont(new Font("Serif", Font.BOLD, 30));
@@ -50,7 +57,7 @@ public class HabbitAdd5 extends JFrame {
         habbitAdd5.add(jbutton1);
        
       
-        JButton jbutton2 = new JButton("다음");
+        JButton jbutton2 = new JButton("저장");
         jbutton2.setSize(80,50);
         jbutton2.setLocation(450, 280);
         habbitAdd5.add(jbutton2);
@@ -72,10 +79,21 @@ public class HabbitAdd5 extends JFrame {
       		@Override
       		public void mouseClicked(MouseEvent e) {
       			
+      			HabbitAdd.habbitAddDTO.setHabitGoal((Integer)spin.getValue());
+//               위치        인스턴스명        집어넣기          값
+      			System.out.println(HabbitAdd.habbitAddDTO);
+ 
+      			HabbitAddController habbitAddController = new HabbitAddController();
+      			
+      			habbitAddController.insertAllHabbit(HabbitAdd.habbitAddDTO);
+      			
+      			
       			PanelChangeControl.changeFrame(habbitAdd5 , new MainPage());
-      			
-      			
       		}
       	}); 
    }
+	
+	
+	
+	
 }

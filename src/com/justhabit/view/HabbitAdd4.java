@@ -19,6 +19,8 @@ import com.justhabit.model.dto.HabbitAddDTO;
 
 public class HabbitAdd4 extends JFrame {
 
+	
+	
 	private HabbitAdd4 habbitAdd4;
 	
 	public HabbitAdd4() {
@@ -81,17 +83,14 @@ public class HabbitAdd4 extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
             	
-            	if(count.isSelected()) {
-            		
+            	
+            		HabbitAdd.habbitAddDTO.setHabitType(recordType.getSelection().getActionCommand());
+            		System.out.println(HabbitAdd.habbitAddDTO);
             		System.out.println(recordType.getSelection().getActionCommand());
             		PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd5());
             	            	
-            	} else {
             		
-            		System.out.println(recordType.getSelection().getActionCommand());
-            		PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd6());
             	
-            	 }
             }
          }); 
 

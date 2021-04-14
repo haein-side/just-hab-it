@@ -2,6 +2,7 @@
 package com.justhabit.run;
 
 import com.justhabit.view.FirstFrame;
+import com.justhabit.view.HabbitAdd;
 
 public class Run {
 
@@ -18,14 +19,13 @@ public class Run {
 //		mainpage.displayHabit();
 		
 
-		FirstFrame.main(null);
+//		FirstFrame.main(null);
 //		new MyPage();
-//		new HabbitAdd();
+		new HabbitAdd();
 		
 	}
 }
 
-//		new HabbitAdd();
 //		
 //	}
 //}

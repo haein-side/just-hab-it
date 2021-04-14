@@ -28,14 +28,14 @@ public class HabbitAddDAO {
 	}
 
 
-	public List<HabbitAddDTO> insertAllHabbit(Connection con, String userID, int habitID, int habitDate,
+	public int insertAllHabbit(Connection con, String userID, int habitID, int habitDate,
 			String habitType, String habitDays, int habitGoal) {
 		
 		PreparedStatement pstmt = null;
 		
 		int result = 0;
 		
-		List<HabbitAddDTO> habbitAddList = null;
+		HabbitAddDTO habbitAdd = null;
 		
 		String query = prop.getProperty("insertAllHabbit");
 		
@@ -50,7 +50,7 @@ public class HabbitAddDAO {
 		
 		
 		
-		return null;
+		return 0;
 	}
 
 	

@@ -89,9 +89,7 @@ public class HabbitAdd3 extends JFrame {
       		@Override
       		public void mouseClicked(MouseEvent e) {
       			
-      			PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4());
       			
-      			HabbitAddDTO habbitAddDTO = new HabbitAddDTO();
       			String selectDay = "";
       			
       			for (int i = 0; i < buttons.length; i++) {
@@ -100,7 +98,10 @@ public class HabbitAdd3 extends JFrame {
 					}
 				}
       			System.out.println("strDay : " + selectDay);
-      			habbitAddDTO.setHabitDays(selectDay);
+      			HabbitAdd.habbitAddDTO.setHabitDays(selectDay);
+      			System.out.println(HabbitAdd.habbitAddDTO);
+      			
+      			PanelChangeControl.changeFrame(habbitAdd3 , new HabbitAdd4());
       		}
       	});
 

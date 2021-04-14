@@ -72,7 +72,7 @@ public class HabbitAdd6 extends JFrame{
 	      		@Override
 	      		public void mouseClicked(MouseEvent e) {
 	      			
-	      			
+//	      			HabbitAdd.habbitAddDTO.setHabitGoal();
 	      			PanelChangeControl.changeFrame(habbitAdd6 , new MainPage());
 	      			
 	      		}

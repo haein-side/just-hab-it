@@ -59,6 +59,8 @@ public class HabbitAdd extends JFrame {
         @Override
         public void mouseClicked(MouseEvent e) {
         	System.out.println(text.getText());
+        	
+        	
         	HabbitAdd.habbitAddDTO.setHabitName(text.getText());
         	PanelChangeControl.changeFrame(habbitAdd , new HabbitAdd3());
         	
