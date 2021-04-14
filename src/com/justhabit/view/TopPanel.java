@@ -17,7 +17,7 @@ public class TopPanel extends JPanel{
 	
 	private UserController userController = new UserController();
 	
-	public static UserLevelDTO userLevelInfo;
+	private UserLevelDTO userLevelInfo = null;
 	
 	public TopPanel() {
 		//상단바
@@ -28,7 +28,7 @@ public class TopPanel extends JPanel{
 		
 		
 		/* 로그인 된 유저의 레벨관련 정보 객체 생성*/
-		userLevelInfo = userController.userLevel(FirstFrame.loggedUserID);
+		userLevelInfo = userInfo();
 		
 		JLabel title = new JLabel("JUST HAB' IT");
 		title.setFont(new Font("D2Coding", Font.BOLD,50));
@@ -73,6 +73,13 @@ public class TopPanel extends JPanel{
 		dayPrint.setFont(new Font("D2Coding",Font.BOLD,15));
 		dayPrint.setForeground(new Color(255,249,247));
 		this.add(dayPrint);
+	}
+	
+	public UserLevelDTO userInfo() {
+		
+		UserLevelDTO userLevelInfo = userController.userLevel(FirstFrame.loggedUserID);
+		
+		return userLevelInfo;
 	}
 			
 }
