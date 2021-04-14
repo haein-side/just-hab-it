@@ -1,6 +1,6 @@
 package com.justhabit.model.dao;
 
-import static com.justhabit.common.JDBCTemplate.close;
+import static com.justhabit.common.JDBC_EC2.close;
 
 import java.io.FileInputStream;
 import java.io.IOException;
@@ -38,11 +38,10 @@ public class HabbitAddDAO {
 			
 			pstmt = con.prepareStatement(query);
 			pstmt.setInt(1, habitAddDTO.getUserID());
-			pstmt.setInt(2, habitAddDTO.getHabitID());
-			pstmt.setString(3, habitAddDTO.getHabitName());
-			pstmt.setString(4, habitAddDTO.getHabitType());
-			pstmt.setString(5, habitAddDTO.getHabitDays());
-			pstmt.setInt(6, habitAddDTO.getHabitGoal());
+			pstmt.setString(2, habitAddDTO.getHabitName());
+			pstmt.setString(3, habitAddDTO.getHabitType());
+			pstmt.setString(4, habitAddDTO.getHabitDays());
+			pstmt.setInt(5, habitAddDTO.getHabitGoal());
 		
 			result = pstmt.executeUpdate();
 			

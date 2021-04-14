@@ -147,24 +147,24 @@
    
    <entry key="insertAllHabbit">
        INSERT
-
-   		 INTO admin.hbt_register (
-              user_id
-            , habit_id
-            , habit_name
-            , habit_type
-            , habit_days
-            , habit_goal
-            )
-
-       VALUES (
-       		   ?
-             , ?
-             , ?
-             , ?
-             , ?
-             , ?
-		)
+   		 INTO admin.hbt_register 
+   	   (
+         user_id
+       , habit_id
+       , habit_name
+       , habit_type
+       , habit_days
+       , habit_goal
+       )
+       VALUES 
+       (
+ 		 ?
+       , admin.seq_habit_id.nextval
+       , ?
+       , ?
+       , ?
+       , ?
+	   )
 	</entry>
    <entry key="selectTotalCheck">
        SELECT

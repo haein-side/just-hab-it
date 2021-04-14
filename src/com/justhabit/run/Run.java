@@ -19,9 +19,10 @@ public class Run {
 //		mainpage.displayHabit();
 		
 
-//		FirstFrame.main(null);
+		FirstFrame.main(null);
 //		new MyPage();
-		new HabbitAdd();
+//		new HabbitAdd();
+//		new FirstFrame();
 		
 	}
 }
