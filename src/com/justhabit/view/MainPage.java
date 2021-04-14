@@ -64,7 +64,7 @@ public class MainPage extends JFrame{
 		JPanel left = new JPanel();
 		left.setBounds(0, 100, 400, 462);
 //		center.setLocation(0, 100);
-//		left.setPreferredSize(new Dimension(900,462));
+//		left.setPreferredSize(new Dimension(500,462));
 		left.setLayout(null);
 		left.setBackground(Color.GRAY);
 		left.setVisible(true);
@@ -73,10 +73,10 @@ public class MainPage extends JFrame{
 		
 
 		JPanel right = new JPanel();
-		right.setLocation(400,100);
 		right.setSize(500,462);
-//		right.setBounds(400, 100, 500, 462);
-//		right.setPreferredSize(new Dimension(800,562));
+//		right.setBounds(400, 100, 500, 462)5
+//		right.setPreferredSize(new Dimension(500,550));
+		right.setLocation(400,100);
 //		center.setLocation(0, 100);
 //		right.setPreferredSize(new Dimension(900,462));
 		right.setLayout(null);
@@ -139,20 +139,22 @@ public class MainPage extends JFrame{
 				right.add(box);
 		}
 		
+		right.setPreferredSize(new Dimension(500,140 + 80 * (allhabitList.size()-1)));
 		
         // 스크롤
-//        JScrollPane scrollbar = new JScrollPane(right);
-//        scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
-//        scrollbar.setPreferredSize(new Dimension(900,452));
-////        scrollbar.setPreferredSize(new Dimension(900,462));
-//        int width = scrollbar.getPreferredSize().width-13;
-//        int height = scrollbar.getPreferredSize().height;
-//        scrollbar.setBounds(0,100,width,height);
-//        scrollbar.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
-////        scrollbar.setBackground(Color.pink);
-//        this.add(scrollbar);
-//        
+        JScrollPane scrollbar = new JScrollPane(right);
+        scrollbar.setPreferredSize(new Dimension(500,462));
+        scrollbar.setVerticalScrollBarPolicy(JScrollPane.VERTICAL_SCROLLBAR_AS_NEEDED);
+        scrollbar.setHorizontalScrollBarPolicy(JScrollPane.HORIZONTAL_SCROLLBAR_NEVER);
+        int width = scrollbar.getPreferredSize().width-13;
+        int height = scrollbar.getPreferredSize().height;
+        scrollbar.setBounds(400,100,width,height);
+        scrollbar.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
+        scrollbar.setBackground(Color.pink);
+        this.getContentPane().add(scrollbar);
+      
    
+        
 
 		
 		
@@ -265,6 +267,9 @@ public class MainPage extends JFrame{
 		botPan.setSize(900, 100);
 		botPan.setLocation(0, 562);
 		
+		Font  buttonF  = new Font("빙그레체Ⅱ", Font.PLAIN,  20);
+		
+		
 		//메뉴목록
 		String[] menu = {"메인페이지", "습관등록","습관삭제","마이페이지"};
 		
@@ -273,6 +278,7 @@ public class MainPage extends JFrame{
 		for(int i =0; i <menu.length; i++) {
 			
 			menuButton[i] = new JButton(menu[i]);
+			menuButton[i].setFont(buttonF);
 			menuButton[i].setBackground(Color.decode("#e65758"));
 			botPan.add(menuButton[i]);
 		}
@@ -318,6 +324,8 @@ public class MainPage extends JFrame{
 		
 		
 //		this.add(center);
+//		this.add(right);
+//		right.setLocation(400,100);
 //		this.add(right);
 		this.setVisible(true);
 		this.setResizable(true);
