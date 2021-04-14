@@ -19,7 +19,7 @@ public class test {
 		 int habitGoal = 3;
 		
 		 
-//		 List<HabbitAddDTO> allhabitList = HabbitAddController.insertAllHabbit(userID, habitID, habitName,habitType ,habitDays, habitGoal);
+//		 List<HabbitAddDTO> HabbitAddDTO = HabbitAddController.insertAllHabbit(userID, habitID, habitName,habitType ,habitDays, habitGoal);
 		
 		 
 	}
