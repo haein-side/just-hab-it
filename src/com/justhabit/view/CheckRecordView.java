@@ -377,7 +377,7 @@ public class CheckRecordView extends JFrame{
 	          
 	          @Override
 	          public void actionPerformed(ActionEvent e) {
-	        	  new DeleteHabit();
+	        	  new DeleteHabit(mf);
 	          }
 	       });
 		

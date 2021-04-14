@@ -356,7 +356,7 @@ public class TimeRecordView extends JFrame{
 	          
 	          @Override
 	          public void actionPerformed(ActionEvent e) {
-	        	  new DeleteHabit();
+	        	  new DeleteHabit(mf);
 	          }
 	       });
 		menuButton[3].addActionListener(new ActionListener() {
