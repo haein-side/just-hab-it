@@ -44,6 +44,7 @@ public class CheckRecordView extends JFrame{
 	private int totalDate =0; //습관실시 일수
 	private int totalCheck=0;//기록된 습관 총 수 
 	private String thisMonth = "" ;//이번달 "00월"
+	private int accomon = 0;
 	JFrame mf = this;
 	
 	public CheckRecordView() {
@@ -125,7 +126,6 @@ public class CheckRecordView extends JFrame{
 		JPanel calendarPanel = new JPanel();
 		calendarPanel.setBounds(43, 95, 350, 340);
 		calendarPanel.setLayout(null);
-//		calendarPanel.setBackground(new Color(255,204,153));
 		
 		//달력 날짜 입력
 		ArrayList<Integer>calArr = new ArrayList<>();
@@ -139,8 +139,6 @@ public class CheckRecordView extends JFrame{
 		}
 		
 		//월표시
-//		JLabel monthPrint = new JLabel();
-//		monthPrint.setBackground(new Color(255,204,153));
 		
 		if(month < 9) {
 			thisMonth = "0"+(month+1);
@@ -152,9 +150,7 @@ public class CheckRecordView extends JFrame{
 		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
 		monthName.setForeground(new Color(255,255,204));
 		
-//		monthPrint.add(monthName);
 		calendarPanel.add(monthName);
-//		calendarPanel.add(monthPrint);
 		
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
 		
@@ -162,7 +158,6 @@ public class CheckRecordView extends JFrame{
 		//달력표시
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
-//		calendar.setBackground(new Color(255,204,153));
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
@@ -201,6 +196,7 @@ public class CheckRecordView extends JFrame{
 				int record = recordAndGoalList.get(searchDate).getCheck();
 				if(goal == record) {
 					dayButton[i].setBackground(new Color(102,204,153));
+					accomon++;
 				} else {
 					dayButton[i].setBackground(new Color(255,204,51));
 				}
@@ -258,7 +254,7 @@ public class CheckRecordView extends JFrame{
 		totalDate = totalRecord.getDateCount();
 		//습관 총 횟수
 		totalCheck = (int)totalRecord.getRecordSum();
-		infoText.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
+		infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 		infoPanel.add(infoText);
 		
 		//습관기록저장
@@ -277,13 +273,14 @@ public class CheckRecordView extends JFrame{
 				@Override
 				public void actionPerformed(ActionEvent e) {
 					SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-					
+					accomon = 0;
 					
 					if(checkCount == 0) {
 						JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
 					} else {
 						
 						//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
+						
 						checkRecord.setUserId(registInfo.getUserID());  //유저아이디
 						checkRecord.setHabitId(registInfo.getHabitID()); // 습관아이디
 						checkRecord.setCheck(checkCount); // 체크횟수
@@ -305,7 +302,6 @@ public class CheckRecordView extends JFrame{
 						totalRecord = habitInfoController.monthTotalController(totalRecord);
 						totalDate = totalRecord.getDateCount();
 						totalCheck = (int)totalRecord.getRecordSum();
-						infoText.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 						
 						//날짜 클릭시 조회되는 값 바꾸기
 						checkRecord.setHabitId(MainPage.userhabitid);
@@ -322,15 +318,19 @@ public class CheckRecordView extends JFrame{
 								int goal = recordAndGoalList.get(searchDate).getHabitGoal();
 								int record = recordAndGoalList.get(searchDate).getCheck();
 								if(goal == record) {
-									dayButton[i].setBackground(Color.green);
+									dayButton[i].setBackground(new Color(102,204,153));
+									accomon++;
 								} else if(record > 0 ){
-									dayButton[i].setBackground(Color.yellow);
+									dayButton[i].setBackground(new Color(255,204,51));
+								} else {
+									dayButton[i].setBackground(new Color(255,255,255));
 								}
 							}
 						}
 						//상단에 출력되는 값 변경
 						habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
 						checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
+						infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
 					}
 				}
 			});
