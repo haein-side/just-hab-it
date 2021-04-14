@@ -69,7 +69,7 @@ public class MyPage extends JFrame {
 	    label_email.setBounds(400, 100, 150, 150);
 	    label_password.setBounds(400, 140, 150, 150);
 	    label_pin.setBounds(550, 270, 150, 150);
-		levelExp.setBounds(130, 270, 150, 150);
+		levelExp.setBounds(130, 240, 150, 150);
 		
 		userPanel.add(label_username);
 		userPanel.add(label_email);
@@ -121,7 +121,7 @@ public class MyPage extends JFrame {
 		myUser_email.setBounds(600, 160, 200, 30);
 		myUser_pwd.setBounds(600, 200, 200, 30);
 		myUser_pin.setBounds(600, 330, 200, 30);
-		myUser_level.setBounds(220, 270, 150, 150);
+		myUser_level.setBounds(220, 240, 150, 150);
 
 		
 		myUser_name.setEditable(false);
@@ -245,7 +245,7 @@ public class MyPage extends JFrame {
 		Image level = new ImageIcon("image/" + myUser.getUserImage()).getImage().getScaledInstance(130, 130, 0);
 		
 		JLabel levelImg = new JLabel(new ImageIcon(level));
-		levelImg.setBounds(80,60,300,300);
+		levelImg.setBounds(50,70,300,300);
 		userPanel.add(levelImg);
 		
 		//메뉴패널추가

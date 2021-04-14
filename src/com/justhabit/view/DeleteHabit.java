@@ -26,13 +26,16 @@ public class DeleteHabit extends JFrame {
 	private String btn2 = "취소";
 	public static String selectedHabbit;
 	public static int selectedHabitNum;
+	public JFrame mv = null;
 	public JFrame dh = this;
 	
 
 	List<AllHabitDTO> allhabitList = habitDayController.selectAllHabitBy(FirstFrame.loggedUserID);
 	
 	
-	public DeleteHabit() {
+	public DeleteHabit(JFrame mv) {
+		
+		this.mv = mv;
 		
 		this.setLayout(null);
 		this.setSize(300,200);
@@ -96,7 +99,7 @@ public class DeleteHabit extends JFrame {
 	        	  
 //	        	  MainPage.setVisible(true);
 //	        	  기존 프레임을 어떻게 안 보이게 할지.. 모르겠음
-	        	  
+	        	  mv.setVisible(false);
 	        	  PanelChangeControl.changeFrame(dh, new MainPage());
 	        	  
 	          }
