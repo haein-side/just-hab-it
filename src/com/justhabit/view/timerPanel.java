@@ -1,6 +1,7 @@
 package com.justhabit.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
@@ -41,6 +42,7 @@ public class timerPanel extends JPanel{
 	
 	public timerPanel() {
 		//타이머화면
+		
 		JPanel p =new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel bp = new JPanel(new FlowLayout(FlowLayout.CENTER));
 		JPanel wp = new JPanel(new FlowLayout(FlowLayout.CENTER));
@@ -64,11 +66,21 @@ public class timerPanel extends JPanel{
 		
 		
 		start = new JButton("START");
+		start.setBackground(new Color(171,188,180));
+		start.setForeground(new Color(255,255,255));
+		start.setFont(new Font("THE외계인설명서", Font.BOLD, 15));
 		reset = new JButton("RESET");
+		reset.setBackground(new Color(171,188,180));
+		reset.setForeground(new Color(255,255,255));
+		reset.setFont(new Font("THE외계인설명서", Font.BOLD, 15));
 		pause = new JButton("PAUSE");
+		pause.setBackground(new Color(171,188,180));
+		pause.setForeground(new Color(255,255,255));
+		pause.setFont(new Font("THE외계인설명서", Font.BOLD, 15));
 		bp.add(start);
 		bp.add(pause);
 		bp.add(reset);
+		bp.setBackground(new Color(249,228,183));
 		
 		wp.add(hbtHr);
 		wp.add(c1);
@@ -77,13 +89,14 @@ public class timerPanel extends JPanel{
 		wp.add(hbtSec);
 		wp.add(c3);
 		wp.add(hbtMillsec);
-		
+		wp.setBackground(new Color(249,228,183));
 		p.add(wp);
 		p.add(bp);
 		add(p);
-
+		p.setBackground(new Color(249,228,183));
 		pause.setEnabled(false);
 		reset.setEnabled(false);
+//		this.setBackground(new Color(249,228,183));
 		
 		start.addActionListener(new ButtonListener());
 		pause.addActionListener(new ButtonListener());
