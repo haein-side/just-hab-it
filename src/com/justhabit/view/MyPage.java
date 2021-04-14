@@ -69,7 +69,7 @@ public class MyPage extends JFrame {
 	    label_email.setBounds(400, 100, 150, 150);
 	    label_password.setBounds(400, 140, 150, 150);
 	    label_pin.setBounds(550, 270, 150, 150);
-		levelExp.setBounds(130, 270, 150, 150);
+		levelExp.setBounds(130, 240, 150, 150);
 		
 		userPanel.add(label_username);
 		userPanel.add(label_email);
@@ -78,9 +78,9 @@ public class MyPage extends JFrame {
 		userPanel.add(levelExp);
 		
 		
-//		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
+		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
 		//TODO: 테스트용 지우고 로그인된 유저로 정보가져오기.
-		UserDTO myUser = userController.userInfo(1); // test
+//		UserDTO myUser = userController.userInfo(1); // test
 		//TODO: level값을 가져오는 쿼리.어디서? 레벨에 따른 사진 변경 
 		
 		
@@ -121,7 +121,7 @@ public class MyPage extends JFrame {
 		myUser_email.setBounds(600, 160, 200, 30);
 		myUser_pwd.setBounds(600, 200, 200, 30);
 		myUser_pin.setBounds(600, 330, 200, 30);
-		myUser_level.setBounds(220, 270, 150, 150);
+		myUser_level.setBounds(220, 240, 150, 150);
 
 		
 		myUser_name.setEditable(false);
@@ -226,9 +226,11 @@ public class MyPage extends JFrame {
             	myUser_pin.setBackground(Color.GRAY);
             	
             	if(myUser_pin.getText().equals(String.valueOf(myUser.getUserPin()))) {
-            		if(userController.deleteUser(myUser))
+            		if(userController.deleteUser(myUser)) {
                 		JOptionPane.showMessageDialog(myPage, myUser.getUserName() + "님의 탈퇴가 완료 되었습니다");
-            			
+            			myPage.setVisible(false);
+            			FirstFrame.main(null);
+            		}
             		else
                 		JOptionPane.showMessageDialog(myPage, myUser.getUserName() + "님의 탈퇴가 실패했습니다");
             	} else {
@@ -243,7 +245,7 @@ public class MyPage extends JFrame {
 		Image level = new ImageIcon("image/" + myUser.getUserImage()).getImage().getScaledInstance(130, 130, 0);
 		
 		JLabel levelImg = new JLabel(new ImageIcon(level));
-		levelImg.setBounds(80,60,300,300);
+		levelImg.setBounds(50,70,300,300);
 		userPanel.add(levelImg);
 		
 		//메뉴패널추가

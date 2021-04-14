@@ -83,8 +83,20 @@ public class MainPage extends JFrame{
 		for(h = 0; h < allhabitList.size(); h++) {
 				JButton box = new JButton();
 				box.setSize(400, 60);
-				box.setLocation(400, 180 + 50 * (h-1));	
+				box.setLocation(400, 180 + 100 * (h-1));	
 				box.setText(allhabitList.get(h).getHabitName());
+				
+				// 버튼 이미지 넣으려고 했으나 실패
+//				box.setOpaque(false);
+//				box.setContentAreaFilled(false);
+//				box.setBorderPainted(false);
+				
+//				Image button = new ImageIcon("button1/diary.jpg").getImage();
+//				JLabel button1 = new JLabel(new ImageIcon(button));
+//				button1.setBounds(400,60,400,180 + 100 * (h-1));
+//				
+//				center.add(button1);
+//				
 				
 				int i = h;
 				box.setText(allhabitList.get(h).getHabitName());
@@ -234,10 +246,10 @@ public class MainPage extends JFrame{
 	    
 	    
 	    
-		Image back = new ImageIcon("image/resizedbackground1.jpg").getImage().getScaledInstance(900, 700, 0);
-		JLabel backImg = new JLabel(new ImageIcon(back));
-		backImg.setBounds(0,0,900,462);
-		center.add(backImg);
+//		Image back = new ImageIcon("image/resizedbackground1.jpg").getImage().getScaledInstance(900, 700, 0);
+//		JLabel backImg = new JLabel(new ImageIcon(back));
+//		backImg.setBounds(0,0,900,462);
+//		center.add(backImg);
 		
 		
 		
@@ -245,7 +257,6 @@ public class MainPage extends JFrame{
 		botPan.setLayout(new GridLayout(1,6));
 		botPan.setSize(900, 100);
 		botPan.setLocation(0, 562);
-		botPan.setBackground(Color.GREEN);
 		
 		//메뉴목록
 		String[] menu = {"Main", "습관등록", "습관삭제", "mypage"};
@@ -271,7 +282,7 @@ public class MainPage extends JFrame{
 	          @Override
 	          public void actionPerformed(ActionEvent e) {
 //	             PanelChangeControl.changeFrame(mf, new DeleteHabit());
-	        	  new DeleteHabbit();
+	        	  new DeleteHabit(mf);
 	          }
 	       });
 		
@@ -284,6 +295,19 @@ public class MainPage extends JFrame{
 	       });
 		
 		this.add(botPan);
+		
+		Image button = new ImageIcon("button1/diary.jpg").getImage().getScaledInstance(900, 700, 0);
+		JLabel button1 = new JLabel(new ImageIcon(button));
+		button1.setBounds(0,0,400,80);
+		
+		center.add(button1);
+		
+//		Image back = new ImageIcon("image/resizedbackground1.jpg").getImage().getScaledInstance(900, 700, 0);
+//		JLabel backImg = new JLabel(new ImageIcon(back));
+//		backImg.setBounds(0,0,900,462);
+//		center.add(backImg);
+		
+		
 		
 		
 		this.add(center);

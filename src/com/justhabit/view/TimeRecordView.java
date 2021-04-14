@@ -5,6 +5,7 @@ import java.awt.Dialog;
 import java.awt.FlowLayout;
 import java.awt.Font;
 import java.awt.GridLayout;
+import java.awt.Image;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.SimpleDateFormat;
@@ -14,6 +15,7 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
@@ -43,6 +45,7 @@ public class TimeRecordView extends JFrame{
 	private int totalDate =0; //습관실시 일수
 	private double totalTimer=0;//기록된 습관 총 시간
 	private String thisMonth = "" ;//이번달 "00월"
+	private int accomon = 0;
 	JFrame mf = this;
 	
 	
@@ -60,7 +63,7 @@ public class TimeRecordView extends JFrame{
 		JPanel center = new JPanel();
 		center.setBounds(0, 100, 900, 462);
 		center.setLayout(null);
-		center.setBackground(new Color(246,245,245));
+		center.setBackground(new Color(47,49,54));
 		
 		
 		//등록된 습관정보 불러오기
@@ -69,12 +72,10 @@ public class TimeRecordView extends JFrame{
 		//습관상단바
 		JPanel habitTop = new JPanel();
 		habitTop.setLayout(new FlowLayout(FlowLayout.LEFT));
-//		habitTop.setBackground(new Color(51,153,51));
 		habitTop.setBounds(43, 20, 800, 50);
 		
 		//습관상단바 - 습관명
 		JPanel habitName = new JPanel();
-//		habitName.setBounds(0,0,200,50);
 		habitName.setBackground(new Color(211,224,234));
 		JLabel nameLabel = new JLabel(registInfo.getHabitName());
 		nameLabel.setHorizontalAlignment(JLabel.CENTER);
@@ -100,6 +101,7 @@ public class TimeRecordView extends JFrame{
 		calendarPanel.setBounds(43, 95, 350, 340);
 		calendarPanel.setLayout(null);
 		calendarPanel.setBackground(new Color(255,204,153));
+		
 		//달력 날짜 입력
 		ArrayList<Integer>calArr = new ArrayList<>();
 		Calendar cal = Calendar.getInstance();
@@ -112,9 +114,6 @@ public class TimeRecordView extends JFrame{
 		}
 		
 		//월표시
-		JPanel monthPrint = new JPanel();
-		monthPrint.setBounds(80,15,200,50);
-		monthPrint.setBackground(new Color(255,204,153));
 		
 		thisMonth = "";
 		if(month < 9) {
@@ -122,25 +121,24 @@ public class TimeRecordView extends JFrame{
 		} else {
 			thisMonth = month+1+"";
 		}
-		
 		JLabel monthName = new JLabel(thisMonth+"월");
+		monthName.setBounds(160,15,80,50);
 		monthName.setFont(new Font("D2Coding",Font.BOLD,20));
+		monthName.setForeground(new Color(255,255,204));
+	
 		
-		monthPrint.add(monthName);
-		calendarPanel.add(monthPrint);
+		calendarPanel.add(monthName);
 		
 		//달력표시
 		JPanel calendar = new JPanel();
 		calendar.setBounds(0, 80, 350, 250);
-		calendar.setBackground(new Color(255,204,153));
 		GridLayout gridLayout = new GridLayout(calArr.size()/7+1,7,2,2);
 		calendar.setLayout(gridLayout);
 		
-		//오늘날짜 확인
 		Date todayDate = new Date();
 		SimpleDateFormat dateFormat = new SimpleDateFormat("dd");
 		today = dateFormat.format(todayDate);
-				
+		
 		JButton[] dayButton = new JButton[calArr.size()]; 
 		for(int i = 0; i < calArr.size();i++) {
 			
@@ -165,27 +163,29 @@ public class TimeRecordView extends JFrame{
 		timerRecord.setRecordType(registInfo.getHabitType());
 		recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
 		SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
-		String checkYearMonth = yearMonth.format(todayDate);
-		System.out.println(checkYearMonth);
+		String timerYearMonth = yearMonth.format(todayDate);
 		String searchDate =  "";
 		for(int i = 0; i < calArr.size(); i++) {
 
-			searchDate = checkYearMonth+"/"+dayButton[i].getText();
+			searchDate = timerYearMonth+"/"+dayButton[i].getText();
 			if(recordAndGoalList.get(searchDate)!=null) {
 				int goal = recordAndGoalList.get(searchDate).getHabitGoal();
 				double record = recordAndGoalList.get(searchDate).getTimer();
 				if(goal <= record) {
-					dayButton[i].setBackground(Color.green);
+					dayButton[i].setBackground(new Color(102,204,153));
+					accomon++;
 				} else {
-					dayButton[i].setBackground(Color.yellow);
+					dayButton[i].setBackground(new Color(255,204,51));
 				}
+			} else {
+				dayButton[i].setBackground(new Color(255,255,255));
 			}
 		}
 		calendarPanel.add(calendar);
 		
-		//클릭시 그날 기록 출력하기,기록있는날만 나옴  
+		//클릭시 그날 기록 출력하기  
 		for(int i = 0; i < calArr.size(); i++) {
-			searchDate = checkYearMonth+"/"+dayButton[i].getText();
+			searchDate = timerYearMonth+"/"+dayButton[i].getText();
 			if(recordAndGoalList.get(searchDate)==null) {
 				String dialogDate = searchDate;
 				dayButton[i].addActionListener(new ActionListener() {
@@ -207,7 +207,7 @@ public class TimeRecordView extends JFrame{
 			}
 		}
 		
-		//기존 등록된 습관이 있으면 출력하기 타이머보류
+		//기존 등록된 습관이 있으면 출력하기 타이머보류,스레드..
 //		SimpleDateFormat todayRecord = new SimpleDateFormat("yy/MM/dd");
 //		String existingRecordDate = todayRecord.format(todayDate);
 //		if(recordAndGoalList.get(existingRecordDate)!=null) {
@@ -229,7 +229,7 @@ public class TimeRecordView extends JFrame{
 		totalDate = totalRecord.getDateCount();
 		//습관 총 횟수
 		totalTimer = totalRecord.getRecordSum();
-		info.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 총시간 : " + totalTimer + "시간");
+		info.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalTimer + "회");
 		habitInfo.add(info);
 		
 		//저장 버튼 
@@ -239,15 +239,19 @@ public class TimeRecordView extends JFrame{
 		this.add(recordButton);
 		
 		recordButton.addActionListener(/**
-				 * @author user
-				 * 저장버튼 클릭 시 일치하는 날짜 검색->update 없으면 insert;
-				 * total 출력 문구 바뀜
-				 */
+				* @author user
+				* 저장버튼 클릭 시 
+				* 1.일치하는 날짜 검색->있으면update /없으면 insert;
+				* 2.total 출력 문구 변경
+				* 3.달력 클릭 시 출력되는 값 변경
+				*/
 				new ActionListener() {
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
 						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
+						accomon = 0;
+						
 						double div = 60*60*100;
 						double hbtTimer = timerPanel.t / div;
 						double test = timerPanel.t % div;
@@ -261,6 +265,8 @@ public class TimeRecordView extends JFrame{
 							timerRecord.setTimer(hbtTimer); //기록시간
 							today = todayDateFormat.format(todayDate);
 							timerRecord.setDoDate(today);  // 오늘날짜
+							
+							//날짜에 등록된 기록이 없으면 update, 있으면 insert
 							int result = habitInfoController.dateTimerSelectController(timerRecord);
 							if(result==0){
 								habitInfoController.insertTimerController(timerRecord);
@@ -269,45 +275,47 @@ public class TimeRecordView extends JFrame{
 								habitInfoController.updateTimerController(timerRecord);
 								JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
 							}
-							//출력할정보를 검색
+							//total 출력문구 바꾸기
 							totalRecord.setHabitId(registInfo.getHabitID());
 							totalRecord.setTodayMonth(thisMonth);
 							totalRecord = habitInfoController.monthTimerTotalController(totalRecord);
 							totalDate = totalRecord.getDateCount();
 							totalTimer = totalRecord.getRecordSum();
-							info.setText("\n \n \n 이번달 기록 \n \n 실시한 일수 : " + totalDate + "일 \n \n 총시간 : " + totalTimer + "시간");
 							
 							timerRecord.setHabitId(MainPage.userhabitid);
 							timerRecord.setRecordType(registInfo.getHabitType());
 							
-							//달력값 바꾸기
+							//날짜 클릭시 조회되는 값 바꾸기
 							timerRecord.setHabitId(MainPage.userhabitid);
 							timerRecord.setRecordType(registInfo.getHabitType());
 							recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
 							SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
-							String checkYearMonth = yearMonth.format(todayDate);
+							String timerYearMonth = yearMonth.format(todayDate);
 							String searchDate =  "";
 							for(int i = 0; i < calArr.size(); i++) {
 								
-								searchDate = checkYearMonth+"/"+dayButton[i].getText();
-								System.out.println("비교할 날짜 : " +  searchDate);
+								searchDate = timerYearMonth+"/"+dayButton[i].getText();
 								if(recordAndGoalList.get(searchDate)!=null) {
 									int goal = recordAndGoalList.get(searchDate).getHabitGoal();
 									double record = recordAndGoalList.get(searchDate).getTimer();
 									if(goal <= record) {
-										dayButton[i].setBackground(Color.green);
+										dayButton[i].setBackground(new Color(102,204,153));
+										accomon++;
 									} else if(record > 0 ){
-										dayButton[i].setBackground(Color.yellow);
+										dayButton[i].setBackground(new Color(255,204,51));
+									} else {
+										dayButton[i].setBackground(new Color(255,255,255));
 									}
 								}
 							}
-							//저장버튼 누를 떄 기존값변경
+							//저장버튼 누를 떄 기존값변경,,타이머보류
 //							String existingRecordDate = todayRecord.format(todayDate);
 //							if(recordAndGoalList.get(existingRecordDate)!=null) {
 //								timerPanel.t = recordAndGoalList.get(existingRecordDate).getTimer()*60*60*100;
 //								System.out.println(timerPanel.t);
 //							}
 						}
+						info.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalTimer + "회");
 					}
 				});
 		
@@ -355,6 +363,17 @@ public class TimeRecordView extends JFrame{
 		center.add(habitInfo);
 		center.add(calendarPanel);
 		center.add(habitTop);
+		
+		//달력배경
+		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 450, 0);
+		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
+		CalendarBackground.setBounds(0, 0, 350, 340);
+		//배경화면
+		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
+		JLabel background = new JLabel(new ImageIcon(backImg));
+		background.setBounds(0, 0, 900, 462);
+		calendarPanel.add(CalendarBackground);
+		center.add(background);
 		
 		this.add(center);
 		

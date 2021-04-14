@@ -8,6 +8,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.SQLIntegrityConstraintViolationException;
 import java.util.Properties;
 
 import com.justhabit.model.dto.UserDTO;
@@ -203,6 +204,7 @@ private Properties prop = new Properties();
 		PreparedStatement psmt = null;
 		ResultSet rset = null;
 		UserLevelDTO user = null;
+		UserLevelDTO ghostUser = null;
 		
 		String query = prop.getProperty("userLevel");
 		
@@ -225,15 +227,40 @@ private Properties prop = new Properties();
 				user.setSuccessOfTimer(rset.getInt("success_timer"));
 			}
 			
+		} catch(SQLIntegrityConstraintViolationException e)	{
+			
+			ghostUser = new UserLevelDTO(loggedUserID, 1, "1렙계란.PNG", 0, 0, 0);
 			
 		} catch (SQLException e) {
 			e.printStackTrace();
+		} finally {
+			close(rset);
+			close(psmt);
 		}
 		
-		return user;
+		return user == null ? ghostUser : user;
 	}
 
-	
-
-	
+	public boolean userLvlUpdate(Connection con, UserLevelDTO user) {
+		
+		PreparedStatement psmt = null;
+		int result = 0;
+		
+		String query = prop.getProperty("userLvlUpdate");
+		
+		try {
+			psmt = con.prepareStatement(query);
+			psmt.setInt(1, user.getUserLevel());
+			psmt.setInt(2, user.getUserId());
+			
+			result = psmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			close(psmt);
+		}
+		
+		return result == 0 ? false : true;
+	}
 }
