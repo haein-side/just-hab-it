@@ -228,7 +228,6 @@ public class CheckRecordView extends JFrame{
 		}
 				
 		//클릭시 그날 기록 출력하기  
-		
 		for(int i = 0; i < calArr.size(); i++) {
 			searchDate = checkYearMonth+"/"+dayButton[i].getText();
 			if(recordAndGoalList.get(searchDate)==null) {
@@ -258,7 +257,8 @@ public class CheckRecordView extends JFrame{
 		SimpleDateFormat todayRecord = new SimpleDateFormat("yy/MM/dd");
 		String existingRecordDaty = todayRecord.format(todayDate);
 		if(recordAndGoalList.get(existingRecordDaty)!=null) {
-			habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
+			habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "
+		                    +recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
 			checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
 		}
 		
