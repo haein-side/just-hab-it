@@ -374,7 +374,6 @@ public class HabitRecordDAO {
 			while(rset.next()) {
 				row = new HabitRecordDTO();
 				String dodate = rset.getString("do_date");
-//				row.setDoDate();
 				row.setCheck(rset.getInt("count_check"));
 				row.setHabitGoal(rset.getInt("habit_goal"));
 				userRecordGoalList.put(dodate, row);

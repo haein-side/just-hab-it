@@ -95,7 +95,7 @@ public class CheckRecordView extends JFrame{
 		Image plusImg = new ImageIcon("image/더하기사진.png").getImage().getScaledInstance(35, 35, 0);
 		JLabel plusLabel = new JLabel(new ImageIcon(plusImg));
 		habitCheck.add(plusLabel);
-		habitCheck.addMouseListener(new MouseAdapter() {
+		plusLabel.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -228,7 +228,6 @@ public class CheckRecordView extends JFrame{
 		}
 				
 		//클릭시 그날 기록 출력하기  
-		
 		for(int i = 0; i < calArr.size(); i++) {
 			searchDate = checkYearMonth+"/"+dayButton[i].getText();
 			if(recordAndGoalList.get(searchDate)==null) {
@@ -258,7 +257,8 @@ public class CheckRecordView extends JFrame{
 		SimpleDateFormat todayRecord = new SimpleDateFormat("yy/MM/dd");
 		String existingRecordDaty = todayRecord.format(todayDate);
 		if(recordAndGoalList.get(existingRecordDaty)!=null) {
-			habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
+			habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "
+		                    +recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
 			checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
 		}
 		
@@ -310,7 +310,7 @@ public class CheckRecordView extends JFrame{
 					today = todayDateFormat.format(todayDate);
 					checkRecord.setDoDate(today);   // 오늘날짜
 					
-					//날짜에 등록된 기록이 없으면 update, 있으면 insert	
+					//날짜에 등록된 기록이 없으면 insert, 있으면 update	
 					int result = habitInfoController.dateSelectController(checkRecord);
 					if(result==0){
 						habitInfoController.insertCheckController(checkRecord);

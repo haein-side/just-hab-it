@@ -34,13 +34,14 @@ public class HabbitAdd4 extends JFrame {
 	   	habbitAdd4.setVisible(true);
 
 
-	   	JLabel label1 = new JLabel("4번) 습관기록방식은 무엇인가요?");
+	   	JLabel label1 = new JLabel("A-3) 습관기록방식은 무엇인가요?");
 	   
-	   	label1.setFont(new Font("Serif", Font.BOLD, 30));
+	   	label1.setFont(new Font("THE Oegyeinseolmyeongseo", Font.BOLD, 20));
 	   	label1.setSize(500,200);
-	   	label1.setLocation(200,0);
+	   	label1.setLocation(250,0);
 	   	habbitAdd4.add(label1);
        
+	   	
 	   	JPanel radioPanel = new JPanel();
 	   	radioPanel.setSize(200,50);
 	   	radioPanel.setLocation(320,160);
@@ -87,6 +88,8 @@ public class HabbitAdd4 extends JFrame {
             		HabbitAdd.habbitAddDTO.setHabitType(recordType.getSelection().getActionCommand());
             		System.out.println(HabbitAdd.habbitAddDTO);
             		System.out.println(recordType.getSelection().getActionCommand());
+            		
+            		
             		PanelChangeControl.changeFrame(habbitAdd4 , new HabbitAdd5());
             	            	
             		

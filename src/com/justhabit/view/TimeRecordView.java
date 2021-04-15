@@ -263,7 +263,7 @@ public class TimeRecordView extends JFrame{
 					today = todayDateFormat.format(todayDate);
 					timerRecord.setDoDate(today);  // 오늘날짜
 					
-					//날짜에 등록된 기록이 없으면 update, 있으면 insert
+					//날짜에 등록된 기록이 없으면 insert, 있으면 update
 					int result = habitInfoController.dateTimerSelectController(timerRecord);
 					if(result==0){
 						habitInfoController.insertTimerController(timerRecord);
