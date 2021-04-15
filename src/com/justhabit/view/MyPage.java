@@ -59,25 +59,34 @@ public class MyPage extends JFrame {
 		JLabel label_password = new JLabel("Password : ");
 		JLabel label_pin = new JLabel("PIN : ");
 		JLabel levelExp = new JLabel("레벨 : ");
+		JLabel label_edit = new JLabel("수정");
+		JLabel label_delete = new JLabel("탈퇴");
 		label_username.setFont(new Font("THE외계인설명서",Font.BOLD,20));
 		label_email.setFont(new Font("THE외계인설명서",Font.BOLD,20));
 		label_password.setFont(new Font("THE외계인설명서",Font.BOLD,20));
 		label_pin.setFont(new Font("THE외계인설명서",Font.BOLD,20));
 	    levelExp.setFont(new Font("THE외계인설명서",Font.BOLD,15));
-	    
+	    label_edit.setFont(new Font("THE외계인설명서",Font.BOLD,13));
+	    label_delete.setFont(new Font("THE외계인설명서",Font.BOLD,13));
+
 	    
 	    label_username.setBounds(400, 60, 150, 150);
 	    label_email.setBounds(400, 100, 150, 150);
 	    label_password.setBounds(400, 140, 150, 150);
 	    label_pin.setBounds(550, 270, 150, 150);
 		levelExp.setBounds(130, 190, 150, 150);
+		label_edit.setBounds(650, 400, 140, 140);
+		label_delete.setBounds(750, 400, 140, 140);
+
 		
 		userPanel.add(label_username);
 		userPanel.add(label_email);
 		userPanel.add(label_password);
 		userPanel.add(label_pin);
 		userPanel.add(levelExp);
-		
+		userPanel.add(label_edit);
+		userPanel.add(label_delete);
+
 		
 		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
 		
@@ -146,6 +155,7 @@ public class MyPage extends JFrame {
 		JButton level_info = new JButton("레벨 정보");
 		level_info.setSize(150,30);
 		level_info.setLocation(120, 290);
+		level_info.setBackground(Color.YELLOW);
 		userPanel.add(level_info);
 		level_info.addMouseListener(new MouseAdapter() {
             @Override
@@ -155,13 +165,6 @@ public class MyPage extends JFrame {
             }
          });
 		
-		
-		
-		
-		JButton revise = new JButton("회원정보 수정하기");
-		revise.setSize(180,40);
-		revise.setLocation(385, 430);
-		userPanel.add(revise);
 		
 		myUser_pin.addKeyListener(new KeyAdapter() {
             public void keyPressed(KeyEvent ke) {
@@ -175,10 +178,16 @@ public class MyPage extends JFrame {
              }
           });
 		
-		revise.addMouseListener(new MouseAdapter() {
-            @Override
-            public void mouseClicked(MouseEvent e) {
-            	myUser_name.setEditable(true);
+		
+		Image editImg = new ImageIcon("image/edit-user.png").getImage().getScaledInstance(70, 70, 0);
+		JLabel edLabel = new JLabel(new ImageIcon(editImg));
+		edLabel.setBounds(600, 350, 140, 140);
+		userPanel.add(edLabel);
+		
+		edLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				myUser_name.setEditable(true);
             	myUser_name.setBackground(Color.LIGHT_GRAY);
         		myUser_email.setEditable(true);
             	myUser_email.setBackground(Color.LIGHT_GRAY);
@@ -215,18 +224,23 @@ public class MyPage extends JFrame {
         		myUser_pin.setText("");
             	myUser_pin.setBackground(Color.GRAY);
             	
-//            	PanelChangeControl.changeFrame(myPage , new ReviseInfo());
-            	
-            }
-         });
+			}
+		});
 		
-//		UserDTO myUser = userController.userInfo(1); // test
+		
 
-		JButton exit = new JButton("탈퇴하기");
-		exit.setSize(180,40);
-		exit.setLocation(610, 430);
-		userPanel.add(exit);
-		exit.addMouseListener(new MouseAdapter() {
+//		JButton exit = new JButton("탈퇴하기");
+//		exit.setSize(180,40);
+//		exit.setLocation(610, 430);
+//		userPanel.add(exit);
+//		
+		Image deleteImg = new ImageIcon("image/delete-user.png").getImage().getScaledInstance(70, 70, 0);
+		JLabel dtLabel = new JLabel(new ImageIcon(deleteImg));
+		dtLabel.setBounds(700, 350, 140, 140);
+		userPanel.add(dtLabel);
+		
+		
+		dtLabel.addMouseListener(new MouseAdapter() {
             @Override
             public void mouseClicked(MouseEvent e) {
             	
