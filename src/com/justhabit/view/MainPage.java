@@ -222,7 +222,7 @@ public class MainPage extends JFrame{
 		
 		
 		
-	    JButton save = new JButton("일기 감춰놓기");
+	    JButton save = new JButton("일기 숨겨놓기");
 	    JButton open = new JButton("일기 불러오기");
 	    
 		save.addActionListener(new ActionListener() {
@@ -230,20 +230,19 @@ public class MainPage extends JFrame{
 			public void actionPerformed(ActionEvent e){
 			       
 				 FileDialog dialog = new FileDialog(mf, "저장", FileDialog.SAVE);
-				    dialog.setFile("*.txt;");
+				    dialog.setFile("*.txt");
 	                dialog.setVisible(true);    
 	                String path = dialog.getDirectory() + dialog.getFile();
 	                
 	                try {
-	                   FileWriter w = new FileWriter( path );
-	                   String s = chat.getText();
-	                   s = s.replace("\n","\r\n");
-	                   w.write( s  ); 
-	                   w.close();
+	                   FileWriter writer = new FileWriter( path );
+	                   writer.write(chat.getText()); 
+	                   writer.close();
 	                } catch (Exception e2) {
 	                    System.out.println("저장오류"+e2);
 	                }  
 				
+	                chat.setText("");
 			}
 		
 		});
@@ -257,29 +256,28 @@ public class MainPage extends JFrame{
                    dialog.setVisible(true);        
                    
                    String path = dialog.getDirectory() + dialog.getFile();                 
-                   String s ="";
+                   String diary ="";
                    
                    if( dialog.getFile() == null ) return;
                    try {
-                      FileReader r = new FileReader( path );
+                      FileReader reader = new FileReader( path );
                       int k;              
                       for( ;  ; ) {
-                          k = r.read();
+                          k = reader.read();
                           if( k == -1) break;
-                          s += (char)k;               
+                          diary += (char)k;               
                       }           
-                      r.close();
+                      reader.close();
                    } catch (Exception e2) {
                        System.out.println("오류"+e);
                    } 
-                   chat.setText(s);   
+                   chat.setText(diary);   
             }            
         }); 
 		
 		
 		
 		
-//		save.setLocation(370,100);
 		save.setBounds(65, 400, 130, 40);
 		open.setBounds(215, 400, 120, 40);
 		save.setFont(new Font("THE외계인설명서",Font.BOLD,15));
