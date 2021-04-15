@@ -49,7 +49,7 @@ public class MyPage extends JFrame {
 		//가운데 화면
 		JPanel userPanel = new JPanel();
 		userPanel.setLayout(null);
-		userPanel.setBounds(0,80,900,480);
+		userPanel.setBounds(0,80,900,530);
 		userPanel.setBackground(Color.white);
 		this.add(userPanel);
 		
@@ -59,11 +59,11 @@ public class MyPage extends JFrame {
 		JLabel label_password = new JLabel("Password : ");
 		JLabel label_pin = new JLabel("PIN : ");
 		JLabel levelExp = new JLabel("레벨 : ");
-		label_username.setFont(new Font("a디딤돌",Font.BOLD,20));
-		label_email.setFont(new Font("a디딤돌",Font.BOLD,20));
-		label_password.setFont(new Font("a디딤돌",Font.BOLD,20));
-		label_pin.setFont(new Font("a디딤돌",Font.BOLD,20));
-	    levelExp.setFont(new Font("a디딤돌",Font.BOLD,15));
+		label_username.setFont(new Font("THE외계인설명서",Font.BOLD,20));
+		label_email.setFont(new Font("THE외계인설명서",Font.BOLD,20));
+		label_password.setFont(new Font("THE외계인설명서",Font.BOLD,20));
+		label_pin.setFont(new Font("THE외계인설명서",Font.BOLD,20));
+	    levelExp.setFont(new Font("THE외계인설명서",Font.BOLD,15));
 	    
 	    
 	    label_username.setBounds(400, 60, 150, 150);
@@ -80,20 +80,6 @@ public class MyPage extends JFrame {
 		
 		
 		UserDTO myUser = userController.userInfo(FirstFrame.loggedUserID);
-//		UserLevelDTO myUserLevel = new TopPanel().userInfo(FirstFrame.loggedUserID);
-//		
-//		JLabel level_info = new JLabel("");
-//		
-//		level_info.setText("<html><b>" + myUser.getUserName() + "</b>님의 현재 총 습관의 수는<font color=green> " + myUserLevel.getNumOfHabits() + "</font>,<br>"
-//				            +  "총 습관 성공 횟수 : <font color=green>" + (myUserLevel.getSuccessOfCheck() + myUserLevel.getSuccessOfTimer()) + "</font><br>"
-//				            +  "-카운트 습관 성공 횟수 : <font color=green>" + myUserLevel.getSuccessOfCheck() + "</font><br>"
-//				            +  "-타이머 습관 성공 횟수 : <font color=green>" + myUserLevel.getSuccessOfTimer() + "</font>");
-//		
-//		
-//		level_info.setFont(new Font("a디딤돌",Font.BOLD,20));
-//		level_info.setBounds(130, 250, 400, 400);
-//		userPanel.add(level_info);
-		
 		
 		String pwd = "";
 		for(int i = 0; i < myUser.getUserPwd().length(); i++) {
@@ -119,11 +105,11 @@ public class MyPage extends JFrame {
 		JTextField myUser_pin = new JTextField(pin);
 		
 		JLabel myUser_level = new JLabel("<html><font color=green>"+ Integer.valueOf(myUser.getUserLevel()).toString()+"</font></html>");
-		myUser_name.setFont(new Font("a디딤돌",Font.BOLD,20));
-		myUser_email.setFont(new Font("a디딤돌",Font.BOLD,20));
-		myUser_pwd.setFont(new Font("a디딤돌",Font.BOLD,20));
-		myUser_pin.setFont(new Font("a디딤돌",Font.BOLD,20));
-		myUser_level.setFont(new Font("a디딤돌",Font.ITALIC,20));
+		myUser_name.setFont(new Font("THE외계인설명서",Font.BOLD,20));
+		myUser_email.setFont(new Font("THE외계인설명서",Font.BOLD,20));
+		myUser_pwd.setFont(new Font("THE외계인설명서",Font.BOLD,20));
+		myUser_pin.setFont(new Font("THE외계인설명서",Font.BOLD,20));
+		myUser_level.setFont(new Font("THE외계인설명서",Font.ITALIC,20));
 //		myUser_level.setBackground(Color.YELLOW);
 
 		
@@ -132,7 +118,7 @@ public class MyPage extends JFrame {
 		myUser_email.setBounds(600, 160, 200, 30);
 		myUser_pwd.setBounds(600, 200, 200, 30);
 		myUser_pin.setBounds(600, 330, 200, 30);
-		myUser_level.setBounds(220, 190, 150, 150);
+		myUser_level.setBounds(200, 190, 150, 150);
 
 		
 		myUser_name.setEditable(false);
@@ -150,7 +136,7 @@ public class MyPage extends JFrame {
 		
 		
 		JLabel instruction  = new JLabel();
-		instruction.setFont(new Font("a디딤돌",Font.ITALIC,21));
+		instruction.setFont(new Font("THE외계인설명서",Font.ITALIC,21));
 		instruction.setVisible(false);
 		instruction.setBounds(400, 290, 420, 20);
 		userPanel.add(instruction);
@@ -165,7 +151,7 @@ public class MyPage extends JFrame {
             @Override
             public void mouseClicked(MouseEvent e) {
             	
-            	new LevelInfoPage(myPage);
+            	new LevelInfoPage(myPage, myUser.getUserName());
             }
          });
 		
@@ -174,7 +160,7 @@ public class MyPage extends JFrame {
 		
 		JButton revise = new JButton("회원정보 수정하기");
 		revise.setSize(180,40);
-		revise.setLocation(385, 390);
+		revise.setLocation(385, 430);
 		userPanel.add(revise);
 		
 		myUser_pin.addKeyListener(new KeyAdapter() {
@@ -238,7 +224,7 @@ public class MyPage extends JFrame {
 
 		JButton exit = new JButton("탈퇴하기");
 		exit.setSize(180,40);
-		exit.setLocation(610, 390);
+		exit.setLocation(610, 430);
 		userPanel.add(exit);
 		exit.addMouseListener(new MouseAdapter() {
             @Override

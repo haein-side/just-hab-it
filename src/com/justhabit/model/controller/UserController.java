@@ -134,13 +134,13 @@ public class UserController {
 		
 		
 		
-		if((successOfChecks + successOfTimers >= 7 ) && totalHabits >= 7  ) {
+		if((successOfChecks + successOfTimers >= 7 ) && totalHabits >= 5 ) {
 			level = 5;
-		} else if((successOfChecks + successOfTimers >= 5 ) && totalHabits >= 5) {
+		} else if((successOfChecks + successOfTimers >= 6 ) && totalHabits >= 4) {
 			level = 4;
-		} else if((successOfChecks + successOfTimers >= 3 ) && totalHabits >= 3) {
+		} else if((successOfChecks + successOfTimers >= 5 ) && totalHabits >= 3) {
 			level = 3;
-		} else if((successOfChecks + successOfTimers >= 1 ) && totalHabits >= 1) {
+		} else if((successOfChecks + successOfTimers >= 4 ) && totalHabits >= 2) {
 			level = 2;
 		} else {
 			level = 1;
