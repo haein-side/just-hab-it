@@ -191,10 +191,13 @@ public class FirstFrame {
 			public void mouseClicked(MouseEvent e){
 				if(userController.loginCheck(txtUsername.getText().toLowerCase(), 
 	    				  new String(txtPassword.getPassword()))) {
-	    			  //login   
+					
+	    			  //login success
 	        		  	PanelChangeControl.changeFrame(frame, new TodayWord());
+	        		  	
 	    		  } else {
-	    			  //login failed
+	    			  
+	    			  //login fail
 	    			  JOptionPane.showMessageDialog(login, "ID or Password wrong\nPlease try again :)");
 	    			  txtUsername.setText("");
 	    			  txtPassword.setText("");

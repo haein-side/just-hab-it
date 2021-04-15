@@ -109,7 +109,6 @@ private Properties prop = new Properties();
 			close(psmt);
 		}
 		
-		
 		return result == 0 ? false : true;
 	}
 

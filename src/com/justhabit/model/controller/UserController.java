@@ -17,9 +17,6 @@ public class UserController {
 			return false;
 		} 
 		
-		
-		
-		
 		return userService.login(loginId, loginPwd);
 	}
 
@@ -42,21 +39,17 @@ public class UserController {
 		if(!userService.userIdCheck(signup_name)) 
 			return "이미 존재하는 유저입니다";
 		
-		/* UserDTO를 생성하여 service호출 */
+		/* UserDTO를 생성 */
 		UserDTO registerUser = new UserDTO();
 		registerUser.setUserName(signup_name);
 		registerUser.setUserPwd(pwd1);
 		registerUser.setUserEmail(email);
 		registerUser.setUserPin(Integer.parseInt(pin));
 		
-		
-		/* 회원가입 */ 
-		
+		/* 회원가입 진행 */ 
 		boolean isRegistered = userService.register(registerUser);
 		
-		
 		return isRegistered == true ? "회원가입이 성공적으로 완료되었습니다 :)" : "에러발생";
-		
 	}
 
 	public UserDTO userInfo(int loggedUserID) {
@@ -104,7 +97,7 @@ public class UserController {
 				result = "입력한 아이디가 이미 존재하는 아이디입니다";
 		}
 		
-		// 5. 회원정보 수정 
+		/* 회원정보 수정 */ 
 		else {
 			result = userService.userUpdate(myUser);
 		}
@@ -120,10 +113,10 @@ public class UserController {
 		/* 2. 기준에 맞게 레벨 update */
 		/////////////////////////
 		// 레벨 1 습관수 0 성공횟수 0// 
-		// 레벨 2 습관수 1 성공횟수 1// 
-		// 레벨 3 습관수 3 성공횟수 3//
-		// 레벨 4 습관수 5 성공횟수 5////////
-		// 레벨 5 습관수 7이상 성공횟수 7이상// 
+		// 레벨 2 습관수 2 성공횟수 4// 
+		// 레벨 3 습관수 3 성공횟수 5//
+		// 레벨 4 습관수 4 성공횟수 6////////
+		// 레벨 5 습관수 5이상 성공횟수 7이상// 
 		/////////////////////////////
 		int userLevel = user.getUserLevel();
 		int totalHabits = user.getNumOfHabits();

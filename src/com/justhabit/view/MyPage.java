@@ -45,7 +45,6 @@ public class MyPage extends JFrame {
 		myPage.add(top);
 		
 		
-		
 		//가운데 화면
 		JPanel userPanel = new JPanel();
 		userPanel.setLayout(null);
