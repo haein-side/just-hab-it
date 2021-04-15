@@ -115,13 +115,12 @@ public class MainPage extends JFrame{
 				JButton box = new JButton();
 				box.setSize(400, 60);
 				box.setLocation(50, 80 * (h + 1));
-//				box.setText(allhabitList.get(h).getHabitName());
 				
 				box.setOpaque(false);
 				box.setContentAreaFilled(false);
 				box.setBorderPainted(false);
 				
-				Image button = new ImageIcon("image/button7.png").getImage().getScaledInstance(400, 60, 0);
+				Image button = new ImageIcon("image/button1.png").getImage().getScaledInstance(400, 60, 0);
 				JLabel button1 = new JLabel(new ImageIcon(button));
 				button1.setBounds(50,80 *(h+1),400,60);
 				
@@ -133,10 +132,6 @@ public class MainPage extends JFrame{
 				habitN.setVisible(true);
 				right.add(habitN);
 				
-//				Image diary = new ImageIcon("image/diary.jpg").getImage().getScaledInstance(300, 300, 0);
-//				JLabel yellow = new JLabel(new ImageIcon(diary));
-//				yellow.setBounds(50,80,300,300);
-//				left.add(yellow);
 				
 				right.add(button1);
 				
@@ -144,7 +139,6 @@ public class MainPage extends JFrame{
 
 				
 				int i = h;
-//				box.setText(allhabitList.get(h).getHabitName());
 				box.addActionListener(new ActionListener() {
 					
 			          @Override
@@ -286,7 +280,7 @@ public class MainPage extends JFrame{
 		
 		
 //		save.setLocation(370,100);
-		save.setBounds(65, 400, 120, 40);
+		save.setBounds(65, 400, 130, 40);
 		open.setBounds(215, 400, 120, 40);
 		save.setFont(new Font("THE외계인설명서",Font.BOLD,15));
 		open.setFont(new Font("THE외계인설명서",Font.BOLD,15));
