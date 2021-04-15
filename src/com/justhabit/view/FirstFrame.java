@@ -215,7 +215,7 @@ public class FirstFrame {
 				frame.setVisible(false);
 	        	 SecondFrame.main(null);
 			}
-		});
+	  });
       
       JLabel lblNewLabel_3 = new JLabel("LOGIN");
       lblNewLabel_3.setForeground(Color.WHITE);

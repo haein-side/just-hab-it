@@ -129,7 +129,6 @@ public class SecondFrame {
       sign_username.setBackground(Color.WHITE);
       sign_username.setBounds(330, 60, 120, 20);
       signup.add(sign_username);
-//      txtUsername.setColumns(5);
       sign_username.setBorder(null);
       
 
@@ -149,12 +148,11 @@ public class SecondFrame {
       sign_email.setBorder(null);
       
       sign_PIN = new JTextField();
-      sign_PIN.setBounds(330, 180, 120, 20);
+      sign_PIN.setBounds(330, 214, 120, 20);
       signup.add(sign_PIN);
       sign_PIN.setBorder(null);
       sign_PIN.addKeyListener(new KeyAdapter() {
           public void keyPressed(KeyEvent ke) {
-              String value = sign_PIN.getText();
               if (ke.getKeyChar() >= '0' && ke.getKeyChar() <= '9' 
              		 || ke.getKeyChar() == '\b') {
              	 sign_PIN.setEditable(true);
@@ -164,8 +162,6 @@ public class SecondFrame {
               }
            }
         });
-      
-      
       
       
       
@@ -194,57 +190,64 @@ public class SecondFrame {
       email_label.setBounds(229, 150, 250, 14);
       signup.add(email_label);
       
+      JLabel instruction = new JLabel("*회원정보 수정과 회원탈퇴시 필요합니다*");
+      instruction.setForeground(Color.WHITE);
+      instruction.setFont(new Font("Tahoma", Font.ITALIC, 13));
+      instruction.setBounds(229, 190, 300, 14);
+      signup.add(instruction);
+
+      
       JLabel pin_label = new JLabel("PIN(4digits)");
       pin_label.setForeground(Color.WHITE);
       pin_label.setFont(new Font("Tahoma", Font.BOLD, 16));
-      pin_label.setBounds(229, 185, 250, 14);
+      pin_label.setBounds(229, 215, 250, 14);
       signup.add(pin_label);
       
       
-      JLabel result_label = new JLabel();
       
-      
-      
-      
-      
-      JButton backButton = new JButton("<- BACK");
-      backButton.setBounds(220, 234, 80, 30);
-      signup.add(backButton);
-      backButton.addActionListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent e) {
-//            PanelChangeControl.changePanel(frame, signup, login );
-        	 frame.setVisible(false);
-        	 FirstFrame.main(null);
-         }
-      });
-      
-      
-      
-      JButton registerButton = new JButton("REGISTER");
-      registerButton.setBounds(310, 234, 140, 30);
-      signup.add(registerButton);
-      registerButton.addActionListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent e) {
             
-         	String result = userController.signupCheck(sign_username.getText().toLowerCase()
-         			, new String(sign_pwd.getPassword()), new String(sign_pwd_check.getPassword())
-         			, sign_email.getText(), sign_PIN.getText());
-         	
-         	if(result.equals("회원가입이 성공적으로 완료되었습니다 :)")) {
-         		JOptionPane.showMessageDialog(signup, result + "\n로그인 화면으로 이동합니다.");
-         		frame.setVisible(false);
-         		FirstFrame.main(null);
-         	}
-         	else {
-         		JOptionPane.showMessageDialog(signup, result);
-         		
-         	}
-         }
-      });
+
+      
+      Image loginImg = new ImageIcon("image/login-2.png").getImage().getScaledInstance(40, 40, 0);
+	  JLabel lgLabel = new JLabel(new ImageIcon(loginImg));
+	  lgLabel.setBounds(200, 205, 140, 140);
+	  signup.add(lgLabel);
+	  
+	  lgLabel.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e){
+				frame.setVisible(false);
+	        	 FirstFrame.main(null);
+			}
+		});
+      
+      
+	  
+	  Image signupImg = new ImageIcon("image/sign-up.png").getImage().getScaledInstance(70, 70, 0);
+	  JLabel suLabel = new JLabel(new ImageIcon(signupImg));
+	  suLabel.setBounds(290, 205, 140, 140);
+	  signup.add(suLabel);
+      
+	  suLabel.addMouseListener(new MouseAdapter() {
+			@Override
+			public void mouseClicked(MouseEvent e){
+				String result = userController.signupCheck(sign_username.getText().toLowerCase()
+	         			, new String(sign_pwd.getPassword()), new String(sign_pwd_check.getPassword())
+	         			, sign_email.getText(), sign_PIN.getText());
+	         	
+	         	if(result.equals("회원가입이 성공적으로 완료되었습니다 :)")) {
+	         		JOptionPane.showMessageDialog(signup, result + "\n로그인 화면으로 이동합니다.");
+	         		frame.setVisible(false);
+	         		FirstFrame.main(null);
+	         	}
+	         	else {
+	         		JOptionPane.showMessageDialog(signup, result);
+	         		
+	         	}
+			}
+	  });
+
       
       
       
