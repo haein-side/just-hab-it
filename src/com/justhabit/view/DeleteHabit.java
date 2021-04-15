@@ -99,15 +99,13 @@ public class DeleteHabit extends JFrame {
 	        	  
 	        	  habitDayController.deleteHabitBy(deleteHabitID);
 	        	  
-//	        	  MainPage.setVisible(true);
-//	        	  기존 프레임을 어떻게 안 보이게 할지.. 모르겠음
 	        	  mv.setVisible(false);
 	        	  PanelChangeControl.changeFrame(dh, new MainPage());
 	        	  
 	          }
 	       });
 
-		// 하나의 JFrame만 삭제하기 위해선 exit() 대신 dispose()를 사용해야
+
 		cancel .addActionListener(e -> {
 			dh.dispose();
 		});
