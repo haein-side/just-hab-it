@@ -191,8 +191,8 @@ public class SecondFrame {
       
       JLabel instruction = new JLabel("*회원정보 수정과 회원탈퇴시 필요합니다*");
       instruction.setForeground(Color.WHITE);
-      instruction.setFont(new Font("Tahoma", Font.ITALIC, 13));
-      instruction.setBounds(229, 190, 300, 14);
+      instruction.setFont(new Font("THE외계인설명서", Font.ITALIC, 13));
+      instruction.setBounds(229, 190, 330, 14);
       signup.add(instruction);
 
       
