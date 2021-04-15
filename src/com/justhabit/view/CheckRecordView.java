@@ -95,7 +95,7 @@ public class CheckRecordView extends JFrame{
 		Image plusImg = new ImageIcon("image/더하기사진.png").getImage().getScaledInstance(35, 35, 0);
 		JLabel plusLabel = new JLabel(new ImageIcon(plusImg));
 		habitCheck.add(plusLabel);
-		habitCheck.addMouseListener(new MouseAdapter() {
+		plusLabel.addMouseListener(new MouseAdapter() {
 			
 			@Override
 			public void mouseClicked(MouseEvent e) {
@@ -310,7 +310,7 @@ public class CheckRecordView extends JFrame{
 					today = todayDateFormat.format(todayDate);
 					checkRecord.setDoDate(today);   // 오늘날짜
 					
-					//날짜에 등록된 기록이 없으면 update, 있으면 insert	
+					//날짜에 등록된 기록이 없으면 insert, 있으면 update	
 					int result = habitInfoController.dateSelectController(checkRecord);
 					if(result==0){
 						habitInfoController.insertCheckController(checkRecord);
