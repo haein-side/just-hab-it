@@ -115,12 +115,36 @@ public class MainPage extends JFrame{
 				JButton box = new JButton();
 				box.setSize(400, 60);
 				box.setLocation(50, 80 * (h + 1));
-				box.setText(allhabitList.get(h).getHabitName());
+//				box.setText(allhabitList.get(h).getHabitName());
 				
+				box.setOpaque(false);
+				box.setContentAreaFilled(false);
+				box.setBorderPainted(false);
+				
+				Image button = new ImageIcon("image/button7.png").getImage().getScaledInstance(400, 60, 0);
+				JLabel button1 = new JLabel(new ImageIcon(button));
+				button1.setBounds(50,80 *(h+1),400,60);
+				
+				JLabel habitN = new JLabel(allhabitList.get(h).getHabitName());
+				habitN.setFont(new Font("THE외계인설명서",Font.BOLD,17));
+				habitN.setForeground(Color.BLACK);
+				habitN.setBounds(50,80*(h+1),400,60);
+				habitN.setHorizontalAlignment(JLabel.CENTER);
+				habitN.setVisible(true);
+				right.add(habitN);
+				
+//				Image diary = new ImageIcon("image/diary.jpg").getImage().getScaledInstance(300, 300, 0);
+//				JLabel yellow = new JLabel(new ImageIcon(diary));
+//				yellow.setBounds(50,80,300,300);
+//				left.add(yellow);
+				
+				right.add(button1);
+				
+				right.add(box);
 
 				
 				int i = h;
-				box.setText(allhabitList.get(h).getHabitName());
+//				box.setText(allhabitList.get(h).getHabitName());
 				box.addActionListener(new ActionListener() {
 					
 			          @Override
@@ -152,6 +176,9 @@ public class MainPage extends JFrame{
         scrollbar.setBorder(BorderFactory.createBevelBorder(javax.swing.border.BevelBorder.LOWERED));
 //        scrollbar.setBackground(Color.pink);
         this.getContentPane().add(scrollbar);
+        
+        // 버튼 이미지 넣으려고 했으나 실패
+
       
    
         
@@ -159,25 +186,31 @@ public class MainPage extends JFrame{
 		
 		
 		//오늘의 일기
-		JLabel promise = new JLabel("<오늘의 일기>");
+        
+  
+		JLabel promise = new JLabel("  오늘의 일기");
+		promise.setOpaque(true);
+		promise.setBackground(new Color(249,228,183));
 		
 		Font font = new Font("THE외계인설명서", Font.BOLD, 18);
 		
 		promise.setFont(font);
 	
-	    promise.setSize(300,50);
-	    promise.setLocation(60, 15);
+	    promise.setSize(110,50);
+	    promise.setLocation(140, 15);
 	    left.add(promise);
 	    
-	    JLabel habit = new JLabel("<오늘의 습관>");
+	    JLabel habit = new JLabel("  오늘의 습관");
+	    habit.setOpaque(true);
+	    habit.setBackground(new Color(249,228,183));
 	    habit.setFont(font);
 	
-	    habit.setSize(300,50);
-	    habit.setLocation(60, 15);
+	    habit.setSize(110,50);
+	    habit.setLocation(190, 15);
 	    right.add(habit);
 	    
 	    JTextArea chat = new JTextArea();
-	    chat.setBounds(50,60,300,300);
+	    chat.setBounds(50,80,300,300);
 	    chat.setEditable(true);
 		chat.setFont(font);
 		
@@ -190,7 +223,7 @@ public class MainPage extends JFrame{
 	    
         Image diary = new ImageIcon("image/diary.jpg").getImage().getScaledInstance(300, 300, 0);
 		JLabel yellow = new JLabel(new ImageIcon(diary));
-		yellow.setBounds(50,60,300,300);
+		yellow.setBounds(50,80,300,300);
 		left.add(yellow);
 		
 		
@@ -253,12 +286,35 @@ public class MainPage extends JFrame{
 		
 		
 //		save.setLocation(370,100);
-		save.setBounds(65, 380, 120, 40);
-		open.setBounds(215, 380, 120, 40);
+		save.setBounds(65, 400, 120, 40);
+		open.setBounds(215, 400, 120, 40);
+		save.setFont(new Font("THE외계인설명서",Font.BOLD,15));
+		open.setFont(new Font("THE외계인설명서",Font.BOLD,15));
+		
+		save.setOpaque(false);
+		open.setOpaque(false);
+		
 		left.add(save);
 		left.add(open);
 	    
-	    
+		save.setOpaque(false);
+		save.setContentAreaFilled(false);
+		save.setBorderPainted(false);
+		
+		open.setOpaque(false);
+		open.setContentAreaFilled(false);
+		open.setBorderPainted(false);
+		
+		Image button2 = new ImageIcon("image/button7.png").getImage().getScaledInstance(120, 40, 0);
+		JLabel buttonB1 = new JLabel(new ImageIcon(button2));
+		buttonB1.setBounds(65, 400, 120, 40);
+		
+		Image button3 = new ImageIcon("image/button7.png").getImage().getScaledInstance(120, 40, 0);
+		JLabel buttonB2 = new JLabel(new ImageIcon(button3));
+		buttonB2.setBounds(215, 400, 120, 40);
+		
+		left.add(buttonB1);
+		left.add(buttonB2);
 
 		
 		JPanel botPan = new JPanel();

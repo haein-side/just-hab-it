@@ -228,6 +228,7 @@ public class CheckRecordView extends JFrame{
 		}
 				
 		//클릭시 그날 기록 출력하기  
+		
 		for(int i = 0; i < calArr.size(); i++) {
 			searchDate = checkYearMonth+"/"+dayButton[i].getText();
 			if(recordAndGoalList.get(searchDate)==null) {
@@ -235,7 +236,7 @@ public class CheckRecordView extends JFrame{
 				dayButton[i].addActionListener(new ActionListener() {
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(mf, dialogDate +"\n\n"+ 0 + " / " + registInfo.getHabitGoal());
+						JOptionPane.showMessageDialog(mf, dialogDate + "\n\n"+ 0 + " / " + registInfo.getHabitGoal());
 					}
 				});
 			} else {
@@ -244,7 +245,8 @@ public class CheckRecordView extends JFrame{
 					
 					@Override
 					public void actionPerformed(ActionEvent e) {
-						JOptionPane.showMessageDialog(mf, dialogDate +"\n\n"+ recordAndGoalList.get(dialogDate).getCheck() + " / " + registInfo.getHabitGoal());
+						JOptionPane.showMessageDialog(mf, dialogDate +"\n\n"+ recordAndGoalList.get(dialogDate).getCheck() 
+								                                     + " / " + registInfo.getHabitGoal());
 					}
 				});
 			}
@@ -312,7 +314,7 @@ public class CheckRecordView extends JFrame{
 					int result = habitInfoController.dateSelectController(checkRecord);
 					if(result==0){
 						habitInfoController.insertCheckController(checkRecord);
-						JOptionPane.showMessageDialog(mf, "기록등록 성공");
+						JOptionPane.showMessageDialog(mf, "신규 저장 성공");
 					} else {
 						habitInfoController.updateCheckController(checkRecord);
 						JOptionPane.showMessageDialog(mf, "기록 갱신 성공");

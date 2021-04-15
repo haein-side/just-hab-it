@@ -1,6 +1,7 @@
 package com.justhabit.view;
 
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.Image;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
@@ -43,20 +44,18 @@ public class TodayWord extends JFrame {
 		todayWord.setVisible(true);
 		todayWord.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		
-		String[] words = new String[7];
-		words[0] = "<오늘의 명언>\n\n산다는 것,\n 그것은 치열한 전투이다.\n\n-로망로랑-";
-		words[1] = "<오늘의 명언>\n\n삶이란 불충분에서\n 충분을 끌어내는 기술이다.\n\n-S.버틀러-";
-		words[2] = "<오늘의 명언>\n\n용기가 있는 곳에 희망이 있다.\n\n-타키투스-";
-		words[3] = "<오늘의 명언>\n\n습관이란 인간으로 하여금\n 어떤 일이든지 하게 만든다.\n\n-도스토예프스키-";
-		words[4] = "<오늘의 명언>\n\n절대 어제를 후회하지 마라 .\n 인생은 오늘의 나 안에 있고\n내일은 스스로 만드는 것이다. \n\n-L.론허바드-";
-		words[5] = "<오늘의 명언>\n\n습관은 나무 껍질에 새겨놓은 \n 문자 같아서 그 나무가\n 자라남에 따라 확대된다.\n\n-새뮤얼 스마일스-";
-		words[6] = "<오늘의 명언>\n\n우리가 반복해서 하는 행동이\n 바로 우리이다.\n 그러므로 탁월함이란,\n 행동이 아니라 습관이다. \n\n-아리스토텔레스-";
+		String[] words = new String[5];
+		words[0] = "<오늘의 명언>\n\n하루의 시작은\n 습관부터 시작이다.\n\n-채도혁-";
+		words[1] = "<오늘의 명언>\n\n들어왔네?\n 잘 생각했어\n\n-채도혁-";
+		words[2] = "<오늘의 명언>\n\n내일 할 것도\n오늘 하자,\n그게 맘 편해\n\n-차진서-";
+		words[3] = "<오늘의 명언>\n\nKing\n 너네 나 못 이겨\n\n-이해승-";
+		words[4] = "<오늘의 명언>\n\n생각하지 말고\n JUST DO IT \n\n-김해인-";
 		
 
 		
 		JTextPane textfield = new JTextPane();
 
-		textfield.setText(words[(int)(Math.random()*7)]);
+		textfield.setText(words[(int)(Math.random()*5)]);
 		
 		SimpleAttributeSet aSet = new SimpleAttributeSet(); 
 		StyleConstants.setFontFamily(aSet, "궁서");
@@ -82,9 +81,19 @@ public class TodayWord extends JFrame {
 		
 		
 		JButton first = new JButton("시작");
+		first.setFont(new Font("THE외계인설명서",Font.BOLD,15));
 		first.setSize(70,40);
 		first.setLocation(410, 560);
 		this.add(first);
+		first.setOpaque(false);
+		first.setContentAreaFilled(false);
+		first.setBorderPainted(false);
+		
+		Image button2 = new ImageIcon("image/button7.png").getImage().getScaledInstance(70, 40, 0);
+		JLabel buttonB1 = new JLabel(new ImageIcon(button2));
+		buttonB1.setBounds(410, 560, 70,40);
+		
+		this.add(buttonB1);
 		
 		userLevelUpdate();
 
