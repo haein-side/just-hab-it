@@ -11,6 +11,7 @@ import java.awt.event.KeyEvent;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.awt.event.MouseMotionAdapter;
+import java.text.SimpleDateFormat;
 
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -156,9 +157,10 @@ public class FirstFrame {
       lblNewLabel_2_1.setBounds(229, 148, 250, 14);
       login.add(lblNewLabel_2_1);
       
-      JButton loginButton = new JButton("LOG IN");
-      loginButton.setBounds(220, 234, 130, 30);
-      login.add(loginButton);
+      Image loginImg = new ImageIcon("image/login-2.png").getImage().getScaledInstance(70, 70, 0);
+	  JLabel lgLabel = new JLabel(new ImageIcon(loginImg));
+	  lgLabel.setBounds(290, 205, 140, 140);
+	  login.add(lgLabel);
       
       
       
@@ -183,45 +185,37 @@ public class FirstFrame {
           }
        });
       
-     
+      lgLabel.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e){
+				if(userController.loginCheck(txtUsername.getText().toLowerCase(), 
+	    				  new String(txtPassword.getPassword()))) {
+	    			  //login   
+	        		  	PanelChangeControl.changeFrame(frame, new TodayWord());
+	    		  } else {
+	    			  //login failed
+	    			  JOptionPane.showMessageDialog(login, "ID or Password wrong\nPlease try again :)");
+	    			  txtUsername.setText("");
+	    			  txtPassword.setText("");
+	    		  }
+			}
+		});
+		
       
-      loginButton.addActionListener(new ActionListener() {
-    	  
-    	  @Override
-    	  public void actionPerformed(ActionEvent e) {
-    		  
-//    		  System.out.println(new String(txtPassword.getPassword()));
-    		  
-    		  if(userController.loginCheck(txtUsername.getText().toLowerCase(), 
-    				  new String(txtPassword.getPassword()))) {
-    			    
-        		  	PanelChangeControl.changeFrame(frame, new TodayWord());
-    		  } else {
-    			  //login failed
-//    			  System.out.println("id or password wrong");
-    			  JOptionPane.showMessageDialog(login, "ID or Password wrong\nPlease try again :)");
-    			  txtUsername.setText("");
-    			  txtPassword.setText("");
-    		  }
-    		  
-    	  }
-      });
+      Image signupImg = new ImageIcon("image/sign-up.png").getImage().getScaledInstance(40, 40, 0);
+	  JLabel suLabel = new JLabel(new ImageIcon(signupImg));
+	  suLabel.setBounds(380, 205, 140, 140);
+	  login.add(suLabel);
       
-      
-      JButton signupButton = new JButton("SIGN UP");
-      signupButton.addActionListener(new ActionListener() {
-         
-         @Override
-         public void actionPerformed(ActionEvent e) {
-        	 
-//            PanelChangeControl.changePanel(frame, login, new () );
-        	 frame.setVisible(false);
-        	 SecondFrame.main(null);
-         }
-      });
-      
-      signupButton.setBounds(355, 234, 130, 30);
-      login.add(signupButton);
+	  suLabel.addMouseListener(new MouseAdapter() {
+			
+			@Override
+			public void mouseClicked(MouseEvent e){
+				frame.setVisible(false);
+	        	 SecondFrame.main(null);
+			}
+		});
       
       JLabel lblNewLabel_3 = new JLabel("LOGIN");
       lblNewLabel_3.setForeground(Color.WHITE);
