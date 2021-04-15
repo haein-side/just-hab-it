@@ -30,15 +30,16 @@ public class HabbitAdd5 extends JFrame {
 
 	   	JLabel label1 = new JLabel();
 	   	
-	   	label1.setFont(new Font("Serif", Font.BOLD, 30));
+	   	label1.setFont(new Font("THE Oegyeinseolmyeongseo", Font.BOLD, 20));
 	   	label1.setSize(500,200);
-	   	label1.setLocation(250,0);
+	   	label1.setLocation(300,0);
+	   	
 	   	
 	   	if(HabbitAdd.habbitAddDTO.getHabitType() == "c") {
-	   		label1.setText("5번) 하루에 몇번 할건가요?");
+	   		label1.setText("A-4) 하루에 몇번 할건가요?");
 	   		habbitAdd5.add(label1);
 	   	} else {
-	   		label1.setText("5번) 하루에 몇시간 할건가요?");
+	   		label1.setText("A-4) 하루에 몇시간 할건가요?");
 	   		habbitAdd5.add(label1);
 	   	}
 	   	

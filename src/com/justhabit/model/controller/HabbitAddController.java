@@ -33,7 +33,6 @@ public class HabbitAddController {
 		} else {
 			System.out.println("습관저장실패");
 		}
-
 		
 		return 0;
 	}
