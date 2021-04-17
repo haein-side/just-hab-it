@@ -36,12 +36,14 @@ public class HabbitAdd5 extends JFrame {
 	   	
 	   	
 	   	if(HabbitAdd.habbitAddDTO.getHabitType() == "c") {
+	   		
 	   		label1.setText("A-4) 하루에 몇번 할건가요?");
 	   		habbitAdd5.add(label1);
+	   		
 	   	} else {
 	   		label1.setText("A-4) 하루에 몇시간 할건가요?");
 	   		habbitAdd5.add(label1);
-	   	}
+	   	  }
 	   	
 
 	   	SpinnerNumberModel value = new SpinnerNumberModel(0,0,10,1); // 시작값, 최소값, 최대값, 증가값 , 스피너 규칙정하기
@@ -64,7 +66,6 @@ public class HabbitAdd5 extends JFrame {
         habbitAdd5.add(jbutton2);
       	
       	jbutton1.addMouseListener(new MouseAdapter() {
-      		
             @Override
             public void mouseClicked(MouseEvent e) {
             	
@@ -72,11 +73,10 @@ public class HabbitAdd5 extends JFrame {
             	
             	
             }
+            
          }); 
       	
-      	
       	jbutton2.addMouseListener(new MouseAdapter() {
-      		
       		@Override
       		public void mouseClicked(MouseEvent e) {
       			
@@ -90,13 +90,11 @@ public class HabbitAdd5 extends JFrame {
       			
       			System.out.println(HabbitAdd.habbitAddDTO);
       			
-      			
       			PanelChangeControl.changeFrame(habbitAdd5 , new MainPage());
+      			
       		}
+      		
       	}); 
    }
-	
-	
-	
-	
+
 }

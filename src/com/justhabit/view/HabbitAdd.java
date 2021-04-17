@@ -73,19 +73,20 @@ public class HabbitAdd extends JFrame {
   	jbutton2.addMouseListener(new MouseAdapter() {
         @Override
         public void mouseClicked(MouseEvent e) {
-        	System.out.println(text.getText());
         	
-        	
-        	HabbitAdd.habbitAddDTO.setHabitName(text.getText());
-        	PanelChangeControl.changeFrame(habbitAdd , new HabbitAdd3());
-         }
+        System.out.println(text.getText());
+	
+        HabbitAdd.habbitAddDTO.setHabitName(text.getText());
+        PanelChangeControl.changeFrame(habbitAdd , new HabbitAdd3());
+        }
+        
      });
   	
 
-  	habbitAdd.setVisible(true);
-  	habbitAdd.setResizable(false);
-  	habbitAdd.setLocationRelativeTo(null); 
-  	habbitAdd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+  		habbitAdd.setVisible(true);
+  		habbitAdd.setResizable(false);
+  		habbitAdd.setLocationRelativeTo(null); 
+  		habbitAdd.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
    } 
 }
