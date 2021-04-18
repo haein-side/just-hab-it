@@ -208,12 +208,7 @@ public class TimeRecordView extends JFrame{
 			}
 		}
 		
-		//기존 등록된 습관이 있으면 출력하기 타이머보류,스레드..
-//		SimpleDateFormat todayRecord = new SimpleDateFormat("yy/MM/dd");
-//		String existingRecordDate = todayRecord.format(todayDate);
-//		if(recordAndGoalList.get(existingRecordDate)!=null) {
-//			timerPanel.t = recordAndGoalList.get(existingRecordDate).getCheck()*60*60*100;
-//		}
+
 		//문구 표시
 		JPanel habitInfo = new JPanel();
 		habitInfo.setLayout(null);
@@ -311,88 +306,6 @@ public class TimeRecordView extends JFrame{
 		});
 		
 		
-		
-		
-//		JButton recordButton = new JButton("저장");
-////		recordButton.setBounds(43, 20, 800, 50);
-//		recordButton.setBounds(783, 139, 60, 27);
-//		this.add(recordButton);
-//		
-//		recordButton.addActionListener(/**
-//				* @author user
-//				* 저장버튼 클릭 시 
-//				* 1.일치하는 날짜 검색->있으면update /없으면 insert;
-//				* 2.total 출력 문구 변경
-//				* 3.달력 클릭 시 출력되는 값 변경
-//				*/
-//				new ActionListener() {
-//					
-//					@Override
-//					public void actionPerformed(ActionEvent e) {
-//						SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-//						accomon = 0;
-//						
-//						double div = 60*60*100;
-//						double hbtTimer = timerPanel.t / div;
-//						double test = timerPanel.t % div;
-//						if(hbtTimer == 0) {
-//							JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
-//						} else {
-//							
-//							//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
-//							timerRecord.setUserId(registInfo.getUserID()); //유저아이디
-//							timerRecord.setHabitId(registInfo.getHabitID()); //습관아이디
-//							timerRecord.setTimer(hbtTimer); //기록시간
-//							today = todayDateFormat.format(todayDate);
-//							timerRecord.setDoDate(today);  // 오늘날짜
-//							
-//							//날짜에 등록된 기록이 없으면 update, 있으면 insert
-//							int result = habitInfoController.dateTimerSelectController(timerRecord);
-//							if(result==0){
-//								habitInfoController.insertTimerController(timerRecord);
-//								JOptionPane.showMessageDialog(mf, "기록 저장 성공");
-//							} else {
-//								habitInfoController.updateTimerController(timerRecord);
-//								JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
-//							}
-//							//total 출력문구 바꾸기
-//							totalRecord.setHabitId(registInfo.getHabitID());
-//							totalRecord.setTodayMonth(thisMonth);
-//							totalRecord = habitInfoController.monthTimerTotalController(totalRecord);
-//							totalDate = totalRecord.getDateCount();
-//							totalTimer = totalRecord.getRecordSum();
-//							
-//							timerRecord.setHabitId(MainPage.userhabitid);
-//							timerRecord.setRecordType(registInfo.getHabitType());
-//							
-//							//날짜 클릭시 조회되는 값 바꾸기
-//							timerRecord.setHabitId(MainPage.userhabitid);
-//							timerRecord.setRecordType(registInfo.getHabitType());
-//							recordAndGoalList = habitInfoController.selectRecordGoal(timerRecord);
-//							SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
-//							String timerYearMonth = yearMonth.format(todayDate);
-//							String searchDate =  "";
-//							for(int i = 0; i < calArr.size(); i++) {
-//								
-//								searchDate = timerYearMonth+"/"+dayButton[i].getText();
-//								if(recordAndGoalList.get(searchDate)!=null) {
-//									int goal = recordAndGoalList.get(searchDate).getHabitGoal();
-//									double record = recordAndGoalList.get(searchDate).getTimer();
-//									if(goal <= record) {
-//										dayButton[i].setBackground(new Color(102,204,153));
-//										accomon++;
-//									} else if(record > 0 ){
-//										dayButton[i].setBackground(new Color(255,204,51));
-//									} else {
-//										dayButton[i].setBackground(new Color(255,255,255));
-//									}
-//								}
-//							}
-//						}
-//						info.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalTimer + "회");
-//					}
-//				});
-		
 		//하단패널
 		JPanel botPan = new JPanel();
 		botPan.setLayout(new GridLayout(1,4));
@@ -403,45 +316,46 @@ public class TimeRecordView extends JFrame{
 		// 메뉴목록
 		String[] menu = {"메인페이지", "습관등록","습관삭제", "마이페이지"};
 		//버튼추가
-				JButton[] menuButton = new JButton[menu.length];
-				for(int i =0; i <menu.length; i++) {
+		JButton[] menuButton = new JButton[menu.length];
+		for(int i =0; i <menu.length; i++) {
 					
-					menuButton[i] = new JButton(menu[i]);
-					menuButton[i].setBackground(Color.decode("#e65758"));
-					menuButton[i].setForeground(new Color(255,249,247));
-					menuButton[i].setFont(new Font("THE외계인설명서", Font.BOLD, 17));
-					botPan.add(menuButton[i]);
-				}
+			menuButton[i] = new JButton(menu[i]);
+			menuButton[i].setBackground(Color.decode("#e65758"));
+			menuButton[i].setForeground(new Color(255,249,247));
+			menuButton[i].setFont(new Font("THE외계인설명서", Font.BOLD, 17));
+			botPan.add(menuButton[i]);
+		}
 		
 		menuButton[0].addActionListener(new ActionListener() {
+        
 	          
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	             PanelChangeControl.changeFrame(mf, new MainPage());
-	          }
-	       });
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            PanelChangeControl.changeFrame(mf, new MainPage());
+	        }
+	    });
 		menuButton[1].addActionListener(new ActionListener() {
 	          
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	             PanelChangeControl.changeFrame(mf, new HabbitAdd());
-	          }
-	       });
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            PanelChangeControl.changeFrame(mf, new HabbitAdd());
+	        }
+	    });
 		
 		menuButton[2].addActionListener(new ActionListener() {
 	          
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	        	  new DeleteHabit(mf);
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            new DeleteHabit(mf);
 	          }
 	       });
 		menuButton[3].addActionListener(new ActionListener() {
 	          
-	          @Override
-	          public void actionPerformed(ActionEvent e) {
-	             PanelChangeControl.changeFrame(mf, new MyPage());
-	          }
-	       });
+	        @Override
+	        public void actionPerformed(ActionEvent e) {
+	            PanelChangeControl.changeFrame(mf, new MyPage());
+	        }
+	    });
 		center.add(habitInfo);
 		center.add(calendarPanel);
 		center.add(habitTop);
@@ -457,7 +371,6 @@ public class TimeRecordView extends JFrame{
 		monthTotalBackground.setBounds(0,0,338,350);
 		habitInfo.add(monthTotalBackground);
 		calendarPanel.add(CalendarBackground);
-//		center.add(background);
 		
 		this.add(center);
 		this.setResizable(false);
