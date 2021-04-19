@@ -7,11 +7,11 @@ import java.util.Map;
 import com.justhabit.model.dto.HabitInfoDTO;
 import com.justhabit.model.dto.HabitMonthTotalDTO;
 import com.justhabit.model.dto.HabitRecordDTO;
-import com.justhabit.model.service.HaeSeungService;
+import com.justhabit.model.service.HabitRecordService;
 
 public class HabitRecordController {
 	
-	private HaeSeungService habitService = new HaeSeungService();
+	private HabitRecordService habitService = new HabitRecordService();
 	
 	/**
 	 * <pre>
