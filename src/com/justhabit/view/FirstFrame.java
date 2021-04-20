@@ -103,7 +103,6 @@ public class FirstFrame {
       lblLogo.setBounds(78, 90, 234, 160);
       circlePanel.add(lblLogo);
       
-      
       JLabel lblNewLabel_1 = new JLabel("JUST HAB' IT");
       lblNewLabel_1.setForeground(Color.black);
       lblNewLabel_1.setHorizontalAlignment(SwingConstants.CENTER);

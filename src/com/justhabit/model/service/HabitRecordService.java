@@ -19,7 +19,7 @@ import com.justhabit.model.dto.HabitInfoDTO;
 import com.justhabit.model.dto.HabitMonthTotalDTO;
 import com.justhabit.model.dto.HabitRecordDTO;
 
-public class HaeSeungService {
+public class HabitRecordService {
 	
 	HabitRecordDAO habitDAO = new HabitRecordDAO();
 

@@ -123,22 +123,6 @@ public class CheckRecordView extends JFrame{
 			}
 		});
 		
-//		JButton minus = new JButton(" - ");
-//		minus.setSize(60,40);
-//		habitCheck.add(minus);
-//		minus.addActionListener(new ActionListener() {
-//			
-//			@Override
-//			public void actionPerformed(ActionEvent e) {
-//				if(checkCount == 0) {
-//					JOptionPane.showMessageDialog(mf, "0보다 작을 수 없습니다.");
-//				} else {
-//					checkCount--;
-//					habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+checkCount + "회      ");
-//				}
-//			}
-//		});
-		
 		habitTop.add(habitCheck);
 		//달력
 		JPanel calendarPanel = new JPanel();
@@ -158,7 +142,6 @@ public class CheckRecordView extends JFrame{
 		}
 		
 		//월표시
-		
 		if(month < 9) {
 			thisMonth = "0"+(month+1);
 		} else {
@@ -272,8 +255,6 @@ public class CheckRecordView extends JFrame{
 		infoText.setFont(new Font("THE외계인설명서",Font.PLAIN,20));
 		infoText.setEditable(false);
 		infoText.setOpaque(false);
-//		infoText.setBorder(BorderFactory.createEmptyBorder());
-//		infoText.setBackground(new Color(0,0,0,0));
 
 		//출력할 정보를 검색
 		totalRecord.setHabitId(registInfo.getHabitID());
@@ -287,7 +268,6 @@ public class CheckRecordView extends JFrame{
 		infoPanel.add(infoText);
 		
 		//습관기록저장
-		
 		Image saveImg = new ImageIcon("image/저장버튼.png").getImage().getScaledInstance(60, 50, 0);
 		JLabel saveLabel = new JLabel(new ImageIcon(saveImg));
 		saveLabel.setBounds(840,128,60,45);
@@ -361,90 +341,6 @@ public class CheckRecordView extends JFrame{
 			}
 		});		
 		
-//		JButton recordButton = new JButton("저장");
-//
-//		recordButton.setBounds(823,128, 60, 40);
-//		recordButton.addActionListener(/**
-//		 * @author user
-//		 * 저장버튼 클릭 시 
-//		 * 1.일치하는 날짜 검색->있으면update /없으면 insert;
-//		 * 2.total 출력 문구 변경
-//		 * 3.달력 클릭 시 출력되는 값 변경
-//		 */
-//			new ActionListener() {
-//			
-//				@Override
-//				public void actionPerformed(ActionEvent e) {
-//					SimpleDateFormat todayDateFormat = new SimpleDateFormat("yy/MM/dd");
-//					accomon = 0;
-//					
-//					if(checkCount == 0) {
-//						JOptionPane.showMessageDialog(mf, "등록할 기록 없음");
-//					} else {
-//						
-//						//습관기록을위한 기본정보(유저ID,습관ID,오늘날짜)
-//						
-//						checkRecord.setUserId(registInfo.getUserID());  //유저아이디
-//						checkRecord.setHabitId(registInfo.getHabitID()); // 습관아이디
-//						checkRecord.setCheck(checkCount); // 체크횟수
-//						today = todayDateFormat.format(todayDate);
-//						checkRecord.setDoDate(today);   // 오늘날짜
-//						
-//						//날짜에 등록된 기록이 없으면 update, 있으면 insert	
-//						int result = habitInfoController.dateSelectController(checkRecord);
-//						if(result==0){
-//							habitInfoController.insertCheckController(checkRecord);
-//							JOptionPane.showMessageDialog(mf, "기록등록 성공");
-//						} else {
-//							habitInfoController.updateCheckController(checkRecord);
-//							JOptionPane.showMessageDialog(mf, "기록 갱신 성공");
-//						}
-//						//total 출력문구 바꾸기
-//						totalRecord.setHabitId(registInfo.getHabitID());
-//						totalRecord.setTodayMonth(thisMonth);
-//						totalRecord = habitInfoController.monthTotalController(totalRecord);
-//						totalDate = totalRecord.getDateCount();
-//						totalCheck = (int)totalRecord.getRecordSum();
-//						
-//						//날짜 클릭시 조회되는 값 바꾸기
-//						checkRecord.setHabitId(MainPage.userhabitid);
-//						checkRecord.setRecordType(registInfo.getHabitType());
-//						recordAndGoalList = habitInfoController.selectRecordGoal(checkRecord);
-//						SimpleDateFormat yearMonth = new SimpleDateFormat("yy/MM");
-//						String checkYearMonth = yearMonth.format(todayDate);
-//						String searchDate =  "";
-//						
-//						for(int i = 0; i < calArr.size(); i++) {
-//							
-//							searchDate = checkYearMonth+"/"+dayButton[i].getText();
-//							if(recordAndGoalList.get(searchDate)!=null) {
-//								int goal = recordAndGoalList.get(searchDate).getHabitGoal();
-//								int record = recordAndGoalList.get(searchDate).getCheck();
-//								if(goal == record) {
-//									dayButton[i].setBackground(new Color(102,204,153));
-//									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
-//									accomon++;
-//								} else if(record > 0 ){
-//									dayButton[i].setBackground(new Color(255,204,51));
-//									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
-//								} else {
-//									dayButton[i].setBackground(new Color(255,255,255));
-//									dayButton[i].setFont(new Font("THE외계인설명서", Font.PLAIN, 15));
-//								}
-//							}
-//						}
-//						//상단에 출력되는 값 변경
-//						habitCount.setText("      목표 : "+ registInfo.getHabitGoal() + "회 / 현재 : "+recordAndGoalList.get(existingRecordDaty).getCheck() + "회      ");
-//						checkCount = recordAndGoalList.get(existingRecordDaty).getCheck();
-//						infoText.setText("\n \n \n 이번달 기록 \n \n 달성한 일수 : " + accomon + "\n \n 실시한 일수 : " + totalDate + "일 \n \n 실시한 횟수 : " + totalCheck + "회");
-//					}
-//				}
-//			});
-//				
-//		habitTop.add(recordButton);
-		
-		
-		
 		//하단패널
 		JPanel botPan = new JPanel();
 		botPan.setLayout(new GridLayout(1,4));
@@ -503,7 +399,6 @@ public class CheckRecordView extends JFrame{
 		center.add(calendarPanel);
 		center.add(habitTop);
 		
-		
 		//달력배경
 		Image calendarImg = new ImageIcon("image/달력.PNG").getImage().getScaledInstance(470, 430, 0);
 		JLabel CalendarBackground = new JLabel(new ImageIcon(calendarImg));
@@ -514,21 +409,8 @@ public class CheckRecordView extends JFrame{
 		JLabel monthTotalBackground = new JLabel(new ImageIcon(monthTotal));
 		monthTotalBackground.setBounds(0,0,338,350);
 		
-		//배경화면
-//		Image backImg = new ImageIcon("image/기록화면배경1.PNG").getImage().getScaledInstance(900, 700, 0);
-//		JLabel background = new JLabel(new ImageIcon(backImg));
-//		background.setBounds(0, 0, 900, 462);
-		
-		//습관상단바
-//		Image topImg = new ImageIcon("image/포스트잇.png").getImage().getScaledInstance(800, 50, 0);
-//		JLabel topbackground = new JLabel(new ImageIcon(topImg));
-//		topbackground.setBounds(0, 0, 800, 50);
-//		habitTop.add(topbackground);
-			
-		
 		infoPanel.add(monthTotalBackground);
 		calendarPanel.add(CalendarBackground);
-//		center.add(background);
 		
 		this.setResizable(false);
 		this.add(center);
